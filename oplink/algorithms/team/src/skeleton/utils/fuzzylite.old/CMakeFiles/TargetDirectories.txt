@@ -1,0 +1,3 @@
+/home/edusegre/fuzzylite-2.0b1302/fuzzylite/CMakeFiles/fl-bin.dir
+/home/edusegre/fuzzylite-2.0b1302/fuzzylite/CMakeFiles/fl-shared.dir
+/home/edusegre/fuzzylite-2.0b1302/fuzzylite/CMakeFiles/fl-static.dir

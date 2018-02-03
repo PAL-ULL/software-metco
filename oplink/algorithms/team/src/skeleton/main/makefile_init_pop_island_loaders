@@ -1,0 +1,14 @@
+directory:=../../plugins/initPopIslandLoaders/
+initPopIslandLoaders=$(shell ls $(directory))
+clean:=$(foreach initPopIslandLoader, $(initPopIslandLoaders), ${directory}${initPopIslandLoader}/${initPopIslandLoader}.library)
+
+all: $(initPopIslandLoaders) 
+clean: $(clean)
+
+$(initPopIslandLoaders):
+	@echo Generando $@
+	make -s -f makefile_init_pop_island_loader initPopIslandLoader="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

@@ -1,0 +1,14 @@
+directory:=../../plugins/migrationSelectors/
+migrationSelectors=$(shell ls $(directory))
+clean:=$(foreach migrationSelector, $(migrationSelectors), ${directory}${migrationSelector}/${migrationSelector}.library)
+
+all: $(migrationSelectors) 
+clean: $(clean)
+
+$(migrationSelectors):
+	@echo Generando $@
+	make -s -f makefile_migration_selector migrationSelector="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

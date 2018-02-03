@@ -1,0 +1,30 @@
+LFLAGS = -shared 
+CROSSOVERDIR = ../../plugins/crossovers/
+IFLAGS= -I../ -I../utils/ -I$(CROSSOVERDIR)$(crossover)/
+SO_FILE= $(crossover).so
+COMPLETE_O_FILE=$(crossover).complete.o
+O_FILE= $(crossover).o
+C_FILE:=$(CROSSOVERDIR)$(crossover)/$(crossover).cpp
+H_FILE:=$(CROSSOVERDIR)$(crossover)/$(crossover).h
+LIBRARY_C_FILE:=$(CROSSOVERDIR)$(crossover)/$(crossover).library.cpp
+LIBRARY_O_FILE:=$(crossover).library.o
+H_FILE:=$(CROSSOVERDIR)$(crossover)/$(crossover).h
+FILE_TO_CHANGE:=../complete.c
+OBJ_FILES:=Crossover.reloc.o Individual.reloc.o utils.reloc.o Plugin.reloc.o
+
+$(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE) 
+	$(CXX) $(IFLAGS) $(LFLAGS) -o $@ -Wl,-soname,$@ $^
+
+$(LIBRARY_O_FILE): $(LIBRARY_C_FILE) ../Crossover.h ../Individual.h ../Definitions.h $(H_FILE) 
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(LIBRARY_C_FILE) -o $@
+
+$(LIBRARY_C_FILE): $(FILE_TO_CHANGE) 
+	sed 's/TIPO_NUEVO/$(crossover)/g' $(FILE_TO_CHANGE) | sed 's/TIPO_DEVUELTO/Crossover/g' > $@
+
+$(O_FILE): $(C_FILE) $(H_FILE) ../Crossover.h ../Individual.h ../Definitions.h
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(C_FILE) -o $@
+
+$(OBJ_FILES): force
+	make -f Makefile $@
+
+force : ;

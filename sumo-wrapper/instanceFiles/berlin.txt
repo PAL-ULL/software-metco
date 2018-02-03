@@ -1,0 +1,103 @@
+berlin
+instances/berlin/
+97
+514
+-335825 2 GG yy 
+-335829 2 G y 
+-335903 2 G y 
+-335909 2 G y 
+-335915 8 rrrGGgrrrGGg rrryygrrryyg rrrrrGrrrrrG rrrrryrrrrry GGgrrrGGgrrr yygrrryygrrr rrGrrrrrGrrr rryrrrrryrrr 
+-336067 2 GG yy 
+-336133 6 GrrGggGGG yrryggyyy rrrrGGrrr rrrryyrrr GGGrrrrrr yyyrrrrrr 
+-336303 8 GGgrrrGGgrrr yygrrryygrrr rrGrrrrrGrrr rryrrrrryrrr rrrGGgrrrGGg rrryygrrryyg rrrrrGrrrrrG rrrrryrrrrry 
+1121847602 2 GG yy 
+1419061109 8 rrrGGgrrrGGg rrryygrrryyg rrrrrGrrrrrG rrrrryrrrrry GGgrrrGGgrrr yygrrryygrrr rrGrrrrrGrrr rryrrrrryrrr 
+1539749693 2 GG yy 
+1652869620 2 GG yy 
+21487231 8 GGGgrrrGGGgrrr yyygrrryyygrrr rrrGrrrrrrGrrr rrryrrrrrryrrr rrrrGGgrrrrGGg rrrryygrrrryyg rrrrrrGrrrrrrG rrrrrryrrrrrry 
+2292169767 8 GGGgrrrGGGgrrr yyygrrryyygrrr rrrGrrrrrrGrrr rrryrrrrrryrrr rrrrGGgrrrrGGg rrrryygrrrryyg rrrrrrGrrrrrrG rrrrrryrrrrrry 
+2341913620 8 rrrGGgrrrGGg rrryygrrryyg rrrrrGrrrrrG rrrrryrrrrry GGgrrrGGgrrr yygrrryygrrr rrGrrrrrGrrr rryrrrrryrrr 
+248511412 2 GG yy 
+25663483 6 rrGGGGGg rryyyyyg rrrrrrrG rrrrrrry GGGrrrrr yyyrrrrr 
+263577593 2 GG yy 
+26746326 6 GGGGrrrGg yyyyrrryg rrrrrrrrG rrrrrrrry rrrGGGGrr rrryyyyrr 
+26746764 4 GGrr yyrr rGGG ryyy 
+26747435 4 GGGGGrrrrr yyyyyrrrrr rrrrrGGGGG rrrrryyyyy 
+26747436 4 GGGGGrrrrr yyyyyrrrrr rrrrrGGGGG rrrrryyyyy 
+26747644 2 GG yy 
+26764819 8 rrrGGgrrrGGg rrryygrrryyg rrrrrGrrrrrG rrrrryrrrrry GGgrrrGGgrrr yygrrryygrrr rrGrrrrrGrrr rryrrrrryrrr 
+26765334 6 GGgrrGGG yygrryyy rrGrrrrr rryrrrrr rrrGGGrr rrryyyrr 
+26869280 4 GGrr yyrr rGGG ryyy 
+26913851 6 GGrrrrGg yyrrrryg rrrrrrrG rrrrrrry rrGGGGrr rryyyyrr 
+26936194 2 GG yy 
+26952386 6 GgGGrrrr ygyyrrrr rGrrrrrr ryrrrrrr rrrrGGGG rrrryyyy 
+26952406 6 rrGGGg rryyyg rrrrrG rrrrry GGGrrr yyyrrr 
+26952408 8 rrrGGgrrrGGg rrryygrrryyg rrrrrGrrrrrG rrrrryrrrrry GGgrrrGGgrrr yygrrryygrrr rrGrrrrrGrrr rryrrrrryrrr 
+26952414 6 GgGGrrrr ygyyrrrr rGrrrrrr ryrrrrrr rrrrGGGG rrrryyyy 
+26952502 6 GGGGrrrGg yyyyrrryg rrrrrrrrG rrrrrrrry rrrGGGGrr rrryyyyrr 
+27432725 4 GGGG yyyy GGGG yyyy 
+27432729 6 rrrGGGGg rrryyyyg rrrrrrrG rrrrrrry GGGGGrrr yyyyyrrr 
+27432782 6 GgGGrrrr ygyyrrrr rGrrrrrr ryrrrrrr rrrrGGGG rrrryyyy 
+27432789 6 GgGGGGrrr ygyyyyrrr rGrrrrrrr ryrrrrrrr rrrrrGGGG rrrrryyyy 
+27432794 6 GgGGrrrr ygyyrrrr rGrrrrrr ryrrrrrr rrrrGGGG rrrryyyy 
+27432942 6 GgGGrrrr ygyyrrrr rGrrrrrr ryrrrrrr rrrrGGGG rrrryyyy 
+27435143 6 GGrrrrGg yyrrrryg rrrrrrrG rrrrrrry rrGGGGrr rryyyyrr 
+27435145 6 GGGGrrrGg yyyyrrryg rrrrrrrrG rrrrrrrry rrrGGGGrr rrryyyyrr 
+29208254 6 rrGGGGGg rryyyyyg rrrrrrrG rrrrrrry GGGrrrrr yyyrrrrr 
+294494421 4 GGrrr yyrrr rrGGG rryyy 
+294494422 4 GGGrr yyyrr rrrGG rrryy 
+29789730 6 GGrrrGg yyrrryg rrrrrrG rrrrrry rrGGGrr rryyyrr 
+29789731 6 rrrGgGG rrrygyy rrrrGrr rrrryrr GGGrrrr yyyrrrr 
+29825865 6 GGrrrrGg yyrrrryg rrrrrrrG rrrrrrry rrGGGGrr rryyyyrr 
+454920626 2 G y 
+471376392 2 GG yy 
+471376509 2 GG yy 
+567178197 2 GG yy 
+815343319 2 GG yy 
+815343355 2 GG yy 
+901799422 2 GG yy 
+968024959 2 GG yy 
+968024963 2 GG yy 
+cluster_-335819_-335901 8 rrrGGGgrrrGGGg rrryyygrrryyyg rrrrrrGrrrrrrG rrrrrryrrrrrry GGgrrrrGGgrrrr yygrrrryygrrrr rrGrrrrrrGrrrr rryrrrrrryrrrr 
+cluster_-336113_-336115_-336117 6 GGGGrrGgg yyyyrrygg rrrrrrrGG rrrrrrryy rrrGGGrrr rrryyyrrr 
+cluster_-336283_775540299 6 rrGGGGGg rryyyyyg rrrrrrrG rrrrrrry GGGrrrrr yyyrrrrr 
+cluster_1121847597_29789747_29789749 6 rrrGGGgGGGg rrryyygyyyg rrrrrrGrrrG rrrrrryrrry GGGGrrrrrrr yyyyrrrrrrr 
+cluster_1121856178_1121856187_1121856192 4 GGGG yyyy GGGG yyyy 
+cluster_116798493_26913881 6 GgGGGGrrr ygyyyyrrr rGrrrrrrr ryrrrrrrr rrrrrGGGG rrrrryyyy 
+cluster_116798498_26913854 6 GGrrrrGg yyrrrryg rrrrrrrG rrrrrrry rrGGGGrr rryyyyrr 
+cluster_116798500_26746677_350177360 4 Grrr yrrr rGGG ryyy 
+cluster_116798503_26746308 6 GGrrrrGg yyrrrryg rrrrrrrG rrrrrrry rrGGGGrr rryyyyrr 
+cluster_116798505_26746678 6 rrggGGGG rrggyyyy rrGGrrrr rryyrrrr GGrrrrrr yyrrrrrr 
+cluster_162429475_26913884 6 GgGGrrrr ygyyrrrr rGrrrrrr ryrrrrrr rrrrGGGG rrrryyyy 
+cluster_174069318_1769380594 8 rrrGGGgrrrGGGg rrryyygrrryyyg rrrrrrGrrrrrrG rrrrrryrrrrrry GGgrrrrGGgrrrr yygrrrryygrrrr rrGrrrrrrGrrrr rryrrrrrryrrrr 
+cluster_21487234_268468777 8 rrrGGGgrrrGGg rrryyygrrryyg rrrrrrGrrrrrG rrrrrryrrrrry gGGrrrrGGgrrr gyyrrrryygrrr GrrrrrrrrGrrr yrrrrrrrryrrr 
+cluster_21487237_29789748 8 rrrGGGgrrrGGGg rrryyygrrryyyg rrrrrrGrrrrrrG rrrrrryrrrrrry GGgrrrrGGgrrrr yygrrrryygrrrr rrGrrrrrrGrrrr rryrrrrrryrrrr 
+cluster_21487270_235637226_26952393 6 GGgrrGGG yygrryyy rrGrrrrr rryrrrrr rrrGGGrr rrryyyrr 
+cluster_21487271_270440119 6 GGrrrrGg yyrrrryg rrrrrrrG rrrrrrry rrGGGGrr rryyyyrr 
+cluster_21487272_2246102642_27539568 6 GGGrrrGGGg yyyrrryyyg rrrrrrrrrG rrrrrrrrry rrrGGGrrrr rrryyyrrrr 
+cluster_248511413_268468778 8 rrrGGGgrrrGGGg rrryyygrrryyyg rrrrrrGrrrrrrG rrrrrryrrrrrry GGgrrrrGGgrrrr yygrrrryygrrrr rrGrrrrrrGrrrr rryrrrrrryrrrr 
+cluster_26708010_26869281_350295984_350302094 8 rrrGGGgrrrGGGg rrryyygrrryyyg rrrrrrGrrrrrrG rrrrrryrrrrrry GGgrrrrGGgrrrr yygrrrryygrrrr rrGrrrrrrGrrrr rryrrrrrryrrrr 
+cluster_26746079_26870741 4 GGGrr yyyrr rrrGG rrryy 
+cluster_26746242_26870782 4 GGGrr yyyrr rrGGG rryyy 
+cluster_26747601_26747602_28096060_28096063 8 rrrGGGGgrrrGGGGg rrryyyygrrryyyyg rrrrrrrGrrrrrrrG rrrrrrryrrrrrrry GGgrrrrrGGgrrrrr yygrrrrryygrrrrr rrGrrrrrrrGrrrrr rryrrrrrrryrrrrr 
+cluster_26747610_26747611_26747612_26747618 8 GGGGggrrrrrrGGGGggrrrrrr yyyyggrrrrrryyyyggrrrrrr rrrrGGrrrrrrrrrrGGrrrrrr rrrryyrrrrrrrrrryyrrrrrr rrrrrrGGGGggrrrrrrGGGGgg rrrrrryyyyggrrrrrryyyygg rrrrrrrrrrGGrrrrrrrrrrGG rrrrrrrrrryyrrrrrrrrrryy 
+cluster_26747640_28096068 6 GGGGrrrrrrGGgg yyyyrrrrrryygg rrrrrrrrrrrrGG rrrrrrrrrrrryy rrrrGGGGGGrrrr rrrryyyyyyrrrr 
+cluster_26913850_28096072 6 rrrrrrGGggGGGG rrrrrryyggyyyy rrrrrrrrGGrrrr rrrrrrrryyrrrr GGGGGGrrrrrrrr yyyyyyrrrrrrrr 
+cluster_26936200_26936201 6 rrrrrrrrGGGggGGGGG rrrrrrrryyyggyyyyy rrrrrrrrrrrGGrrrrr rrrrrrrrrrryyrrrrr GGGGGGGGrrrrrrrrrr yyyyyyyyrrrrrrrrrr 
+cluster_26936445_332624394 6 GGGGrrrGg yyyyrrryg rrrrrrrrG rrrrrrrry rrrGGGGrr rrryyyyrr 
+cluster_26952503_27539563 6 GGgGGGGrrrr yygyyyyrrrr rrGrrrrrrrr rryrrrrrrrr rrrrrrrGGGG rrrrrrryyyy 
+cluster_26960766_29208264 4 GGGGGG yyyyyy GGGGGG yyyyyy 
+cluster_270443701_29789682 6 GGGGrrrrGg yyyyrrrryg rrrrrrrrrG rrrrrrrrry rrrGGGGGrr rrryyyyyrr 
+cluster_271176842_272359147 8 rrrGGgrrrGGg rrryygrrryyg rrrrrGrrrrrG rrrrryrrrrry GGgrrrGGgrrr yygrrryygrrr rrGrrrrrGrrr rryrrrrryrrr 
+cluster_27432739_824505908 8 GGgrrrGgGrrr yygrrrygyrrr rrGrrrrGrrrr rryrrrryrrrr rrrGGgrrrGGg rrryygrrryyg rrrrrGrrrrrG rrrrryrrrrry 
+cluster_27432940_332625971 6 rrggGGGG rrggyyyy rrGGrrrr rryyrrrr GGrrrrrr yyrrrrrr 
+cluster_29209302_29209305_29209307_29209310 6 GGgrrGGG yygrryyy rrGrrrrr rryrrrrr rrrGGGrr rrryyyrr 
+cluster_29209324_29209325 6 rrrGGgGGG rrryygyyy rrrrrGrrr rrrrryrrr GGGrrrrrr yyyrrrrrr 
+cluster_29210909_357384481 8 rrrGGGgrrrGGGg rrryyygrrryyyg rrrrrrGrrrrrrG rrrrrryrrrrrry GGgrrrrGGgrrrr yygrrrryygrrrr rrGrrrrrrGrrrr rryrrrrrryrrrr 
+cluster_29720820_543507358_59905492 6 rrGGGGGg rryyyyyg rrrrrrrG rrrrrrry GGGrrrrr yyyrrrrr 
+cluster_29789701_29789703_775540300_775540305 6 rrrGGgGGG rrryygyyy rrrrrGrrr rrrrryrrr GGGrrrrrr yyyrrrrrr 
+cluster_29789705_29789706 6 GGGrrrGGg yyyrrryyg rrrrrrrrG rrrrrrrry rrrGGGrrr rrryyyrrr 
+cluster_29790215_471376401 6 GGgrrGGG yygrryyy rrGrrrrr rryrrrrr rrrGGGrr rrryyyrr 
+cluster_632947478_632947480 8 rrrGGGgrrrGGGg rrryyygrrryyyg rrrrrrGrrrrrrG rrrrrryrrrrrry GGgrrrrGGgrrrr yygrrrryygrrrr rrGrrrrrrGrrrr rryrrrrrryrrrr 
+1300
+3400

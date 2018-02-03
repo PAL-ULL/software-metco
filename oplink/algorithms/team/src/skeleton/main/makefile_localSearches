@@ -1,0 +1,14 @@
+directory:=../../plugins/localSearches/
+localSearches=$(shell ls $(directory)) 
+clean:=$(foreach localSearch, $(localSearches), ${directory}${localSearch}/${localSearch}.library)
+
+all: $(localSearches) 
+clean: $(clean)
+
+$(localSearches):
+	@echo Generando $@
+	make -s -f makefile_localSearch localSearch="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

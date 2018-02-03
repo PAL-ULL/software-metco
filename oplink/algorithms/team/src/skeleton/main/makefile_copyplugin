@@ -1,0 +1,10 @@
+directory=../../plugins/$(PLUGIN)
+pluginnames=$(shell ls $(directory))
+
+all: $(pluginnames)
+
+$(pluginnames):
+	echo "Es: $(pluginnames)"
+	echo "Copiando: $@"
+	mkdir -p $(DIST_DIR)/src/plugins/$(PLUGIN)/$@
+	cp ../../plugins/$(PLUGIN)/$@/*.cpp ../../plugins/$(PLUGIN)/$@/*.h $(DIST_DIR)/src/plugins/$(PLUGIN)/$@

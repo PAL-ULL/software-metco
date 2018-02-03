@@ -1,0 +1,144 @@
+MPICC = /soft/openmpi/bin/mpiCC
+CC = g++ 
+FLEX = flex
+BISON = bison
+CCFLAGS = -c -O2
+IFLAGS = -I. -I.. -I../utils -I../../../src_external/hv-1.1-src
+DFLAGS = 
+LFLAGS = -shared 
+
+all: sequential parallel problems algorithms conversions scores migrationSelectors exchangeSelectors mutations crossovers
+sequential: metcoSeq
+parallel: metcoPar
+problems:
+	make -s -f makefile_problems CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+algorithms:
+	make -s -f makefile_algorithms CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+conversions:
+	make -s -f makefile_conversions CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+scores:
+	make -s -f makefile_scores CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+migrationSelectors:
+	make -s -f makefile_migration_selectors CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+exchangeSelectors:
+	make -s -f makefile_exchange_selectors CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+mutations:
+	make -s -f makefile_mutations CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+crossovers:
+	make -s -f makefile_crossovers CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+
+######################## sequential #####################################
+
+metcoSeq: metcoSeq.cpp Individual.o MOFront_noMPI.o hv.o avl.o EA.o utils.o ScoreAlgorithm.o Mutation.o Crossover.o Plugin.o
+	$(CC) -DNO_CONF_PARSING $(IFLAGS) metcoSeq.cpp Individual.o MOFront_noMPI.o hv.o avl.o EA.o utils.o ScoreAlgorithm.o Mutation.o Crossover.o Plugin.o -o $@ -ldl 
+
+#########################################################################
+
+############################# parallel ##################################
+
+metcoPar: metcoPar.cpp MOFront.o hv.o avl.o Individual.o EA.o ExecutionIsland.o CoordinatorIsland.o Configuration.o utils.o parseConf.tab.c lex.Conf.c Conversion.o ScoreAlgorithm.o GlobalScoreAlgorithm.o LocalScoreAlgorithm.o MigrationSelector.o ExchangeSelector.o Mutation.o Crossover.o Plugin.o
+	$(MPICC) $(IFLAGS) metcoPar.cpp Individual.o MOFront.o hv.o avl.o EA.o ExecutionIsland.o utils.o CoordinatorIsland.o Configuration.o parseConf.tab.c lex.Conf.c Conversion.o ScoreAlgorithm.o MigrationSelector.o ExchangeSelector.o GlobalScoreAlgorithm.o LocalScoreAlgorithm.o Mutation.o Crossover.o Plugin.o -o $@ -ldl
+#########################################################################
+
+############################# skeleton ##################################
+
+parseConf.tab.c: ../parseConf.y 
+	$(BISON) -p Conf -d ../parseConf.y 
+
+lex.Conf.c: ../parseConf.l
+	$(FLEX) -PConf -i ../parseConf.l 
+
+Plugin.o: ../Plugin.cpp
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@
+
+CoordinatorIsland.o: ../CoordinatorIsland.cpp 
+	$(MPICC) $(IFLAGS) $(CCFLAGS) $< -o $@ 
+
+Configuration.o: ../Configuration.cpp
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@ 
+
+utils.o: ../utils/utils.cpp 
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@ 
+
+ExecutionIsland.o: ../ExecutionIsland.cpp
+	$(MPICC) $(IFLAGS) $(CCFLAGS) $< -o $@
+
+EA.o: ../EA.cpp
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@
+
+MOFront.o: ../MOFront.cpp
+	$(MPICC) $(IFLAGS) $(CCFLAGS) -DVARIANT=4 $< -o $@
+
+MOFront_noMPI.o: ../MOFront.cpp
+	$(CC) $(IFLAGS) $(CCFLAGS) -DNO_MPI -DVARIANT=4 $< -o $@
+
+Individual.o: ../Individual.cpp 
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@ 
+
+Conversion.o: ../Conversion.cpp 
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@ 
+
+ScoreAlgorithm.o: ../ScoreAlgorithm.cpp
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@
+
+GlobalScoreAlgorithm.o: ../GlobalScoreAlgorithm.cpp 
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@
+
+LocalScoreAlgorithm.o: ../LocalScoreAlgorithm.cpp
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@
+
+MigrationSelector.o: ../MigrationSelector.cpp
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@
+
+ExchangeSelector.o: ../ExchangeSelector.cpp 
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@
+
+Mutation.o: ../Mutation.cpp
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@
+
+Crossover.o: ../Crossover.cpp
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@
+
+#########################################################################
+
+## Hipervolumen
+
+hv.o: ../../../src_external/hv-1.1-src/hv.c
+	$(CC) $(IFLAGS) $(CCFLAGS) -DVARIANT=4 $< -o $@
+
+avl.o: ../../../src_external/hv-1.1-src/avl.c 
+	$(CC) $(IFLAGS) $(CCFLAGS) $< -o $@
+
+#########################################################################
+clean:
+	rm -f *.o *.so *.stackdump *.tmp *~ out metcoSeq metcoPar parseConf.tab.h parseConf.tab.c lex.Conf.c
+	make -s -f makefile_algorithms clean
+	make -s -f makefile_conversions clean
+	make -s -f makefile_crossovers clean
+	make -s -f makefile_exchange_selectors clean
+	make -s -f makefile_migration_selectors clean
+	make -s -f makefile_mutations clean
+	make -s -f makefile_problems clean
+	make -s -f makefile_scores clean
+
+# Dependencias creadas usando makedepend
+metcoPar.o: ../CoordinatorIsland.h ../Configuration.h ../MigrationSelector.h ../Individual.h ../Plugin.h ../definitions.h ../Mutation.h ../Crossover.h ../ExchangeSelector.h ../ScoreAlgorithm.h ../Conversion.h ../EA.h ../utils/utils.h ../MOFront.h ../LocalScoreAlgorithm.h ../ExecutionIsland.h
+metcoSeq.o: ../EA.h ../Plugin.h ../utils/utils.h ../Individual.h ../definitions.h ../Mutation.h ../Crossover.h ../MOFront.h ../LocalScoreAlgorithm.h ../ScoreAlgorithm.h
+CoordinatorIsland.o: ../CoordinatorIsland.h ../Configuration.h ../MigrationSelector.h ../Individual.h ../Plugin.h ../definitions.h ../Mutation.h ../Crossover.h ../ExchangeSelector.h ../ScoreAlgorithm.h ../Conversion.h ../EA.h ../utils/utils.h ../MOFront.h ../LocalScoreAlgorithm.h ../ExecutionIsland.h ../GlobalScoreAlgorithm.h
+Configuration.o: ../Configuration.h ../MigrationSelector.h ../Individual.h ../Plugin.h ../definitions.h ../Mutation.h ../Crossover.h ../ExchangeSelector.h ../ScoreAlgorithm.h ../Conversion.h ../EA.h ../utils/utils.h ../MOFront.h ../LocalScoreAlgorithm.h
+ExecutionIsland.o: ../Configuration.h ../MigrationSelector.h ../Individual.h ../Plugin.h ../definitions.h ../Mutation.h ../Crossover.h ../ExchangeSelector.h ../ScoreAlgorithm.h ../Conversion.h ../EA.h ../utils/utils.h ../MOFront.h ../LocalScoreAlgorithm.h ../ExecutionIsland.h ../CoordinatorIsland.h
+EA.o: ../EA.h ../Plugin.h ../utils/utils.h ../Individual.h ../definitions.h ../Mutation.h ../Crossover.h ../MOFront.h ../LocalScoreAlgorithm.h ../ScoreAlgorithm.h ../Configuration.h ../MigrationSelector.h ../ExchangeSelector.h ../Conversion.h
+MOFront.o: ../MOFront.h ../definitions.h ../Individual.h ../Plugin.h ../Mutation.h ../Crossover.h ../../../src_external/hv-1.1-src/hv.h ../utils/utils.h
+Individual.o: ../Individual.h ../Plugin.h ../definitions.h ../Mutation.h ../Crossover.h
+Conversion.o: ../Conversion.h ../Individual.h ../Plugin.h ../definitions.h ../Mutation.h ../Crossover.h
+ScoreAlgorithm.o: ../ScoreAlgorithm.h ../Plugin.h
+GlobalScoreAlgorithm.o: ../GlobalScoreAlgorithm.h ../ScoreAlgorithm.h ../Plugin.h ../MOFront.h ../definitions.h ../Individual.h ../Mutation.h ../Crossover.h
+LocalScoreAlgorithm.o: ../LocalScoreAlgorithm.h ../ScoreAlgorithm.h ../Plugin.h ../MOFront.h ../definitions.h ../Individual.h ../Mutation.h ../Crossover.h
+MigrationSelector.o: ../MigrationSelector.h ../Individual.h ../Plugin.h ../definitions.h ../Mutation.h ../Crossover.h
+ExchangeSelector.o: ../ExchangeSelector.h ../Individual.h ../Plugin.h ../definitions.h ../Mutation.h ../Crossover.h
+Mutation.o: ../Mutation.h ../Individual.h ../Plugin.h ../definitions.h ../Crossover.h
+Crossover.o: ../Crossover.h ../Individual.h ../Plugin.h ../definitions.h ../Mutation.h
+parseConf.tab.o: ../Conversion.h ../Individual.h ../Plugin.h ../definitions.h ../Mutation.h ../Crossover.h ../ScoreAlgorithm.h ../MigrationSelector.h ../ExchangeSelector.h ../Configuration.h ../EA.h ../utils/utils.h ../MOFront.h ../LocalScoreAlgorithm.h
+hv.o: ../../../src_external/hv-1.1-src/hv.h ../../../src_external/hv-1.1-src/avl.h
+avl.o: ../../../src_external/hv-1.1-src/avl.h
+Plugin.o: ../Plugin.h

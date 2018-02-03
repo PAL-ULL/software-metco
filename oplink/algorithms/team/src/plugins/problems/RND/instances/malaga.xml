@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<instance>
+	<name>malaga</name>
+	<description>
+	<![CDATA[
+Map of the city of Malaga.
+GridSizeX (Lng / Columns): 450
+GridSizeY (Lat / Rows): 300
+CellWidth: 15m
+Nr. Candidate Sites: 1000
+Total Area: 27.2 km2	
+	]]>	
+	</description>
+	<gridSizeX>450</gridSizeX>
+	<gridSizeY>300</gridSizeY>
+	<availableTransmittersFile>malaga.dat</availableTransmittersFile>
+	<range>30</range>
+	<propagationModel>Ommidirectional</propagationModel>
+</instance>

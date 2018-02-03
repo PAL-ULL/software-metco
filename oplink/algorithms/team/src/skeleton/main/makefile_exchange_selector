@@ -1,0 +1,30 @@
+LFLAGS = -shared 
+EXCHANGESELECTORDIR = ../../plugins/exchangeSelectors/
+IFLAGS= -I../ -I../utils/ -I$(EXCHANGESELECTORDIR)$(exchangeSelector)/
+SO_FILE= $(exchangeSelector).so
+COMPLETE_O_FILE=$(exchangeSelector).complete.o
+O_FILE= $(exchangeSelector).o
+C_FILE:=$(EXCHANGESELECTORDIR)$(exchangeSelector)/$(exchangeSelector).cpp
+H_FILE:=$(EXCHANGESELECTORDIR)$(exchangeSelector)/$(exchangeSelector).h
+LIBRARY_C_FILE:=$(EXCHANGESELECTORDIR)$(exchangeSelector)/$(exchangeSelector).library.cpp
+LIBRARY_O_FILE:=$(exchangeSelector).library.o
+H_FILE:=$(EXCHANGESELECTORDIR)$(exchangeSelector)/$(exchangeSelector).h
+FILE_TO_CHANGE:=../complete.c
+OBJ_FILES:=ExchangeSelector.reloc.o Individual.reloc.o utils.reloc.o Plugin.reloc.o
+
+$(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE) 
+	$(CXX) $(IFLAGS) $(LFLAGS)  -o $@ -Wl,-soname,$@ $^
+
+$(LIBRARY_O_FILE): $(LIBRARY_C_FILE) ../ExchangeSelector.h ../Individual.h ../Definitions.h $(H_FILE) 
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(LIBRARY_C_FILE) -o $@
+
+$(LIBRARY_C_FILE): $(FILE_TO_CHANGE) 
+	sed 's/TIPO_NUEVO/$(exchangeSelector)/g' $(FILE_TO_CHANGE) | sed 's/TIPO_DEVUELTO/ExchangeSelector/g' > $@
+
+$(O_FILE): $(C_FILE) $(H_FILE) ../ExchangeSelector.h ../Individual.h ../Definitions.h
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(C_FILE) -o $@
+
+$(OBJ_FILES): force
+	make -f Makefile $@
+
+force : ;

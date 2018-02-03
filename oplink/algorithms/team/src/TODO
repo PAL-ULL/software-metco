@@ -1,0 +1,8 @@
+- Gestion del archivo en paralelo: al multiobjetivizar hay problemas si se usa archivo externo, ya
+que los valores ficticios pueden cambiar, y eso ahora no se esta considerando.
+Ver la influencia que tiene, porque igual se obviar...
+
+
+- Para implementar getOptDirection junto con multiobjetivizacion se tuvo que incluir un vector con
+referencia a los plugins multiobjetivo y se estan copiando con cada clonacion para evitar el uso
+de miembros estaticos en los plugins. Ver otras formas para mejorarlo

@@ -1,0 +1,14 @@
+directory:=../../plugins/mutations/
+mutations=$(shell ls $(directory)) 
+clean:=$(foreach mutation, $(mutations), ${directory}${mutation}/${mutation}.library)
+
+all: $(mutations) 
+clean: $(clean)
+
+$(mutations):
+	@echo Generando $@
+	make -s -f makefile_mutation mutation="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

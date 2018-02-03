@@ -1,0 +1,8 @@
+R #Rango de las antenas
+SizeX SizeY #Tam. de la zona
+N # Numero de posibles ubicaciones
+x1 y1 #ubicacion 1
+x2 y2 # ubicacion 2
+...
+xN yN # ubicacion N
+

@@ -1,0 +1,30 @@
+LFLAGS = -shared 
+LOCALSEARCHDIR = ../../plugins/localSearches/
+IFLAGS= -I../ -I../utils/ -I$(LOCALSEARCHDIR)$(localSearch)/
+SO_FILE= $(localSearch).so
+COMPLETE_O_FILE=$(localSearch).complete.o
+O_FILE= $(localSearch).o
+C_FILE:=$(LOCALSEARCHDIR)$(localSearch)/$(localSearch).cpp
+H_FILE:=$(LOCALSEARCHDIR)$(localSearch)/$(localSearch).h
+LIBRARY_C_FILE:=$(LOCALSEARCHDIR)$(localSearch)/$(localSearch).library.cpp
+LIBRARY_O_FILE:=$(localSearch).library.o
+H_FILE:=$(LOCALSEARCHDIR)$(localSearch)/$(localSearch).h
+FILE_TO_CHANGE:=../complete.c
+OBJ_FILES:=LocalSearch.reloc.o Individual.reloc.o utils.reloc.o Plugin.reloc.o MOFront.reloc.o  hv.reloc.o avl.reloc.o SimpleIndividual.reloc.o
+
+$(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE) 
+	$(CXX) $(IFLAGS) $(LFLAGS)  -o $@ -Wl,-soname,$@ $^
+
+$(LIBRARY_O_FILE): $(LIBRARY_C_FILE) ../LocalSearch.h ../Individual.h ../Definitions.h ../MOFront.h ../SimpleIndividual.h $(H_FILE) 
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(LIBRARY_C_FILE) -o $@
+
+$(LIBRARY_C_FILE): $(FILE_TO_CHANGE) 
+	sed 's/TIPO_NUEVO/$(localSearch)/g' $(FILE_TO_CHANGE) | sed 's/TIPO_DEVUELTO/LocalSearch/g' > $@
+
+$(O_FILE): $(C_FILE) $(H_FILE) ../LocalSearch.h ../Individual.h ../Definitions.h ../MOFront.h
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(C_FILE) -o $@
+
+$(OBJ_FILES): force
+	make -f Makefile $@
+
+force : ;

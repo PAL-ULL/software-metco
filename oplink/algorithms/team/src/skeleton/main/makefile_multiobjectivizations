@@ -1,0 +1,14 @@
+directory:=../../plugins/multiObjectivizations/
+multiobjectivizations=$(shell ls $(directory))
+clean:=$(foreach multiobjectivization, $(multiobjectivizations), ${directory}${multiobjectivization}/${multiobjectivization}.library)
+
+all: $(multiobjectivizations) 
+clean: $(clean)
+
+$(multiobjectivizations):
+	@echo Generando $@
+	make -s -f makefile_multiobjectivization multiobjectivization="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

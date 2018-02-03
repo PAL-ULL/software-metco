@@ -1,0 +1,14 @@
+directory:=../../plugins/crossovers/
+crossovers=$(shell ls $(directory))
+clean:=$(foreach crossover, $(crossovers), ${directory}${crossover}/${crossover}.library)
+
+all: $(crossovers) 
+clean: $(clean)
+
+$(crossovers):
+	@echo Generando $@
+	make -s -f makefile_crossover crossover="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

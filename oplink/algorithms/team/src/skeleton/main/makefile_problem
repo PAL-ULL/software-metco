@@ -1,0 +1,29 @@
+LFLAGS = -shared 
+PROBLEMDIR = ../../plugins/problems/
+IFLAGS= -I../../problems/$(problem)/ -I../ -I../utils/ -I../utils/sumo-wrapper -I../utils/CEC2013_MultiModal
+SO_FILE= $(problem).so
+COMPLETE_O_FILE=$(problem).complete.o
+O_FILE= $(problem).o
+C_FILE:=$(PROBLEMDIR)$(problem)/$(problem).cpp
+H_FILE:=$(PROBLEMDIR)$(problem)/$(problem).h
+LIBRARY_C_FILE:=$(PROBLEMDIR)$(problem)/$(problem).library.cpp
+LIBRARY_O_FILE:=$(problem).library.o
+FILE_TO_CHANGE:=../complete.c
+OBJ_FILES:=Individual.reloc.o Plugin.reloc.o utils.reloc.o cInstance.reloc.o simpleXMLParser.reloc.o cec2013.reloc.o cfunction.reloc.o rand2.reloc.o
+
+$(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE)
+	$(CXX) $(IFLAGS) $(LFLAGS) -o $@ -Wl,-soname,$@ $^ -lm -lgsl -lgslcblas
+
+$(LIBRARY_O_FILE): $(LIBRARY_C_FILE) ../Individual.h ../Definitions.h ../utils/utils.h $(H_FILE)
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(LIBRARY_C_FILE) -o $@
+
+$(LIBRARY_C_FILE): $(FILE_TO_CHANGE)
+	sed 's/TIPO_NUEVO/$(problem)/g' $(FILE_TO_CHANGE) | sed 's/TIPO_DEVUELTO/Individual/g'  > $@
+
+$(O_FILE): $(C_FILE) $(H_FILE) ../Individual.h ../Definitions.h ../utils/utils.h
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(C_FILE) -o $@
+
+$(OBJ_FILES): force
+	make -f Makefile $@
+
+force : ;

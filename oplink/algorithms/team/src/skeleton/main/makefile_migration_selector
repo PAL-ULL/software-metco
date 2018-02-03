@@ -1,0 +1,30 @@
+LFLAGS = -shared 
+MIGRATIONSELECTORDIR = ../../plugins/migrationSelectors/
+IFLAGS= -I../ -I$(MIGRATIONSELECTORDIR)$(migrationSelector)/
+SO_FILE= $(migrationSelector).so
+COMPLETE_O_FILE=$(migrationSelector).complete.o
+O_FILE= $(migrationSelector).o
+C_FILE:=$(MIGRATIONSELECTORDIR)$(migrationSelector)/$(migrationSelector).cpp
+H_FILE:=$(MIGRATIONSELECTORDIR)$(migrationSelector)/$(migrationSelector).h
+LIBRARY_C_FILE:=$(MIGRATIONSELECTORDIR)$(migrationSelector)/$(migrationSelector).library.cpp
+LIBRARY_O_FILE:=$(migrationSelector).library.o
+H_FILE:=$(MIGRATIONSELECTORDIR)$(migrationSelector)/$(migrationSelector).h
+FILE_TO_CHANGE:=../complete.c
+OBJ_FILES:=MigrationSelector.reloc.o Individual.reloc.o utils.reloc.o Plugin.reloc.o MOFront.reloc.o MOFrontVector_noMPI.reloc.o hv.reloc.o avl.reloc.o SimpleIndividual.reloc.o
+
+$(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE) 
+	$(CXX) $(IFLAGS) $(LFLAGS)  -o $@ -Wl,-soname,$@ $^
+
+$(LIBRARY_O_FILE): $(LIBRARY_C_FILE) ../MigrationSelector.h ../Individual.h ../Definitions.h $(H_FILE) 
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(LIBRARY_C_FILE) -o $@
+
+$(LIBRARY_C_FILE): $(FILE_TO_CHANGE) 
+	sed 's/TIPO_NUEVO/$(migrationSelector)/g' $(FILE_TO_CHANGE) | sed 's/TIPO_DEVUELTO/MigrationSelector/g' > $@
+
+$(O_FILE): $(C_FILE) $(H_FILE) ../MigrationSelector.h ../Individual.h ../Definitions.h
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(C_FILE) -o $@
+
+$(OBJ_FILES): force
+	make -f Makefile $@
+
+force : ;

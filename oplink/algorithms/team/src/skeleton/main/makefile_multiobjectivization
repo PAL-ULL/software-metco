@@ -1,0 +1,30 @@
+LFLAGS = -shared 
+MULTIOBJECTIVIZATIONDIR = ../../plugins/multiObjectivizations/
+IFLAGS= -I../ -I../utils/ -I$(MULTIOBJECTIVIZATIONDIR)$(multiobjectivization)/ -I../utils/fuzzylite/
+SO_FILE= $(multiobjectivization).so
+COMPLETE_O_FILE=$(multiobjectivization).complete.o
+O_FILE= $(multiobjectivization).o
+C_FILE:=$(MULTIOBJECTIVIZATIONDIR)$(multiobjectivization)/$(multiobjectivization).cpp
+H_FILE:=$(MULTIOBJECTIVIZATIONDIR)$(multiobjectivization)/$(multiobjectivization).h
+LIBRARY_C_FILE:=$(MULTIOBJECTIVIZATIONDIR)$(multiobjectivization)/$(multiobjectivization).library.cpp
+LIBRARY_O_FILE:=$(multiobjectivization).library.o
+H_FILE:=$(MULTIOBJECTIVIZATIONDIR)$(multiobjectivization)/$(multiobjectivization).h
+FILE_TO_CHANGE:=../complete.c
+OBJ_FILES:=MultiObjectivization.reloc.o Individual.reloc.o utils.reloc.o Plugin.reloc.o
+
+$(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE)
+	$(CXX) $(IFLAGS) $(LFLAGS) -o $@ -Wl,--whole-archive ../utils/fuzzylite/lib/libfuzzylite-static.a -Wl,--no-whole-archive -Wl,-soname,$@ $^
+
+$(LIBRARY_O_FILE): $(LIBRARY_C_FILE) ../MultiObjectivization.h ../Individual.h ../Definitions.h $(H_FILE)
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(LIBRARY_C_FILE) -o $@
+
+$(LIBRARY_C_FILE): $(FILE_TO_CHANGE) 
+	sed 's/TIPO_NUEVO/$(multiobjectivization)/g' $(FILE_TO_CHANGE) | sed 's/TIPO_DEVUELTO/MultiObjectivization/g' > $@
+
+$(O_FILE): $(C_FILE) $(H_FILE) ../MultiObjectivization.h ../Individual.h ../Definitions.h
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(C_FILE) -o $@
+
+$(OBJ_FILES): force
+	make -f Makefile $@
+
+force : ;

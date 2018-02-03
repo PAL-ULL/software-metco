@@ -1,0 +1,14 @@
+directory:=../../plugins/scores/
+scores=$(shell ls $(directory))
+clean:=$(foreach score, $(scores), ${directory}${score}/${score}.library)
+
+all: $(scores) 
+clean: $(clean)
+
+$(scores):
+	@echo Generando $@
+	make -s -f makefile_score score="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

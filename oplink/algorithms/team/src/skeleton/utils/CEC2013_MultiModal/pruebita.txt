@@ -1,0 +1,53 @@
+Current Evaluation = 100(103)
+Front Size = 1
+29.9509203247497418 196.07362597997934 
+
+Current Evaluation = 200(203)
+Front Size = 1
+0.0337254256167101793 197.301965950663174 
+
+Current Evaluation = 300(301)
+Front Size = 1
+0.0337254256167101793 197.301965950663174 
+
+Current Evaluation = 400(402)
+Front Size = 1
+0.0337254256167101793 197.301965950663174 
+
+Current Evaluation = 500(505)
+Front Size = 1
+0.0337254256167101793 197.301965950663174 
+
+Current Evaluation = 600(605)
+Front Size = 1
+0.0138015700493246962 198.89587439605404 
+
+Current Evaluation = 700(701)
+Front Size = 1
+0.0138015700493246962 198.89587439605404 
+
+Current Evaluation = 800(803)
+Front Size = 1
+0.0138015700493246962 198.89587439605404 
+
+Current Evaluation = 900(900)
+Front Size = 1
+0.0138015700493246962 198.89587439605404 
+
+Current Evaluation = 1000(1001)
+Front Size = 1
+0.0138015700493246962 198.89587439605404 
+
+MonoObjective Genetic Algorithm
+Number of Evaluations = 1000
+Mutation Probability = 1
+Crossover Probability = 1
+Population Size = 5
+Survival Selection Type = 1
+
+Time =  0.0102349999999999993
+
+Current Evaluation = 1001
+Front Size = 1
+0.0138015700493246962 198.89587439605404 
+

@@ -1,0 +1,30 @@
+LFLAGS = -shared 
+SCOREDIR = ../../plugins/scores/
+IFLAGS= -I../ -I$(SCOREDIR)$(score)/
+SO_FILE= $(score).so
+COMPLETE_O_FILE=$(score).complete.o
+O_FILE= $(score).o
+C_FILE:=$(SCOREDIR)$(score)/$(score).cpp
+H_FILE:=$(SCOREDIR)$(score)/$(score).h
+LIBRARY_C_FILE:=$(SCOREDIR)$(score)/$(score).library.cpp
+LIBRARY_O_FILE:=$(score).library.o
+H_FILE:=$(SCOREDIR)$(score)/$(score).h
+FILE_TO_CHANGE:=../complete.c
+OBJ_FILES:=LocalScoreAlgorithm.reloc.o GlobalScoreAlgorithm.reloc.o ScoreAlgorithm.reloc.o MOFront.reloc.o hv.reloc.o avl.reloc.o Individual.reloc.o utils.reloc.o Plugin.reloc.o
+
+$(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE) 
+	$(CXX) $(IFLAGS) $(LFLAGS)  -o $@ -Wl,-soname,$@ $^
+
+$(LIBRARY_O_FILE): $(LIBRARY_C_FILE) ../Individual.h ../MOFront.h ../ScoreAlgorithm.h ../GlobalScoreAlgorithm.h ../LocalScoreAlgorithm.h ../Definitions.h $(H_FILE) 
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(LIBRARY_C_FILE) -o $@
+
+$(LIBRARY_C_FILE): $(FILE_TO_CHANGE) 
+	sed 's/TIPO_NUEVO/$(score)/g' $(FILE_TO_CHANGE) | sed 's/TIPO_DEVUELTO/ScoreAlgorithm/g' > $@
+
+$(O_FILE): $(C_FILE) $(H_FILE) ../LocalScoreAlgorithm.h ../GlobalScoreAlgorithm.h ../ScoreAlgorithm.h ../Individual.h ../MOFront.h ../Definitions.h
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(C_FILE) -o $@
+
+$(OBJ_FILES): force
+	make -f Makefile $@
+
+force : ;

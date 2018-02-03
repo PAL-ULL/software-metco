@@ -1,0 +1,7 @@
+Instance name
+Path
+tlLogics 
+totalPhases(trafficLights) 
+tlLogics lines and each line: - tlID #phase phase (#phase words)
+numVehicles 
+simTime

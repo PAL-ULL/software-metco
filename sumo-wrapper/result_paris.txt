@@ -1,0 +1,16 @@
+6662.25 // Original Green vs Red
+1.04031 // Normalized GvR
+1.36859e+06 // Total duration
+1137 // Vehicles arriving
+63 // Vehicles not arriving
+957899 // Number of stops
+1.95523 // Fitness
+1203.69 // Mean Travel Time
+93.3 // Mean Waiting Time
+1.07251e+09 // CO2 
+1.26571e+07 // CO
+1.84043e+06 // HC
+6.878e+06 // NOx
+174518 // PMx
+425246 // fuel
+0 // noise

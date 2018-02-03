@@ -1,0 +1,76 @@
+paris
+instances/paris/
+70
+378
+176932548 6 GGGrrrGGg yyyrrryyg rrrrrrrrG rrrrrrrry rrrGGGrrr rrryyyrrr 
+21659950 4 GGGrrrGGG yyyrrryyy rrrGGGrrr rrryyyrrr 
+21660043 6 GGgGGGrrr yygyyyrrr rrGrrrrrr rryrrrrrr rrrrrrGGG rrrrrryyy 
+21660044 6 GGgGGGrrr yygyyyrrr rrGrrrrrr rryrrrrrr rrrrrrGGG rrrrrryyy 
+21660045 6 GGgGGGrrr yygyyyrrr rrGrrrrrr rryrrrrrr rrrrrrGGG rrrrrryyy 
+21660340 8 GGGgrrrGGGgrrr yyygrrryyygrrr rrrGrrrrrrGrrr rrryrrrrrryrrr rrrrGGgrrrrGGg rrrryygrrrryyg rrrrrrGrrrrrrG rrrrrryrrrrrry 
+21660458 6 GgGGGr ygyyyr rGrrrr ryrrrr rrrrGG rrrryy 
+21661042 4 GGGGGGr yyyyyyr rrrrGGG rrrryyy 
+21661060 4 GGGGr yyyyr rrGGG rryyy 
+21661081 8 GGGgrrrGGGgrrr yyygrrryyygrrr rrrGrrrrrrGrrr rrryrrrrrryrrr rrrrGGgrrrrGGg rrrryygrrrryyg rrrrrrGrrrrrrG rrrrrryrrrrrry 
+25623928 4 GGrr yyrr rrGG rryy 
+25623951 4 GGrr yyrr rGGG ryyy 
+25623994 10 GGGgrrrrrrrGGGgrrrr yyygrrrrrrryyygrrrr rrrGrrrrrrrrrrGrrrr rrryrrrrrrrrrryrrrr rrrrrrrGGggrrrrGGgg rrrrrrryyggrrrryygg rrrrrrrrrGGrrrrrrGG rrrrrrrrryyrrrrrryy rrrrGGGGrrrrrrrrrrr rrrryyyyrrrrrrrrrrr 
+25624008 8 rrrGGGgrrrGGGg rrryyygrrryyyg rrrrrrGrrrrrrG rrrrrryrrrrrry GGgrrrrGGgrrrr yygrrrryygrrrr rrGrrrrrrGrrrr rryrrrrrryrrrr 
+25625261 4 GGrr yyrr rrGG rryy 
+25625921 8 rrrGGGgrrrGGGg rrryyygrrryyyg rrrrrrGrrrrrrG rrrrrryrrrrrry GGgrrrrGGgrrrr yygrrrryygrrrr rrGrrrrrrGrrrr rryrrrrrryrrrr 
+25625929 6 GGrrrGg yyrrryg rrrrrrG rrrrrry rrGGGrr rryyyrr 
+25625930 4 GGrr yyrr rrGG rryy 
+25626299 4 GGrr yyrr rrGG rryy 
+270678185 2 GGGGG yyyyy 
+270678186 6 Grrg yrrg rrrG rrry rGGr ryyr 
+270678320 2 GGGGG yyyyy 
+270938224 6 GGgrrGGG yygrryyy rrGrrrrr rryrrrrr rrrGGGrr rrryyyrr 
+270960794 8 rrrrrrGGgGGG rrrrrryygyyy rrrrrrrrGrrr rrrrrrrryrrr GGGgggrrrrrr yyygggrrrrrr rrrGGGrrrrrr rrryyyrrrrrr 
+271081455 4 Grr yrr rGG ryy 
+27235305 6 rrrrGGGgGGGg rrrryyygyyyg rrrrrrrGrrrG rrrrrrryrrry GGGGrrrrrrrr yyyyrrrrrrrr 
+27286687 4 GGr yyr rrG rry 
+27286688 6 rrrGGgGGG rrryygyyy rrrrrGrrr rrrrryrrr GGGrrrrrr yyyrrrrrr 
+27286700 6 rrrGGgGGG rrryygyyy rrrrrGrrr rrrrryrrr GGGrrrrrr yyyrrrrrr 
+273415600 4 rrGGGG rryyyy GGrrrr yyrrrr 
+291590185 4 GGGGGr yyyyyr rrrGGG rrryyy 
+299014098 2 G y 
+305208580 6 GGGrrrGGg yyyrrryyg rrrrrrrrG rrrrrrrry rrrGGGrrr rrryyyrrr 
+32560668 4 Gr yr rG ry 
+32560682 4 GGrrGG yyrryy rrGGrr rryyrr 
+32560724 4 GGrr yyrr rrGG rryy 
+34816458 4 GGGrrrr yyyrrrr rrrGGGG rrryyyy 
+34816475 4 GGGGGrrrr yyyyyrrrr rrrGGGGGG rrryyyyyy 
+34816507 4 GGGGGrrrr yyyyyrrrr rrrGGGGGG rrryyyyyy 
+34816544 4 GGGGGGrrr yyyyyyrrr GGrrrrGGG yyrrrryyy 
+34816547 4 GGGGGGrrr yyyyyyrrr GGrrrrGGG yyrrrryyy 
+34816573 6 GGgGGGrrr yygyyyrrr rrGrrrrrr rryrrrrrr rrrrrrGGG rrrrrryyy 
+34816582 4 GGrr yyrr rrGG rryy 
+34816753 6 GGGrrrGGg yyyrrryyg rrrrrrrrG rrrrrrrry rrrGGGrrr rrryyyrrr 
+34817055 6 rrrGGgGGG rrryygyyy rrrrrGrrr rrrrryrrr GGGrrrrrr yyyrrrrrr 
+367893 8 GGGgrrrGGGgrrr yyygrrryyygrrr rrrGrrrrrrGrrr rrryrrrrrryrrr rrrrGGgrrrrGGg rrrryygrrrryyg rrrrrrGrrrrrrG rrrrrryrrrrrry 
+368336 8 GGrrrrGGrr yyrrrryyrr rrrrGgrrGg rrrrygrryg rrrrrGrrrG rrrrryrrry rrGGrrrrrr rryyrrrrrr 
+368337 6 GGGgrrrGGGg yyygrrryyyg rrrGrrrrrrG rrryrrrrrry rrrrGGGGrrr rrrryyyyrrr 
+495986890 4 rrGGGG rryyyy GGrrrr yyrrrr 
+661218 6 GGGrrrGGg yyyrrryyg rrrrrrrrG rrrrrrrry rrrGGGrrr rrryyyrrr 
+661220 6 GGGrrrGGg yyyrrryyg rrrrrrrrG rrrrrrrry rrrGGGrrr rrryyyrrr 
+661221 6 GGGrrrGGg yyyrrryyg rrrrrrrrG rrrrrrrry rrrGGGrrr rrryyyrrr 
+661225 6 GGGGggGrrr yyyyggyrrr rrrrGGrrrr rrrryyrrrr rrrGrrrGGG rrryrrryyy 
+838050011 4 GGGG yyyy GGGG yyyy 
+838076324 2 G y 
+838076540 4 GGGG yyyy GGGG yyyy 
+925869772 4 GGrrGG yyrryy rrGGrr rryyrr 
+cluster_-10_30378221 6 GGGGGgrr yyyyygrr rrrrrGrr rrrrryrr GrrrrrGG yrrrrryy 
+cluster_1757087108_32561132 8 GGGgrrrGGGgrrr yyygrrryyygrrr rrrGrrrrrrGrrr rrryrrrrrryrrr rrrrGGgrrrrGGg rrrryygrrrryyg rrrrrrGrrrrrrG rrrrrryrrrrrry 
+cluster_21660332_838121846 4 GGrrGG yyrryy rrGGrr rryyrr 
+cluster_21660970_368335 8 GGGrrrgggrrrr yyyrrrgggrrrr rrrrrrGGGrrrr rrrrrryyyrrrr rrrgggrrrGGGG rrrgggrrryyyy rrrGGGrrrrrrr rrryyyrrrrrrr 
+cluster_21661018_21661061_273415647 6 GGGrrGg yyyrryg rrrrrrG rrrrrry rrGGGrr rryyyrr 
+cluster_25626269_34843121 6 GGGgrrrrrGGGg yyygrrrrryyyg rrrGrrrrrrrrG rrryrrrrrrrry rrrrGGGGGrrrr rrrryyyyyrrrr 
+cluster_260928395_583370365 6 GGGgrrrGGGG yyygrrryyyy rrrGrrrrrrr rrryrrrrrrr rrrrGGGGrGr rrrryyyyryr 
+cluster_27286670_299018666 6 GGGgrrrGGGg yyygrrryyyg rrrGrrrrrrG rrryrrrrrry rrrrGGGGrrr rrrryyyyrrr 
+cluster_34816583_368307 8 GGgrrGGGrrr yygrryyyrrr rrGrrrrrrrr rryrrrrrrrr rrrGgrrrGGg rrrygrrryyg rrrrGrrrrrG rrrryrrrrry 
+cluster_34843123_368341_829526332 8 rrrGGgrrGGG rrryygrryyy rrrrrGrrrrr rrrrryrrrrr GGgrrrGgrrr yygrrrygrrr rrGrrrrGrrr rryrrrryrrr 
+cluster_34843124_368340 6 GGGGrrrrGGg yyyyrrrryyg rrrrrrrrrrG rrrrrrrrrry rrrrGGGGrrr rrrryyyyrrr 
+cluster_34843128_661222 6 GGGGGrrrrrGGgg yyyyyrrrrryygg rrrrrrrrrrrrGG rrrrrrrrrrrryy rrrrrGGGGGrrrr rrrrryyyyyrrrr 
+cluster_34843131_368338 6 rrGGGrrGG rryyyrryy GgrrrGgrr ygrrrygrr rGrrrrGrr ryrrrryrr 
+1200
+3400

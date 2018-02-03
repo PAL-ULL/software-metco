@@ -1,0 +1,81 @@
+stockholm
+instances/stockholm/
+75
+370
+1121948642 2 GG yy 
+1363066772 2 GG yy 
+1363066773 2 GG yy 
+1364657041 4 Grr yrr rGG ryy 
+1386641666 4 Grr yrr rGG ryy 
+1386747196 2 GG yy 
+1414649332 4 Grr yrr rGG ryy 
+1431277338 2 GGG yyy 
+1431277492 2 GG yy 
+1431277501 2 GG yy 
+1484973707 2 GG yy 
+1518435071 2 GGG yyy 
+155577 4 GGrr yyrr rGGG ryyy 
+169884 8 rrrGGgrrGGG rrryygrryyy rrrrrGrrrrr rrrrryrrrrr GGgrrrGgrrr yygrrrygrrr rrGrrrrGrrr rryrrrryrrr 
+169901 6 GGgrrrGGg yygrrryyg rrGrrrrrG rryrrrrry rrrGGGGrr rrryyyyrr 
+193910 2 GG yy 
+1989690 2 GG yy 
+1989704 4 GGGr yyyr GrrG yrry 
+21665003 4 GGGG yyyy GGGG yyyy 
+245307 8 rrrGGgrrrGGg rrryygrrryyg rrrrrGrrrrrG rrrrryrrrrry GGgrrrGGgrrr yygrrryygrrr rrGrrrrrGrrr rryrrrrryrrr 
+247684903 6 GGGgrr yyygrr rrrGrr rrryrr GrrrGG yrrryy 
+25248243 4 GG yy GG yy 
+25616581 8 rrrGGgrrrGGg rrryygrrryyg rrrrrGrrrrrG rrrrryrrrrry GGgrrrGGgrrr yygrrryygrrr rrGrrrrrGrrr rryrrrrryrrr 
+266318553 2 GG yy 
+30239715 8 rrrGGgrrGGG rrryygrryyy rrrrrGrrrrr rrrrryrrrrr GGgrrrGgrrr yygrrrygrrr rrGrrrrGrrr rryrrrryrrr 
+413502974 2 GG yy 
+419018870 2 G y 
+446162167 2 GG yy 
+475902906 2 GG yy 
+479369195 2 GG yy 
+485981335 6 rrGGGGGg rryyyyyg rrrrrrrG rrrrrrry GGGrrrrr yyyrrrrr 
+5245363 4 GGGGGrr yyyyyrr rrGrrGG rryrryy 
+5482274 6 GgrrGG ygrryy rGrrrr ryrrrr rrGGGr rryyyr 
+7529973 4 GGr yyr rrG rry 
+8891841 6 rrrGGgGGg rrryygyyg rrrrrGrrG rrrrryrry GGGGrrrrr yyyyrrrrr 
+8891842 4 GGGGrr yyyyrr rrrrGG rrrryy 
+942951786 4 GGrr yyrr rrGG rryy 
+joinedS_0 4 GGGG yyyy GGGG yyyy 
+joinedS_1 6 gggrrgggg gggrrgggg GGGrrGGGG yyyrryyyy rrrGGGrrr rrryyyrrr 
+joinedS_10 6 gggrrGGg gggrryyg GGGrrrrG yyyrrrry rrrGGrrr rrryyrrr 
+joinedS_11 4 rrrGrrGGGGGG rrryrryyyyyy GGGGGGrrrrrr yyyyyyrrrrrr 
+joinedS_12 4 GGGG yyyy GGGG yyyy 
+joinedS_13 6 ggggggrrr ggggggrrr GGGGGGrrr yyyyyyrrr rrrrrrGGG rrrrrryyy 
+joinedS_14 4 GGGG yyyy GGGG yyyy 
+joinedS_15 6 ggrrGGg ggrryyg GGrrrrG yyrrrry rrGGrrr rryyrrr 
+joinedS_16 4 GGrrGGG yyrryyy rrGGGrr rryyyrr 
+joinedS_17 6 rrggggGgg rrggggygg rrGGGGrGG rryyyyryy GGGrrrGrr yyyrrryrr 
+joinedS_18 8 rrGGGgrrgg rryyygrrgg rrrrrGrrGG rrrrryrryy ggrrrrggrr ggrrrrggrr GGrrrrGGrr yyrrrryyrr 
+joinedS_19 8 rrggggrrgggg rrggggrrgggg rrGGGGrrGGGG rryyyyrryyyy ggrrrrggrrrr ggrrrrggrrrr GGrrrrGGrrrr yyrrrryyrrrr 
+joinedS_2 4 GGGG yyyy GGGG yyyy 
+joinedS_20 6 GGGrrrrGGGrrr yyyrrrryyyrrr rrrGGGrrrrGGG rrryyyrrrryyy GGGrrrGGrrrrr yyyrrryyrrrrr 
+joinedS_21 8 rrggggggggrr rrggggggggrr rrGGGGGGGGrr rryyyyyyyyrr ggrrrrrrrrgg ggrrrrrrrrgg GGrrrrrrrrGG yyrrrrrrrryy 
+joinedS_22 6 Gggrrgggg yggrrgggg rGGrrGGGG ryyrryyyy GrrGGGrrr yrryyyrrr 
+joinedS_23 4 GGGG yyyy GGGG yyyy 
+joinedS_24 4 rrrGGGrrrGGG rrryyyrrryyy GGGrrrGGGGrr yyyrrryyyyrr 
+joinedS_25 6 GrGggg yryggg rrrGGG rrryyy GGrGrr yyryrr 
+joinedS_26 6 GGGGGGrrrr yyyyyyrrrr rrrrrrgggg rrrrrrgggg rrrrrrGGGG rrrrrryyyy 
+joinedS_27 8 gggrrrGGGgrrr gggrrryyygrrr GGGrrrrrrGrrr yyyrrrrrryrrr rrrgggrrrrGgg rrrgggrrrrygg rrrGGGrrrrrGG rrryyyrrrrryy 
+joinedS_28 8 rgggrrGGg rgggrryyg rGGGrrrrG ryyyrrrry grrrGgrrr grrrygrrr GrrrrGrrr yrrrryrrr 
+joinedS_29 8 rrGGGgrrggg rryyygrrggg rrrrrGrrGGG rrrrryrryyy ggrrrrggrrr ggrrrrggrrr GGrrrrGGrrr yyrrrryyrrr 
+joinedS_3 6 GGGgrrgg yyygrrgg rrrGrrGG rrryrryy GrrrGGrr yrrryyrr 
+joinedS_30 6 GGGrrrrGG yyyrrrryy rrrggggrr rrrggggrr rrrGGGGrr rrryyyyrr 
+joinedS_31 6 GGGrrrrGGG yyyrrrryyy rrrggggrrr rrrggggrrr rrrGGGGrrr rrryyyyrrr 
+joinedS_32 4 rrrGGGrrrGGG rrryyyrrryyy GGGrrrGGGrrr yyyrrryyyrrr 
+joinedS_33 8 ggggrrrrgggg ggggrrrrgggg GGGGrrrrGGGG yyyyrrrryyyy rrrrggggrrrr rrrrggggrrrr rrrrGGGGrrrr rrrryyyyrrrr 
+joinedS_34 4 GGr yyr rGG ryy 
+joinedS_35 8 rrrggGGrrgg rrrggyyrrgg rrrGGrrrrGG rrryyrrrryy GGgrrrrggrr yygrrrrggrr rrGrrrrGGrr rryrrrryyrr 
+joinedS_36 8 rrgggGggrr rrgggyggrr rrGGGrGGrr rryyyryyrr GgGrrGrrgg ygyrryrrgg rGrrrrrrGG ryrrrrrryy 
+joinedS_37 4 GGrrrrGG yyrrrryy rrGGGGrr rryyyyrr 
+joinedS_4 6 gggrrgggg gggrrgggg GGGrrGGGG yyyrryyyy rrrGGGrrr rrryyyrrr 
+joinedS_5 8 rggrrGGg rggrryyg rGGrrrrG ryyrrrry grrGgrrr grrygrrr GrrrGrrr yrrryrrr 
+joinedS_6 6 GGgGggrr yygyggrr rrGrGGrr rryryyrr GGGGrrGG yyyyrryy 
+joinedS_7 6 ggrrGGg ggrryyg GGrrrrG yyrrrry rrGGrrr rryyrrr 
+joinedS_8 8 rrrGggGGGgrr rrryggyyygrr rrrrGGrrrGrr rrrryyrrryrr gggGrrrrrrgg gggyrrrrrrgg GGGrrrrrrrGG yyyrrrrrrryy 
+joinedS_9 8 rrgggGGgrrr rrgggyygrrr rrGGGrrGrrr rryyyrryrrr ggrrrGrrggg ggrrryrrggg GGrrrrrrGGG yyrrrrrryyy 
+1400
+4000

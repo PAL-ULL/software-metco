@@ -1,0 +1,67 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ(2.61)
+AC_INIT("METCO", 0.54)
+AC_CONFIG_SRCDIR([configureFiles/config.h.in])
+dnl AC_CONFIG_MACRO_DIR(configureFiles)
+AC_CONFIG_HEADER([configureFiles/config.h])
+AC_CONFIG_AUX_DIR(configureFiles)
+
+AM_INIT_AUTOMAKE([metco],0.54)
+dnl CONFIG_SITE = "./config.site"
+
+dnl includedir=~/metco
+
+# Checks for programs.
+AC_PROG_AWK
+AC_PROG_YACC
+AC_PROG_CXX
+AC_PROG_CC
+AC_PROG_LEX
+AC_ARG_VAR(mpi,"Version de mpi que quiere utilizar")
+dnl AC_ARG_VAR(ExistsVMPI2,"Version de mpi que quiere utilizar")
+dnl AM_CONDITIONAL(condVersMPI,[test $mpi])
+AC_PATH_PROG(ExistsVersMPI,$mpi,1)
+AC_CHECK_FILE($mpi,Exists2VMPI=1,Exists2VMPI=0)
+AM_CONDITIONAL(Exists2VMPI,[test $Exists2VMPI = 1])
+AM_CONDITIONAL(ExistsVMPI,[test $ExistsVersMPI != 1])
+AC_PATH_PROG(ExistsMpiCC,mpiCC,1)
+AM_CONDITIONAL(condMPI,[test $ExistsMpiCC = 1])
+AC_ARG_VAR(plugin_path,"Directorio de instalacion de los plugins")
+AM_CONDITIONAL(condPlugins,[test $plugin_path])
+#if ((test "$ExistsVersMPI" = 1) &&  (test "$Exists2VMPI" = 0) && (test "$mpi")); then
+#	AC_MSG_ERROR([Configuracion MPI incorrecta])
+#fi
+
+#if ((test $ExistsMpiCC = 1) && (test !"$mpi")); then
+#	AC_MSG_ERROR([Configuracion MPI incorrecta])
+#fi
+dnl AC_MSG_ERROR([could not find mpi that supports])
+AC_PROG_MAKE_SET
+
+
+# Checks for libraries.
+# FIXME: Replace `main' with a function in `-ldl':
+AC_CHECK_LIB([dl], [metco])
+
+# Checks for header files.
+AC_HEADER_STDC
+AC_HEADER_SYS_WAIT
+AC_CHECK_HEADERS([float.h limits.h stdlib.h string.h strings.h sys/time.h unistd.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_STDBOOL
+AC_C_CONST
+AC_C_INLINE
+AC_HEADER_TIME
+
+# Checks for library functions.
+AC_FUNC_MALLOC
+AC_FUNC_REALLOC
+AC_FUNC_STRTOD
+AC_FUNC_VPRINTF
+AC_CHECK_FUNCS([floor gettimeofday mkdir pow sqrt strcasecmp strerror])
+
+AC_OUTPUT(Makefile)
+

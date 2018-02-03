@@ -1,0 +1,14 @@
+directory:=../../plugins/algorithms/
+algorithms=$(shell ls $(directory))
+clean:=$(foreach algorithm, $(algorithms), ${directory}${algorithm}/${algorithm}.library)
+
+all: $(algorithms) 
+clean: $(clean)
+
+$(algorithms):
+	@echo Generando $@
+	make -s -f makefile_algorithm algorithm="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

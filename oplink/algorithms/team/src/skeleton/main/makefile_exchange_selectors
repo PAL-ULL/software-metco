@@ -1,0 +1,14 @@
+directory:=../../plugins/exchangeSelectors/
+exchangeSelectors=$(shell ls $(directory))
+clean:=$(foreach exchangeSelector, $(exchangeSelectors), ${directory}${exchangeSelector}/${exchangeSelector}.library)
+
+all: $(exchangeSelectors) 
+clean: $(clean)
+
+$(exchangeSelectors):
+	@echo Generando $@
+	make -s -f makefile_exchange_selector exchangeSelector="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

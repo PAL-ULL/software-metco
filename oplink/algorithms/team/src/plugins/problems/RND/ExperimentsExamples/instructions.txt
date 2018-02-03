@@ -1,0 +1,7 @@
+How to execute:
+java -jar experiment-validator.jar <files ...> and/or <folders ...>
+
+The application can receive files and/or folders. In case of folders, all .xml files on the folder are processed.
+To compare floating point values the application only takes into account 14 decimal places. This default value can be changed through the property mornd.decimal.places. For example:
+
+java -Dmornd.decimal.places=10 -jar experiment-validator.jar <files ...> and/or <folders ...>

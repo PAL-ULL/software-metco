@@ -1,0 +1,30 @@
+LFLAGS = -shared 
+OUTPUTPRINTERDIR = ../../plugins/outputPrinters/
+IFLAGS= -I../ -I$(OUTPUTPRINTERDIR)$(outputPrinter)/ -I../utils/
+SO_FILE= $(outputPrinter).so
+COMPLETE_O_FILE=$(outputPrinter).complete.o
+O_FILE= $(outputPrinter).o
+C_FILE:=$(OUTPUTPRINTERDIR)$(outputPrinter)/$(outputPrinter).cpp
+H_FILE:=$(OUTPUTPRINTERDIR)$(outputPrinter)/$(outputPrinter).h
+LIBRARY_C_FILE:=$(OUTPUTPRINTERDIR)$(outputPrinter)/$(outputPrinter).library.cpp
+LIBRARY_O_FILE:=$(outputPrinter).library.o
+H_FILE:=$(OUTPUTPRINTERDIR)$(outputPrinter)/$(outputPrinter).h
+FILE_TO_CHANGE:=../complete.c
+OBJ_FILES:=OutputPrinter.reloc.o Individual.reloc.o MOFrontBinaryInteger.reloc.o MOFrontVector_noMPI.reloc.o MOFront.reloc.o EA.reloc.o utils.reloc.o Plugin.reloc.o hv.reloc.o avl.reloc.o 
+ 
+$(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE) 
+	$(CXX) $(IFLAGS) $(LFLAGS)  -o $@ -Wl,-soname,$@ $^
+
+$(LIBRARY_O_FILE): $(LIBRARY_C_FILE) ../OutputPrinter.h ../Individual.h ../Definitions.h $(H_FILE) 
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(LIBRARY_C_FILE) -o $@
+
+$(LIBRARY_C_FILE): $(FILE_TO_CHANGE) 
+	sed 's/TIPO_NUEVO/$(outputPrinter)/g' $(FILE_TO_CHANGE) | sed 's/TIPO_DEVUELTO/OutputPrinter/g' > $@
+
+$(O_FILE): $(C_FILE) $(H_FILE) ../OutputPrinter.h ../Individual.h ../Definitions.h
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(C_FILE) -o $@
+
+$(OBJ_FILES): force
+	make -f Makefile $@
+
+force : ;

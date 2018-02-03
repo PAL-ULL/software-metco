@@ -1,0 +1,108 @@
+************************************************************
+
+1) DESCRIPTION
+
+The programs in this directory automate the execution of
+experiments with METCO
+
+************************************************************
+
+2) USEFUL FILES
+
+* execParallelExperiment.sh: it is used to make parallel 
+	experiments. It accepts an argument, that it
+  is a file describing the experiment to execute.
+
+  The script will run executions combining every specified parameters. The parameters are:
+    * Repetitions: number of repetitions of each experiment.
+		* Number_of_processors: number of processors used in each execution.
+    * Name_of_experiment: some temporary files are needed. The files will be created in  
+      experimentsTmpFiles/$Name_of_experiment/
+    * Configurations: files that describes the different algorithms and configurations
+      that are going to be used.
+    * Init_percent_of_individuals
+    * Migration_probability
+    * Number_of_individuals_to_migrate
+    * Max_front_size
+    * Execution_line: describes the execution line for each experiment. In the execution line
+      the next variables can be used:
+      - np: number of processors.
+      - rep: number of actual repetition.
+      - algFile: file describing the algorithms and configurations
+      - initPerc: init percent of individuals
+      - migProb: migration probability
+      - numIndMig: number of individuals to migrate
+      - maxFrontSize
+      - solutionSize
+      - confFile: is the name of the temporary configuration file created to run the experiment
+      - expName: name of the experiment
+      - macFile: machine File.
+      - outFile: %expName_%confFile_%np_execution_model_%numberOfExecutionModel_%initPerc_%migProb_%numIndMig_%maxFrontSize_%solutionSize.%rep
+  
+    * Solution_size
+    * Machinefile: is the complete set of machines to be used. Each experiment will run in a subset of this machines
+    * Preaction: this action is executed before execution any experiment.
+    * Execution_model: set of execution models of the team algorithm.
+  
+  An example:
+  
+    #######################################################################################################################################
+    Repetitions: 30 
+    Number_of_processors: 4
+    Name_of_experiment: migrationZDTx 
+    Configurations: experimentConfigFiles/migrationZDT/zdt1, experimentConfigFiles/migrationZDT/zdt2, experimentConfigFiles/migrationZDT/zdt3, experimentConfigFiles/migrationZDT/zdt4 
+    Init_percent_of_individuals: 1 
+    Migration_probability: 0.0, 0.05, 0.1, 0.15, 0.20, 0.25, 0.30, 0.35
+    Number_of_individuals_to_migrate: 1, 2, 3, 4, 5, 6, 7, 8 
+    Max_front_size: 100
+    Execution_line: mpirun -np %np -machinefile experimentsTmpFiles/%expName/machinefile_%outFile -nolocal ../../src/skeleton/main/metcoPar %confFile > experimentsResults/%expName/%outFile
+    Solution_size: 100
+    Machinefile: experimentConfigFiles/migrationZDT/machinefile
+    Preaction: mkdir -p experimentsResults/migrationZDTx
+    Execution_model: { [EVALUATIONS, 3000, CIRCULAR] [ CLEARSTATISTICS ] [EVALUATIONS, 3000, CIRCULAR] [EVALUATIONS, 24000, PROBABILITY ] }
+                     { [EVALUATIONS, 3000, CIRCULAR] [ CLEARSTATISTICS ] [EVALUATIONS, 3000, CIRCULAR] [EVALUATIONS, 24000, ELITIST ] }
+                     { [EVALUATIONS, 30000, PROBABILITY] }
+                     { [EVALUATIONS, 30000, ELITIST] }
+    #######################################################################################################################################
+  
+  The experiments will be executed in parallel using the set of machines of the machinefile specified.
+
+* execSeqExperiment.sh: it is a general file to execute repetitions of experiments
+  using a set of machines.
+	It can be used to execute experiment with the single evolutionary algorithms.
+	It accepts an argument describing the experiments to execute.
+
+	The parameters specified in the configuration file are:
+	  * Repetitions: number of repetitions of each experiment.
+		* Name_of_experiment: some temporary files are needed. The files will be created in  
+      experimentsTmpFiles/$Name_of_experiment/
+		* Preaction: this action is executed before execution any experiment.
+    * Execution: a set of executions lines describing the experiment. The next variables
+		  can be used:
+			  - rep: number of actual repetition.
+        - expName: name of the experiment.
+    * machinefile: is the complete set of machines to be used.
+
+	An example experiment file:
+	
+	########################################################################################################################################
+  Repetitions: 30
+  Name_of_experiment: seqZDTx
+  Preaction: mkdir -p experimentsResults/seqZDT1 experimentsResults/seqZDT2 experimentsResults/seqZDT3 experimentsResults/seqZDT4
+  Execution:  [ ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA SPEA  IndividualZDT1 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT1/SPEA_ZDT1_30000_0.01_1_100_100.%rep,
+                ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA SPEA2 IndividualZDT1 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT1/SPEA2_ZDT1_30000_0.01_1_100_100.%rep,
+                ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA NSGA2 IndividualZDT1 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT1/NSGA2_ZDT1_30000_0.01_1_100_100.%rep,
+                ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA SPEA  IndividualZDT2 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT2/SPEA_ZDT2_30000_0.01_1_100_100.%rep,
+                ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA SPEA2 IndividualZDT2 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT2/SPEA2_ZDT2_30000_0.01_1_100_100.%rep,
+                ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA NSGA2 IndividualZDT2 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT2/NSGA2_ZDT2_30000_0.01_1_100_100.%rep, 
+  						  ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA SPEA  IndividualZDT3 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT3/SPEA_ZDT3_30000_0.01_1_100_100.%rep,
+                ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA SPEA2 IndividualZDT3 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT3/SPEA2_ZDT3_30000_0.01_1_100_100.%rep,
+                ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA NSGA2 IndividualZDT3 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT3/NSGA2_ZDT3_30000_0.01_1_100_100.%rep, 
+  						  ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA SPEA  IndividualZDT4 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT4/SPEA_ZDT4_30000_0.01_1_100_100.%rep,
+                ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA SPEA2 IndividualZDT4 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT4/SPEA2_ZDT4_30000_0.01_1_100_100.%rep,
+                ~/SVN/oplink/algorithms/team/skeleton/main/mainMOEA NSGA2 IndividualZDT4 EVALUATIONS 30000 1 0.01 1 100 100 > experimentsResults/seqZDT4/NSGA2_ZDT4_30000_0.01_1_100_100.%rep ]
+  machinefile: experimentConfigFiles/seqZDTx/machinefile
+  ##############################################################################################################################################
+
+
+  The sequential algorithms will be executed in parallel using the se of machines specified.

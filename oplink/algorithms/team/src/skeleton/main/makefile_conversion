@@ -1,0 +1,30 @@
+LFLAGS = -shared 
+CONVERSIONDIR = ../../plugins/conversions/
+IFLAGS= -I../ -I../utils/
+SO_FILE= $(conversion).so
+COMPLETE_O_FILE=$(conversion).complete.o
+O_FILE= $(conversion).o
+C_FILE:=$(CONVERSIONDIR)$(conversion)/$(conversion).cpp
+H_FILE:=$(CONVERSIONDIR)$(conversion)/$(conversion).h
+LIBRARY_C_FILE:=$(CONVERSIONDIR)$(conversion)/$(conversion).library.cpp
+LIBRARY_O_FILE:=$(conversion).library.o
+H_FILE:=$(CONVERSIONDIR)$(conversion)/$(conversion).h
+FILE_TO_CHANGE:=../complete.c
+OBJ_FILES:=Conversion.reloc.o Individual.reloc.o Plugin.reloc.o
+
+$(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE)
+	$(CXX) $(IFLAGS) $(LFLAGS)  -o $@ -Wl,-soname,$@ $^
+
+$(LIBRARY_O_FILE): $(LIBRARY_C_FILE) ../Conversion.h ../Individual.h ../Definitions.h $(H_FILE) 
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(LIBRARY_C_FILE) -o $@
+
+$(LIBRARY_C_FILE): $(FILE_TO_CHANGE) 
+	sed 's/TIPO_NUEVO/$(conversion)/g' $(FILE_TO_CHANGE) | sed 's/TIPO_DEVUELTO/Conversion/g' > $@
+
+$(O_FILE): $(C_FILE) $(H_FILE) ../Individual.h ../Conversion.h ../Definitions.h
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(C_FILE) -o $@
+
+$(OBJ_FILES): force
+	make -f Makefile $@
+
+force : ;

@@ -1,0 +1,5 @@
+#Con la opcion -Y. conseguimos evitar la generacion de las dependencias con las librerias estandar
+SRCS = metcoPar.cpp metcoSeq.cpp ../CoordinatorIsland.cpp ../Configuration.cpp ../ExecutionIsland.cpp ../MOEA.cpp ../MOFront.cpp ../Individual.cpp ../Conversion.cpp ../ScoreAlgorithm.cpp ../GlobalScoreAlgorithm.cpp ../LocalScoreAlgorithm.cpp ../MigrationSelector.cpp ../ExchangeSelector.cpp ../Mutation.cpp ../Crossover.cpp parseConf.tab.c ../../../src_external/hv-1.1-src/hv.c ../../../src_external/hv-1.1-src/avl.c ../Plugin.cpp
+IFLAGS = -I. -I.. -I../utils -I../../../src_external/hv-1.1-src -Y.
+depend:
+	makedepend -w10000 -f- -- $(IFLAGS) -- $(SRCS)

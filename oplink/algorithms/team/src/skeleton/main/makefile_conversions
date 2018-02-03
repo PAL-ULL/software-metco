@@ -1,0 +1,14 @@
+directory:=../../plugins/conversions/
+conversions=$(shell ls $(directory))
+clean:=$(foreach conversion, $(conversions), ${directory}${conversion}/${conversion}.library)
+
+all: $(conversions) 
+clean: $(clean)
+
+$(conversions):
+	@echo Generando $@
+	make -s -f makefile_conversion conversion="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

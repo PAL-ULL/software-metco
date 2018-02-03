@@ -1,0 +1,14 @@
+directory:=../../plugins/migrationTopologies/
+migrationTopologies=$(shell ls $(directory))
+clean:=$(foreach migrationTopology, $(migrationTopologies), ${directory}${migrationTopology}/${migrationTopology}.library)
+
+all: $(migrationTopologies) 
+clean: $(clean)
+
+$(migrationTopologies):
+	@echo Generando $@
+	make -s -f makefile_migration_topology migrationTopology="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

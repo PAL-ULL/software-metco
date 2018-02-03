@@ -1,0 +1,7 @@
+directory=../../plugins/
+plugintypes=$(shell ls $(directory))
+
+all: $(plugintypes) 
+
+$(plugintypes):
+	make -f makefile_copyplugin PLUGIN=$@ DIST_DIR=$(DIST_DIR)

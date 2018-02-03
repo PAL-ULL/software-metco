@@ -1,0 +1,16 @@
+directory=../../plugins/problems/
+problems=$(shell ls --hide=utils --hide=BCI  $(directory))
+barra=/
+clean:=$(foreach problem, $(problems), ${directory}${problem}/$(problem).library)
+IFLAGS = -I../utils
+
+all: $(problems)
+clean: $(clean)
+
+$(problems):
+	@echo Generando $@
+	make -s -f makefile_problem problem="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

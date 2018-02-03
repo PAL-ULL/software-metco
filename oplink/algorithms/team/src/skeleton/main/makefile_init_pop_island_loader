@@ -1,0 +1,30 @@
+LFLAGS = -shared 
+INITPOPISLANDLOADERDIR = ../../plugins/initPopIslandLoaders/
+IFLAGS= -I../ -I$(INITPOPISLANDLOADERDIR)$(initPopIslandLoader)/
+SO_FILE= $(initPopIslandLoader).so
+COMPLETE_O_FILE=$(initPopIslandLoader).complete.o
+O_FILE= $(initPopIslandLoader).o
+C_FILE:=$(INITPOPISLANDLOADERDIR)$(initPopIslandLoader)/$(initPopIslandLoader).cpp
+H_FILE:=$(INITPOPISLANDLOADERDIR)$(initPopIslandLoader)/$(initPopIslandLoader).h
+LIBRARY_C_FILE:=$(INITPOPISLANDLOADERDIR)$(initPopIslandLoader)/$(initPopIslandLoader).library.cpp
+LIBRARY_O_FILE:=$(initPopIslandLoader).library.o
+H_FILE:=$(INITPOPISLANDLOADERDIR)$(initPopIslandLoader)/$(initPopIslandLoader).h
+FILE_TO_CHANGE:=../complete.c
+OBJ_FILES:=InitPopIslandLoader.reloc.o Individual.reloc.o utils.reloc.o Plugin.reloc.o
+
+$(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE) 
+	$(CXX) $(IFLAGS) $(LFLAGS)  -o $@ -Wl,-soname,$@ $^
+
+$(LIBRARY_O_FILE): $(LIBRARY_C_FILE) ../InitPopIslandLoader.h ../Individual.h ../Definitions.h $(H_FILE) 
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(LIBRARY_C_FILE) -o $@
+
+$(LIBRARY_C_FILE): $(FILE_TO_CHANGE) 
+	sed 's/TIPO_NUEVO/$(initPopIslandLoader)/g' $(FILE_TO_CHANGE) | sed 's/TIPO_DEVUELTO/InitPopIslandLoader/g' > $@
+
+$(O_FILE): $(C_FILE) $(H_FILE) ../InitPopIslandLoader.h ../Individual.h ../Definitions.h
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(C_FILE) -o $@
+
+$(OBJ_FILES): force
+	make -f Makefile $@
+
+force : ;

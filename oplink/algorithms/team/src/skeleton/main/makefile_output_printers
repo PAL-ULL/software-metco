@@ -1,0 +1,14 @@
+directory:=../../plugins/outputPrinters/
+outputPrinters=$(shell ls $(directory))
+clean:=$(foreach outputPrinter, $(outputPrinters), ${directory}${outputPrinter}/${outputPrinter}.library)
+
+all: $(outputPrinters) 
+clean: $(clean)
+
+$(outputPrinters):
+	@echo Generando $@
+	make -s -f makefile_output_printer outputPrinter="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp

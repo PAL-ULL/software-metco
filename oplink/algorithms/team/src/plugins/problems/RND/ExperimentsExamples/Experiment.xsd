@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="experiment">
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="algorithm" />
+				<xs:element ref="traces" />
+			</xs:all>
+			<xs:attribute name="timestamp" type="xs:dateTime" use="required" />
+			<xs:attribute name="instanceDefinitionFile" type="InstanceFileType" use="required" />
+			<xs:attribute name="maxFitnessEvaluations" type="xs:positiveInteger" use="required" />
+			<xs:attribute name="checkpointPeriod" type="xs:positiveInteger" use="required" />
+			
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="algorithm">
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="parameters" />
+				<xs:element ref="operators" />
+			</xs:all>
+			<xs:attribute name="name" type="xs:NMTOKEN" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="operators">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="operator" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+		<xs:unique name="operatorIdMustBeUnique">
+			<xs:selector xpath="operator"/>
+			<xs:field xpath="@id"/>
+		</xs:unique>
+		<xs:unique name="operatorTypeMustBeUnique">
+			<xs:selector xpath="operator"/>
+			<xs:field xpath="@type"/>
+		</xs:unique>
+	</xs:element>
+
+	<xs:element name="operator">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="parameters" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:NMTOKEN" use="required" />
+			<xs:attribute name="type" type="xs:NMTOKEN" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="parameters">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+		<xs:unique name="parameterIdMustBeUnique">
+			<xs:selector xpath="parameter"/>
+			<xs:field xpath="@id"/>
+		</xs:unique>
+	</xs:element>
+
+	<xs:element name="parameter">
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:NMTOKEN" use="required" />
+			<xs:attribute name="value" type="NotNullString" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="traces">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="trace" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:unique name="traceNumberOfEvaluationsMustBeUnique">
+			<xs:selector xpath="trace"/>
+			<xs:field xpath="@nEval"/>
+		</xs:unique>
+	</xs:element>
+
+	<xs:element name="trace">
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="solutionSet" />
+				<xs:element ref="outputParameters" minOccurs="0" />
+			</xs:all>
+			<xs:attribute name="nEval" type="xs:positiveInteger" use="required" />
+			<xs:attribute name="nSolutions" type="xs:positiveInteger" use="required" />
+			<xs:attribute name="maxNumberBS" type="xs:nonNegativeInteger" use="required" />
+			<xs:attribute name="minNumberBS" type="xs:nonNegativeInteger" use="required" />
+			<xs:attribute name="minCoverRate" type="CoverRateType" use="required" />
+			<xs:attribute name="maxCoverRate" type="CoverRateType" use="required" />
+			<xs:attribute name="executionTime" type="xs:time" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="solutionSet">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="solution" type="SolutionType" minOccurs="1" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="SolutionType">
+		<xs:simpleContent>
+			<xs:extension base="BinaryEncoded">
+				<xs:attribute name="numberBS" type="xs:nonNegativeInteger" use="required" />
+				<xs:attribute name="coverRate" type="CoverRateType" use="required" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:element name="outputParameters">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+		<xs:unique name="extraParamIdMustBeUnique">
+			<xs:selector xpath="parameter"/>
+			<xs:field xpath="@id"/>
+		</xs:unique>
+	</xs:element>
+
+	<xs:simpleType name="BinaryEncoded"> 
+		<xs:restriction base="xs:string"> 
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="([01])+" /> 
+		</xs:restriction> 
+	</xs:simpleType>
+
+	<xs:simpleType name="InstanceFileType"> 
+		<xs:restriction base="xs:string"> 
+			<xs:whiteSpace value="collapse"/> 
+			<xs:minLength value="1" />
+		</xs:restriction> 
+	</xs:simpleType>
+
+	<xs:simpleType name="PropagationModelEnum"> 
+		<xs:restriction base="xs:string"> 
+			<xs:enumeration value="Ommidirectional"/> 
+			<xs:enumeration value="Square"/> 
+		</xs:restriction> 
+	</xs:simpleType>
+	
+
+	<xs:simpleType name="CoverRateType"> 
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0"/> 
+		</xs:restriction> 
+	</xs:simpleType>
+	
+	<xs:simpleType name="NotNullString"> 
+		<xs:restriction base="xs:string"> 
+			<xs:whiteSpace value="collapse"/> 
+			<xs:minLength value="1" />
+		</xs:restriction> 
+	</xs:simpleType>
+</xs:schema>

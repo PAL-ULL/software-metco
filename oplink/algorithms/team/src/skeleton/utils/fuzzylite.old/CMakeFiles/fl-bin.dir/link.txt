@@ -1,0 +1,1 @@
+/usr/bin/c++   -Werror -fPIC -O3 -DNDEBUG    CMakeFiles/fl-bin.dir/src/main.cpp.o  -o bin/fuzzylite-demo -rdynamic lib/libfuzzylite.so -Wl,-rpath,/home/edusegre/fuzzylite-2.0b1302/fuzzylite/lib: 
