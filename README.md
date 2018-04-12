@@ -18,3 +18,9 @@ Now you are ready to start using METCO.
 * Flex
 * MPICH.
 * GNU GSL. [How to install](https://askubuntu.com/a/490475).
+
+
+## Documentation
+* [Setup](./doc/setup.md): Instructions to get everything up and running.
+* [Plugins](./doc/newPlugin.md): How to add new plugins.
+* [Experiment](./doc/experiment.md): How to configure and run an experiment in METCO.
