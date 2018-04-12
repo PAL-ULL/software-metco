@@ -67,7 +67,11 @@ typedef struct dlnode {
 
 
 static avl_tree_t *tree;
-extern int stop_dimension;
+#if VARIANT < 4
+int stop_dimension = 1; // default: stop on dimension 2
+#else
+int stop_dimension = 2; // default: stop on dimension 3
+#endif
 
 static int compare_node( const void *p1, const void* p2)
 {

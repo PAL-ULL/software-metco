@@ -22,6 +22,7 @@
 
 using namespace std;
 
+#include "Configuration.h"
 #include "parseConf.tab.h"
 
 double realValueConf;
