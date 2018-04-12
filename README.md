@@ -22,5 +22,6 @@ Now you are ready to start using METCO.
 
 ## Documentation
 * [Setup](./doc/setup.md): Instructions to get everything up and running.
+* [Structure](./doc/structure): Here you can find the structure of METCO described.
 * [Plugins](./doc/newPlugin.md): How to add new plugins.
 * [Experiment](./doc/experiment.md): How to configure and run an experiment in METCO.
