@@ -14,9 +14,11 @@ Now you are ready to start using METCO.
 
 ## Dependencies
 
+* gcc/g++ compiler.
+* Autotools: autotools-dev and automake packages.
 * Bison
 * Flex
-* MPICH.
+* MPICH: libmpich-dev package.
 * GNU GSL. [How to install](https://askubuntu.com/a/490475).
 
 
