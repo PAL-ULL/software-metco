@@ -38,9 +38,10 @@ In this case, adding a new problem in METCO is even easier than an algorithm.
 
 4. The new class must inherit from Individual and the following methods must be overwritten:
 
-    * `bool init(const vector<string>& params)`: This is the method which is in charge of initialized the problem with all the given parameters.`
-    * `void evaluate(void)`: This method must contains the evaluation function of the problem. The method `setObj(dimension, value)` must be call with result of the evaluation in the i-th dimension. 
-    * `double getGlobalOptimum(void) const`: If the problem has a known optimum, it should be returned from this function. In other case, you may return whatever you want and ignored this method.
+    * `bool init(const vector<string>& params)`: This is the method which is in charge of initialized the problem with all the given parameters. Inside this method, you must define the number of objectives and variables of the problem. Therefore, the following methods must be called:
+        * `setNumberOfVar(NPARAM)`: Defines the number of variables of the problem.
+        * `setNumberOfObj(NOBJ)`: Defines the number of objectives of the problem.
+    * `void evaluate(void)`: This method must contains the evaluation function of the problem. For every objective, the method `setObj(dimension, value)` must be call with result of the evaluation in the i-th dimension. 
     * Ranges of the search space for each dimension:
 
         * `double getMaximum(const int i) const`
