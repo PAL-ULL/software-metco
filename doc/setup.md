@@ -48,26 +48,18 @@ As you can see, we use some delimiters to separate the parameters in groups.
 The options of the parameters such as Output Printer, Algorithm, Problem and so on must be any option from the appropiate [directory](structure.md).
 
 
-So, an example of how to solve the Rastrigin problem using the genetic algorithm provided by METCO is with 1000 evaluations and printing solutions every 100 evaluations is:
+So, an example of how to solve the Rastrigin problem using the Opposition-Based-Learning Competitive Particle Swarm Optimization (OBL-CPSO) provided by METCO is with 1000 evaluations and printing solutions every 100 evaluations is:
 
-`./metcoSeq /home/username . PlainText results.txt MonoGA Rastrigin EVALUATIONS 1000 100 0 60 0.5 0.5 0 ! 30 - Mutate_Uniform_All Crossover_SBX`
+`./metcoSeq /home/username . PlainText results.txt OBLCPSO Rastrigin EVALUATIONS 1000 100 0 0.5 30 ! 30 $ NoOp;
 
 This example shows how to solve the Rastrigin problem using the GA algorithm where:
 
 * `/home/username`: Path where you can find the file _results.txt_.
 * The next parameter is `.` which tells us that we are running METCO from the same `(...)/src/skeleton/main/` directory.
-*   The GA algorithm developed in METCO use these parameters: popSize pm pc survivalSelection
-    *   Population size: 60
-    *   Mutation probability: 0.5
-    *   Crossover probability: 0.5
-    *   Survival Selection:  
-        *   0: Steady State
-		*   1: Generational
-		*   2: Replace worst from parent and offspring 
+*   The OBL_CPSO algorithm developed in METCO use these parameters: gamma popsize
+    * Gamma: 0.5
+    * Population size: 30
 * After the '!' character goes the parameters for the problem. In this case, the Rastrigin functions only needs the number of dimensions which in this example is 30.
-* Finally, the mutation and crossover operators:
-    * Mutation: Mutate_Uniform_All
-    * Crossover: Crossover_SBX
-
+* Finally, `$ NoOp` indicates that we are not going to use any local search.
 ### Parallel Runs
 _Coming soon..._
