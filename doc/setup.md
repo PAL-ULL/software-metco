@@ -18,16 +18,16 @@ As a result of the compilation process, we will have two variations of METCO. So
 
 If your purpose is using METCO for sequential runs, _metcoSeq_ is the variation you must use. This program requires the following parameters for a single run:
 
-* Output Path
-* Plugin Path
-* Output Printer Module
+* Output Path: Path where METCO is going to save the results.
+* Plugin Path: Path where is metcoSeq (`(...)/src/skeleton/main/`).
+* Output Printer Module: PlainText or XML.
 * Output File
 * Algorithm 
 * Problem
-* Stopping Criteria
+* Stopping Criteria: EVALUATIONS, QUALITY and TIME.
 * Stopping Criteria Value
 * Print Period
-* Using an Externa Archive
+* Using an External Archive
 * Algorithm Parameters
 * Problem Parameters
 * Score Module and Parameters of the Score Module (Optional)
@@ -35,6 +35,31 @@ If your purpose is using METCO for sequential runs, _metcoSeq_ is the variation 
 * Local Search and Local Search Parameters (Optional)
 * Multiobjectivization and Parameters 
 
+`./metcoSeq outputPath pluginPath outputPrinterModule outputFile algoritmo problema critStop critStopValue printPeriod useExternalArchive(0 | (1 maxLocalFrontSize)) [parametros_algoritmo] [! parametros_problema] [_ scoreModule paramsScoreModule] [- Mutation Crossover ] $ LocalSearch paramsLocalSearch [ + MultiObjectivizationPlugin paramsMultiObjectivization ]`
+
+As you can see, we use some delimiters to separate the parameters in groups.
+
+ * The **'!'** character tells METCO that the following parameters belongs to the chosen algorithm.
+ * The **'_'** character determines the beginning of the score module and it's parameters. This parameters are optional.
+ * After **'-'** goes the mutation and crossover operators.
+ * The **'$'** are used to define, after it, a local search strategy and its parameters. It is optional as well.
+ * Finally, if you are into multiobjectivization, use the **'+'** character and then define the module and its parameters.
+
+The options of the parameters such as Output Printer, Algorithm, Problem and so on must be any option from the appropiate [directory](structure.md).
+
+
+So, an example of how to solve the Rastrigin problem using the genetic algorithm provided by METCO is with 1000 evaluations and printing solutions every 100 evaluations is:
+
+`./metcoSeq /home/username . PlainText results.txt GA Rastrigin EVALUATIONS 1000 100 0 [parametros_algoritmo] ! 30 - Mutation Crossover`
+
+This example shows how to solve the Rastrigin problem using the GA algorithm where:
+
+* `/home/username`: Path where you can find the file _results.txt_.
+* The next parameter is `.` which tells us that we are running METCO from the same `(...)/src/skeleton/main/` directory.
+*   The GA algorithm developed in METCO use these parameters:
+    *   Mutation probability:
+    *   Crossover probability
+* Finally, after the '!' character goes the parameters for the problem. In this case, the Rastrigin functions only needs the number of dimensions which in this example is 30.
 
 ### Parallel Runs
-Coming soon...
+_Coming soon..._
