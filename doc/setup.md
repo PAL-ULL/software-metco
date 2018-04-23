@@ -48,15 +48,14 @@ As you can see, we use some delimiters to separate the parameters in groups.
 The options of the parameters such as Output Printer, Algorithm, Problem and so on must be any option from the appropiate [directory](structure.md).
 
 
-So, an example of how to solve the Rastrigin problem using the Opposition-Based-Learning Competitive Particle Swarm Optimization (OBL-CPSO) provided by METCO is with 1000 evaluations and printing solutions every 100 evaluations is:
+So, an example of how to solve the Rastrigin problem using the Opposition-Based-Learning Competitive Particle Swarm Optimization (OBL-CPSO) provided by METCO doing 1000 evaluations and printing solutions every 100 evaluations is:
 
-`./metcoSeq /home/username . PlainText results.txt OBLCPSO Rastrigin EVALUATIONS 1000 100 0 0.5 30 ! 30 $ NoOp;
+`./metcoSeq /home/username . PlainText results.txt OBL_CPSO Rastrigin EVALUATIONS 1000 100 0 0.5 30 ! 30 $ NoOp;
 
-This example shows how to solve the Rastrigin problem using the GA algorithm where:
 
 * `/home/username`: Path where you can find the file _results.txt_.
 * The next parameter is `.` which tells us that we are running METCO from the same `(...)/src/skeleton/main/` directory.
-*   The OBL_CPSO algorithm developed in METCO use these parameters: gamma popsize
+*   The OBL_CPSO algorithm developed in METCO use these parameters:
     * Gamma: 0.5
     * Population size: 30
 * After the '!' character goes the parameters for the problem. In this case, the Rastrigin functions only needs the number of dimensions which in this example is 30.
