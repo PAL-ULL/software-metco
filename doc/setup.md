@@ -50,7 +50,7 @@ The options of the parameters such as Output Printer, Algorithm, Problem and so 
 
 So, an example of how to solve the Rastrigin problem using the Opposition-Based-Learning Competitive Particle Swarm Optimization (OBL-CPSO) provided by METCO doing 1000 evaluations and printing solutions every 100 evaluations is:
 
-`./metcoSeq /home/username . PlainText results.txt OBL_CPSO Rastrigin EVALUATIONS 1000 100 0 0.5 30 ! 30 $ NoOp;
+`./metcoSeq /home/username . PlainText results.txt OBL_CPSO Rastrigin EVALUATIONS 1000 100 0 0.5 30 ! 30 $ NoOp;`
 
 
 * `/home/username`: Path where you can find the file _results.txt_.
