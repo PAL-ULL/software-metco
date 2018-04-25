@@ -9,7 +9,7 @@
 
 Adding a new algorithm in METCO is quite straightforward. You only have to follow the simple steps.
 
-1. Create a new folder with the name of the algorithm in the path `path-where-cloned/software-metco/oplink/algorithms/team/src/plugins/algorithms`.
+1. Create a new folder with the name of the algorithm in the path `local_path/software-metco/oplink/algorithms/team/src/plugins/algorithms`.
 2. Then, add the header and source file for the algorithm with, **exactly, the same the name of the folder created**. Besides, the new class in which the algorithm is implemented must have the same name.
 3. Now, inside the header file, you must include the superclasses `Individual` and `EA`: 
         
@@ -30,7 +30,7 @@ Adding a new algorithm in METCO is quite straightforward. You only have to follo
 
 In this case, adding a new problem in METCO is even easier than an algorithm.
 
-1. Create a new folder with the name of the algorithm in the path `path-where-cloned/software-metco/oplink/algorithms/team/src/plugins/problems`.
+1. Create a new folder with the name of the algorithm in the path `local_path/software-metco/oplink/algorithms/team/src/plugins/problems`.
 2. Then, add the header and source file for the problem with, **exactly, the same the name of the folder created**. Besides, the new class in which the problem is implemented must have the same name.
 3. Now, for the new problem, only include `Individual`: 
         

@@ -12,7 +12,7 @@ The steps you must follow to [start](../README.md) using METCO can be found in t
 4. Run `make` to build the tool (make sure you have installed all the [dependencies](../README.md)).
 5. Due to the fact that METCO allows parallel runs in multiple nodes over HPC systems or any multicore computer, you must configure a ssh connection in the machine you are going to use without using password. A good tutorial of how to achieve this can be found [here](https://www.thegeekstuff.com/2008/11/3-steps-to-perform-ssh-login-without-password-using-ssh-keygen-ssh-copy-id).
 
-As a result of the compilation process, we will have two variations of METCO. So, from now on, we are going to discern between sequential (_metcoSeq_) and parallel (_metcoPar_) runs in METCO. This two programs can be found in the path `path_where_cloned/software-metco/oplink/algorithms/team/src/skeleton/main`.
+As a result of the compilation process, we will have two variations of METCO. So, from now on, we are going to discern between sequential (_metcoSeq_) and parallel (_metcoPar_) runs in METCO. This two programs can be found in the path `local_path/software-metco/oplink/algorithms/team/src/skeleton/main`.
 
 ### Sequential Runs
 

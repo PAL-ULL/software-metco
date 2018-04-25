@@ -2,7 +2,7 @@
 
 
 
-Under the `path-where-cloned/software-metco/oplink/algorithms/team/src/plugins/` you can found all the plugins that shape METCO. All these plugins are subdivided in the following categories:
+Under the `local_path/software-metco/oplink/algorithms/team/src/plugins/` you can found all the plugins that shape METCO. All these plugins are subdivided in the following categories:
     
     * Algorithms
     * Conversions

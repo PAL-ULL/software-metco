@@ -25,8 +25,6 @@ public:
 	// Clone
 	Individual* clone (void) const;
   // Ranges
-  // Gets the value of the global optimum
-  double getGlobalOptimum(void) const { return globalOptimum; };
 	double getMaximum(const int i) const { return maxVar[i]; };
 	double getMinimum(const int i) const { return minVar[i]; };
   unsigned int getOptDirection(const int i) const { return MINIMIZE; };
