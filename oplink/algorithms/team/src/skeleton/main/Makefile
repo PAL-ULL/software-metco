@@ -147,12 +147,12 @@ AUTOMAKE = ${SHELL} /home/edusegre/oplink/algorithms/team/src/skeleton/main/conf
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+CFLAGS = -g -O2 -std=c++11
 CPP = gcc -E
 CPPFLAGS = 
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2
+CXXFLAGS = -g -O2 -std=c++11
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -831,11 +831,6 @@ cfunction.o: ../utils/CEC2013_MultiModal/cfunction.cpp
 rand2.o: ../utils/CEC2013_MultiModal/rand2.c
 	$(CXX) $(IFLAGS) $(CCFLAGS) $< -o $@
 
-cInstance.o: ../utils/sumo-wrapper/cInstance.cpp
-	$(CXX) $(IFLAGS) $(CCFLAGS) $< -o $@ 
-
-simpleXMLParser.o: ../utils/sumo-wrapper/simpleXMLParser.cpp 
-	$(CXX) $(IFLAGS) $(CCFLAGS) $< -o $@
 
 ExecutionIsland.o: ../ExecutionIsland.cpp
 	$(MPICC) $(IFLAGS) $(CCFLAGS) $< -o $@
@@ -931,12 +926,6 @@ cfunction.reloc.o: ../utils/CEC2013_MultiModal/cfunction.cpp
 	$(CXX) $(IFLAGS) $(LFLAGS) $(CCFLAGS) $< -o $@ 
 
 rand2.reloc.o: ../utils/CEC2013_MultiModal/rand2.c
-	$(CXX) $(IFLAGS) $(LFLAGS) $(CCFLAGS) $< -o $@ 
-
-cInstance.reloc.o: ../utils/sumo-wrapper/cInstance.cpp
-	$(CXX) $(IFLAGS) $(LFLAGS) $(CCFLAGS) $< -o $@ 
-
-simpleXMLParser.reloc.o: ../utils/sumo-wrapper/simpleXMLParser.cpp
 	$(CXX) $(IFLAGS) $(LFLAGS) $(CCFLAGS) $< -o $@ 
 
 Plugin.reloc.o: ../Plugin.cpp

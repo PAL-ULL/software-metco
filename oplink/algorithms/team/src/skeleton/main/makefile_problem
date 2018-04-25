@@ -1,6 +1,6 @@
 LFLAGS = -shared 
 PROBLEMDIR = ../../plugins/problems/
-IFLAGS= -I../../problems/$(problem)/ -I../ -I../utils/ -I../utils/sumo-wrapper -I../utils/CEC2013_MultiModal
+IFLAGS= -I../../problems/$(problem)/ -I../ -I../utils/ -I../utils/CEC2013_MultiModal
 SO_FILE= $(problem).so
 COMPLETE_O_FILE=$(problem).complete.o
 O_FILE= $(problem).o
@@ -9,7 +9,7 @@ H_FILE:=$(PROBLEMDIR)$(problem)/$(problem).h
 LIBRARY_C_FILE:=$(PROBLEMDIR)$(problem)/$(problem).library.cpp
 LIBRARY_O_FILE:=$(problem).library.o
 FILE_TO_CHANGE:=../complete.c
-OBJ_FILES:=Individual.reloc.o Plugin.reloc.o utils.reloc.o cInstance.reloc.o simpleXMLParser.reloc.o cec2013.reloc.o cfunction.reloc.o rand2.reloc.o
+OBJ_FILES:=Individual.reloc.o Plugin.reloc.o utils.reloc.o cec2013.reloc.o cfunction.reloc.o rand2.reloc.o
 
 $(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE)
 	$(CXX) $(IFLAGS) $(LFLAGS) -o $@ -Wl,-soname,$@ $^ -lm -lgsl -lgslcblas
