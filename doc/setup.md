@@ -5,7 +5,7 @@
 The steps you must follow to [start](../README.md) using METCO can be found in the [README](../README.md) file. However, here is the list of all the steps you must follow from cloned the repo to finally run an algorithm to solve a problem in METCO. 
 
 1. First of all, download or clone this repo.
-2. After that, move to `path_where_cloned/software-metco/oplink/algorithms/team/src/skeleton/main`.
+2. After that, move to `local_path/software-metco/oplink/algorithms/team/src/skeleton/main`.
 3. Now run the configuration scripts:
     * `$ ./gen.sh`.
     * `$ ./configure`.
