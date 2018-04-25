@@ -15,7 +15,7 @@ Now you are ready to start using METCO.
 
 ## Dependencies
 
-| Dependency       	| How to install                                   	| Link                                                                                            	|
+| Dependency       	| How to install  (Debian/Ubuntu Distros)                                 	| Link                                                                                            	|
 |------------------	|--------------------------------------------------	|-------------------------------------------------------------------------------------------------	|
 | gcc/g++ compiler 	| sudo apt-get install build-essential             	| [GCC/G++](https://gcc.gnu.org/)                                                                            	|
 | Autotools        	| sudo apt-get install autotools automake          	| [Autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) 	|
