@@ -19,6 +19,7 @@
 #include <iostream>
 #include <signal.h>
 #include <math.h>
+#include <functional>
 
 using namespace std;
 

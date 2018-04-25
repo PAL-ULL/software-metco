@@ -17,6 +17,7 @@
 
 #include "Individual.h"
 #include "EA.h"
+#include <functional>
 
 #include <vector>
 

@@ -19,6 +19,7 @@
 #include <fstream>
 #include "Individual.h"
 #include "EA.h"
+#include <functional>
 
 using namespace std;
 
