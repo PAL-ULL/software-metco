@@ -8,7 +8,7 @@ Currently, METCO only allows two formats for the results files, plain text and X
 
 Let's supposed that we are trying to find the global optimum of the [Ackley Function](https://www.sfu.ca/~ssurjano/ackley.html) (30 dimensions instance) using the Differential Evolution algorithm implemented in METCO. We should run our experiment like:
 
-`./metcoSeq /home/username . PlainText results.txt MonoDE Ackley EVALUATIONS 100000 1000 0 0.5 0.115 100 ! 30 $ NoOp;`
+`./metcoSeq /home/username . PlainText results.txt MonoDE Ackley EVALUATIONS 100000 1000 0 0.5 0.115 30 ! 30 $ NoOp;`
 
 After it finishes, we will have the **result.txt** file with the results of the experiment for every **1000** evaluations of the algorithm. If you don't realize why it is this way, check out [how to run METCO](setup.md).
 
@@ -29,7 +29,7 @@ Genetic Algorithm DE
 Number of Evaluations = 100000
 Weight factor = 0.5
 Crossover = 0.100000001490116119
-Population Size = 100
+Population Size = 30
 
 Time =  0.468252999999999975
 
@@ -45,7 +45,7 @@ When the print period is reached, METCO shows the status of the execution:
 
 * Current Evaluation
 * Number of items of the Pareto's Front. In this case, as we are working with a single-objective function, the value is one.
-* Evaluation of every single individual in the population.
+* MOFront returned from the `getSolution(MOFront*)` method inside the algorithm class. In this case DE returns the evaluation of every single individual of the population.
 
 This information is printed continuosly after the algorithm performs _printPeriod_ evaluations. 
 
