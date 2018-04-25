@@ -6,3 +6,7 @@ config.status
 autom4te.cache/*
 configureFiles/*
 .deps/*
+lex.Conf.c
+metcoPar
+metcoSeq
+parseConf.tab.*
