@@ -60,9 +60,12 @@ In this case, adding a new problem in METCO is even easier than an algorithm.
 
     * `void evaluate(void)`: This method must contains the evaluation function of the problem. For every objective, the method `setObj(dimension, value)` must be call with result of the evaluation in the i-th dimension. Following with the Rastrigin example, the evaluate method will look like:
 
-    **Rastrigin equation:** <Enter>
+    **Rastrigin equation:** 
     
-    $f(x) = 10d + \sum_{i=1}^{d}[x_{i}^{2} - 10cos(2\pi x_{i})]$    
+    
+    ![equation](https://wikimedia.org/api/rest_v1/media/math/render/svg/1aa1c38ee739ca9cf4582867d74d469df4676cbc)  
+    
+    and A = 10.
     <Enter>
     <Enter>
     ```
@@ -80,7 +83,11 @@ In this case, adding a new problem in METCO is even easier than an algorithm.
         * `double getMaximum(const int i) const`
         * `double getMinimum(const int i) const`
    
-    For instance, if we consider the Rastrigin function which is evaluated on the hypercube defined by $x_{i} \in[-5.12, 5.12]$, for all i = 1, ..., d, these methods must return -5.12 and 5.12 for every value of the variable i:
+    For instance, if we consider the Rastrigin function which is evaluated on the hypercube defined by:
+    
+    ![equation](https://wikimedia.org/api/rest_v1/media/math/render/svg/e3560b2d6c10fff0a26c994d45374c4dc70f98e5)
+    
+    these methods must return -5.12 and 5.12 for every value of the variable i:
     ```
     double Rastrigin::getMaximum(const int i) const {
         return 5.12;
