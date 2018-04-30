@@ -29,7 +29,6 @@ public:
 	double getMinimum(const int i) const { return minVar[i]; };
   unsigned int getOptDirection(const int i) const { return MINIMIZE; };
 private:
-  static bool firstInit;
   static int numVar;
   static vector<double> minVar;
   static vector<double> maxVar;

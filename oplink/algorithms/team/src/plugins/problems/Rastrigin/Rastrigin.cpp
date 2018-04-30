@@ -16,11 +16,9 @@ bool Rastrigin::init(const vector<string> &params) {
     cerr << "Error in Rastrigin init: the parameter dim must be especificated" << endl;
     exit(-1);
   }
-  if(firstInit){
-    numVar = atoi(params[0].c_str());
-    minVar.resize(numVar, -5.12);
-    maxVar.resize(numVar, 5.12);
-  }
+  numVar = atoi(params[0].c_str());
+  minVar.resize(numVar, -5.12);
+  maxVar.resize(numVar, 5.12);
   setNumberOfVar(numVar);
   setNumberOfObj(1);
   setFitnessValue(0.00);
@@ -41,5 +39,4 @@ void Rastrigin::evaluate(){
 
 vector<double> Rastrigin::minVar;
 vector<double> Rastrigin::maxVar;
-bool Rastrigin::firstInit = true;
 int Rastrigin::numVar = 30;
