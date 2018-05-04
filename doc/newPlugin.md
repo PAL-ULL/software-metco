@@ -79,7 +79,7 @@ Moreover, in the new class we must overwrite the following methods:
 
 ```cpp
     bool Rastrigin::init(const vector<string>& params) {
-          if (params.size() != 1) {
+        if (params.size() != 1) {
             cerr << "Error in Rastrigin init: the parameter dim must be especificated" << endl;
             exit(-1);
         }
@@ -94,6 +94,7 @@ Moreover, in the new class we must overwrite the following methods:
 * `void evaluate(void)`: This method must contains the evaluation function of the problem. For every objective, the method `setObj(dimension, value)` must be call with result of the evaluation in the i-th dimension. Following with the Rastrigin example, the evaluate method will look like:
 
 ```cpp
+
     void Rastrigin::evaluate(){
         double evaluation = 0.0;
         for(int i = 0; i < getNumberOfVar(); i++)
@@ -111,6 +112,7 @@ Moreover, in the new class we must overwrite the following methods:
 In this case, as we are defining the Rastrigin function which is evaluated on the hypercube defined by $x_{i} \in[-5.12, 5.12]$, for all i = 1, ..., d, these methods must return -5.12 and 5.12 for every value of the variable i:
 
 ```cpp
+
     double Rastrigin::getMaximum(const int i) const {
         return 5.12;
     }
@@ -123,7 +125,7 @@ In this case, as we are defining the Rastrigin function which is evaluated on th
 
 * `Individual* clone(void) const`: Returns a new Individual cloned from the current one.
 
-The final result of the new header file must be something like this example down below: 
+The final result of the new header file must be something like the example down below: 
 
 ```cpp
 #ifndef __RASTRIGIN__
@@ -185,4 +187,3 @@ void Rastrigin::evaluate(){
 vector<double> Rastrigin::minVar;
 vector<double> Rastrigin::maxVar;
 ```
-
