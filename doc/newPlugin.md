@@ -29,7 +29,9 @@ Adding a new algorithm in METCO is quite straightforward. You only have to follo
 ### New Problem
 
 In this case, adding a new problem in METCO is even easier than an algorithm. Let's suppose that we want to create a new problem, for example, the Rastrigin function. This functions is defined like:
+
 ![equation](https://wikimedia.org/api/rest_v1/media/math/render/svg/1aa1c38ee739ca9cf4582867d74d469df4676cbc)
+
 Where A = 10 and it is evaluated on the hypercube defined by:
 
 ![eq](https://wikimedia.org/api/rest_v1/media/math/render/svg/e3560b2d6c10fff0a26c994d45374c4dc70f98e5) for all i = 1, ..., d.
