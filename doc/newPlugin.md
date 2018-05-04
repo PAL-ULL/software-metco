@@ -29,11 +29,10 @@ Adding a new algorithm in METCO is quite straightforward. You only have to follo
 ### New Problem
 
 In this case, adding a new problem in METCO is even easier than an algorithm. Let's suppose that we want to create a new problem, for example, the Rastrigin function. This functions is defined like:
-    <Enter>
-    $f(x) = 10d + \sum_{i=1}^{d}[x_{i}^{2} - 10cos(2\pi x_{i})]$    
-    <Enter>
-    <Enter>
-Where A = 10 and it is evaluated on the hypercube defined by $x_{i} \in[-5.12, 5.12]$, for all i = 1, ..., d.
+![equation](https://wikimedia.org/api/rest_v1/media/math/render/svg/1aa1c38ee739ca9cf4582867d74d469df4676cbc)
+Where A = 10 and it is evaluated on the hypercube defined by:
+
+![eq](https://wikimedia.org/api/rest_v1/media/math/render/svg/e3560b2d6c10fff0a26c994d45374c4dc70f98e5) for all i = 1, ..., d.
 
 The steps that we must follow to achieve this are:
 
