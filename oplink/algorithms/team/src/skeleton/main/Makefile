@@ -231,12 +231,12 @@ AUTOMAKE = ${SHELL} /home/marre/software-metco/oplink/algorithms/team/src/skelet
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+CFLAGS = -g -O2 -std=c++11
 CPP = gcc -E
-CPPFLAGS = 
+CPPFLAGS = -std=c++11
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2
+CXXFLAGS = -g -O2 -std=c++11
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -339,7 +339,7 @@ metcoSeq_SOURCES = metcoSeq.cpp
 metcoPar_SOURCES = metcoPar.cpp
 FLEX = flex
 BISON = bison
-CCFLAGS = -c -O2
+CCFLAGS = -c -O2 -std=c++11
 IFLAGS = -I. -I.. -I../utils -I../../../src_external/hv-1.1-src
 DFLAGS = 
 LFLAGS = -fPIC 

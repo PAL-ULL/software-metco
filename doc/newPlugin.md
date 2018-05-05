@@ -73,7 +73,11 @@ public:
 Moreover, in the new class we must overwrite the following methods:
 
 * `bool init(const vector<string>& params)`: This is the method which is in charge of initialized the problem with all the given parameters. Inside this method, you must define the number of objectives and variables of the problem. Therefore, the following methods must be called:
-    * `setNumberOfVar(NPARAM)`: Defines the number of variables of the problem.
+    * `setNumberOfVar(NPARAM)`: Defines the number of variables of the problem. It will be a good practice to define two static vectors such as **minVar** and **maxVar** where to store the limits of each variable if, in contrast to this case, they are not constant values.
+    ```cpp
+        static vector<double> minVar;
+        static vector<double> maxVar;
+    ```
     * `setNumberOfObj(NOBJ)`: Defines the number of objectives of the problem.
 
     The given parameters must depend of the treated problem. In this case, the Rastrigin function takes the number of dimensions as argument so, this method will look like:
@@ -85,8 +89,6 @@ Moreover, in the new class we must overwrite the following methods:
             exit(-1);
         }
         double numVar = atoi(params[0].c_str());
-        minVar.resize(numVar, -5.12);
-        maxVar.resize(numVar, 5.12);
         setNumberOfVar(numVar);
         setNumberOfObj(1);
     }
@@ -95,7 +97,6 @@ Moreover, in the new class we must overwrite the following methods:
 * `void evaluate(void)`: This method must contains the evaluation function of the problem. For every objective, the method `setObj(dimension, value)` must be call with result of the evaluation in the i-th dimension. Following with the Rastrigin example, the evaluate method will look like:
 
 ```cpp
-
     void Rastrigin::evaluate(){
         double evaluation = 0.0;
         for(int i = 0; i < getNumberOfVar(); i++)
@@ -142,13 +143,9 @@ public:
   bool init (const vector<string> &params);     // Initialization method
   void evaluate (void);                         // Evaluation
   Individual* clone (void) const;               // Clone individual
-  double getMaximum(const int i) const { return maxVar[i]; };   // Ranges of the search space
-  double getMinimum(const int i) const { return minVar[i]; };
+  double getMaximum(const int i) const { return 5.12; };   // Ranges of the search space
+  double getMinimum(const int i) const { return -5.12; };
   unsigned int getOptDirection(const int i) const { return MINIMIZE; };     // Opt direction
-private:
-  // Ranges of the search space
-  static vector<double> minVar;
-  static vector<double> maxVar;
 };
 
 #endif
@@ -166,8 +163,6 @@ bool Rastrigin::init(const vector<string> &params) {
     exit(-1);
   }
   double numVar = atoi(params[0].c_str());
-  minVar.resize(numVar, -5.12);
-  maxVar.resize(numVar, 5.12);
   setNumberOfVar(numVar);
   setNumberOfObj(1);
   return true;
@@ -184,7 +179,4 @@ void Rastrigin::evaluate(){
   evaluation = 10 * getNumberOfVar() + evaluation;
   setObj(0, evaluation);
 }
-
-vector<double> Rastrigin::minVar;
-vector<double> Rastrigin::maxVar;
 ```
