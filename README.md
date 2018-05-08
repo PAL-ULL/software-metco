@@ -18,7 +18,7 @@ Now you are ready to start using METCO.
 | Dependency       	| How to install  (Debian/Ubuntu Distros)                                 	| Link                                                                                            	|
 |------------------	|--------------------------------------------------	|-------------------------------------------------------------------------------------------------	|
 | gcc/g++ compiler 	| sudo apt-get install build-essential             	| [GCC/G++](https://gcc.gnu.org/)                                                                            	|
-| Autotools        	| sudo apt-get install autotools automake          	| [Autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) 	|
+| Autotools        	| sudo apt-get install autotools-dev automake          	| [Autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) 	|
 | Bison            	| sudo apt-get install bison                       	| [Bison](https://launchpad.net/ubuntu/+source/bison)                                                      	|
 | Flex             	| sudo apt-get install flex                        	| [Flex](http://manpages.ubuntu.com/manpages/xenial/es/man1/flex.1.html)                                  	|
 | MPICH*            	| sudo apt-get install libcr-dev mpich2 mpich2-doc 	| [MPICH](https://www.mpich.org/)                                                                          	|
