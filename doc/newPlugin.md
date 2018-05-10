@@ -119,7 +119,7 @@ void SA::runGeneration() {
 }
 
 void SA::applyRandomPerturbations() {
-    perturbation = ((double) rand () / (double) RAND_MAX);
+    double perturbation = ((double) rand () / (double) RAND_MAX);
     Individual* copy = (*population)[0]->internalClone();
     for (int j = 0; j < (*population)[0]->getNumberOfVar(); j++) {
         copy->setVar(j, getPerturbation() * (copy->getMaximum(j)
