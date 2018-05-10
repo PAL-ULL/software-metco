@@ -180,3 +180,4 @@ void Rastrigin::evaluate(){
   setObj(0, evaluation);
 }
 ```
+* Optionally, you can add other methods you could need, i.e. quicksort. See [Knapsack Problem](../oplink/algorithms/team/src/plugins/problems/KNAP/KNAP.h).
