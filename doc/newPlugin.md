@@ -7,23 +7,164 @@
 
 ### New Algorithm
 
-Adding a new algorithm in METCO is quite straightforward. You only have to follow the simple steps.
+Adding a new algorithm in METCO is quite straightforward. You can follow the steps down below. For this example, we are going to use the [Simulated Annealing (SA)](https://en.wikipedia.org/wiki/Simulated_annealing) algorithm. _More references about SA algorithm can be found [here](https://www.springer.com/cda/content/document/cda_downloaddocument/9783319411910-c2.pdf?SGWID=0-0-45-1579890-p180080441) and [here](http://mathworld.wolfram.com/SimulatedAnnealing.html)_.
+
 
 1. Create a new folder with the name of the algorithm in the path `local_path/software-metco/oplink/algorithms/team/src/plugins/algorithms`.
+```
+local_path/software-metco/oplink/algorithms/team/src/plugins/algorithm/SA.
+```
 2. Then, add the header and source file for the algorithm with, **exactly, the same name of the folder created**. Besides, the new class in which the algorithm is implemented must have the same name.
+```
+local_path/software-metco/oplink/algorithms/team/src/plugins/algorithm/SA/SA.h
+local_path/software-metco/oplink/algorithms/team/src/plugins/algorithm/SA/SA.cpp
+```
 3. Now, inside the header file, you must include the superclasses `Individual` and `EA`: 
-        
-        #include "Individual.h"
-        #include "EA.h" 
+```cpp        
+#include "Individual.h"
+#include "EA.h" 
+```
+4. The new class must inherit from the EA superclass:
 
-4. The new class must inherit from EA and the following methods must be overwritten:
+```cpp
+#ifndef __SA_H__
+#define __SA_H__
 
-    * `bool init(const vector<string>& params)`: This is the method which is in charge of initialized the algorithm with all the given parameters.`
-    * `void runGeneration()`: In this method it must be included the code that the algorithm will repeat for each generation. Main loop.
-    * `void getSolution(MOFront* p)`: It may include the current population of individuals in the MultiObjectiveFront p.
-    * `void printInfo(ostream& os) const`: This method is only for information purpose.
+#include "Individual.h"
+#include "EA.h"
 
-5. Them, the specific features and components of the algorithm must be implemented.
+class SA : public EA {
+    (...)
+};
+
+#endif
+```
+5.After that, the following methods must be overwritten in the new class:
+
+* `bool init(const vector<string>& params)`: This is the method which is in charge of initialized the algorithm with all the given parameters.
+* `void runGeneration()`: In this method it must be included the code that the algorithm will repeat for each generation. Main loop.
+* `void getSolution(MOFront* p)`: It may include the current population of individuals in the MultiObjectiveFront p.
+* `void printInfo(ostream& os) const`: This method is only for information purpose.
+
+6. Them, the specific features and components of the algorithm must be implemented.
+
+Here is how the header file should look like:
+```cpp
+#ifndef __SA_H__
+#define __SA_H__
+
+#include "Individual.h"
+#include "EA.h"
+
+class SA : public EA {
+public:
+    bool init(const vector<string>& params);
+    void getSolution(MOFront* p);
+    void printInfo(ostream& os) const;
+private:
+    void runGeneration();
+// Specific variables and methods for SA algorithm
+private:
+    void applyRandomPerturbation();
+    void evaluateDifference();
+    void updateTemperature();
+private:
+    double initialTemp;
+    double temperature;
+    double perturbation;
+    double temperatureVariation;
+    uint64_t seed;
+    Individual* newIndividual; // New individual after applyRandomPerturbation
+private:
+    static const int PARAMS; // Number of parameters that must be given to SA
+};
+
+#endif
+```
+And then, we must implement this methods inside the source code file:
+
+```cpp
+#include "SA.h"
+#include <algorithm>    // std::min
+#include <cmath>        // isless, isgreater
+
+// Define the static constants
+const int SA::PARAMS = 3; 
+
+// Algorithm initialization
+bool SA::init(const vector<string>& params) {
+    // Check number of parameters
+    if (params.size() != PARAMS) {
+        cout << "Parameters: seed init_temp temp_variation" << endl;
+        return false;
+    }
+    // Only mono-objective optimization is supported
+    if (getSampleInd()->getNumberOfObj() != 1) {
+        cout << "Multi-Objective not supported" << endl;
+        return false;
+    }
+    setPopulationSize(1);
+    seed = static_cast<uint64_t>(atof(params[0].c_str()));
+    srand(seed);
+    initialTemp = atof(params[1].c_str());
+    temperature = initialTemp;
+    temperatureVariation = atof(params[2].c_str());
+    return true;
+}
+
+void SA::runGeneration() {
+    applyRandomPerturbations();
+    evaluateDifference();
+    updateTemperature();
+}
+
+void SA::applyRandomPerturbations() {
+    perturbation = ((double) rand () / (double) RAND_MAX);
+    Individual* copy = (*population)[0]->internalClone();
+    for (int j = 0; j < (*population)[0]->getNumberOfVar(); j++) {
+        copy->setVar(j, getPerturbation() * (copy->getMaximum(j)
+		                - copy->getMinimum(j))
+			            + copy->getMinimum(j));
+        if (copy->getVar(j) > copy->getMaximum(j)
+        || copy->getVar(j) < copy->getMinimum(j)) {
+            copy->setVar(j, (copy->getMaximum(j) - copy->getMinimum(j))
+            + copy->getMinimum(j));
+        }
+    }
+    newIndividual = copy->internalClone();;
+}
+
+void SA::evaluateDifference() {
+    evaluate((*population)[0]);
+    evaluate(newIndividual);
+    double difference = 0.0;
+    difference = (*population)[0]->getObj(0) - newIndividual->getObj(0);
+    if(isless(difference, 0.0))
+        (*population)[0] = newIndividual->internalClone();
+    else {
+        const double randomProbability = (double) rand() / (RAND_MAX);
+        const double e = exp(-difference / temperature);
+        const double probability = min(1.0, e);
+        if(isless(randomProbability, probability))
+            (*population)[0] = newIndividual->internalClone();
+    }
+}
+
+void SA::updateTemperature() {
+    temperature *= temperatureVariation;
+}
+
+void SA::getSolution(MOFront* p) {
+    p->insert((*population)[0]);
+}
+
+void SA::printInfo(ostream& os) const {
+    os << "Simulated Annealing Algorithm"  << endl;
+    os << "Number of Evaluations = " << getEvaluations() << endl;
+    os << "Initial Temperature = " << initialTemp << endl;
+    os << "Temperature Variation = " << temperatureVariation << endl;
+}
+```
 
 
 ### New Problem
