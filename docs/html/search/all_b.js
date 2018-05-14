@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['scorealgorithm',['ScoreAlgorithm',['../da/de1/classScoreAlgorithm.html',1,'']]],
-  ['setpopulationsize',['setPopulationSize',['../d0/dff/classEA.html#afb4678f700cb03d64dc60fc3d24f7a1f',1,'EA']]],
-  ['setsampleind',['setSampleInd',['../d0/dff/classEA.html#add9a924cd307b2a49b1cf961c65e8ef2',1,'EA']]],
-  ['simpleindividual',['SimpleIndividual',['../d3/da8/classSimpleIndividual.html',1,'']]]
+  ['readme',['README',['../d0/d30/md_README.html',1,'']]],
+  ['resetstopconditions',['resetStopConditions',['../d0/dff/classEA.html#ad56460c346eca5b890b27c85e985ec12',1,'EA']]],
+  ['run',['run',['../d0/dff/classEA.html#a0b330cfc98d799706ebaee44dfbfdd21',1,'EA']]],
+  ['rungeneration',['runGeneration',['../d0/dff/classEA.html#ab5586c481933e063694c45d487757c82',1,'EA']]],
+  ['rungenerationinc',['runGenerationInc',['../d0/dff/classEA.html#a8a4518d405abf91c5432b8823d34c400',1,'EA']]]
 ];

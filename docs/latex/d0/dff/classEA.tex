@@ -61,18 +61,12 @@ void \mbox{\hyperlink{classEA_afb4678f700cb03d64dc60fc3d24f7a1f}{set\+Population
 \begin{DoxyCompactList}\small\item\em Set the population size. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classEA_add9a924cd307b2a49b1cf961c65e8ef2}{set\+Sample\+Ind}} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind)
 \begin{DoxyCompactList}\small\item\em Set a sample \mbox{\hyperlink{classIndividual}{Individual}}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classEA_a49a75271ab62ffdb59d7a5fbbc97f998}\label{classEA_a49a75271ab62ffdb59d7a5fbbc97f998}} 
-void {\bfseries set\+Output\+Printer} (\mbox{\hyperlink{classOutputPrinter}{Output\+Printer}} $\ast$op)
-\item 
-\mbox{\Hypertarget{classEA_a161b549d8ec90da1bd07687f6b388b59}\label{classEA_a161b549d8ec90da1bd07687f6b388b59}} 
-void {\bfseries set\+Print\+Period} (const int pp)
-\item 
-\mbox{\Hypertarget{classEA_a114980c167652af030f11349810797e9}\label{classEA_a114980c167652af030f11349810797e9}} 
-void {\bfseries set\+Max\+Local\+Front\+Size} (const int max)
-\item 
-\mbox{\Hypertarget{classEA_a2a66dc69d7f1c185f9f177f3a3913898}\label{classEA_a2a66dc69d7f1c185f9f177f3a3913898}} 
-void {\bfseries set\+Id\+Conf} (const int id\+Conf)
-\item 
+void \mbox{\hyperlink{classEA_a49a75271ab62ffdb59d7a5fbbc97f998}{set\+Output\+Printer}} (\mbox{\hyperlink{classOutputPrinter}{Output\+Printer}} $\ast$op)
+\begin{DoxyCompactList}\small\item\em Set printer module from \mbox{\hyperlink{classOutputPrinter}{Output\+Printer}} instances. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEA_a161b549d8ec90da1bd07687f6b388b59}{set\+Print\+Period}} (const int pp)
+\begin{DoxyCompactList}\small\item\em Set the period to print the intermediate results. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEA_a114980c167652af030f11349810797e9}{set\+Max\+Local\+Front\+Size}} (const int max)
+\begin{DoxyCompactList}\small\item\em Set the maximum number of individuals in the Pareto\textquotesingle{}s Front. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classEA_a2140dd732a9acc2ce6044669e60bb335}\label{classEA_a2140dd732a9acc2ce6044669e60bb335}} 
 void {\bfseries set\+Score\+Algorithm} (\mbox{\hyperlink{classScoreAlgorithm}{Score\+Algorithm}} $\ast$sc)
 \item 
@@ -85,39 +79,27 @@ void {\bfseries set\+Multi\+Objectivization\+Plugins} (const vector$<$ \mbox{\hy
 \mbox{\Hypertarget{classEA_a4e6f4130156dc99c0c44f9d7b9903a25}\label{classEA_a4e6f4130156dc99c0c44f9d7b9903a25}} 
 void {\bfseries set\+Generate\+Archive} (const bool generate, const int type)
 \item 
-\mbox{\Hypertarget{classEA_a61c0385f3596233e124a9002e834fc6a}\label{classEA_a61c0385f3596233e124a9002e834fc6a}} 
-void {\bfseries set\+Stopping\+Criterion} (const int crit\+Stop, const double crit\+Stop\+Value)
-\item 
-\mbox{\Hypertarget{classEA_a6ec89c4b5edec15a2c59f8f640522169}\label{classEA_a6ec89c4b5edec15a2c59f8f640522169}} 
-int {\bfseries get\+Crit\+Stop} (void) const
-\item 
-\mbox{\Hypertarget{classEA_a53c6bb76e024220eae10799b732d1571}\label{classEA_a53c6bb76e024220eae10799b732d1571}} 
-double {\bfseries get\+Crit\+Stop\+Value} (void) const
-\item 
-\mbox{\Hypertarget{classEA_af3137eadac064eb1257ec161150fb304}\label{classEA_af3137eadac064eb1257ec161150fb304}} 
-int {\bfseries get\+Print\+Period} (void) const
-\item 
-\mbox{\Hypertarget{classEA_a107a7507708a8a4db8ca2dfbef72f52c}\label{classEA_a107a7507708a8a4db8ca2dfbef72f52c}} 
-int {\bfseries get\+Population\+Size} (void) const
-\item 
+void \mbox{\hyperlink{classEA_a61c0385f3596233e124a9002e834fc6a}{set\+Stopping\+Criterion}} (const int crit\+Stop, const double crit\+Stop\+Value)
+\begin{DoxyCompactList}\small\item\em Initialize the necessary attributes to set a stopping criteria. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classEA_a6ec89c4b5edec15a2c59f8f640522169}{get\+Crit\+Stop}} (void) const
+\begin{DoxyCompactList}\small\item\em Method that returns the stopping criteria. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classEA_a53c6bb76e024220eae10799b732d1571}{get\+Crit\+Stop\+Value}} (void) const
+\begin{DoxyCompactList}\small\item\em This method returns the value for the stopping criteria. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classEA_af3137eadac064eb1257ec161150fb304}{get\+Print\+Period}} (void) const
+\begin{DoxyCompactList}\small\item\em Returns how many iterations the algorithm must print the results. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classEA_a107a7507708a8a4db8ca2dfbef72f52c}{get\+Population\+Size}} (void) const
+\begin{DoxyCompactList}\small\item\em This method returns how many individuals are in the population. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classEA_a0bb927fe460bab1aa745ac9df0b267c9}\label{classEA_a0bb927fe460bab1aa745ac9df0b267c9}} 
 \mbox{\hyperlink{classMOFront}{M\+O\+Front}} $\ast$ {\bfseries get\+Local\+Solution} (void) const
 \item 
-\mbox{\Hypertarget{classEA_ad677d015c33f989e079eb9b204f1dd3c}\label{classEA_ad677d015c33f989e079eb9b204f1dd3c}} 
-int {\bfseries get\+Evaluations} (void) const
-\item 
-\mbox{\Hypertarget{classEA_ab40a86dcc65d506f7327e457e137859f}\label{classEA_ab40a86dcc65d506f7327e457e137859f}} 
-int {\bfseries get\+Performed\+Evaluations} (void) const
-\item 
-\mbox{\Hypertarget{classEA_a6fd5e97e8a83ed5b187311cc77c246f5}\label{classEA_a6fd5e97e8a83ed5b187311cc77c246f5}} 
-int {\bfseries get\+Generation} (void) const
-\item 
-\mbox{\Hypertarget{classEA_ae84da938d98677fa658c2b3659a7c356}\label{classEA_ae84da938d98677fa658c2b3659a7c356}} 
-int {\bfseries get\+Max\+Local\+Front\+Size} (void) const
-\item 
-\mbox{\Hypertarget{classEA_acb63738ccb9248cd8f39be5bd16a4331}\label{classEA_acb63738ccb9248cd8f39be5bd16a4331}} 
-int {\bfseries get\+Id\+Conf} (void) const
-\item 
+int \mbox{\hyperlink{classEA_ad677d015c33f989e079eb9b204f1dd3c}{get\+Evaluations}} (void) const
+\begin{DoxyCompactList}\small\item\em Method that returns the number of maximum evaluations to perform. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classEA_ab40a86dcc65d506f7327e457e137859f}{get\+Performed\+Evaluations}} (void) const
+\begin{DoxyCompactList}\small\item\em Method that returns the number of performed evaluations. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classEA_a6fd5e97e8a83ed5b187311cc77c246f5}{get\+Generation}} (void) const
+\begin{DoxyCompactList}\small\item\em Method that returns the number of generations. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classEA_ae84da938d98677fa658c2b3659a7c356}{get\+Max\+Local\+Front\+Size}} (void) const
+\begin{DoxyCompactList}\small\item\em Method that returns the number of maximum individuals in the Pareto\textquotesingle{}s Front. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classEA_aced3f2cb4a4825b1a2df6e7b220433f8}\label{classEA_aced3f2cb4a4825b1a2df6e7b220433f8}} 
 \mbox{\hyperlink{classIndividual}{Individual}} $\ast$ {\bfseries get\+Sample\+Ind} (void) const
 \item 
@@ -133,9 +115,8 @@ int {\bfseries get\+Next\+Print} (void) const
 \mbox{\Hypertarget{classEA_a7893ceefbafe8ecef3107626bfd55ef3}\label{classEA_a7893ceefbafe8ecef3107626bfd55ef3}} 
 int {\bfseries get\+Num\+Multi\+Objectivization\+Plugins} (void) const
 \item 
-\mbox{\Hypertarget{classEA_ad2ab19a63b1222c13f67009ac2df972d}\label{classEA_ad2ab19a63b1222c13f67009ac2df972d}} 
-double {\bfseries get\+Elapsed\+Time} () const
-\item 
+double \mbox{\hyperlink{classEA_ad2ab19a63b1222c13f67009ac2df972d}{get\+Elapsed\+Time}} () const
+\begin{DoxyCompactList}\small\item\em This method returns the elapsed time of the execution. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classEA_a610f12a2674c608c3bc4cac93e243ebf}\label{classEA_a610f12a2674c608c3bc4cac93e243ebf}} 
 virtual bool {\bfseries supports\+Multi\+Objectivization} ()
 \end{DoxyCompactItemize}
@@ -158,29 +139,23 @@ int {\bfseries binary\+Tournament} (vector$<$ \mbox{\hyperlink{classIndividual}{
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classEA_abb8743d21c3db992b53356e1d8fe2646}\label{classEA_abb8743d21c3db992b53356e1d8fe2646}} 
-vector$<$ \mbox{\hyperlink{classIndividual}{Individual}} $\ast$ $>$ $\ast$ {\bfseries population}
-\end{DoxyCompactItemize}
+vector$<$ \mbox{\hyperlink{classIndividual}{Individual}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classEA_abb8743d21c3db992b53356e1d8fe2646}{population}}
+\begin{DoxyCompactList}\small\item\em Vector of \mbox{\hyperlink{classIndividual}{Individual}} instances that shape the population. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEA_ab5586c481933e063694c45d487757c82}\label{classEA_ab5586c481933e063694c45d487757c82}} 
-virtual void {\bfseries run\+Generation} ()=0
-\item 
-\mbox{\Hypertarget{classEA_ae99a3c887d3014a59bce9501add80308}\label{classEA_ae99a3c887d3014a59bce9501add80308}} 
-virtual void {\bfseries fill\+Pop\+With\+New\+Inds\+And\+Evaluate} ()
-\item 
-\mbox{\Hypertarget{classEA_a1375cfc8e01a4e7520633051e4193e7a}\label{classEA_a1375cfc8e01a4e7520633051e4193e7a}} 
-void {\bfseries check\+Print} ()
-\end{DoxyCompactItemize}
+virtual void \mbox{\hyperlink{classEA_ab5586c481933e063694c45d487757c82}{run\+Generation}} ()=0
+\begin{DoxyCompactList}\small\item\em Method that run one generation of the algorithm. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classEA_ae99a3c887d3014a59bce9501add80308}{fill\+Pop\+With\+New\+Inds\+And\+Evaluate}} ()
+\begin{DoxyCompactList}\small\item\em Method fill the population with new individuals and then, evaluate them. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEA_aee2992080a3ffc95c9edea9cc142f62d}\label{classEA_aee2992080a3ffc95c9edea9cc142f62d}} 
-\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ {\bfseries sample\+Ind}
-\item 
+\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ \mbox{\hyperlink{classEA_aee2992080a3ffc95c9edea9cc142f62d}{sample\+Ind}}
+\begin{DoxyCompactList}\small\item\em Sample \mbox{\hyperlink{classIndividual}{Individual}}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classEA_a003551d80fd0fd6e7bc29870ec1b2bd8}\label{classEA_a003551d80fd0fd6e7bc29870ec1b2bd8}} 
-\mbox{\hyperlink{classOutputPrinter}{Output\+Printer}} $\ast$ {\bfseries output\+Printer}
-\item 
+\mbox{\hyperlink{classOutputPrinter}{Output\+Printer}} $\ast$ \mbox{\hyperlink{classEA_a003551d80fd0fd6e7bc29870ec1b2bd8}{output\+Printer}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classOutputPrinter}{Output\+Printer}} instance to print the results. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classEA_a340f68daee20bce5089deed405edb791}\label{classEA_a340f68daee20bce5089deed405edb791}} 
 \mbox{\hyperlink{classMOFront}{M\+O\+Front}} $\ast$ {\bfseries local\+Solution}
 \item 
@@ -205,23 +180,10 @@ int {\bfseries generations}
 \mbox{\Hypertarget{classEA_a7c2e3fae5ef87767765d58d9637e0d29}\label{classEA_a7c2e3fae5ef87767765d58d9637e0d29}} 
 int {\bfseries generation\+Actual}
 \item 
-\mbox{\Hypertarget{classEA_ad62e844dcae9b5c7724ab56a9aea2dc9}\label{classEA_ad62e844dcae9b5c7724ab56a9aea2dc9}} 
-double {\bfseries quality}
-\item 
+double \mbox{\hyperlink{classEA_ad62e844dcae9b5c7724ab56a9aea2dc9}{quality}}
+\begin{DoxyCompactList}\small\item\em Desired quality to finish the execution. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classEA_add005610c438f386a0e1297f40f99294}\label{classEA_add005610c438f386a0e1297f40f99294}} 
 int {\bfseries local\+Front\+Size}
-\item 
-\mbox{\Hypertarget{classEA_a28ab3bae229219bcf7ea0d8a03ce78d5}\label{classEA_a28ab3bae229219bcf7ea0d8a03ce78d5}} 
-int {\bfseries p\+Size}
-\item 
-\mbox{\Hypertarget{classEA_ac58dd64188e1481baaa9df911026836a}\label{classEA_ac58dd64188e1481baaa9df911026836a}} 
-int {\bfseries my\+Id}
-\item 
-\mbox{\Hypertarget{classEA_a960f7ddfe7f2c8aacc1d08bfb9a7c606}\label{classEA_a960f7ddfe7f2c8aacc1d08bfb9a7c606}} 
-int {\bfseries num\+Procs}
-\item 
-\mbox{\Hypertarget{classEA_a12f5674b1b1eb20b47ad4849247239ea}\label{classEA_a12f5674b1b1eb20b47ad4849247239ea}} 
-int {\bfseries initiated}
 \item 
 \mbox{\Hypertarget{classEA_a76be177471c03a1c37b2e562d0ad51cf}\label{classEA_a76be177471c03a1c37b2e562d0ad51cf}} 
 double {\bfseries time}
@@ -229,37 +191,14 @@ double {\bfseries time}
 \mbox{\Hypertarget{classEA_af18fabb320c08ef9de16fd9877272211}\label{classEA_af18fabb320c08ef9de16fd9877272211}} 
 double {\bfseries crit\+Stop\+Value}
 \item 
-\mbox{\Hypertarget{classEA_a586553aca80fde73642542a1b41bd255}\label{classEA_a586553aca80fde73642542a1b41bd255}} 
-int {\bfseries id\+Conf}
-\item 
-\mbox{\Hypertarget{classEA_a224d5617597ad16e7a90e3004ade9a11}\label{classEA_a224d5617597ad16e7a90e3004ade9a11}} 
-double {\bfseries start\+Time}
-\item 
 \mbox{\Hypertarget{classEA_a40edcfb8016401e5ea73b8188731026b}\label{classEA_a40edcfb8016401e5ea73b8188731026b}} 
 vector$<$ \mbox{\hyperlink{classMultiObjectivization}{Multi\+Objectivization}} $\ast$ $>$ {\bfseries multi\+Objectivizations\+Plugins}
-\item 
-\mbox{\Hypertarget{classEA_aded32463840cd4ac457949fa6c9c3f98}\label{classEA_aded32463840cd4ac457949fa6c9c3f98}} 
-int {\bfseries print\+Period}
-\item 
-\mbox{\Hypertarget{classEA_a8815427bc9aafb995f6a3ecb4aa0c52b}\label{classEA_a8815427bc9aafb995f6a3ecb4aa0c52b}} 
-int {\bfseries next\+Print}
-\item 
-\mbox{\Hypertarget{classEA_a13a8479041c0f19c8b992ddca9ce9fc6}\label{classEA_a13a8479041c0f19c8b992ddca9ce9fc6}} 
-bool {\bfseries generate\+Archive}
-\end{DoxyCompactItemize}
-\subsection*{Friends}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{classEA_ab4c25820347b7b27b7e94132b313f4bf}\label{classEA_ab4c25820347b7b27b7e94132b313f4bf}} 
-class {\bfseries Execution\+Island}
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Detailed Description}
 \mbox{\hyperlink{classPlugin}{Plugin}} base class to represent the algorithms. 
-
-
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classEA_a65e719d5e3a3cff67139d1e81f092cec}\label{classEA_a65e719d5e3a3cff67139d1e81f092cec}} 
@@ -292,6 +231,133 @@ Initialize the initial population with individuals from Global Front.
 {\em Vector$<$\+Individual} & $\ast$$>$ Evaluated individuals \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classEA_ae99a3c887d3014a59bce9501add80308}\label{classEA_ae99a3c887d3014a59bce9501add80308}} 
+\index{EA@{EA}!fill\+Pop\+With\+New\+Inds\+And\+Evaluate@{fill\+Pop\+With\+New\+Inds\+And\+Evaluate}}
+\index{fill\+Pop\+With\+New\+Inds\+And\+Evaluate@{fill\+Pop\+With\+New\+Inds\+And\+Evaluate}!EA@{EA}}
+\subsubsection{\texorpdfstring{fill\+Pop\+With\+New\+Inds\+And\+Evaluate()}{fillPopWithNewIndsAndEvaluate()}}
+{\footnotesize\ttfamily void E\+A\+::fill\+Pop\+With\+New\+Inds\+And\+Evaluate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Method fill the population with new individuals and then, evaluate them. 
+
+This method could be overwritten by the sub-\/classes. \mbox{\Hypertarget{classEA_a6ec89c4b5edec15a2c59f8f640522169}\label{classEA_a6ec89c4b5edec15a2c59f8f640522169}} 
+\index{EA@{EA}!get\+Crit\+Stop@{get\+Crit\+Stop}}
+\index{get\+Crit\+Stop@{get\+Crit\+Stop}!EA@{EA}}
+\subsubsection{\texorpdfstring{get\+Crit\+Stop()}{getCritStop()}}
+{\footnotesize\ttfamily int E\+A\+::get\+Crit\+Stop (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that returns the stopping criteria. 
+
+\begin{DoxyReturn}{Returns}
+The actual stopping criteria 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEA_a53c6bb76e024220eae10799b732d1571}\label{classEA_a53c6bb76e024220eae10799b732d1571}} 
+\index{EA@{EA}!get\+Crit\+Stop\+Value@{get\+Crit\+Stop\+Value}}
+\index{get\+Crit\+Stop\+Value@{get\+Crit\+Stop\+Value}!EA@{EA}}
+\subsubsection{\texorpdfstring{get\+Crit\+Stop\+Value()}{getCritStopValue()}}
+{\footnotesize\ttfamily double E\+A\+::get\+Crit\+Stop\+Value (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+This method returns the value for the stopping criteria. 
+
+\begin{DoxyReturn}{Returns}
+The stopping criteria value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEA_ad2ab19a63b1222c13f67009ac2df972d}\label{classEA_ad2ab19a63b1222c13f67009ac2df972d}} 
+\index{EA@{EA}!get\+Elapsed\+Time@{get\+Elapsed\+Time}}
+\index{get\+Elapsed\+Time@{get\+Elapsed\+Time}!EA@{EA}}
+\subsubsection{\texorpdfstring{get\+Elapsed\+Time()}{getElapsedTime()}}
+{\footnotesize\ttfamily double E\+A\+::get\+Elapsed\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+This method returns the elapsed time of the execution. 
+
+\begin{DoxyReturn}{Returns}
+Elapsed time 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEA_ad677d015c33f989e079eb9b204f1dd3c}\label{classEA_ad677d015c33f989e079eb9b204f1dd3c}} 
+\index{EA@{EA}!get\+Evaluations@{get\+Evaluations}}
+\index{get\+Evaluations@{get\+Evaluations}!EA@{EA}}
+\subsubsection{\texorpdfstring{get\+Evaluations()}{getEvaluations()}}
+{\footnotesize\ttfamily int E\+A\+::get\+Evaluations (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that returns the number of maximum evaluations to perform. 
+
+\begin{DoxyReturn}{Returns}
+Maximum evaluations to perform 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEA_a6fd5e97e8a83ed5b187311cc77c246f5}\label{classEA_a6fd5e97e8a83ed5b187311cc77c246f5}} 
+\index{EA@{EA}!get\+Generation@{get\+Generation}}
+\index{get\+Generation@{get\+Generation}!EA@{EA}}
+\subsubsection{\texorpdfstring{get\+Generation()}{getGeneration()}}
+{\footnotesize\ttfamily int E\+A\+::get\+Generation (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that returns the number of generations. 
+
+\begin{DoxyReturn}{Returns}
+Current generation. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEA_ae84da938d98677fa658c2b3659a7c356}\label{classEA_ae84da938d98677fa658c2b3659a7c356}} 
+\index{EA@{EA}!get\+Max\+Local\+Front\+Size@{get\+Max\+Local\+Front\+Size}}
+\index{get\+Max\+Local\+Front\+Size@{get\+Max\+Local\+Front\+Size}!EA@{EA}}
+\subsubsection{\texorpdfstring{get\+Max\+Local\+Front\+Size()}{getMaxLocalFrontSize()}}
+{\footnotesize\ttfamily int E\+A\+::get\+Max\+Local\+Front\+Size (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that returns the number of maximum individuals in the Pareto\textquotesingle{}s Front. 
+
+\begin{DoxyReturn}{Returns}
+Maximum number of individuals in the Pareto\textquotesingle{}s Front 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEA_ab40a86dcc65d506f7327e457e137859f}\label{classEA_ab40a86dcc65d506f7327e457e137859f}} 
+\index{EA@{EA}!get\+Performed\+Evaluations@{get\+Performed\+Evaluations}}
+\index{get\+Performed\+Evaluations@{get\+Performed\+Evaluations}!EA@{EA}}
+\subsubsection{\texorpdfstring{get\+Performed\+Evaluations()}{getPerformedEvaluations()}}
+{\footnotesize\ttfamily int E\+A\+::get\+Performed\+Evaluations (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that returns the number of performed evaluations. 
+
+\begin{DoxyReturn}{Returns}
+Performed evaluations 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEA_a107a7507708a8a4db8ca2dfbef72f52c}\label{classEA_a107a7507708a8a4db8ca2dfbef72f52c}} 
+\index{EA@{EA}!get\+Population\+Size@{get\+Population\+Size}}
+\index{get\+Population\+Size@{get\+Population\+Size}!EA@{EA}}
+\subsubsection{\texorpdfstring{get\+Population\+Size()}{getPopulationSize()}}
+{\footnotesize\ttfamily int E\+A\+::get\+Population\+Size (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+This method returns how many individuals are in the population. 
+
+\begin{DoxyReturn}{Returns}
+Population size 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEA_af3137eadac064eb1257ec161150fb304}\label{classEA_af3137eadac064eb1257ec161150fb304}} 
+\index{EA@{EA}!get\+Print\+Period@{get\+Print\+Period}}
+\index{get\+Print\+Period@{get\+Print\+Period}!EA@{EA}}
+\subsubsection{\texorpdfstring{get\+Print\+Period()}{getPrintPeriod()}}
+{\footnotesize\ttfamily int E\+A\+::get\+Print\+Period (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns how many iterations the algorithm must print the results. 
+
+\begin{DoxyReturn}{Returns}
+Number of iterations to print the results 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classEA_a84eacf2682007bef9f90543ecdd0639e}\label{classEA_a84eacf2682007bef9f90543ecdd0639e}} 
 \index{EA@{EA}!get\+Solution@{get\+Solution}}
 \index{get\+Solution@{get\+Solution}!EA@{EA}}
@@ -346,7 +412,47 @@ Restars the stopping condition.
 \begin{DoxyItemize}
 \item Restart time
 \item Number of evaluations 
-\end{DoxyItemize}\mbox{\Hypertarget{classEA_afb4678f700cb03d64dc60fc3d24f7a1f}\label{classEA_afb4678f700cb03d64dc60fc3d24f7a1f}} 
+\end{DoxyItemize}\mbox{\Hypertarget{classEA_ab5586c481933e063694c45d487757c82}\label{classEA_ab5586c481933e063694c45d487757c82}} 
+\index{EA@{EA}!run\+Generation@{run\+Generation}}
+\index{run\+Generation@{run\+Generation}!EA@{EA}}
+\subsubsection{\texorpdfstring{run\+Generation()}{runGeneration()}}
+{\footnotesize\ttfamily virtual void E\+A\+::run\+Generation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [pure virtual]}}
+
+
+
+Method that run one generation of the algorithm. 
+
+This method must be overwritten by the sub-\/classes. \mbox{\Hypertarget{classEA_a114980c167652af030f11349810797e9}\label{classEA_a114980c167652af030f11349810797e9}} 
+\index{EA@{EA}!set\+Max\+Local\+Front\+Size@{set\+Max\+Local\+Front\+Size}}
+\index{set\+Max\+Local\+Front\+Size@{set\+Max\+Local\+Front\+Size}!EA@{EA}}
+\subsubsection{\texorpdfstring{set\+Max\+Local\+Front\+Size()}{setMaxLocalFrontSize()}}
+{\footnotesize\ttfamily void E\+A\+::set\+Max\+Local\+Front\+Size (\begin{DoxyParamCaption}\item[{const int}]{max }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the maximum number of individuals in the Pareto\textquotesingle{}s Front. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Maximum} & number of individuals. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEA_a49a75271ab62ffdb59d7a5fbbc97f998}\label{classEA_a49a75271ab62ffdb59d7a5fbbc97f998}} 
+\index{EA@{EA}!set\+Output\+Printer@{set\+Output\+Printer}}
+\index{set\+Output\+Printer@{set\+Output\+Printer}!EA@{EA}}
+\subsubsection{\texorpdfstring{set\+Output\+Printer()}{setOutputPrinter()}}
+{\footnotesize\ttfamily void E\+A\+::set\+Output\+Printer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOutputPrinter}{Output\+Printer}} $\ast$}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set printer module from \mbox{\hyperlink{classOutputPrinter}{Output\+Printer}} instances. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classOutputPrinter}{Output\+Printer}}} & instance \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEA_afb4678f700cb03d64dc60fc3d24f7a1f}\label{classEA_afb4678f700cb03d64dc60fc3d24f7a1f}} 
 \index{EA@{EA}!set\+Population\+Size@{set\+Population\+Size}}
 \index{set\+Population\+Size@{set\+Population\+Size}!EA@{EA}}
 \subsubsection{\texorpdfstring{set\+Population\+Size()}{setPopulationSize()}}
@@ -359,6 +465,21 @@ Set the population size.
 
 \begin{DoxyParams}{Parameters}
 {\em Integer} & that defines the population size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEA_a161b549d8ec90da1bd07687f6b388b59}\label{classEA_a161b549d8ec90da1bd07687f6b388b59}} 
+\index{EA@{EA}!set\+Print\+Period@{set\+Print\+Period}}
+\index{set\+Print\+Period@{set\+Print\+Period}!EA@{EA}}
+\subsubsection{\texorpdfstring{set\+Print\+Period()}{setPrintPeriod()}}
+{\footnotesize\ttfamily void E\+A\+::set\+Print\+Period (\begin{DoxyParamCaption}\item[{const int}]{pp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the period to print the intermediate results. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Number} & of iterations to print the results \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classEA_add9a924cd307b2a49b1cf961c65e8ef2}\label{classEA_add9a924cd307b2a49b1cf961c65e8ef2}} 
@@ -376,7 +497,47 @@ Useful for copy a \mbox{\hyperlink{classIndividual}{Individual}} without its eva
 {\em \mbox{\hyperlink{classIndividual}{Individual}}} & \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classEA_a61c0385f3596233e124a9002e834fc6a}\label{classEA_a61c0385f3596233e124a9002e834fc6a}} 
+\index{EA@{EA}!set\+Stopping\+Criterion@{set\+Stopping\+Criterion}}
+\index{set\+Stopping\+Criterion@{set\+Stopping\+Criterion}!EA@{EA}}
+\subsubsection{\texorpdfstring{set\+Stopping\+Criterion()}{setStoppingCriterion()}}
+{\footnotesize\ttfamily void E\+A\+::set\+Stopping\+Criterion (\begin{DoxyParamCaption}\item[{const int}]{crit\+Stop,  }\item[{const double}]{crit\+Stop\+Value }\end{DoxyParamCaption})}
 
+
+
+Initialize the necessary attributes to set a stopping criteria. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em crit\+Stop} & integer\+: T\+I\+ME, E\+V\+A\+L\+U\+A\+T\+I\+O\+NS, Q\+U\+A\+L\+I\+TY \\
+\hline
+{\em crit\+Stop\+Value} & criteria stop value \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classEA_ad62e844dcae9b5c7724ab56a9aea2dc9}\label{classEA_ad62e844dcae9b5c7724ab56a9aea2dc9}} 
+\index{EA@{EA}!quality@{quality}}
+\index{quality@{quality}!EA@{EA}}
+\subsubsection{\texorpdfstring{quality}{quality}}
+{\footnotesize\ttfamily double E\+A\+::quality\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Desired quality to finish the execution. 
+
+This variable it is only used when the Q\+U\+A\+L\+I\+TY stopping criteria is set. \mbox{\Hypertarget{classEA_aee2992080a3ffc95c9edea9cc142f62d}\label{classEA_aee2992080a3ffc95c9edea9cc142f62d}} 
+\index{EA@{EA}!sample\+Ind@{sample\+Ind}}
+\index{sample\+Ind@{sample\+Ind}!EA@{EA}}
+\subsubsection{\texorpdfstring{sample\+Ind}{sampleInd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classIndividual}{Individual}}$\ast$ E\+A\+::sample\+Ind\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sample \mbox{\hyperlink{classIndividual}{Individual}}. 
+
+Useful for copy purposes. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
