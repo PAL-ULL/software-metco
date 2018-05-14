@@ -1,0 +1,327 @@
+\hypertarget{classIndividual}{}\section{Individual Class Reference}
+\label{classIndividual}\index{Individual@{Individual}}
+
+
+Mother class to represent individuals (Problems)  
+
+
+
+
+{\ttfamily \#include $<$Individual.\+h$>$}
+
+Inheritance diagram for Individual\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d6/d0c/classIndividual}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classIndividual_a6093773270d0dc49f4bd1d289e8b026e}\label{classIndividual_a6093773270d0dc49f4bd1d289e8b026e}} 
+void {\bfseries mutate\+\_\+binary\+\_\+flip} (double pm, int origin=0, int destination=-\/1)
+\item 
+\mbox{\Hypertarget{classIndividual_a0a08bd4e2c891329f7247f569300c910}\label{classIndividual_a0a08bd4e2c891329f7247f569300c910}} 
+void {\bfseries mutate\+\_\+uniform\+\_\+one} (double pm)
+\item 
+\mbox{\Hypertarget{classIndividual_aa813180f56458071173e34314124dd69}\label{classIndividual_aa813180f56458071173e34314124dd69}} 
+void {\bfseries mutate\+\_\+uniform} (double pm, int origin=0, int destination=-\/1)
+\item 
+\mbox{\Hypertarget{classIndividual_a74bd4e537f04468dd2a1fb76a8135d70}\label{classIndividual_a74bd4e537f04468dd2a1fb76a8135d70}} 
+void {\bfseries mutate\+\_\+binary} (double pm)
+\item 
+\mbox{\Hypertarget{classIndividual_afa9b34ae673b8a7b355cff0e11e2cd3b}\label{classIndividual_afa9b34ae673b8a7b355cff0e11e2cd3b}} 
+void {\bfseries mutate\+\_\+range} (double pm)
+\item 
+\mbox{\Hypertarget{classIndividual_a180da20e7bd49ce2e5950c7ee4e0a304}\label{classIndividual_a180da20e7bd49ce2e5950c7ee4e0a304}} 
+void {\bfseries mutate\+\_\+\+Pol} (double pm, int origin=0, int destination=-\/1)
+\item 
+\mbox{\Hypertarget{classIndividual_a51b40ce43c02e2087c6781f23bd0da3b}\label{classIndividual_a51b40ce43c02e2087c6781f23bd0da3b}} 
+void {\bfseries mutate\+\_\+\+Pol2} (double pm, int origin=0, int destination=-\/1)
+\item 
+\mbox{\Hypertarget{classIndividual_a96b5da395328e11fd60f4fa0af07b2d7}\label{classIndividual_a96b5da395328e11fd60f4fa0af07b2d7}} 
+void {\bfseries crossover\+\_\+range} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind, const int interval)
+\item 
+\mbox{\Hypertarget{classIndividual_a2c454d63a886a6245eee7b1d82284411}\label{classIndividual_a2c454d63a886a6245eee7b1d82284411}} 
+void {\bfseries crossover\+\_\+uniform} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind, int origin=0, int destination=-\/1)
+\item 
+\mbox{\Hypertarget{classIndividual_a0972d982f28d6f51de7cf06ed35a2c1f}\label{classIndividual_a0972d982f28d6f51de7cf06ed35a2c1f}} 
+void {\bfseries crossover\+\_\+\+S\+BX} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind, int origin=0, int destination=-\/1)
+\item 
+\mbox{\Hypertarget{classIndividual_a44928e95dffa8255c21f70d7a906fdb0}\label{classIndividual_a44928e95dffa8255c21f70d7a906fdb0}} 
+void {\bfseries crossover\+\_\+\+S\+B\+X2} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind)
+\item 
+\mbox{\Hypertarget{classIndividual_a7349f4844f5a78a43e6e29d9e701887a}\label{classIndividual_a7349f4844f5a78a43e6e29d9e701887a}} 
+void {\bfseries crossover\+\_\+\+O\+PC} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind, int origin=0, int destination=-\/1)
+\item 
+\mbox{\Hypertarget{classIndividual_a43726fb38d841dd9fcb3e378c258ec06}\label{classIndividual_a43726fb38d841dd9fcb3e378c258ec06}} 
+void {\bfseries crossover\+\_\+\+T\+PC} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind, int origin=0, int destination=-\/1)
+\item 
+\mbox{\Hypertarget{classIndividual_a789500ea4f3299f1482b8ec7f38be9a3}\label{classIndividual_a789500ea4f3299f1482b8ec7f38be9a3}} 
+void {\bfseries mutation} (double pm)
+\item 
+\mbox{\Hypertarget{classIndividual_a5c3c8a3b935c67bdb897410fc42c50c9}\label{classIndividual_a5c3c8a3b935c67bdb897410fc42c50c9}} 
+void {\bfseries crossover} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind)
+\item 
+\mbox{\Hypertarget{classIndividual_a909890a10fad8caedfee75df4e4275a4}\label{classIndividual_a909890a10fad8caedfee75df4e4275a4}} 
+void {\bfseries delete\+Vars} ()
+\item 
+\mbox{\Hypertarget{classIndividual_afe188906f7a4414c1420d81ba77cd19f}\label{classIndividual_afe188906f7a4414c1420d81ba77cd19f}} 
+virtual void {\bfseries evaluate} (void)=0
+\item 
+\mbox{\Hypertarget{classIndividual_a567920f87071ab8bbac7bea9d9ef970f}\label{classIndividual_a567920f87071ab8bbac7bea9d9ef970f}} 
+unsigned int {\bfseries get\+Number\+Of\+Var} (void) const
+\item 
+\mbox{\Hypertarget{classIndividual_a1823a9a02df3bca64cca7b9d67ce39c3}\label{classIndividual_a1823a9a02df3bca64cca7b9d67ce39c3}} 
+double {\bfseries get\+Var} (const int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_a2a88ee53411472e3e91ab5b39e618b23}\label{classIndividual_a2a88ee53411472e3e91ab5b39e618b23}} 
+unsigned int {\bfseries get\+Number\+Of\+Obj} (void) const
+\item 
+\mbox{\Hypertarget{classIndividual_ad867138d74c6f7ed4a40653acbbe564e}\label{classIndividual_ad867138d74c6f7ed4a40653acbbe564e}} 
+long double {\bfseries get\+Obj} (const int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_ac7180dae391a4b76cf7283bb3ae7e0a2}\label{classIndividual_ac7180dae391a4b76cf7283bb3ae7e0a2}} 
+unsigned int {\bfseries get\+Number\+Of\+Mig\+Data} (void) const
+\item 
+\mbox{\Hypertarget{classIndividual_a224a48c2975b1c862bb407a20c329ddb}\label{classIndividual_a224a48c2975b1c862bb407a20c329ddb}} 
+unsigned int {\bfseries get\+Number\+Of\+Aux\+Data} (void) const
+\item 
+\mbox{\Hypertarget{classIndividual_aec4b5a16194cc1cd1d8c98c22ee1033d}\label{classIndividual_aec4b5a16194cc1cd1d8c98c22ee1033d}} 
+double {\bfseries get\+Migration\+Data} (const int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_a915b5251c26d78bbacd3217b5f0cda5a}\label{classIndividual_a915b5251c26d78bbacd3217b5f0cda5a}} 
+double {\bfseries get\+Aux\+Data} (const int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_afaefb518f34a0cee32c8cf9f0105ab09}\label{classIndividual_afaefb518f34a0cee32c8cf9f0105ab09}} 
+unsigned int {\bfseries get\+Aux\+Data\+Size} (void) const
+\item 
+\mbox{\Hypertarget{classIndividual_a4b8c30aeaaf3c718d3ea2d36626dd581}\label{classIndividual_a4b8c30aeaaf3c718d3ea2d36626dd581}} 
+double {\bfseries get\+Algorithm\+Data} (const int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_a5d6f94bfb26b12bb814ae33c41d53171}\label{classIndividual_a5d6f94bfb26b12bb814ae33c41d53171}} 
+double {\bfseries get\+Algorithm\+Data\+Size} (void) const
+\item 
+\mbox{\Hypertarget{classIndividual_acd07ae051e15b48872401de61d888bf3}\label{classIndividual_acd07ae051e15b48872401de61d888bf3}} 
+double {\bfseries get\+Fitness\+Value} (void) const
+\item 
+\mbox{\Hypertarget{classIndividual_a4244c72e717c2bb1bfe78c74768da777}\label{classIndividual_a4244c72e717c2bb1bfe78c74768da777}} 
+Owner {\bfseries get\+Owner} (void) const
+\item 
+\mbox{\Hypertarget{classIndividual_aae95dd48e11039b7e721a221316f929a}\label{classIndividual_aae95dd48e11039b7e721a221316f929a}} 
+unsigned int {\bfseries get\+Internal\+Opt\+Direction} (const int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_afa96281426e0b761c9054475173a53af}\label{classIndividual_afa96281426e0b761c9054475173a53af}} 
+virtual double {\bfseries get\+Maximum} (const int i) const =0
+\item 
+\mbox{\Hypertarget{classIndividual_af40bb21011fa5725d5c81514d8954148}\label{classIndividual_af40bb21011fa5725d5c81514d8954148}} 
+virtual double {\bfseries get\+Minimum} (const int i) const =0
+\item 
+\mbox{\Hypertarget{classIndividual_ac01510009bcdcee97a15c107cfcccbe1}\label{classIndividual_ac01510009bcdcee97a15c107cfcccbe1}} 
+\mbox{\hyperlink{classMultiObjectivization}{Multi\+Objectivization}} $\ast$ {\bfseries get\+Multi\+Objectivization\+Plugin} (int index) const
+\item 
+\mbox{\Hypertarget{classIndividual_aa68afefaff7dac801e0c06a438c31edf}\label{classIndividual_aa68afefaff7dac801e0c06a438c31edf}} 
+int {\bfseries get\+Num\+Multi\+Objectivization\+Plugins} (void) const
+\item 
+\mbox{\Hypertarget{classIndividual_ae3922aadae6b6f49656b9175ec1a6a90}\label{classIndividual_ae3922aadae6b6f49656b9175ec1a6a90}} 
+void {\bfseries set\+Obj} (const int i, const long double value)
+\item 
+\mbox{\Hypertarget{classIndividual_af80f0f301bf71944e44a1336a1d02275}\label{classIndividual_af80f0f301bf71944e44a1336a1d02275}} 
+void {\bfseries set\+Var} (const int i, const double value)
+\item 
+\mbox{\Hypertarget{classIndividual_ad89e179d02713b647f751c73a5cd5978}\label{classIndividual_ad89e179d02713b647f751c73a5cd5978}} 
+void {\bfseries set\+Fitness\+Value} (const double value)
+\item 
+\mbox{\Hypertarget{classIndividual_ad51b2cd41c4370b7b834b5f71ec18a09}\label{classIndividual_ad51b2cd41c4370b7b834b5f71ec18a09}} 
+void {\bfseries set\+Migration\+Data} (const int i, const double value)
+\item 
+\mbox{\Hypertarget{classIndividual_a82d3c3228f08e7b13469946fe6f4b6c4}\label{classIndividual_a82d3c3228f08e7b13469946fe6f4b6c4}} 
+void {\bfseries set\+Aux\+Data} (const int i, const double value)
+\item 
+\mbox{\Hypertarget{classIndividual_a632f3937b6a074eba85cb268e13cf98c}\label{classIndividual_a632f3937b6a074eba85cb268e13cf98c}} 
+void {\bfseries set\+Number\+Of\+Var} (const int n)
+\item 
+\mbox{\Hypertarget{classIndividual_a57b610304fdb2b7ef442c287472df7dc}\label{classIndividual_a57b610304fdb2b7ef442c287472df7dc}} 
+void {\bfseries set\+Number\+Of\+Obj} (const int n)
+\item 
+\mbox{\Hypertarget{classIndividual_a34e31746ea41d0dfae4e780175e227ec}\label{classIndividual_a34e31746ea41d0dfae4e780175e227ec}} 
+void {\bfseries set\+Algorithm\+Data} (const int i, const double value)
+\item 
+\mbox{\Hypertarget{classIndividual_afcee9a2a14bce879233127de7052c04d}\label{classIndividual_afcee9a2a14bce879233127de7052c04d}} 
+void {\bfseries set\+Aux\+Data\+Size} (const int n)
+\item 
+\mbox{\Hypertarget{classIndividual_af5b4c849207df6d0633f4860af0c3cd1}\label{classIndividual_af5b4c849207df6d0633f4860af0c3cd1}} 
+void {\bfseries set\+Migration\+Data\+Size} (const int n)
+\item 
+\mbox{\Hypertarget{classIndividual_ab562578d64333b00ccd0e20fd079e3d2}\label{classIndividual_ab562578d64333b00ccd0e20fd079e3d2}} 
+void {\bfseries set\+Owner} (const Owner own)
+\item 
+\mbox{\Hypertarget{classIndividual_a5176a4131d6bceb7e84280f84a623ff0}\label{classIndividual_a5176a4131d6bceb7e84280f84a623ff0}} 
+void {\bfseries set\+Mut\+Operator} (\mbox{\hyperlink{classMutation}{Mutation}} $\ast$mut)
+\item 
+\mbox{\Hypertarget{classIndividual_a790e135b019ce331cb9e1270193c3313}\label{classIndividual_a790e135b019ce331cb9e1270193c3313}} 
+void {\bfseries set\+Cross\+Operator} (\mbox{\hyperlink{classCrossover}{Crossover}} $\ast$cross)
+\item 
+\mbox{\Hypertarget{classIndividual_ac9d4ad0bf7bd5bebbc6e13bc2090bfea}\label{classIndividual_ac9d4ad0bf7bd5bebbc6e13bc2090bfea}} 
+void {\bfseries set\+Multi\+Objectivization\+Plugins} (const vector$<$ \mbox{\hyperlink{classMultiObjectivization}{Multi\+Objectivization}} $\ast$$>$ \&multi)
+\item 
+\mbox{\Hypertarget{classIndividual_ac51b9b06ff8b7ad2b8b3e3138e53e875}\label{classIndividual_ac51b9b06ff8b7ad2b8b3e3138e53e875}} 
+int {\bfseries request\+Algorithm\+Data} (void)
+\item 
+\mbox{\Hypertarget{classIndividual_af97490ce47977903aaf34b6af0d8c410}\label{classIndividual_af97490ce47977903aaf34b6af0d8c410}} 
+void {\bfseries release\+Algorithm\+Data} (void)
+\item 
+\mbox{\Hypertarget{classIndividual_a519dab6ca141dd139a0676c8f27e5e98}\label{classIndividual_a519dab6ca141dd139a0676c8f27e5e98}} 
+\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ {\bfseries internal\+Clone} (void) const
+\item 
+\mbox{\Hypertarget{classIndividual_aadc2d0ee76ca08335739faddde118888}\label{classIndividual_aadc2d0ee76ca08335739faddde118888}} 
+void {\bfseries internal\+Clone} (const \mbox{\hyperlink{classIndividual}{Individual}} $\ast$)
+\item 
+\mbox{\Hypertarget{classIndividual_a1fa420271445d3c72cf1c498dc4a990f}\label{classIndividual_a1fa420271445d3c72cf1c498dc4a990f}} 
+void {\bfseries internal\+Clone\+Data} (const \mbox{\hyperlink{classIndividual}{Individual}} $\ast$)
+\item 
+\mbox{\Hypertarget{classIndividual_ab2365dcac4b47bca82a0631c6e2d3a3d}\label{classIndividual_ab2365dcac4b47bca82a0631c6e2d3a3d}} 
+void {\bfseries serialize} (long double $\ast$buffer, int \&count) const
+\item 
+\mbox{\Hypertarget{classIndividual_a25eb4ad558ab7d35a6d26b4f9aa05773}\label{classIndividual_a25eb4ad558ab7d35a6d26b4f9aa05773}} 
+\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ {\bfseries deserialize} (const int n\+Var, const int n\+Obj, const int n\+Mig, const long double $\ast$buffer, int \&count)
+\item 
+\mbox{\Hypertarget{classIndividual_acb2d52f3e74da456e367bc375f9d5c4f}\label{classIndividual_acb2d52f3e74da456e367bc375f9d5c4f}} 
+virtual void {\bfseries deserialized} ()
+\item 
+\mbox{\Hypertarget{classIndividual_a4ca04ade73ff56a0d729d11435a5d519}\label{classIndividual_a4ca04ade73ff56a0d729d11435a5d519}} 
+virtual void {\bfseries cloned} ()
+\item 
+\mbox{\Hypertarget{classIndividual_a1f6b80956eafdd5fa33a6224b96b2e07}\label{classIndividual_a1f6b80956eafdd5fa33a6224b96b2e07}} 
+virtual void {\bfseries maintain\+Only\+Obj} ()
+\item 
+\mbox{\Hypertarget{classIndividual_af8b73dad774466aed120ff2126459d3e}\label{classIndividual_af8b73dad774466aed120ff2126459d3e}} 
+void {\bfseries maintain\+Only\+Obj\+Internal} ()
+\item 
+\mbox{\Hypertarget{classIndividual_a6aabda914856d6384997d7dbc04981af}\label{classIndividual_a6aabda914856d6384997d7dbc04981af}} 
+virtual void {\bfseries print} (ostream \&os) const
+\item 
+\mbox{\Hypertarget{classIndividual_a35fae68fdf132bc32e343104cc0c35d3}\label{classIndividual_a35fae68fdf132bc32e343104cc0c35d3}} 
+virtual void {\bfseries print\+Info} (ostream \&os) const
+\item 
+\mbox{\Hypertarget{classIndividual_a5175fb96632db18a74010297036c35e6}\label{classIndividual_a5175fb96632db18a74010297036c35e6}} 
+virtual string {\bfseries get\+Mutation\+Name} () const
+\item 
+\mbox{\Hypertarget{classIndividual_a1236414e5aaf1f419409f11c5ee37540}\label{classIndividual_a1236414e5aaf1f419409f11c5ee37540}} 
+virtual int {\bfseries get\+Mutation\+Number\+Of\+Parameters} () const
+\item 
+\mbox{\Hypertarget{classIndividual_a2bfbdc16b00ac7a4fcf9ea28ff0523a7}\label{classIndividual_a2bfbdc16b00ac7a4fcf9ea28ff0523a7}} 
+virtual string {\bfseries get\+Mutation\+Parameter\+Name} (int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_ade6c76311ce0011385b1214d9e4b536f}\label{classIndividual_ade6c76311ce0011385b1214d9e4b536f}} 
+virtual string {\bfseries get\+Mutation\+Parameter\+Value} (int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_ad9c6819d323fecfc4ded5aeb7f77648b}\label{classIndividual_ad9c6819d323fecfc4ded5aeb7f77648b}} 
+virtual string {\bfseries get\+Crossover\+Name} () const
+\item 
+\mbox{\Hypertarget{classIndividual_a4bcaad1c9d070d8e3ed1d785356300f3}\label{classIndividual_a4bcaad1c9d070d8e3ed1d785356300f3}} 
+virtual int {\bfseries get\+Crossover\+Number\+Of\+Parameters} () const
+\item 
+\mbox{\Hypertarget{classIndividual_af3058a71a41ed3e8d69bb4367bb1a253}\label{classIndividual_af3058a71a41ed3e8d69bb4367bb1a253}} 
+virtual string {\bfseries get\+Crossover\+Parameter\+Name} (int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_a612d62952361ec165e357be978f9cdcc}\label{classIndividual_a612d62952361ec165e357be978f9cdcc}} 
+virtual string {\bfseries get\+Crossover\+Parameter\+Value} (int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_a212e273f5aa7f6bf7b043f2aaf6d4180}\label{classIndividual_a212e273f5aa7f6bf7b043f2aaf6d4180}} 
+virtual string {\bfseries get\+Obj\+Name} (int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_aa358ac2b049a05d22a691e26af9c115a}\label{classIndividual_aa358ac2b049a05d22a691e26af9c115a}} 
+virtual int {\bfseries get\+Index\+Obj} () const
+\item 
+\mbox{\Hypertarget{classIndividual_a047d5d9c3ce6e26d66c3787242505e8c}\label{classIndividual_a047d5d9c3ce6e26d66c3787242505e8c}} 
+virtual int {\bfseries get\+Index\+Obj\+Min} () const
+\item 
+\mbox{\Hypertarget{classIndividual_a9aa0f5e4ab31fa455876ce2141f3eb1b}\label{classIndividual_a9aa0f5e4ab31fa455876ce2141f3eb1b}} 
+virtual int {\bfseries get\+Index\+Obj\+Max} () const
+\item 
+\mbox{\Hypertarget{classIndividual_a006daae48f79e41b9791fe5b758c9daa}\label{classIndividual_a006daae48f79e41b9791fe5b758c9daa}} 
+bool {\bfseries operator$<$} (const \mbox{\hyperlink{classIndividual}{Individual}} \&ind) const
+\item 
+\mbox{\Hypertarget{classIndividual_ac9ccea2310285f2ea4a5be59013cba96}\label{classIndividual_ac9ccea2310285f2ea4a5be59013cba96}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classIndividual}{Individual}} \&ind) const
+\item 
+\mbox{\Hypertarget{classIndividual_ac508a6fa28504a55ca5ab977d5973926}\label{classIndividual_ac508a6fa28504a55ca5ab977d5973926}} 
+virtual void {\bfseries restart} (void)
+\item 
+\mbox{\Hypertarget{classIndividual_aed35f077fddffa3108543fd9b7712062}\label{classIndividual_aed35f077fddffa3108543fd9b7712062}} 
+virtual void {\bfseries generation\+Code} () const
+\item 
+\mbox{\Hypertarget{classIndividual_a9929b4df4addf089ffecc4d697bab527}\label{classIndividual_a9929b4df4addf089ffecc4d697bab527}} 
+double {\bfseries get\+Euclidean\+Distance} (const \mbox{\hyperlink{classIndividual}{Individual}} $\ast$) const
+\item 
+\mbox{\Hypertarget{classIndividual_aca330827f8d265b2b7d5621078678543}\label{classIndividual_aca330827f8d265b2b7d5621078678543}} 
+double {\bfseries get\+Euclidean\+Distance\+Decision\+Space} (const \mbox{\hyperlink{classIndividual}{Individual}} $\ast$) const
+\item 
+\mbox{\Hypertarget{classIndividual_acbfdc03b91966684a6e2e16c11636925}\label{classIndividual_acbfdc03b91966684a6e2e16c11636925}} 
+virtual unsigned int {\bfseries get\+Neighbourhood\+Size} () const
+\item 
+\mbox{\Hypertarget{classIndividual_a5c5cf3b61e16a4ee651bb88107bfc442}\label{classIndividual_a5c5cf3b61e16a4ee651bb88107bfc442}} 
+virtual \mbox{\hyperlink{classIndividual}{Individual}} $\ast$ {\bfseries get\+Neighbour} (const int i) const
+\item 
+\mbox{\Hypertarget{classIndividual_a34c5cb1f96882ac12fdabf5d52ae817d}\label{classIndividual_a34c5cb1f96882ac12fdabf5d52ae817d}} 
+virtual void {\bfseries get\+Neighbour\+Objectives} (const int i, vector$<$ double $>$ \&objectives) const
+\item 
+\mbox{\Hypertarget{classIndividual_a35a32b6e984bff3a162cefe296a30efa}\label{classIndividual_a35a32b6e984bff3a162cefe296a30efa}} 
+virtual unsigned int {\bfseries get\+Opt\+Direction} (const int i) const =0
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classIndividual_af4553d2ba5e943258c1389735d5caa87}\label{classIndividual_af4553d2ba5e943258c1389735d5caa87}} 
+virtual \mbox{\hyperlink{classIndividual}{Individual}} $\ast$ {\bfseries clone} (void) const =0
+\item 
+\mbox{\Hypertarget{classIndividual_afa6573583c7cebb4a71c09d8e0639048}\label{classIndividual_afa6573583c7cebb4a71c09d8e0639048}} 
+virtual void {\bfseries dependent\+Mutation} (double pm)
+\item 
+\mbox{\Hypertarget{classIndividual_acddee962ce99dcba006c0111c65b26e1}\label{classIndividual_acddee962ce99dcba006c0111c65b26e1}} 
+virtual void {\bfseries dependent\+Crossover} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classIndividual_a3a418fa4c1acb6d9b470bae8ae4f765b}\label{classIndividual_a3a418fa4c1acb6d9b470bae8ae4f765b}} 
+vector$<$ \mbox{\hyperlink{classMultiObjectivization}{Multi\+Objectivization}} $\ast$ $>$ {\bfseries multi\+Objectivizations\+Plugins}
+\item 
+\mbox{\Hypertarget{classIndividual_a3422766f76333dc26094622a2507f2c5}\label{classIndividual_a3422766f76333dc26094622a2507f2c5}} 
+vector$<$ double $>$ {\bfseries var}
+\item 
+\mbox{\Hypertarget{classIndividual_aeaea908497019d83d1faeb1b14b24806}\label{classIndividual_aeaea908497019d83d1faeb1b14b24806}} 
+vector$<$ long double $>$ {\bfseries obj}
+\item 
+\mbox{\Hypertarget{classIndividual_a52f5c8cae2417f71793bb62a2149159e}\label{classIndividual_a52f5c8cae2417f71793bb62a2149159e}} 
+vector$<$ double $>$ {\bfseries migration\+Data}
+\item 
+\mbox{\Hypertarget{classIndividual_acb44f6c44e7f7c958b9f87172c1864e1}\label{classIndividual_acb44f6c44e7f7c958b9f87172c1864e1}} 
+vector$<$ double $>$ {\bfseries aux\+Data}
+\item 
+\mbox{\Hypertarget{classIndividual_a7d2478a023c6de2d9d16dbd49af196b0}\label{classIndividual_a7d2478a023c6de2d9d16dbd49af196b0}} 
+vector$<$ double $>$ {\bfseries algorithm\+Data}
+\item 
+\mbox{\Hypertarget{classIndividual_adfe2e2d7b2f06dc4721f0a13c9b705af}\label{classIndividual_adfe2e2d7b2f06dc4721f0a13c9b705af}} 
+double {\bfseries fitness\+Value}
+\item 
+\mbox{\Hypertarget{classIndividual_a0cc18b1635d07e4d5c09541cfd4fffa4}\label{classIndividual_a0cc18b1635d07e4d5c09541cfd4fffa4}} 
+\mbox{\hyperlink{classMutation}{Mutation}} $\ast$ {\bfseries mut\+Operator}
+\item 
+\mbox{\Hypertarget{classIndividual_a9c3141911458653cfb75073a51d08dc5}\label{classIndividual_a9c3141911458653cfb75073a51d08dc5}} 
+\mbox{\hyperlink{classCrossover}{Crossover}} $\ast$ {\bfseries cross\+Operator}
+\item 
+\mbox{\Hypertarget{classIndividual_aa65e054afcae994f99941559260f74f9}\label{classIndividual_aa65e054afcae994f99941559260f74f9}} 
+Owner {\bfseries owner}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Mother class to represent individuals (Problems) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Individual.\+h\item 
+Individual.\+cpp\end{DoxyCompactItemize}

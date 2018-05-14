@@ -1,0 +1,98 @@
+\hypertarget{classMOFront}{}\section{M\+O\+Front Class Reference}
+\label{classMOFront}\index{M\+O\+Front@{M\+O\+Front}}
+Inheritance diagram for M\+O\+Front\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d6/d3e/classMOFront}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMOFront_acdf484ed4e10a203ade8c6d46e5231db}\label{classMOFront_acdf484ed4e10a203ade8c6d46e5231db}} 
+{\bfseries M\+O\+Front} (const \mbox{\hyperlink{classIndividual}{Individual}} $\ast$ej\+Ind, bool copy\+On\+Insert, bool delete\+On\+Destroy)
+\item 
+\mbox{\Hypertarget{classMOFront_a27a75fdcbdebcce00eb7e7cf841be0ee}\label{classMOFront_a27a75fdcbdebcce00eb7e7cf841be0ee}} 
+virtual unsigned int {\bfseries get\+Front\+Size} (void)=0
+\item 
+\mbox{\Hypertarget{classMOFront_a762cc5626addc8e2e74c0a0488c9f132}\label{classMOFront_a762cc5626addc8e2e74c0a0488c9f132}} 
+virtual \mbox{\hyperlink{classIndividual}{Individual}} $\ast$ {\bfseries get\+Ind} (int index\+Ind) const =0
+\item 
+\mbox{\Hypertarget{classMOFront_a4f20b517e095b9ed4085c221f23c25d5}\label{classMOFront_a4f20b517e095b9ed4085c221f23c25d5}} 
+virtual void {\bfseries get\+Inds} (int n\+Ind, vector$<$ \mbox{\hyperlink{classIndividual}{Individual}} $\ast$$>$ \&inds)=0
+\item 
+\mbox{\Hypertarget{classMOFront_a2fdce6082e4f54d341178e9f50784e23}\label{classMOFront_a2fdce6082e4f54d341178e9f50784e23}} 
+virtual void {\bfseries get\+All\+Individuals} (vector$<$ \mbox{\hyperlink{classIndividual}{Individual}} $\ast$$>$ \&inds)=0
+\item 
+\mbox{\Hypertarget{classMOFront_a91bd2b2f0ae1b1d233d3226a9292833c}\label{classMOFront_a91bd2b2f0ae1b1d233d3226a9292833c}} 
+virtual void {\bfseries crow\+Order} (const unsigned int final\+Size)=0
+\item 
+\mbox{\Hypertarget{classMOFront_a1893dce7aa33cf49e0fbcd6811f3188b}\label{classMOFront_a1893dce7aa33cf49e0fbcd6811f3188b}} 
+virtual bool {\bfseries insert} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind, int \&erased, bool \&iguales)=0
+\item 
+\mbox{\Hypertarget{classMOFront_ac0b6579eed5fe9d76ff490d44b49cdc2}\label{classMOFront_ac0b6579eed5fe9d76ff490d44b49cdc2}} 
+virtual void {\bfseries clear} ()=0
+\item 
+\mbox{\Hypertarget{classMOFront_ab1a4da76deee102a8ff108f18ad56177}\label{classMOFront_ab1a4da76deee102a8ff108f18ad56177}} 
+bool {\bfseries insert} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind)
+\item 
+\mbox{\Hypertarget{classMOFront_a04772ab2fddf45ce52507bd4c2eacbbd}\label{classMOFront_a04772ab2fddf45ce52507bd4c2eacbbd}} 
+bool {\bfseries insert} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind, int \&erased)
+\item 
+\mbox{\Hypertarget{classMOFront_a1559ec3227b41a0f348b4d1cae71783e}\label{classMOFront_a1559ec3227b41a0f348b4d1cae71783e}} 
+bool {\bfseries insert} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind, bool \&iguales)
+\item 
+\mbox{\Hypertarget{classMOFront_aa33a397a31fbd775168f691a0828f954}\label{classMOFront_aa33a397a31fbd775168f691a0828f954}} 
+void {\bfseries crow\+Order1by1} (const unsigned int final\+Size)
+\item 
+\mbox{\Hypertarget{classMOFront_ab27b35b65fbfd65993462568b6ad81d3}\label{classMOFront_ab27b35b65fbfd65993462568b6ad81d3}} 
+void {\bfseries read} (const string \&input\+File)
+\item 
+\mbox{\Hypertarget{classMOFront_afd58e468b58c2a4f650f91b4c07bf68e}\label{classMOFront_afd58e468b58c2a4f650f91b4c07bf68e}} 
+void {\bfseries read\+All} (const string \&input\+File)
+\item 
+\mbox{\Hypertarget{classMOFront_a2c38a2d98c28bcb899b6279d149ed51c}\label{classMOFront_a2c38a2d98c28bcb899b6279d149ed51c}} 
+void {\bfseries write} (const string \&output\+File)
+\item 
+\mbox{\Hypertarget{classMOFront_a15f916b2c26d83f6baed6772d77e8829}\label{classMOFront_a15f916b2c26d83f6baed6772d77e8829}} 
+void {\bfseries write\+All} (const string \&output\+File)
+\item 
+\mbox{\Hypertarget{classMOFront_a0a3254c4f613c217bd5e7cc8206cd995}\label{classMOFront_a0a3254c4f613c217bd5e7cc8206cd995}} 
+void {\bfseries merge} (const char $\ast$namefile1, const char $\ast$namefile2, const int num\+Obj)
+\item 
+\mbox{\Hypertarget{classMOFront_a8e13630dafd4fa986796f6766e68f684}\label{classMOFront_a8e13630dafd4fa986796f6766e68f684}} 
+long double {\bfseries get\+Epsilon\+Indicator} (\mbox{\hyperlink{classMOFront}{M\+O\+Front}} \&p)
+\item 
+\mbox{\Hypertarget{classMOFront_a6968b9c5fa1159392cf75e0b4a33aa02}\label{classMOFront_a6968b9c5fa1159392cf75e0b4a33aa02}} 
+double {\bfseries get\+HV} (vector$<$ long double $>$ \&ref\+Point)
+\item 
+\mbox{\Hypertarget{classMOFront_ae78dc1ff72ee703c78533cf0615f1396}\label{classMOFront_ae78dc1ff72ee703c78533cf0615f1396}} 
+double {\bfseries get\+H\+V\+Norm} (vector$<$ long double $>$ \&ref\+Point, vector$<$ long double $>$ \&min\+Values, vector$<$ long double $>$ \&max\+Values)
+\item 
+\mbox{\Hypertarget{classMOFront_a1512db1a446a937cea76957a010560d5}\label{classMOFront_a1512db1a446a937cea76957a010560d5}} 
+virtual void {\bfseries send} (int dest)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMOFront_a269600b355bba124d6210c7802090282}\label{classMOFront_a269600b355bba124d6210c7802090282}} 
+const \mbox{\hyperlink{classIndividual}{Individual}} $\ast$ {\bfseries ej\+Ind}
+\item 
+\mbox{\Hypertarget{classMOFront_aace714da7364fe832e34d202c1a833dc}\label{classMOFront_aace714da7364fe832e34d202c1a833dc}} 
+bool {\bfseries copy\+On\+Insert}
+\item 
+\mbox{\Hypertarget{classMOFront_a2be8b146cfc5bff6bae00c9d33e2c172}\label{classMOFront_a2be8b146cfc5bff6bae00c9d33e2c172}} 
+bool {\bfseries delete\+On\+Destroy}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMOFront_a186acbb3ce54aa4fdb3b08ea1d9fff18}\label{classMOFront_a186acbb3ce54aa4fdb3b08ea1d9fff18}} 
+ostream \& {\bfseries operator$<$$<$} (ostream \&os, \mbox{\hyperlink{classMOFront}{M\+O\+Front}} $\ast$p)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+M\+O\+Front.\+h\item 
+M\+O\+Front.\+cpp\end{DoxyCompactItemize}

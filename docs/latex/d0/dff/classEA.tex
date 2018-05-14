@@ -1,0 +1,384 @@
+\hypertarget{classEA}{}\section{EA Class Reference}
+\label{classEA}\index{EA@{EA}}
+
+
+\mbox{\hyperlink{classPlugin}{Plugin}} base class to represent the algorithms.  
+
+
+
+
+{\ttfamily \#include $<$E\+A.\+h$>$}
+
+Inheritance diagram for EA\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d0/dff/classEA}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEA_aec8a2d9e63ecfc9705985e1994df0e67}\label{classEA_aec8a2d9e63ecfc9705985e1994df0e67}} 
+\mbox{\hyperlink{classEA_aec8a2d9e63ecfc9705985e1994df0e67}{EA}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEA_afad2dbe6e3835b1689ff2c62768eec30}\label{classEA_afad2dbe6e3835b1689ff2c62768eec30}} 
+virtual \mbox{\hyperlink{classEA_afad2dbe6e3835b1689ff2c62768eec30}{$\sim$\+EA}} (void)
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classEA_a84eacf2682007bef9f90543ecdd0639e}{get\+Solution}} (\mbox{\hyperlink{classMOFront}{M\+O\+Front}} $\ast$p)=0
+\begin{DoxyCompactList}\small\item\em This methods must copy all the solution into the Pareto\textquotesingle{}s Front. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classEA_a2c495b6198538ee0ecbef9d18ced1f61}{print\+Info}} (ostream \&os) const =0
+\begin{DoxyCompactList}\small\item\em This method must be overwritten in order to print the information of the algorithm. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEA_a88b3f36c7e82d4f19d5b5b6720c42416}\label{classEA_a88b3f36c7e82d4f19d5b5b6720c42416}} 
+virtual void {\bfseries received} (vector$<$ \mbox{\hyperlink{classIndividual}{Individual}} $\ast$$>$ \&)
+\item 
+\mbox{\Hypertarget{classEA_aa7ce22145328a30ed9f53009f33e80c4}\label{classEA_aa7ce22145328a30ed9f53009f33e80c4}} 
+virtual double $\ast$ {\bfseries get\+Restart\+Info} ()
+\item 
+\mbox{\Hypertarget{classEA_aa628b1461589a9d6773be9d10ef1636c}\label{classEA_aa628b1461589a9d6773be9d10ef1636c}} 
+virtual void {\bfseries set\+Restart\+Info} (double $\ast$)
+\item 
+\mbox{\Hypertarget{classEA_a2b293ab31ea89d16e14f313332f76074}\label{classEA_a2b293ab31ea89d16e14f313332f76074}} 
+virtual void {\bfseries exchange\+Performed} ()
+\item 
+\mbox{\Hypertarget{classEA_a0b330cfc98d799706ebaee44dfbfdd21}\label{classEA_a0b330cfc98d799706ebaee44dfbfdd21}} 
+void \mbox{\hyperlink{classEA_a0b330cfc98d799706ebaee44dfbfdd21}{run}} ()
+\begin{DoxyCompactList}\small\item\em Run the algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEA_a6ab8cb75b4a102d91579a58ecb815f6c}{fill\+Pop\+With\+Evaluated\+Inds}} (const vector$<$ \mbox{\hyperlink{classIndividual}{Individual}} $\ast$$>$ \&)
+\begin{DoxyCompactList}\small\item\em Initialize the initial population with individuals from Global Front. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEA_a8a4518d405abf91c5432b8823d34c400}\label{classEA_a8a4518d405abf91c5432b8823d34c400}} 
+void \mbox{\hyperlink{classEA_a8a4518d405abf91c5432b8823d34c400}{run\+Generation\+Inc}} ()
+\begin{DoxyCompactList}\small\item\em Increments the generation counter. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classEA_a1ef25307a0576f54ea6009d4c94c9d48}{has\+Finished}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the algorithm has finished yet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEA_ad56460c346eca5b890b27c85e985ec12}{reset\+Stop\+Conditions}} ()
+\begin{DoxyCompactList}\small\item\em Restars the stopping condition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEA_a65e719d5e3a3cff67139d1e81f092cec}{evaluate}} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind)
+\begin{DoxyCompactList}\small\item\em Evaluate the given individual with its evaluation function This methods must call the evaluate method from \mbox{\hyperlink{classIndividual}{Individual}} class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEA_a208ac74dea2eaa42e17c19f5e32d644d}\label{classEA_a208ac74dea2eaa42e17c19f5e32d644d}} 
+void {\bfseries insert\+In\+Archive} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind)
+\item 
+void \mbox{\hyperlink{classEA_afb4678f700cb03d64dc60fc3d24f7a1f}{set\+Population\+Size}} (const int p\+Size)
+\begin{DoxyCompactList}\small\item\em Set the population size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEA_add9a924cd307b2a49b1cf961c65e8ef2}{set\+Sample\+Ind}} (\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ind)
+\begin{DoxyCompactList}\small\item\em Set a sample \mbox{\hyperlink{classIndividual}{Individual}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEA_a49a75271ab62ffdb59d7a5fbbc97f998}\label{classEA_a49a75271ab62ffdb59d7a5fbbc97f998}} 
+void {\bfseries set\+Output\+Printer} (\mbox{\hyperlink{classOutputPrinter}{Output\+Printer}} $\ast$op)
+\item 
+\mbox{\Hypertarget{classEA_a161b549d8ec90da1bd07687f6b388b59}\label{classEA_a161b549d8ec90da1bd07687f6b388b59}} 
+void {\bfseries set\+Print\+Period} (const int pp)
+\item 
+\mbox{\Hypertarget{classEA_a114980c167652af030f11349810797e9}\label{classEA_a114980c167652af030f11349810797e9}} 
+void {\bfseries set\+Max\+Local\+Front\+Size} (const int max)
+\item 
+\mbox{\Hypertarget{classEA_a2a66dc69d7f1c185f9f177f3a3913898}\label{classEA_a2a66dc69d7f1c185f9f177f3a3913898}} 
+void {\bfseries set\+Id\+Conf} (const int id\+Conf)
+\item 
+\mbox{\Hypertarget{classEA_a2140dd732a9acc2ce6044669e60bb335}\label{classEA_a2140dd732a9acc2ce6044669e60bb335}} 
+void {\bfseries set\+Score\+Algorithm} (\mbox{\hyperlink{classScoreAlgorithm}{Score\+Algorithm}} $\ast$sc)
+\item 
+\mbox{\Hypertarget{classEA_a7331ed1b01abe48b170068abbde388be}\label{classEA_a7331ed1b01abe48b170068abbde388be}} 
+void {\bfseries set\+Local\+Search} (\mbox{\hyperlink{classLocalSearch}{Local\+Search}} $\ast$ls)
+\item 
+\mbox{\Hypertarget{classEA_a73cb790a9ba0a552096613522c13d6cf}\label{classEA_a73cb790a9ba0a552096613522c13d6cf}} 
+void {\bfseries set\+Multi\+Objectivization\+Plugins} (const vector$<$ \mbox{\hyperlink{classMultiObjectivization}{Multi\+Objectivization}} $\ast$$>$ \&multi)
+\item 
+\mbox{\Hypertarget{classEA_a4e6f4130156dc99c0c44f9d7b9903a25}\label{classEA_a4e6f4130156dc99c0c44f9d7b9903a25}} 
+void {\bfseries set\+Generate\+Archive} (const bool generate, const int type)
+\item 
+\mbox{\Hypertarget{classEA_a61c0385f3596233e124a9002e834fc6a}\label{classEA_a61c0385f3596233e124a9002e834fc6a}} 
+void {\bfseries set\+Stopping\+Criterion} (const int crit\+Stop, const double crit\+Stop\+Value)
+\item 
+\mbox{\Hypertarget{classEA_a6ec89c4b5edec15a2c59f8f640522169}\label{classEA_a6ec89c4b5edec15a2c59f8f640522169}} 
+int {\bfseries get\+Crit\+Stop} (void) const
+\item 
+\mbox{\Hypertarget{classEA_a53c6bb76e024220eae10799b732d1571}\label{classEA_a53c6bb76e024220eae10799b732d1571}} 
+double {\bfseries get\+Crit\+Stop\+Value} (void) const
+\item 
+\mbox{\Hypertarget{classEA_af3137eadac064eb1257ec161150fb304}\label{classEA_af3137eadac064eb1257ec161150fb304}} 
+int {\bfseries get\+Print\+Period} (void) const
+\item 
+\mbox{\Hypertarget{classEA_a107a7507708a8a4db8ca2dfbef72f52c}\label{classEA_a107a7507708a8a4db8ca2dfbef72f52c}} 
+int {\bfseries get\+Population\+Size} (void) const
+\item 
+\mbox{\Hypertarget{classEA_a0bb927fe460bab1aa745ac9df0b267c9}\label{classEA_a0bb927fe460bab1aa745ac9df0b267c9}} 
+\mbox{\hyperlink{classMOFront}{M\+O\+Front}} $\ast$ {\bfseries get\+Local\+Solution} (void) const
+\item 
+\mbox{\Hypertarget{classEA_ad677d015c33f989e079eb9b204f1dd3c}\label{classEA_ad677d015c33f989e079eb9b204f1dd3c}} 
+int {\bfseries get\+Evaluations} (void) const
+\item 
+\mbox{\Hypertarget{classEA_ab40a86dcc65d506f7327e457e137859f}\label{classEA_ab40a86dcc65d506f7327e457e137859f}} 
+int {\bfseries get\+Performed\+Evaluations} (void) const
+\item 
+\mbox{\Hypertarget{classEA_a6fd5e97e8a83ed5b187311cc77c246f5}\label{classEA_a6fd5e97e8a83ed5b187311cc77c246f5}} 
+int {\bfseries get\+Generation} (void) const
+\item 
+\mbox{\Hypertarget{classEA_ae84da938d98677fa658c2b3659a7c356}\label{classEA_ae84da938d98677fa658c2b3659a7c356}} 
+int {\bfseries get\+Max\+Local\+Front\+Size} (void) const
+\item 
+\mbox{\Hypertarget{classEA_acb63738ccb9248cd8f39be5bd16a4331}\label{classEA_acb63738ccb9248cd8f39be5bd16a4331}} 
+int {\bfseries get\+Id\+Conf} (void) const
+\item 
+\mbox{\Hypertarget{classEA_aced3f2cb4a4825b1a2df6e7b220433f8}\label{classEA_aced3f2cb4a4825b1a2df6e7b220433f8}} 
+\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ {\bfseries get\+Sample\+Ind} (void) const
+\item 
+\mbox{\Hypertarget{classEA_a4e9f31e6d33381156b6c86805172568f}\label{classEA_a4e9f31e6d33381156b6c86805172568f}} 
+bool {\bfseries is\+Generating\+Archive} (void) const
+\item 
+\mbox{\Hypertarget{classEA_aed2699ea33f0fcfb93a5dda4008642a3}\label{classEA_aed2699ea33f0fcfb93a5dda4008642a3}} 
+int {\bfseries get\+Next\+Print} (void) const
+\item 
+\mbox{\Hypertarget{classEA_aefd916d9b6c470c24572f78e4e7a7c63}\label{classEA_aefd916d9b6c470c24572f78e4e7a7c63}} 
+\mbox{\hyperlink{classMultiObjectivization}{Multi\+Objectivization}} $\ast$ {\bfseries get\+Multi\+Objectivization\+Plugin} (int index) const
+\item 
+\mbox{\Hypertarget{classEA_a7893ceefbafe8ecef3107626bfd55ef3}\label{classEA_a7893ceefbafe8ecef3107626bfd55ef3}} 
+int {\bfseries get\+Num\+Multi\+Objectivization\+Plugins} (void) const
+\item 
+\mbox{\Hypertarget{classEA_ad2ab19a63b1222c13f67009ac2df972d}\label{classEA_ad2ab19a63b1222c13f67009ac2df972d}} 
+double {\bfseries get\+Elapsed\+Time} () const
+\item 
+\mbox{\Hypertarget{classEA_a610f12a2674c608c3bc4cac93e243ebf}\label{classEA_a610f12a2674c608c3bc4cac93e243ebf}} 
+virtual bool {\bfseries supports\+Multi\+Objectivization} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEA_a487729de3d170cab56f0617604aeac90}\label{classEA_a487729de3d170cab56f0617604aeac90}} 
+static string {\bfseries get\+Global\+Type\+Stop\+Crit} (const int i)
+\item 
+\mbox{\Hypertarget{classEA_a67a3533562f15f67589ae6cbfaf07aa8}\label{classEA_a67a3533562f15f67589ae6cbfaf07aa8}} 
+static int {\bfseries get\+Type\+Stopping\+Criterion} (const string \&cr)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEA_a9dc2d07361618fa82c9a70e125fc490d}\label{classEA_a9dc2d07361618fa82c9a70e125fc490d}} 
+int {\bfseries binary\+Tournament} (vector$<$ \mbox{\hyperlink{classIndividual}{Individual}} $\ast$$>$ $\ast$pop)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEA_abb8743d21c3db992b53356e1d8fe2646}\label{classEA_abb8743d21c3db992b53356e1d8fe2646}} 
+vector$<$ \mbox{\hyperlink{classIndividual}{Individual}} $\ast$ $>$ $\ast$ {\bfseries population}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEA_ab5586c481933e063694c45d487757c82}\label{classEA_ab5586c481933e063694c45d487757c82}} 
+virtual void {\bfseries run\+Generation} ()=0
+\item 
+\mbox{\Hypertarget{classEA_ae99a3c887d3014a59bce9501add80308}\label{classEA_ae99a3c887d3014a59bce9501add80308}} 
+virtual void {\bfseries fill\+Pop\+With\+New\+Inds\+And\+Evaluate} ()
+\item 
+\mbox{\Hypertarget{classEA_a1375cfc8e01a4e7520633051e4193e7a}\label{classEA_a1375cfc8e01a4e7520633051e4193e7a}} 
+void {\bfseries check\+Print} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEA_aee2992080a3ffc95c9edea9cc142f62d}\label{classEA_aee2992080a3ffc95c9edea9cc142f62d}} 
+\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ {\bfseries sample\+Ind}
+\item 
+\mbox{\Hypertarget{classEA_a003551d80fd0fd6e7bc29870ec1b2bd8}\label{classEA_a003551d80fd0fd6e7bc29870ec1b2bd8}} 
+\mbox{\hyperlink{classOutputPrinter}{Output\+Printer}} $\ast$ {\bfseries output\+Printer}
+\item 
+\mbox{\Hypertarget{classEA_a340f68daee20bce5089deed405edb791}\label{classEA_a340f68daee20bce5089deed405edb791}} 
+\mbox{\hyperlink{classMOFront}{M\+O\+Front}} $\ast$ {\bfseries local\+Solution}
+\item 
+\mbox{\Hypertarget{classEA_ad4c30ccbc633bfa530fa50ca0970bd18}\label{classEA_ad4c30ccbc633bfa530fa50ca0970bd18}} 
+\mbox{\hyperlink{classLocalScoreAlgorithm}{Local\+Score\+Algorithm}} $\ast$ {\bfseries score\+Algorithm}
+\item 
+\mbox{\Hypertarget{classEA_aeba2a26cf290afd924fbafbd0c4ad64d}\label{classEA_aeba2a26cf290afd924fbafbd0c4ad64d}} 
+\mbox{\hyperlink{classLocalSearch}{Local\+Search}} $\ast$ {\bfseries ls}
+\item 
+\mbox{\Hypertarget{classEA_a3acbcb04351627ec86125084c251e12d}\label{classEA_a3acbcb04351627ec86125084c251e12d}} 
+int {\bfseries crit\+Stop}
+\item 
+\mbox{\Hypertarget{classEA_ad7cefa1c91b348cf8436f49ae83560d6}\label{classEA_ad7cefa1c91b348cf8436f49ae83560d6}} 
+int {\bfseries evaluations}
+\item 
+\mbox{\Hypertarget{classEA_ad612447f4ae22f8c1b651c7d18471846}\label{classEA_ad612447f4ae22f8c1b651c7d18471846}} 
+int {\bfseries evaluation\+Actual}
+\item 
+\mbox{\Hypertarget{classEA_ac5a4cf8f9e12dfc07f8d4d4019e89540}\label{classEA_ac5a4cf8f9e12dfc07f8d4d4019e89540}} 
+int {\bfseries generations}
+\item 
+\mbox{\Hypertarget{classEA_a7c2e3fae5ef87767765d58d9637e0d29}\label{classEA_a7c2e3fae5ef87767765d58d9637e0d29}} 
+int {\bfseries generation\+Actual}
+\item 
+\mbox{\Hypertarget{classEA_ad62e844dcae9b5c7724ab56a9aea2dc9}\label{classEA_ad62e844dcae9b5c7724ab56a9aea2dc9}} 
+double {\bfseries quality}
+\item 
+\mbox{\Hypertarget{classEA_add005610c438f386a0e1297f40f99294}\label{classEA_add005610c438f386a0e1297f40f99294}} 
+int {\bfseries local\+Front\+Size}
+\item 
+\mbox{\Hypertarget{classEA_a28ab3bae229219bcf7ea0d8a03ce78d5}\label{classEA_a28ab3bae229219bcf7ea0d8a03ce78d5}} 
+int {\bfseries p\+Size}
+\item 
+\mbox{\Hypertarget{classEA_ac58dd64188e1481baaa9df911026836a}\label{classEA_ac58dd64188e1481baaa9df911026836a}} 
+int {\bfseries my\+Id}
+\item 
+\mbox{\Hypertarget{classEA_a960f7ddfe7f2c8aacc1d08bfb9a7c606}\label{classEA_a960f7ddfe7f2c8aacc1d08bfb9a7c606}} 
+int {\bfseries num\+Procs}
+\item 
+\mbox{\Hypertarget{classEA_a12f5674b1b1eb20b47ad4849247239ea}\label{classEA_a12f5674b1b1eb20b47ad4849247239ea}} 
+int {\bfseries initiated}
+\item 
+\mbox{\Hypertarget{classEA_a76be177471c03a1c37b2e562d0ad51cf}\label{classEA_a76be177471c03a1c37b2e562d0ad51cf}} 
+double {\bfseries time}
+\item 
+\mbox{\Hypertarget{classEA_af18fabb320c08ef9de16fd9877272211}\label{classEA_af18fabb320c08ef9de16fd9877272211}} 
+double {\bfseries crit\+Stop\+Value}
+\item 
+\mbox{\Hypertarget{classEA_a586553aca80fde73642542a1b41bd255}\label{classEA_a586553aca80fde73642542a1b41bd255}} 
+int {\bfseries id\+Conf}
+\item 
+\mbox{\Hypertarget{classEA_a224d5617597ad16e7a90e3004ade9a11}\label{classEA_a224d5617597ad16e7a90e3004ade9a11}} 
+double {\bfseries start\+Time}
+\item 
+\mbox{\Hypertarget{classEA_a40edcfb8016401e5ea73b8188731026b}\label{classEA_a40edcfb8016401e5ea73b8188731026b}} 
+vector$<$ \mbox{\hyperlink{classMultiObjectivization}{Multi\+Objectivization}} $\ast$ $>$ {\bfseries multi\+Objectivizations\+Plugins}
+\item 
+\mbox{\Hypertarget{classEA_aded32463840cd4ac457949fa6c9c3f98}\label{classEA_aded32463840cd4ac457949fa6c9c3f98}} 
+int {\bfseries print\+Period}
+\item 
+\mbox{\Hypertarget{classEA_a8815427bc9aafb995f6a3ecb4aa0c52b}\label{classEA_a8815427bc9aafb995f6a3ecb4aa0c52b}} 
+int {\bfseries next\+Print}
+\item 
+\mbox{\Hypertarget{classEA_a13a8479041c0f19c8b992ddca9ce9fc6}\label{classEA_a13a8479041c0f19c8b992ddca9ce9fc6}} 
+bool {\bfseries generate\+Archive}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEA_ab4c25820347b7b27b7e94132b313f4bf}\label{classEA_ab4c25820347b7b27b7e94132b313f4bf}} 
+class {\bfseries Execution\+Island}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{classPlugin}{Plugin}} base class to represent the algorithms. 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classEA_a65e719d5e3a3cff67139d1e81f092cec}\label{classEA_a65e719d5e3a3cff67139d1e81f092cec}} 
+\index{EA@{EA}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!EA@{EA}}
+\subsubsection{\texorpdfstring{evaluate()}{evaluate()}}
+{\footnotesize\ttfamily void E\+A\+::evaluate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classIndividual}{Individual}} $\ast$}]{ind }\end{DoxyParamCaption})}
+
+
+
+Evaluate the given individual with its evaluation function This methods must call the evaluate method from \mbox{\hyperlink{classIndividual}{Individual}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classIndividual}{Individual}}} & to be evaluated \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEA_a6ab8cb75b4a102d91579a58ecb815f6c}\label{classEA_a6ab8cb75b4a102d91579a58ecb815f6c}} 
+\index{EA@{EA}!fill\+Pop\+With\+Evaluated\+Inds@{fill\+Pop\+With\+Evaluated\+Inds}}
+\index{fill\+Pop\+With\+Evaluated\+Inds@{fill\+Pop\+With\+Evaluated\+Inds}!EA@{EA}}
+\subsubsection{\texorpdfstring{fill\+Pop\+With\+Evaluated\+Inds()}{fillPopWithEvaluatedInds()}}
+{\footnotesize\ttfamily void E\+A\+::fill\+Pop\+With\+Evaluated\+Inds (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{classIndividual}{Individual}} $\ast$$>$ \&}]{new\+Inds }\end{DoxyParamCaption})}
+
+
+
+Initialize the initial population with individuals from Global Front. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Vector$<$\+Individual} & $\ast$$>$ Evaluated individuals \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEA_a84eacf2682007bef9f90543ecdd0639e}\label{classEA_a84eacf2682007bef9f90543ecdd0639e}} 
+\index{EA@{EA}!get\+Solution@{get\+Solution}}
+\index{get\+Solution@{get\+Solution}!EA@{EA}}
+\subsubsection{\texorpdfstring{get\+Solution()}{getSolution()}}
+{\footnotesize\ttfamily virtual void E\+A\+::get\+Solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMOFront}{M\+O\+Front}} $\ast$}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+This methods must copy all the solution into the Pareto\textquotesingle{}s Front. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & M\+O\+Front$\ast$ Empty Pareto\textquotesingle{}s Front \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEA_a1ef25307a0576f54ea6009d4c94c9d48}\label{classEA_a1ef25307a0576f54ea6009d4c94c9d48}} 
+\index{EA@{EA}!has\+Finished@{has\+Finished}}
+\index{has\+Finished@{has\+Finished}!EA@{EA}}
+\subsubsection{\texorpdfstring{has\+Finished()}{hasFinished()}}
+{\footnotesize\ttfamily bool E\+A\+::has\+Finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks if the algorithm has finished yet. 
+
+The stopping criteria has been reached. \mbox{\Hypertarget{classEA_a2c495b6198538ee0ecbef9d18ced1f61}\label{classEA_a2c495b6198538ee0ecbef9d18ced1f61}} 
+\index{EA@{EA}!print\+Info@{print\+Info}}
+\index{print\+Info@{print\+Info}!EA@{EA}}
+\subsubsection{\texorpdfstring{print\+Info()}{printInfo()}}
+{\footnotesize\ttfamily virtual void E\+A\+::print\+Info (\begin{DoxyParamCaption}\item[{ostream \&}]{os }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+This method must be overwritten in order to print the information of the algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & Stream where the information will be printed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEA_ad56460c346eca5b890b27c85e985ec12}\label{classEA_ad56460c346eca5b890b27c85e985ec12}} 
+\index{EA@{EA}!reset\+Stop\+Conditions@{reset\+Stop\+Conditions}}
+\index{reset\+Stop\+Conditions@{reset\+Stop\+Conditions}!EA@{EA}}
+\subsubsection{\texorpdfstring{reset\+Stop\+Conditions()}{resetStopConditions()}}
+{\footnotesize\ttfamily void E\+A\+::reset\+Stop\+Conditions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Restars the stopping condition. 
+
+
+\begin{DoxyItemize}
+\item Restart time
+\item Number of evaluations 
+\end{DoxyItemize}\mbox{\Hypertarget{classEA_afb4678f700cb03d64dc60fc3d24f7a1f}\label{classEA_afb4678f700cb03d64dc60fc3d24f7a1f}} 
+\index{EA@{EA}!set\+Population\+Size@{set\+Population\+Size}}
+\index{set\+Population\+Size@{set\+Population\+Size}!EA@{EA}}
+\subsubsection{\texorpdfstring{set\+Population\+Size()}{setPopulationSize()}}
+{\footnotesize\ttfamily void E\+A\+::set\+Population\+Size (\begin{DoxyParamCaption}\item[{const int}]{p\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the population size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Integer} & that defines the population size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEA_add9a924cd307b2a49b1cf961c65e8ef2}\label{classEA_add9a924cd307b2a49b1cf961c65e8ef2}} 
+\index{EA@{EA}!set\+Sample\+Ind@{set\+Sample\+Ind}}
+\index{set\+Sample\+Ind@{set\+Sample\+Ind}!EA@{EA}}
+\subsubsection{\texorpdfstring{set\+Sample\+Ind()}{setSampleInd()}}
+{\footnotesize\ttfamily void E\+A\+::set\+Sample\+Ind (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classIndividual}{Individual}} $\ast$}]{ind }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set a sample \mbox{\hyperlink{classIndividual}{Individual}}. 
+
+Useful for copy a \mbox{\hyperlink{classIndividual}{Individual}} without its evaluation. 
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classIndividual}{Individual}}} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+E\+A.\+h\item 
+E\+A.\+cpp\end{DoxyCompactItemize}

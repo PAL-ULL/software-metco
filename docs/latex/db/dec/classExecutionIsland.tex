@@ -1,0 +1,74 @@
+\hypertarget{classExecutionIsland}{}\section{Execution\+Island Class Reference}
+\label{classExecutionIsland}\index{Execution\+Island@{Execution\+Island}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a050d1773ab51dc5301e19c06f87d7a53}\label{classExecutionIsland_a050d1773ab51dc5301e19c06f87d7a53}} 
+{\bfseries Execution\+Island} (const int slave\+Islands, const \mbox{\hyperlink{classConfiguration}{Configuration}} \&configuration)
+\item 
+\mbox{\Hypertarget{classExecutionIsland_af6731fdb9aa6e8d2df9657f248a67b90}\label{classExecutionIsland_af6731fdb9aa6e8d2df9657f248a67b90}} 
+void {\bfseries run} (const \mbox{\hyperlink{classConfiguration}{Configuration}} \&configuration)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_aa500ea75fd3fea52722706bb2488f227}\label{classExecutionIsland_aa500ea75fd3fea52722706bb2488f227}} 
+M\+P\+I\+\_\+\+Comm {\bfseries execution\+Island\+Comm}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a7f4c86eb1145ed9f5f7dd89742cb70df}\label{classExecutionIsland_a7f4c86eb1145ed9f5f7dd89742cb70df}} 
+int {\bfseries complete\+Generations}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a4c20ae07df9115735a0ec4ecf2ff0ac6}\label{classExecutionIsland_a4c20ae07df9115735a0ec4ecf2ff0ac6}} 
+long double $\ast$ {\bfseries buffer}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_ada43a3c9ef35af66cf1b4ff47bf8bb38}\label{classExecutionIsland_ada43a3c9ef35af66cf1b4ff47bf8bb38}} 
+int {\bfseries tam\+Buffer}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a6f6c423e8adad0e02034debfdd9809b7}\label{classExecutionIsland_a6f6c423e8adad0e02034debfdd9809b7}} 
+int {\bfseries tam\+Buffer2}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_adb2816efc3f912c4e9506392bbb2c245}\label{classExecutionIsland_adb2816efc3f912c4e9506392bbb2c245}} 
+double {\bfseries p\+Migration}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a59fce7378b8f455332af34035d959426}\label{classExecutionIsland_a59fce7378b8f455332af34035d959426}} 
+unsigned int {\bfseries max\+Ind\+To\+Migrate}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a6dae253f6f1faa81853562da936d5f57}\label{classExecutionIsland_a6dae253f6f1faa81853562da936d5f57}} 
+unsigned int {\bfseries slave\+Islands}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a87b495a9cc15f4792633fe39c2ff8c95}\label{classExecutionIsland_a87b495a9cc15f4792633fe39c2ff8c95}} 
+int {\bfseries number\+Of\+Processes\+Per\+Execution}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a1dc4a4eb05c2f8dc45f3019983e5815d}\label{classExecutionIsland_a1dc4a4eb05c2f8dc45f3019983e5815d}} 
+int {\bfseries my\+Master}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a9ff6f54134c1097cd692986525b9991f}\label{classExecutionIsland_a9ff6f54134c1097cd692986525b9991f}} 
+int {\bfseries my\+Id}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a33caade84ef9e6e5ab390d3f5228f606}\label{classExecutionIsland_a33caade84ef9e6e5ab390d3f5228f606}} 
+int {\bfseries num\+Procs}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a51f38c60209e6c24be820381fc0a1965}\label{classExecutionIsland_a51f38c60209e6c24be820381fc0a1965}} 
+vector$<$ int $>$ {\bfseries my\+Partners}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_a63fe0b7e697e81a80ff2c3a594d26d02}\label{classExecutionIsland_a63fe0b7e697e81a80ff2c3a594d26d02}} 
+map$<$ int, double $\ast$ $>$ {\bfseries configs\+Restart\+Info}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_abf33ea9f3fcf127db9d6c3d35bb5f811}\label{classExecutionIsland_abf33ea9f3fcf127db9d6c3d35bb5f811}} 
+queue$<$ pair$<$ M\+P\+I\+\_\+\+Request $\ast$, long double $\ast$ $>$ $>$ {\bfseries pending\+Requests}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_ab3b9f3eedc49ae903f502a09bf5a2fde}\label{classExecutionIsland_ab3b9f3eedc49ae903f502a09bf5a2fde}} 
+vector$<$ \mbox{\hyperlink{classIndividual}{Individual}} $\ast$ $>$ {\bfseries original\+Population}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExecutionIsland_ab6a3bccbb5b13ca7557b49c7204386eb}\label{classExecutionIsland_ab6a3bccbb5b13ca7557b49c7204386eb}} 
+static const int {\bfseries D\+E\+F\+\_\+\+S\+I\+Z\+E\+\_\+\+B\+UF} = 10
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Execution\+Island.\+h\item 
+Execution\+Island.\+cpp\end{DoxyCompactItemize}

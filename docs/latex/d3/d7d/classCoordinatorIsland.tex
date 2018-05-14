@@ -1,0 +1,178 @@
+\hypertarget{classCoordinatorIsland}{}\section{Coordinator\+Island Class Reference}
+\label{classCoordinatorIsland}\index{Coordinator\+Island@{Coordinator\+Island}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_ab06731bdeed215595beebce0f087d967}\label{classCoordinatorIsland_ab06731bdeed215595beebce0f087d967}} 
+{\bfseries Coordinator\+Island} (const string \&output\+File\+Name, const int print\+Period, const string \&base\+Directory)
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_aec9d72018c3681483e02da3b1aca90a9}\label{classCoordinatorIsland_aec9d72018c3681483e02da3b1aca90a9}} 
+void {\bfseries run} (const char $\ast$file)
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_aa811da3292d8a8ee8c2b9041bea1cd2f}\label{classCoordinatorIsland_aa811da3292d8a8ee8c2b9041bea1cd2f}} 
+\mbox{\hyperlink{classIndividual}{Individual}} $\ast$ {\bfseries get\+Ej\+Ind} () const
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a1f2f4cbc23e2e571f25b2684a2cdc356}\label{classCoordinatorIsland_a1f2f4cbc23e2e571f25b2684a2cdc356}} 
+int {\bfseries get\+Evaluations} () const
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a979a3b6fc598652fb50479a069f3a08c}\label{classCoordinatorIsland_a979a3b6fc598652fb50479a069f3a08c}} 
+ostream \& {\bfseries get\+Output\+File} ()
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_aaceb2bd1c34696257a6599d8671e126c}\label{classCoordinatorIsland_aaceb2bd1c34696257a6599d8671e126c}} 
+const \mbox{\hyperlink{classConfiguration}{Configuration}} \& {\bfseries get\+Configuration} () const
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a4a2824a1972075f41e2dcac9ea4bd6be}\label{classCoordinatorIsland_a4a2824a1972075f41e2dcac9ea4bd6be}} 
+void {\bfseries get\+Solution} (\mbox{\hyperlink{classMOFront}{M\+O\+Front}} $\ast$p) const
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a56f3dbd38c55b9363cad706228c588a2}\label{classCoordinatorIsland_a56f3dbd38c55b9363cad706228c588a2}} 
+void {\bfseries print\+Info} (void)
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_afaadf2f86c49888e4194bbebdb96aa4d}\label{classCoordinatorIsland_afaadf2f86c49888e4194bbebdb96aa4d}} 
+void {\bfseries print\+Characteristic} (const int num\+Slaves)
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_ad6f09de501f6ed21c6d7fce73937c4af}\label{classCoordinatorIsland_ad6f09de501f6ed21c6d7fce73937c4af}} 
+void {\bfseries print\+Statistics} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a8ef31c84fa543fc7a60e0e68b8f6d16e}\label{classCoordinatorIsland_a8ef31c84fa543fc7a60e0e68b8f6d16e}} 
+void {\bfseries init} (const char $\ast$conf\+File)
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_af663b28b853073e2f5d179d19a28011f}\label{classCoordinatorIsland_af663b28b853073e2f5d179d19a28011f}} 
+void {\bfseries init\+Islands} ()
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a2637f5bc00df9693cf5b7bacdc9bc1fc}\label{classCoordinatorIsland_a2637f5bc00df9693cf5b7bacdc9bc1fc}} 
+void {\bfseries init\+Algorithm} (const int act\+Alg, const int act\+Conf, const int id\+Island)
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a78f74dd68e95864e0691e8a40b295e78}\label{classCoordinatorIsland_a78f74dd68e95864e0691e8a40b295e78}} 
+void {\bfseries selection\+Island} (int \&index\+Alg, int \&config, const int idle)
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a09cbbefa720138188302b340dd13bf69}\label{classCoordinatorIsland_a09cbbefa720138188302b340dd13bf69}} 
+bool {\bfseries stop} ()
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a9d6dfa8f43d2a2653eae788704b6e9e0}\label{classCoordinatorIsland_a9d6dfa8f43d2a2653eae788704b6e9e0}} 
+bool {\bfseries stop\+Actual} ()
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_aec34100c82a854a961d39b881ef47145}\label{classCoordinatorIsland_aec34100c82a854a961d39b881ef47145}} 
+void {\bfseries body\+Coordinator} (const int num\+Slaves)
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a33f052e140a7c18109c35d58a12c82e4}\label{classCoordinatorIsland_a33f052e140a7c18109c35d58a12c82e4}} 
+int {\bfseries recv\+Local\+Solution} ()
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a5f05ee8573c776baa181e6e34fc31bec}\label{classCoordinatorIsland_a5f05ee8573c776baa181e6e34fc31bec}} 
+void {\bfseries finish} (const int num\+Procs)
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a52a6719766e8389a5f46ab6467df10bd}\label{classCoordinatorIsland_a52a6719766e8389a5f46ab6467df10bd}} 
+long double {\bfseries score\+Configuration} (const int index\+Alg, const int config, const double rnd\+Value, const int island\+Id)
+\item 
+void \mbox{\hyperlink{classCoordinatorIsland_a25c1872d7c83a2e2855d2db4ada2f06d}{clear\+Statistics}} (vector$<$ vector$<$ \mbox{\hyperlink{structTStatistics}{T\+Statistics}} $>$ $>$ \&statistics)
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a2e24a4b695b66ac53ea6176adeae64c0}\label{classCoordinatorIsland_a2e24a4b695b66ac53ea6176adeae64c0}} 
+void {\bfseries check\+Print\+Period} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a394481f37b842a1c374df49bc975b7de}\label{classCoordinatorIsland_a394481f37b842a1c374df49bc975b7de}} 
+\mbox{\hyperlink{classConfiguration}{Configuration}} {\bfseries configuration}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_af3303f59cee518348d9215d4c582084a}\label{classCoordinatorIsland_af3303f59cee518348d9215d4c582084a}} 
+int {\bfseries num\+Procs}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a4f3ccbeaad01b52a00445697ba79ac65}\label{classCoordinatorIsland_a4f3ccbeaad01b52a00445697ba79ac65}} 
+int {\bfseries not\+Used\+Islands}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_ae982810359acf21091f829a27d5eba68}\label{classCoordinatorIsland_ae982810359acf21091f829a27d5eba68}} 
+unsigned int {\bfseries actual\+Model}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_ac7cbba9bde1ff274506bf78fcd7ca5f1}\label{classCoordinatorIsland_ac7cbba9bde1ff274506bf78fcd7ca5f1}} 
+int {\bfseries my\+Id}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a1072839e49794db26dfc3170627b5b74}\label{classCoordinatorIsland_a1072839e49794db26dfc3170627b5b74}} 
+\mbox{\hyperlink{classMOFront}{M\+O\+Front}} $\ast$ {\bfseries global\+Solution}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a319756886a25d4f53b383b4d36b3679f}\label{classCoordinatorIsland_a319756886a25d4f53b383b4d36b3679f}} 
+double {\bfseries start\+Time}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_ae777de209050b9f840d094051f29b7ad}\label{classCoordinatorIsland_ae777de209050b9f840d094051f29b7ad}} 
+int {\bfseries num\+Executions}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a6a73b6222890a44a47c09b9279945f8e}\label{classCoordinatorIsland_a6a73b6222890a44a47c09b9279945f8e}} 
+int {\bfseries print\+Period}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_aedf88e408f4a17ee650807f03b42af71}\label{classCoordinatorIsland_aedf88e408f4a17ee650807f03b42af71}} 
+int {\bfseries next\+Print}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a5d400b189383e2dd48d30c06a5db11d9}\label{classCoordinatorIsland_a5d400b189383e2dd48d30c06a5db11d9}} 
+int {\bfseries evaluations}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a73c591a7ca9ee2723b95ba16b6b188ab}\label{classCoordinatorIsland_a73c591a7ca9ee2723b95ba16b6b188ab}} 
+int {\bfseries evaluations\+Finished}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_acef1ba13b24b23bc78cf4bdf37b8a06d}\label{classCoordinatorIsland_acef1ba13b24b23bc78cf4bdf37b8a06d}} 
+double {\bfseries value\+Stop\+Crit}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a5af2468832745e66e19adc373c2f455c}\label{classCoordinatorIsland_a5af2468832745e66e19adc373c2f455c}} 
+ofstream {\bfseries output\+File}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_aaf187f409e882f32c88454974ac8e2b7}\label{classCoordinatorIsland_aaf187f409e882f32c88454974ac8e2b7}} 
+string {\bfseries output\+File\+Name}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_ab3aa5cc5aa936c6c508b4c1be6455cff}\label{classCoordinatorIsland_ab3aa5cc5aa936c6c508b4c1be6455cff}} 
+queue$<$ int $>$ {\bfseries clear\+Statistic\+Evaluation}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_ad7a9982659856df1c11922a5eb43c0a6}\label{classCoordinatorIsland_ad7a9982659856df1c11922a5eb43c0a6}} 
+long double {\bfseries last\+Score}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_abf6ec05de747be402ed0a4065a6ec336}\label{classCoordinatorIsland_abf6ec05de747be402ed0a4065a6ec336}} 
+list$<$ \mbox{\hyperlink{structTTask}{T\+Task}} $>$ {\bfseries task\+Queue}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_aeb5c8468d17ff38ef1c21f13c1940a75}\label{classCoordinatorIsland_aeb5c8468d17ff38ef1c21f13c1940a75}} 
+list$<$ \mbox{\hyperlink{structTTask}{T\+Task}} $>$ {\bfseries circular\+Task\+Queue}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a5cb385deb46af49d24b6426af1c387c7}\label{classCoordinatorIsland_a5cb385deb46af49d24b6426af1c387c7}} 
+vector$<$ vector$<$ \mbox{\hyperlink{structTStatistics}{T\+Statistics}} $>$ $>$ {\bfseries real\+Statistics}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a3b14bb913517f9c0041f948fca42245d}\label{classCoordinatorIsland_a3b14bb913517f9c0041f948fca42245d}} 
+vector$<$ vector$<$ \mbox{\hyperlink{structTStatistics}{T\+Statistics}} $>$ $>$ {\bfseries used\+Statistics}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a4c4c0802869ba5e9c882a0463109d435}\label{classCoordinatorIsland_a4c4c0802869ba5e9c882a0463109d435}} 
+vector$<$ int $>$ {\bfseries last\+Evaluations}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a592ffc45c62534e9dce75f600293a62c}\label{classCoordinatorIsland_a592ffc45c62534e9dce75f600293a62c}} 
+vector$<$ int $>$ {\bfseries evaluations\+Performed}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_ad0905830cccafc8991eddc85888560e4}\label{classCoordinatorIsland_ad0905830cccafc8991eddc85888560e4}} 
+vector$<$ \mbox{\hyperlink{structTExecIsland}{T\+Exec\+Island}} $>$ {\bfseries exec\+Island}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_ae7722d9300999fd9c97f58feb67f6a17}\label{classCoordinatorIsland_ae7722d9300999fd9c97f58feb67f6a17}} 
+\mbox{\hyperlink{classInitPopIslandLoader}{Init\+Pop\+Island\+Loader}} $\ast$ {\bfseries ipil}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a12f619d43a6a4c160d0f3a6c38122cbe}\label{classCoordinatorIsland_a12f619d43a6a4c160d0f3a6c38122cbe}} 
+int {\bfseries number\+Of\+Processes\+Per\+Execution}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_ac3e7e32442c3ebbc99d6196a0bf0529c}\label{classCoordinatorIsland_ac3e7e32442c3ebbc99d6196a0bf0529c}} 
+vector$<$ int $>$ {\bfseries my\+Slaves}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCoordinatorIsland_a235933ff7bfb25907f929664f42d79ef}\label{classCoordinatorIsland_a235933ff7bfb25907f929664f42d79ef}} 
+static const int {\bfseries P\+R\+I\+N\+T\+P\+E\+R\+I\+O\+D\+\_\+\+D\+E\+F\+A\+U\+LT} = 5000
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCoordinatorIsland_a25c1872d7c83a2e2855d2db4ada2f06d}\label{classCoordinatorIsland_a25c1872d7c83a2e2855d2db4ada2f06d}} 
+\index{Coordinator\+Island@{Coordinator\+Island}!clear\+Statistics@{clear\+Statistics}}
+\index{clear\+Statistics@{clear\+Statistics}!Coordinator\+Island@{Coordinator\+Island}}
+\subsubsection{\texorpdfstring{clear\+Statistics()}{clearStatistics()}}
+{\footnotesize\ttfamily void Coordinator\+Island\+::clear\+Statistics (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ \mbox{\hyperlink{structTStatistics}{T\+Statistics}} $>$ $>$ \&}]{statistics }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+!if (global\+Solution) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Coordinator\+Island.\+h\item 
+Coordinator\+Island.\+cpp\end{DoxyCompactItemize}

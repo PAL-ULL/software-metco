@@ -1,0 +1,63 @@
+\hypertarget{classScoreAlgorithm}{}\section{Score\+Algorithm Class Reference}
+\label{classScoreAlgorithm}\index{Score\+Algorithm@{Score\+Algorithm}}
+Inheritance diagram for Score\+Algorithm\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{da/de1/classScoreAlgorithm}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_aca316a7c8fb4a7d65793142ffb0854c0}\label{classScoreAlgorithm_aca316a7c8fb4a7d65793142ffb0854c0}} 
+{\bfseries Score\+Algorithm} (const int type)
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_aa5a21e0bd7246db2f4bf4994f63badbe}\label{classScoreAlgorithm_aa5a21e0bd7246db2f4bf4994f63badbe}} 
+int {\bfseries get\+Type} () const
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_ac8cc1949e42bc5e7f9b40a2fd5431fce}\label{classScoreAlgorithm_ac8cc1949e42bc5e7f9b40a2fd5431fce}} 
+virtual bool {\bfseries init} (const vector$<$ string $>$ \&params)
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_adebfd2133cc2531c4573eb4447285dcc}\label{classScoreAlgorithm_adebfd2133cc2531c4573eb4447285dcc}} 
+virtual void {\bfseries begins} (const int alg\+Id, const int conf\+Id, const int island\+Id)
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_a68a608ca6d436baa5ac73b39b29215dc}\label{classScoreAlgorithm_a68a608ca6d436baa5ac73b39b29215dc}} 
+virtual void {\bfseries ends} (const int alg\+Id, const int conf\+Id, const int island\+Id)
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_a0366ab9698f481f382d676d77feebf7b}\label{classScoreAlgorithm_a0366ab9698f481f382d676d77feebf7b}} 
+void {\bfseries set\+Configurations} (const vector$<$ int $>$ \&configs)
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_a88bb035f0b88fa201add6766fec426b5}\label{classScoreAlgorithm_a88bb035f0b88fa201add6766fec426b5}} 
+virtual int {\bfseries get\+Direction} () const =0
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_a96a7912c56aae7c5eeba05e9c7d73f19}\label{classScoreAlgorithm_a96a7912c56aae7c5eeba05e9c7d73f19}} 
+int {\bfseries get\+Number\+Of\+Algorithms} ()
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_ac67021a4b1390d39649988c1512df779}\label{classScoreAlgorithm_ac67021a4b1390d39649988c1512df779}} 
+int {\bfseries get\+Number\+Of\+Configurations} (int alg\+Id)
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_aed17e61b133b57a1d10202eebd3fc06f}\label{classScoreAlgorithm_aed17e61b133b57a1d10202eebd3fc06f}} 
+int {\bfseries get\+Number\+Of\+Configurations} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_a5db73d908a5fcc2c6c28914f6ba3532b}\label{classScoreAlgorithm_a5db73d908a5fcc2c6c28914f6ba3532b}} 
+int {\bfseries number\+Of\+Configurations}
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_a194ba64e3bef5f5e4d9eed35c896a9a3}\label{classScoreAlgorithm_a194ba64e3bef5f5e4d9eed35c896a9a3}} 
+int {\bfseries type}
+\item 
+\mbox{\Hypertarget{classScoreAlgorithm_a4683849279cb7a803919f09c2d13f907}\label{classScoreAlgorithm_a4683849279cb7a803919f09c2d13f907}} 
+vector$<$ int $>$ {\bfseries configs}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Score\+Algorithm.\+h\item 
+Score\+Algorithm.\+cpp\end{DoxyCompactItemize}
