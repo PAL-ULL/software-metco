@@ -1,77 +1,3 @@
-/***********************************************************************************
- * AUTHORS
- *   - Ofelia González Pérez
- *   - Gara Miranda Valladares
- *   - Carlos Segura González
- * 
- * DATE
- *    November 2007
- *
- * DESCRIPTION
- *   Plugin base class to represent the algorithms
- *
- *   --> Steps for the creation of an individual
- *   	 - User must create a class inheriting from EA, defining the next
- *   	 methods: runGeneration, init, received, getSolution and printInfo.
- *
- *       +virtual void runGeneration()
- *          Este metodo debe ejecutar una generación de búsqueda del algoritmo.
- *          La población se encuentra en el vector population. Cuando se quiera 
- *          evaluar un individuo se debe llamar al método evaluate de EA.
- *          No se debe llamar directamente al método evaluate del individuo.
- *          Durante la primera generación de cada ejecución es posible que existan
- *          individuos que ya han sido evaluados (cuando un algoritmo empieza a 
- *          ejecutar en una isla, puede coger parte de su población inicial de la
- *          solución global encontrada actualmente). Llamando al método 
- *          getPopEvaluatedIndividuals se obtiene cuántos individuos de los que hay 
- *          en la población ya han sido evaluados, con lo que sólo habrá que evaluar el 
- *          resto. Los individuos ya evaluados están colocados al inicio del vector 
- *          population. Lo mismo ocurre cuando se reciben individuos migrados.
- *
- *       +virtual bool initParams(const vector<double> &params)
- *          Este método será invocado durante la inicialización del algoritmo pasándole
- *          los parámetros que se hayan especificado en el fichero de configuración del 
- *          equipo de algoritmos (ejecuciones paralelas) o en la línea de comandos
- *          (ejecuciones secuenciales).
- *          En esta inicialización hay que fijar el tamaño de la población llamando 
- *          a setPopulationSize.
- *      
- *       +virtual void getSolution(MOFront *solucion)
- *          Inserta en el frente solucion las soluciones encontradas por el EA.
- *          Para ello se debe llamar al metodo insert del objeto solucion (clase
- *          MOFront) pasándole cada uno de las soluciones a añadir.
- *          
- *       +virtual void printInfo(ostream &os)
- *          Esta rutina debe mostrar informacion sobre el algoritmo: nombre y parámetros
- *          que se están usando (probabilidades de mutación y crossover, tamaños de 
- *          población, etc.)
- *          Esta información se mostrará en el fichero de resultados de las ejecuciones
- *          secuenciales.
- *
- *     - Opcionalmente se pueden sobreescribir los siguientes métodos:
- *
- *       +virtual void fillPopWithNewInds()
- *          Este método tiene como función, rellenar la porción de la población inicial que no
- *          ha sido rellenada con individuos del frente global.
- *          Por defecto rellena la población llamando al  método create del individuo usado.
- *          Para saber cuántos individuos han sido obtenidos a partir del frente global
- *          se debe llamar al método \texttt{getPopEvaluatedIndividuals()}
- *          Para hacer una generación inicial de la población que no sea llamando al método
- *          create del individuo, se debe sobreescribir el método.
- *
- *
- *      +virtual void received(vector<Individual*> &migrados)
- *          Este método es invocado cuando se reciben individuos migrados desde otra isla. 
- *          El algoritmo debe sacrificar a algunos de los individuos actuales, 
- *          intercambiándolos por los nuevos individuos. La elección de que individuos se 
- *          intercambian es dependiente del algoritmo.
- *          El conjunto de individuos que sean sacrificados (ya no se vayan a usar más)
- *          y los individuos del vector migrados que no se utilicen deben ser borrados
- *          mediante el uso del operador delete.
- *          Por defecto se intercambian los primeros individuos de la población por
- *          los individuos que se han recibido
- ***********************************************************************************/
-
 
 #ifndef __EA_H__
 #define __EA_H__
@@ -99,49 +25,71 @@ const string CRIT_STOP[] = {"TIME", "EVALUATIONS", "QUALITY"};
 using namespace std;
 
 class OutputPrinter;
-
+/** \brief Plugin base class to represent the algorithms 
+ *
+ * */
 class EA : public Plugin {
 
 public:
-	// Constructor
+	//! Constructor
 	EA ();
-
-	// Destructor
+	//! Destructor
 	virtual ~EA (void);
-
-	// Métodos públicos que tienen que ser sobreescritos
+	/**
+	 * This methods must copy all the solution into the Pareto's Front.
+	 * @param: MOFront* Empty Pareto's Front
+	 **/
 	virtual void getSolution(MOFront *p) = 0;
+	/**
+	 * This method must be overwritten in order to print the information of the algorithm
+	 * @param: Stream where the information will be printed.
+	 **/
 	virtual void printInfo(ostream &os) const = 0;
-
-	// Metodos públicos que pueden ser sobreescritos
 	virtual void received(vector<Individual*> &);
 	virtual	double *getRestartInfo(){ return NULL; }
 	virtual void setRestartInfo(double *){}
 	virtual void exchangePerformed() {}
-	
-	// Run secuencial
+	/**
+	 * Run the algorithm
+	 **/
 	void run();
-
-	// Inicializacion de la poblacion inicial con individuos del frente global
+	/**
+	 * Initialize the initial population with individuals from Global Front.
+	 * @param Vector<Individual *> Evaluated individuals
+	 */
 	void fillPopWithEvaluatedInds(const vector<Individual *> &);
-
-	// Ejecucion de una generacion
+	/**
+	 * Increments the generation counter
+	 **/
 	void runGenerationInc();
-
-	// Criterio de parada
+	/**
+	 * Checks if the algorithm has finished yet. The stopping criteria has been reached.
+	 **/
 	bool hasFinished();
-
-	// Resetear las condiciones de paradas (reiniciar tiempo, numero de evaluaciones)
+	/**
+	 * Restars the stopping condition
+	 *  - Restart time
+	 *  - Number of evaluations
+	 **/
 	void resetStopConditions();
-
-	// Evaluar un individuo
+	/**
+	 * Evaluate the given individual with its evaluation function
+	 * This methods must call the evaluate method from Individual class.
+	 * @param Individual to be evaluated
+	 **/
 	void evaluate(Individual *ind);
-
 	//Almacenar individuo en el archivo
 	void insertInArchive(Individual *ind);
 
-	// Inline Setters
+	/**
+	 * Set the population size
+	 * @param Integer that defines the population size
+	 **/
 	void setPopulationSize          (const int pSize)     { this->pSize = pSize;                                     }
+	/**
+	 * Set a sample Individual. Useful for copy a Individual without its evaluation.
+	 * @param Individual
+	 **/
 	void setSampleInd               (Individual *ind)     { sampleInd = ind;                                         }
 	void setOutputPrinter           (OutputPrinter *op)   { outputPrinter = op;                                      }
 	void setPrintPeriod             (const int pp)        { printPeriod = nextPrint = pp;                            }
@@ -202,7 +150,6 @@ private:
 	double startTime;
 	vector<MultiObjectivization*> multiObjectivizationsPlugins;
 
-	// Metodos privados que tienen que ser sobreescritos
 	virtual void runGeneration() = 0;
 
 	// Metodos privados que pueden ser sobreescritos
@@ -226,7 +173,7 @@ typedef enum {
 } local_stop_criterions_ids_t;
 
 
-//Obtención de individuo a partir de una librería
+//Obtenciï¿½n de individuo a partir de una librerï¿½a
 EA *getEA(const string &pluginPath, const string &pluginName, const vector<string> &args, bool printError, Individual *ind);
 
 #endif

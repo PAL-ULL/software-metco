@@ -1,13 +1,3 @@
-/***********************************************************************************
- * AUTHORS
- *   - Ofelia González Pérez
- *   - Gara Miranda Valladares
- *   - Carlos Segura González
- * 
- * DATE
- *    November 2007
- ***********************************************************************************/
-
 #include "Configuration.h"
 
 //Selection

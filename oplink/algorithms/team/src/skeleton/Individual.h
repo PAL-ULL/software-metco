@@ -1,114 +1,114 @@
 /***********************************************************************************
  * AUTORES
- *   - Ofelia González Pérez
+ *   - Ofelia Gonzï¿½lez Pï¿½rez
  *   - Gara Miranda Valladares
- *   - Carlos Segura González
+ *   - Carlos Segura Gonzï¿½lez
  * 
  * FECHA
  *    Noviembre 2007
  *
  * DESCRIPCION
- *   Clase padre para la representación de individuos (problemas)
+ *   Clase padre para la representaciï¿½n de individuos (problemas)
  *   
  *   --> OPERADORES DE MUTACION Y CROSSOVER
  *     Los siguientes operadores han sido implementados:
- *       - Mutación uniforme cambiando sólo uno de los genes con probabilidad pm
- *   	   - Mutación uniforme cambiando cambiando cada gen con probabilidad pm
- *   	   - Mutación binaria
- *   	   - Mutación uniforme en el que se cambia un rango de genes
- *   	   - Mutación polinómica cambiando todos los genes
+ *       - Mutaciï¿½n uniforme cambiando sï¿½lo uno de los genes con probabilidad pm
+ *   	   - Mutaciï¿½n uniforme cambiando cambiando cada gen con probabilidad pm
+ *   	   - Mutaciï¿½n binaria
+ *   	   - Mutaciï¿½n uniforme en el que se cambia un rango de genes
+ *   	   - Mutaciï¿½n polinï¿½mica cambiando todos los genes
  *   	   - Crossover uniforme
  *   	   - Crossover por invervales 
  *   	   - Simulated binary crossover
  *  
- *   --> Pasos en la creación de un individuo
- *     - El usuario al heredar debe implementar los métodos mutation, crossover,
+ *   --> Pasos en la creaciï¿½n de un individuo
+ *     - El usuario al heredar debe implementar los mï¿½todos mutation, crossover,
  *       evaluate, init y clone
  *       
  *       +virtual void mutation (double pm)
- *         El método mutation debe realizar una mutación sobre el propio 
- *         individuo. Puede llamar a alguno de los métodos de mutación de la clase
- *         padre o implementar su propio método.
+ *         El mï¿½todo mutation debe realizar una mutaciï¿½n sobre el propio 
+ *         individuo. Puede llamar a alguno de los mï¿½todos de mutaciï¿½n de la clase
+ *         padre o implementar su propio mï¿½todo.
  *     
  *       +virtual void crossover (Individual *ind)
- *          El método de crossover permite la creación de 2 nuevos individuos
+ *          El mï¿½todo de crossover permite la creaciï¿½n de 2 nuevos individuos
  *          a partir de otros 2 individuos. Los 2 individuos originales son
- *          el individuo que se pasa como parámetro y el propio individuo.
+ *          el individuo que se pasa como parï¿½metro y el propio individuo.
  *          Los 2 nuevos individuos generadores se "guardan" sobre el
- *          individuo que se pasó como parámetro y sobre el propio individuo.
+ *          individuo que se pasï¿½ como parï¿½metro y sobre el propio individuo.
  *  
  *       +virtual bool init(const vector<string> &params)
- *          Este método se encarga de inicializar el individuo a partir de los
- *          parámetros pasados. Los parámetros son los dados por el usuario
- *          en la línea de comandos (ejecución secuencial) o en el fichero
- *          de configuración (ejecución paralela).
- *          Además de las inicializaciones propias del individuos se deben 
+ *          Este mï¿½todo se encarga de inicializar el individuo a partir de los
+ *          parï¿½metros pasados. Los parï¿½metros son los dados por el usuario
+ *          en la lï¿½nea de comandos (ejecuciï¿½n secuencial) o en el fichero
+ *          de configuraciï¿½n (ejecuciï¿½n paralela).
+ *          Ademï¿½s de las inicializaciones propias del individuos se deben 
  *          realizar las siguientes operaciones:
- *            - Fijar el número de variables(genes): setNumberOfVar(int)
- *            - Fijar el número de objetivos: setNumberOfObj(int)
- *            - Fijar las direcciones de optimización de cada objetivo (MINIMIZE
+ *            - Fijar el nï¿½mero de variables(genes): setNumberOfVar(int)
+ *            - Fijar el nï¿½mero de objetivos: setNumberOfObj(int)
+ *            - Fijar las direcciones de optimizaciï¿½n de cada objetivo (MINIMIZE
  *              o MAXIMIZE). Se puede hacer de 2 formas:
- *                * Llamando al método setOptDirection(const int optDir[]), 
- *                  pasándole un array de enteros que contiene MINIMIZE o 
+ *                * Llamando al mï¿½todo setOptDirection(const int optDir[]), 
+ *                  pasï¿½ndole un array de enteros que contiene MINIMIZE o 
  *                  MAXIMIZE para cada objetivo.
- *                * Llamar sucesivamente al método setNextOptDirection (una vez
- *                  por cada objetivo), pasándole cada vez MINIMIZE o MAXIMIZE
- *            - Fijar los rangos de valores válidos (minimos y máximos) para cada
+ *                * Llamar sucesivamente al mï¿½todo setNextOptDirection (una vez
+ *                  por cada objetivo), pasï¿½ndole cada vez MINIMIZE o MAXIMIZE
+ *            - Fijar los rangos de valores vï¿½lidos (minimos y mï¿½ximos) para cada
  *              gen. Los valores minimos se pueden establecer de 2 formas:
  *                * LLamando al metodo setMinimumValues(const double minValues[]),
- *                  pasándole un array que contiene el valor mínimo para cada 
+ *                  pasï¿½ndole un array que contiene el valor mï¿½nimo para cada 
  *                  objetivo.
  *                * Llamando sucesivamente al metodo 
  *                setNextMinimumValue(const double value) (una vez por cada objetivo)
- *                pasándole cada vez el valor mínimo correspondiente al objetivo.
- *              Los valores máximos se tratan de la misma forma llamando a los métodos
+ *                pasï¿½ndole cada vez el valor mï¿½nimo correspondiente al objetivo.
+ *              Los valores mï¿½ximos se tratan de la misma forma llamando a los mï¿½todos
  *              setMaximumValues o setNextMaximumValue
- *            - Fijar el número de datos adicionales del individuo, que quieren que
- *            sean sean migrados y clonados de forma automática. Sólo hace faltar fijarlo
- *            si es distinto de 0. Se realiza llamando al método setMigrationDataSize.
+ *            - Fijar el nï¿½mero de datos adicionales del individuo, que quieren que
+ *            sean sean migrados y clonados de forma automï¿½tica. Sï¿½lo hace faltar fijarlo
+ *            si es distinto de 0. Se realiza llamando al mï¿½todo setMigrationDataSize.
  *          Retorna un valor booleano:
- *          - True: la inicialización fue correcta.
- *          - False: error en los parámetros pasados. Se abortará la ejecución.
- *          En los casos en los que se retorne false, se deberá escribir un error
+ *          - True: la inicializaciï¿½n fue correcta.
+ *          - False: error en los parï¿½metros pasados. Se abortarï¿½ la ejecuciï¿½n.
+ *          En los casos en los que se retorne false, se deberï¿½ escribir un error
  *          en cerr
  *  
  *       +virtual void evaluate (void)
- *          Este método se encarga de calcular los valores objetivos a partir de
+ *          Este mï¿½todo se encarga de calcular los valores objetivos a partir de
  *          los valores de las variables (genes) del individuo. Los valores de
- *          los genes están en el vector var. Los objetivos los debe almacenar
+ *          los genes estï¿½n en el vector var. Los objetivos los debe almacenar
  *          en el vector obj.
  *  
  *       +virtual Individual* clone (void)
- *          Este método sirve para realizar la clonación de un individuo. El usuario
+ *          Este mï¿½todo sirve para realizar la clonaciï¿½n de un individuo. El usuario
  *          debe crear un individuo de la clase hija y devolverlo.
- *          Los genes, valores objetivos y parámetros compartidos son copiados
- *          de forma automática.
+ *          Los genes, valores objetivos y parï¿½metros compartidos son copiados
+ *          de forma automï¿½tica.
  *   
  *
- *    - Opcionalmente se pueden sobreescribir los siguientes métodos:
+ *    - Opcionalmente se pueden sobreescribir los siguientes mï¿½todos:
  *
  *        +virtual void print(ostream &os)
- *           Este método por defecto imprime los valores de las variables del individuo
+ *           Este mï¿½todo por defecto imprime los valores de las variables del individuo
  *           seguido de los valores de los objetivos.
- *           En caso de querer mostrar por pantalla algún dato más del individuo o
- *           en otro formato distinto, se puede sobreescribir este método
+ *           En caso de querer mostrar por pantalla algï¿½n dato mï¿½s del individuo o
+ *           en otro formato distinto, se puede sobreescribir este mï¿½todo
  *        
  *        +virtual void restart()
- *           Este método se usa para crear nuevos individuos en la primera población. 
+ *           Este mï¿½todo se usa para crear nuevos individuos en la primera poblaciï¿½n. 
  *           Si no se sobreescribe, se genera un valor aleatorio para cada variable, 
  *           con una probabilidad uniforme dentro de su rango de valores.
  *
  *        +virtual void generationCode()
- *           Tras cada paso de generación en la que se use el individuo, este método 
- *           es instanciado. Si es necesario realizar alguna operación adicional tras cada 
- *           generación, se puede hacer en este método.
+ *           Tras cada paso de generaciï¿½n en la que se use el individuo, este mï¿½todo 
+ *           es instanciado. Si es necesario realizar alguna operaciï¿½n adicional tras cada 
+ *           generaciï¿½n, se puede hacer en este mï¿½todo.
  *
  *    - Otras notas:
- *        En cualquiera de los método sobrecargados se pueden tener en cuenta los datos
+ *        En cualquiera de los mï¿½todo sobrecargados se pueden tener en cuenta los datos
  *        adicionales del individuo (datos a migrar). A estos datos se pueden acceder
- *        con el método:
+ *        con el mï¿½todo:
  *        	double inline getMigrationData(const int i) 
- *        Los valores se pueden fijar con el método:
+ *        Los valores se pueden fijar con el mï¿½todo:
  *        	void inline setMigrationData(const int i, const double value)
  *
  *   *********************************************************************************/
@@ -138,6 +138,8 @@ class Mutation;
 class Crossover;
 class MultiObjectivization;
 
+/** Mother class to represent individuals (Problems)
+ **/
 class Individual : public Plugin {
 
 public:
@@ -287,7 +289,7 @@ public:
 
 private:
 	
-	// Operador de clonación: debe ser reimplementado en la clase hija
+	// Operador de clonaciï¿½n: debe ser reimplementado en la clase hija
 	virtual Individual* clone (void) const = 0;
 	vector<MultiObjectivization*> multiObjectivizationsPlugins;
 	
