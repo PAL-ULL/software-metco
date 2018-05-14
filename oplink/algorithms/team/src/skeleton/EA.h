@@ -26,7 +26,6 @@ using namespace std;
 
 class OutputPrinter;
 /** \brief Plugin base class to represent the algorithms 
- *
  * */
 class EA : public Plugin {
 
@@ -91,10 +90,24 @@ public:
 	 * @param Individual
 	 **/
 	void setSampleInd               (Individual *ind)     { sampleInd = ind;                                         }
+	/**
+	 * \brief Set printer module from OutputPrinter instances.
+	 * @param OutputPrinter instance
+	 **/
 	void setOutputPrinter           (OutputPrinter *op)   { outputPrinter = op;                                      }
+	/**
+	 * \brief Set the period to print the intermediate results.
+	 * @param Number of iterations to print the results
+	 **/
 	void setPrintPeriod             (const int pp)        { printPeriod = nextPrint = pp;                            }
+	/**
+	 * \brief Set the maximum number of individuals in the Pareto's Front.
+	 * @param Maximum number of individuals.
+	 **/
 	void setMaxLocalFrontSize       (const int max)       { localFrontSize = max;                                    }
+	/// @cond INTERNAL
 	void setIdConf                  (const int idConf)    { this->idConf = idConf;                                   }
+	/// @endcond
 	void setScoreAlgorithm          (ScoreAlgorithm *sc)  { scoreAlgorithm = (LocalScoreAlgorithm *)sc;              }
 	void setLocalSearch             (LocalSearch *ls)     { this->ls = ls;                                           }
 	void setMultiObjectivizationPlugins (const vector<MultiObjectivization*> &multi) { this->multiObjectivizationsPlugins = multi; }
@@ -102,20 +115,56 @@ public:
 	//Fijar archivo
 	void setGenerateArchive         (const bool generate, const int type);
 
-	// Non-Inline Setters
+	/** \brief Initialize the necessary attributes to set a stopping criteria
+	 *  @param critStop integer: TIME, EVALUATIONS, QUALITY
+	 *  @param critStopValue criteria stop value
+	 **/
 	void setStoppingCriterion(const int critStop, const double critStopValue);
 
-	// Getters
+	/**
+	 * \brief Method that returns the stopping criteria.
+	 * @returns The actual stopping criteria
+	 **/
 	inline int getCritStop                     (void) const             { return critStop;                               }
+	/**
+	 * \brief This method returns the value for the stopping criteria.
+	 * @returns The stopping criteria value
+	 **/
 	inline double getCritStopValue             (void) const             { return critStopValue;                          }
+	/**
+	 * \brief Returns how many iterations the algorithm must print the results.
+	 * @returns Number of iterations to print the results
+	 **/
 	inline int getPrintPeriod                  (void) const             { return printPeriod;                            }
+	/**
+	 * \brief This method returns how many individuals are in the population.
+	 * @returns Population size
+	 **/
 	inline int getPopulationSize               (void) const             { return pSize;                                  }
 	inline MOFront* getLocalSolution           (void) const             { return localSolution;                          }
+	/**
+	 * \brief Method that returns the number of maximum evaluations to perform.
+	 * @returns Maximum evaluations to perform
+	 **/
 	inline int getEvaluations                  (void) const             { return evaluations;                            }
+	/**
+	 * \brief Method that returns the number of performed evaluations.
+	 * @returns Performed evaluations
+	 **/
 	inline int getPerformedEvaluations         (void) const             { return evaluationActual;                       }
+	/**
+	 * \brief Method that returns the number of generations.
+	 * @returns Current generation.
+	 **/
 	inline int getGeneration                   (void) const             { return generationActual;                       }
+	/**
+	 * \brief Method that returns the number of maximum individuals in the Pareto's Front.
+	 * @returns Maximum number of individuals in the Pareto's Front
+	 **/
 	inline int getMaxLocalFrontSize            (void) const             { return localFrontSize;                         }
+	/// @cond INTERNAL
 	inline int getIdConf                       (void) const             { return idConf;                                 }
+	/// @endcond
 	inline Individual *getSampleInd            (void) const             { return sampleInd;                              } 
 	static inline string getGlobalTypeStopCrit (const int i)            { return CRIT_STOP[i];                           }
 	static inline int getTypeStoppingCriterion (const string &cr)       { return getIndex(cr, CRIT_STOP, N_CRIT_STOP);   }
@@ -123,12 +172,18 @@ public:
 	inline int getNextPrint                    (void) const             { return nextPrint;                              }
 	inline MultiObjectivization* getMultiObjectivizationPlugin (int index) const { return multiObjectivizationsPlugins[index];    }
 	inline int getNumMultiObjectivizationPlugins(void) const            { return  multiObjectivizationsPlugins.size(); }
+	/**
+	 * \brief This method returns the elapsed time of the execution.
+	 * @returns Elapsed time
+	 **/
 	double getElapsedTime() const;
-
 	// Soporte de multiObjectivizacion
 	virtual bool supportsMultiObjectivization() { return false; }
 
 protected:
+	/**
+	 * \brief Vector of Individual instances that shape the population.
+	 **/
 	vector<Individual*>* population;
 	
 	// Operador de torneo binario anadido por 
@@ -136,35 +191,52 @@ protected:
 	int binaryTournament(vector<Individual *>* pop);
 
 private:
+	/**
+	 * \brief Sample Individual. Useful for copy purposes.
+	 **/
 	Individual *sampleInd;
+	/**
+	 * \brief OutputPrinter instance to print the results.
+	 **/
 	OutputPrinter *outputPrinter;
 	MOFront *localSolution;
 	LocalScoreAlgorithm *scoreAlgorithm;
 	LocalSearch *ls;
 	int critStop, evaluations, evaluationActual, generations, generationActual;
+	/**
+	 * \brief Desired quality to finish the execution.
+	 * This variable it is only used when the QUALITY stopping criteria is set.
+	 **/
 	double quality;
 	int localFrontSize;
+	/// @cond INTERNAL
 	int pSize, myId, numProcs, initiated;
+	/// @endcond
 	double time, critStopValue;
+	/// @cond INTERNAL
 	int idConf;
 	double startTime;
+	/// @endcond
 	vector<MultiObjectivization*> multiObjectivizationsPlugins;
-
+	/**
+	 * \brief Method that run one generation of the algorithm.
+	 * This method must be overwritten by the sub-classes.
+	 **/
 	virtual void runGeneration() = 0;
-
-	// Metodos privados que pueden ser sobreescritos
+	/**
+	 * \brief Method fill the population with new individuals and then, evaluate them.
+	 * This method could be overwritten by the sub-classes.
+	 **/
 	virtual void fillPopWithNewIndsAndEvaluate();
-
-	
+	/// @cond INTERNAL
 	// Impresiones intermedias
 	void checkPrint();
 	int printPeriod;
 	int nextPrint;
-
 	// Generar frente complete
 	bool generateArchive;
-
 	friend class ExecutionIsland;
+	/// @endcond
 };
 
 typedef enum {

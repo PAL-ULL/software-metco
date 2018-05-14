@@ -1,8 +1,8 @@
 /***********************************************************************************
  * AUTORES
- *   - Ofelia González Pérez
+ *   - Ofelia Gonzï¿½lez Pï¿½rez
  *   - Gara Miranda Valladares
- *   - Carlos Segura González
+ *   - Carlos Segura Gonzï¿½lez
  * 
  * FECHA
  *    Noviembre 2007
@@ -37,7 +37,7 @@ EA::EA() {
 }
 
 /* ********************************************************************************
- * Elimina la solución local y la población
+ * Elimina la soluciï¿½n local y la poblaciï¿½n
  * ********************************************************************************/
 EA::~EA() {
 	delete localSolution;
@@ -92,8 +92,8 @@ void EA::setStoppingCriterion(const int critStop, const double critStopValue) {
 
 
 /* ******************************************************************************
- * Este método devuelve true cuando se ha alcanzado el criterio de parada local
- * del EA. Los criterios actuales pueden ser tiempo de ejecución o número de 
+ * Este mï¿½todo devuelve true cuando se ha alcanzado el criterio de parada local
+ * del EA. Los criterios actuales pueden ser tiempo de ejecuciï¿½n o nï¿½mero de 
  * evaluaciones realizadas. 
  * ******************************************************************************/
 bool EA::hasFinished() {
@@ -118,8 +118,8 @@ bool EA::hasFinished() {
 
 
 /* *********************************************************************************
- * Realiza las impresiones intermedias de la solución encontrada en función del 
- * periodo de impresión fijado por el usuario
+ * Realiza las impresiones intermedias de la soluciï¿½n encontrada en funciï¿½n del 
+ * periodo de impresiï¿½n fijado por el usuario
  * *********************************************************************************/
 void EA::checkPrint() {
 	if (printPeriod == 0)
@@ -135,10 +135,10 @@ void EA::checkPrint() {
 
 
 /*************************************************************************************
- * Este método lleva a cabo la ejecución secuencial e independiente del algoritmo.
- * Primero genera la población inicial y a continuación va ejecutando generación
- * tras generación hasta que se cumpla el criterio de parada.
- * Cada cierto numero de evaluaciones muestra por pantalla la solución actual.
+ * Este mï¿½todo lleva a cabo la ejecuciï¿½n secuencial e independiente del algoritmo.
+ * Primero genera la poblaciï¿½n inicial y a continuaciï¿½n va ejecutando generaciï¿½n
+ * tras generaciï¿½n hasta que se cumpla el criterio de parada.
+ * Cada cierto numero de evaluaciones muestra por pantalla la soluciï¿½n actual.
  * ***********************************************************************************/
 void EA::run() {
 	struct timeval actualTime; 
@@ -154,14 +154,14 @@ void EA::run() {
 
 
 /*************************************************************************************
- * Este método es invocado cuando se reciben individuos migrados desde otra isla. 
+ * Este mï¿½todo es invocado cuando se reciben individuos migrados desde otra isla. 
  * El algoritmo debe sacrificar a algunos de los individuos actuales, 
- * intercambiándolos por los nuevos individuos. La elección de que individuos se 
+ * intercambiï¿½ndolos por los nuevos individuos. La elecciï¿½n de que individuos se 
  * intercambian es dependiente del algoritmo.
- * El conjunto de individuos que sean sacrificados (ya no se vayan a usar más)
+ * El conjunto de individuos que sean sacrificados (ya no se vayan a usar mï¿½s)
  * y los individuos del vector migrados que no se utilicen deben ser borrados
  * mediante el uso del operador delete.
- * Por defecto se intercambian los primeros individuos de la población por
+ * Por defecto se intercambian los primeros individuos de la poblaciï¿½n por
  * los individuos que se han recibido
  * ***********************************************************************************/
 void EA::received(vector<Individual*> &mig){
@@ -176,10 +176,10 @@ void EA::received(vector<Individual*> &mig){
 }
 
 /*************************************************************************************
- * Ejecución de generaciones
- * - Se ejecuta la generación
+ * Ejecuciï¿½n de generaciones
+ * - Se ejecuta la generaciï¿½n
  * - Se llama al codigo generationCode del individuo 
- * - Se incrementa el número de generaciones hechas
+ * - Se incrementa el nï¿½mero de generaciones hechas
  * ***********************************************************************************/
 void EA::runGenerationInc() {
 	sampleInd->generationCode();
@@ -194,7 +194,7 @@ void EA::runGenerationInc() {
 
 
 /************************************************************************************
- * Inicialización de la población con un conjunto de individuos que ya estan
+ * Inicializaciï¿½n de la poblaciï¿½n con un conjunto de individuos que ya estan
  * evaluados
  * El resto se generan de forma aleatoria y se evaluan 
  * *********************************************************************************/
@@ -207,7 +207,7 @@ void EA::fillPopWithEvaluatedInds(const vector<Individual *> &newInds) {
 
 
 /************************************************************************************
- * Rellena la poblacion hasta llegar al tamaño de la población, con individuos que 
+ * Rellena la poblacion hasta llegar al tamaï¿½o de la poblaciï¿½n, con individuos que 
  * se crean llamando al metodo create del individuo
  * *********************************************************************************/
 void EA::fillPopWithNewIndsAndEvaluate() {
@@ -261,8 +261,8 @@ void EA::evaluate(Individual *ind) {
 /****************************************************************************************
  *   Guarda el individuo en el frente de soluciones locales en las ejecuciones paralelas
  *   o secuenciales en las que se indique que se quiere guardar. Para indicar que
- *   se almacene el frente local en las ejecuciones secuenciales habrá que indicarlo
- *   en la línea de comandos de la ejecución
+ *   se almacene el frente local en las ejecuciones secuenciales habrï¿½ que indicarlo
+ *   en la lï¿½nea de comandos de la ejecuciï¿½n
  *   Supone que ya esta evaluado
  ***************************************************************************************/
 
@@ -275,7 +275,7 @@ void EA::insertInArchive(Individual *ind){
 
 
 /***********************************************************************************
- * Obtiene un EA* a partir del nombre del EA. El fichero de la librería debe
+ * Obtiene un EA* a partir del nombre del EA. El fichero de la librerï¿½a debe
  * tener el mismo nombre que el EA y estar situado en el mismo directorio que
  * el programa
  * *********************************************************************************/
