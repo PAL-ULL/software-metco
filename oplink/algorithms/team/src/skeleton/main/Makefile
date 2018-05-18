@@ -222,18 +222,18 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/marre/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = ${SHELL} /home/marre/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/missing autoconf
-AUTOHEADER = ${SHELL} /home/marre/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/missing autoheader
-AUTOMAKE = ${SHELL} /home/marre/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/missing automake-1.15
+AUTOCONF = ${SHELL} /home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/missing autoconf
+AUTOHEADER = ${SHELL} /home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/missing autoheader
+AUTOMAKE = ${SHELL} /home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/missing automake-1.15
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2 -std=c++11
 CPP = gcc -E
-CPPFLAGS = -g -std=c++11
+CPPFLAGS = -std=c++11
 CXX = g++
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2 -std=c++11
@@ -260,7 +260,7 @@ LEX_OUTPUT_ROOT = lex.yy
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/marre/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/missing makeinfo
+MAKEINFO = ${SHELL} /home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/missing makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
 PACKAGE = metco
@@ -278,10 +278,10 @@ STRIP =
 VERSION = 0.54
 YACC = bison -y
 YFLAGS = 
-abs_builddir = /home/marre/software-metco/oplink/algorithms/team/src/skeleton/main
-abs_srcdir = /home/marre/software-metco/oplink/algorithms/team/src/skeleton/main
-abs_top_builddir = /home/marre/software-metco/oplink/algorithms/team/src/skeleton/main
-abs_top_srcdir = /home/marre/software-metco/oplink/algorithms/team/src/skeleton/main
+abs_builddir = /home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main
+abs_srcdir = /home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main
+abs_top_builddir = /home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main
+abs_top_srcdir = /home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main
 ac_ct_CC = gcc
 ac_ct_CXX = g++
 am__include = include
@@ -301,7 +301,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${temp}
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/marre/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/install-sh
+install_sh = ${SHELL} /home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main/configureFiles/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -339,7 +339,7 @@ metcoSeq_SOURCES = metcoSeq.cpp
 metcoPar_SOURCES = metcoPar.cpp
 FLEX = flex
 BISON = bison
-CCFLAGS = -c -g -O2 -std=c++11
+CCFLAGS = -c -O2 -std=c++11
 IFLAGS = -I. -I.. -I../utils -I../../../src_external/hv-1.1-src
 DFLAGS = 
 LFLAGS = -fPIC 
