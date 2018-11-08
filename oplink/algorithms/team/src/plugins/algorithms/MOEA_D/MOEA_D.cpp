@@ -2,20 +2,21 @@
 #include <float.h>
 #include <random>
 
-const int MOEA_D::TCHE = 0;
-const int MOEA_D::PARAMS = 3;
+const int MOEA_D::PARAMS = 4;
 
 // Inicializa los parámetros iniciales del algoritmo
 bool MOEA_D::init(const vector<string> &params) {
     if(params.size() != MOEA_D::PARAMS){
-        cerr << "Error\nParams for MOEAD_D are: <neighborhood_size> <delta> <replacedSolutions>" << endl;
+        cerr << "Error\nParams for MOEAD_D are: <neighborhood_size> <replacedSolutions> <mutationProb> <seed>" << endl;
         return false;
     } else {
         neighSize = stoi(params[0]);
-        delta = stof(params[1]);
-        replacedSolutions = stoi(params[2]);
+        replacedSolutions = stoi(params[1]);
+        mutationProb = stof(params[2]);
+        seed = stof(params[3]);
         neighborhood.resize(getPopulationSize(), std::vector<int>());
         lambdaV.resize(getPopulationSize(), std::vector<double>());
+        childs.resize(0);
         return true;
     }
 }
@@ -24,10 +25,12 @@ bool MOEA_D::init(const vector<string> &params) {
 void MOEA_D::runGeneration() {
     if(getGeneration() == 0){
         initWeights();
-        initNeighborhood();
+        initNeighborhood(population);
         initZVector();
     } else {
-        cout << "TODO" << endl;
+        reproduce();
+        updateReferencePoint(childs);
+        updateNeighbors();
     }
 }
 
@@ -62,7 +65,8 @@ void MOEA_D::initNeighborhood() {
 }
 
 double MOEA_D::getEuclideanDistanceFromCoeff(const vector<double>& coeff1,
-                                            const vector<double>& coeff2) const {
+                                            const vector<double>& coeff2)
+                                            const {
 	double dist = 0;
     const int size = coeff1.size();
 	for (int i = 0; i < size; i++){
@@ -93,25 +97,49 @@ void MOEA_D::initZVector() {
     for(int i = 0; i < objs; i++) {
         zVector->setVar(i, 1.0e+30);
     }
-    updateReferencePoint();
+    updateReferencePoint(population);
 }
 
-void MOEA_D::updateReferencePoint() {
+void MOEA_D::updateReferencePoint(vector<Individual*>& ind) {
     const int objs = (*population)[0]->getNumberOfObj();
-    const int size = getPopulationSize();
+    const int size = ind->size();
     for(int i = 0; i < objs; i++) {
         for(int j = 0; j < size; j++) {
-            if((*population)[j]->getInternalOptDirection(i) == MINIMIZE) {
-                if(isless((*population)[j]->getObj(i), zVector->getObj(i))) {
-                    zVector->setObj(i, (*population)[j]->getObj(i));
+            if((*ind)[j]->getInternalOptDirection(i) == MINIMIZE) {
+                if(isless((*ind)[j]->getObj(i), zVector->getObj(i))) {
+                    zVector->setObj(i, (*ind)[j]->getObj(i));
                 }
             } else {
-                if(isgreater((*population)[j]->getObj(i), zVector->getObj(i))) {
-                    zVector->setObj(i, (*population)[j]->getObj(i));
+                if(isgreater((*ind)[j]->getObj(i), zVector->getObj(i))) {
+                    zVector->setObj(i, (*ind)[j]->getObj(i));
                 }
             }
         }
     }
+}
+
+void MOEA_D::reproduce() {
+    int size = getPopulationSize();
+    std::random_device rd;
+    std::mt19937 range(rd());
+    std::uniform_int_distribution<int> uni(0, size);
+    for(int i = 0; i < size; i++) {
+        int l = uni(range);
+        int k = uni(range);
+        unique_ptr<Individual> indL = (*population)[l]->clone();
+        unique_ptr<Individual> indK = (*population)[k]->clone();
+        indL->crossover(indK);
+        indL->mutation(mutationProb);
+        childs.push_back(indL);
+    }
+}
+
+void MOEA_D::improvement() {
+    return;
+}
+
+void MOEA_D::updateNeighbors() {
+
 }
 
 // Rellena un frente con las soluciones actuales

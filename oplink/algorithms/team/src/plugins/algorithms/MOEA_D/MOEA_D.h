@@ -15,14 +15,15 @@
 
 class MOEA_D : public EA {
 public:
-	static const int TCHE;
 	static const int PARAMS;
 private:
 	unique_ptr<Individual> zVector; // Punto ideal
 	vector<vector<double>> lambdaV; // Vectores de coeficientes
 	int neighSize; // Tamanio del vecindario
 	vector<vector<int>> neighborhood; // Estructura del Vecindario
-	double delta;
+	vector<Individual*> childs;
+	double mutationProb;
+	double seed;
 	int replacedSolutions;
 public:
 	// Constructor
@@ -40,11 +41,13 @@ private:
 	void initWeights();
 	void initNeighborhood();
 	void initZVector();
-	void updateReferencePoint();
+	void updateReferencePoint(vector<Individual*>&);
 	double getEuclideanDistanceFromCoeff(const vector<double>&,
 		const vector<double>&) const;
 	void minFastSort(vector<double>&, vector<int>&);
-
+	void reproduce();
+	void improvement();
+	void updateNeighbors();
 };
 
 
