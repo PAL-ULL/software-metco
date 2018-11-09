@@ -22,8 +22,7 @@ private:
 	int neighSize; // Tamanio del vecindario
 	vector<vector<int>> neighborhood; // Estructura del Vecindario
 	double mutationProb;
-	double seed;
-	int replacedSolutions;
+	double crossoverProb;
 public:
 	// Constructor
 	MOEA_D() {};

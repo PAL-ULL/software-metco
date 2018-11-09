@@ -4,22 +4,25 @@
 #include <math.h>
 #include <limits>
 
-const int MOEA_D::PARAMS = 3;
+const int MOEA_D::PARAMS = 4;
+
 MOEA_D::~MOEA_D() {
-    Individual* p = zVector.release();
-    delete p;
+    //
 }
+
 // Inicializa los parámetros iniciales del algoritmo
 bool MOEA_D::init(const vector<string> &params) {
     if(params.size() != MOEA_D::PARAMS){
-        cerr << "Error\nParams for MOEAD_D are: <population_size> <neighborhood_size> <mutationProb>" << endl;
+        cerr << "Error\nParams for MOEAD_D are: <population_size> <neighborhood_size> <mutationProb> <crossoverProb>" << endl;
         return false;
     } else {
-        setPopulationSize(stof(params[0]));
-        neighSize = stoi(params[1]);
-        mutationProb = stof(params[2]);
+        setPopulationSize(stof(params[0].c_str()));
+        neighSize = stoi(params[1].c_str());
+        mutationProb = stof(params[2].c_str());
+        crossoverProb = stof(params[3].c_str());
         neighborhood.resize(getPopulationSize(), std::vector<int>());
         lambdaV.resize(getPopulationSize(), std::vector<double>());
+        zVector = unique_ptr<Individual>(getSampleInd()->internalClone());
         return true;
     }
 }
@@ -63,8 +66,8 @@ void MOEA_D::runGeneration() {
                 (*population)[neighborhood[i][j]] = indL->internalClone();
             }
         }
-        indL.release();
-        indK.release();
+        indL.reset();
+        indK.reset();
         child->clear();
         delete(child);
     }
@@ -128,7 +131,6 @@ void MOEA_D::minFastSort(vector<double>& distances, vector<int>& idx) {
 }
 
 void MOEA_D::initZVector() {
-    zVector = unique_ptr<Individual>(this->getSampleInd());
     const int objs = (*population)[0]->getNumberOfObj();
     for(int i = 0; i < objs; i++) {
         zVector->setVar(i, 1.0e+30);
@@ -215,5 +217,9 @@ void MOEA_D::getSolution(MOFront *p) {
 
 // Muestra la información relativa al algoritmo
 void MOEA_D::printInfo(ostream &os) const {
-   os << "TODO" << endl;
+    os << "MOEA/D: Multiobjective Evolutionary Algorithm Based on Decomposition" << endl;
+    os << "Number of Evaluations = " << getEvaluations() << endl;
+    os << "Mutation Probability = " << mutationProb << endl;
+    os << "Population Size = " << getPopulationSize() << endl;
+    os << "Neighbors = " << neighSize << endl;
 }
