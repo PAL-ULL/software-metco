@@ -21,13 +21,13 @@ private:
 	vector<vector<double>> lambdaV; // Vectores de coeficientes
 	int neighSize; // Tamanio del vecindario
 	vector<vector<int>> neighborhood; // Estructura del Vecindario
-	vector<Individual*> childs;
 	double mutationProb;
 	double seed;
 	int replacedSolutions;
 public:
 	// Constructor
 	MOEA_D() {};
+	~MOEA_D();
 	// Define una generación de búsqueda del algoritmo
 	void runGeneration();
 	// Inicializa los parámetros iniciales del algoritmo
@@ -41,12 +41,13 @@ private:
 	void initWeights();
 	void initNeighborhood();
 	void initZVector();
-	void updateReferencePoint(vector<Individual*>&);
+	void updateReferencePoint(vector<Individual*>*);
 	double getEuclideanDistanceFromCoeff(const vector<double>&,
 		const vector<double>&) const;
 	void minFastSort(vector<double>&, vector<int>&);
 	void reproduce();
 	void improvement();
+	double evaluateWithG(Individual*, vector<double>&);
 	void updateNeighbors();
 };
 
