@@ -6,7 +6,6 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
-#include <set>
 #include <memory>
 #include "MOFront.h"
 #include "Individual.h"
@@ -21,6 +20,7 @@ private:
 	vector<vector<double>> lambdaV; // Vectores de coeficientes
 	int neighSize; // Tamanio del vecindario
 	vector<vector<int>> neighborhood; // Estructura del Vecindario
+	// Operators Probability
 	double mutationProb;
 	double crossoverProb;
 public:
@@ -44,10 +44,7 @@ private:
 	double getEuclideanDistanceFromCoeff(const vector<double>&,
 		const vector<double>&) const;
 	void minFastSort(vector<double>&, vector<int>&);
-	void reproduce();
-	void improvement();
 	double evaluateWithG(Individual*, vector<double>&);
-	void updateNeighbors();
 };
 
 

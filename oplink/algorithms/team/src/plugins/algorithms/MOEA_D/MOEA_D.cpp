@@ -35,9 +35,9 @@ void MOEA_D::runGeneration() {
         initZVector();
     }
     const int size = getPopulationSize();
-    std::random_device rd;
-    std::mt19937 range(rd());
-    std::uniform_int_distribution<int> uni(0, neighSize - 1);
+    random_device rd;
+    mt19937 range(rd());
+    uniform_int_distribution<int> uni(0, neighSize - 1);
     for(int i = 0; i < size; i++) {
         // Update
         int idxL = 0;
@@ -154,40 +154,6 @@ void MOEA_D::updateReferencePoint(vector<Individual*>* ind) {
             }
         }
     }
-}
-
-void MOEA_D::reproduce() {
-    // int size = getPopulationSize();
-    // std::random_device rd;
-    // std::mt19937 range(rd());
-    // std::uniform_int_distribution<int> uni(0, size);
-    // for(int i = 0; i < size; i++) {
-    //     int l = uni(range);
-    //     int k = uni(range);
-    //     unique_ptr<Individual> indL = unique_ptr<Individual>( (*population)[l]->internalClone());
-    //     unique_ptr<Individual> indK = unique_ptr<Individual>( (*population)[k]->internalClone());
-    //     indL->crossover(indK.get());
-    //     indL->mutation(mutationProb);
-    //     childs.push_back(indL.get());
-    // }
-}
-
-void MOEA_D::improvement() {
-    return;
-}
-
-void MOEA_D::updateNeighbors() {
-    // int size = getPopulationSize();
-    // for(int i = 0; i < size; i++) { // loop through population
-    //     for(int j = 0; j < neighSize; j++) { // for-each neighbor
-    //         double evaluationX = evaluate((*population)[neighborhood[i][j]], lambdaV[i]);
-    //         double evaluationY = evaluate(childs[i], lambdaV[i]);
-    //         if (isless(evaluationY, evaluationX)) {
-    //             (*population)[neighborhood[i][j]] = childs[i]->internalClone();
-    //             //neighborhood[i][j]->internalClone(childs[i]);
-    //         }
-    //     }
-    // }
 }
 
 double MOEA_D::evaluateWithG(Individual* ind, vector<double>& lambda) {
