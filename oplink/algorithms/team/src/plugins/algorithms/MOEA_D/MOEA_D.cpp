@@ -52,8 +52,7 @@ void MOEA_D::runGeneration() {
                                 [neighborhood[i][idxK]]->internalClone());
         indL->crossover(indK.get());
         indL->mutation(mutationProb);
-        improvement(indL.get());
-        // Update of Z
+        improvement(indL); // improvement
         vector<Individual*>* child = new vector<Individual*>();
         child->push_back(indL.get());
         updateReferencePoint(child);
@@ -175,7 +174,7 @@ double MOEA_D::evaluateWithG(Individual* ind, vector<double>& lambda) {
 }
 
 // Mantenemos las variables dentro de los límites
-void MOEA_D::improvement(Individual* ind) {
+void MOEA_D::improvement(unique_ptr<Individual>& ind) {
     const int vars = ind->getNumberOfVar();
     default_random_engine generator;
     for(int i = 0; i < vars; i++) {
@@ -200,5 +199,5 @@ void MOEA_D::printInfo(ostream &os) const {
     os << "Number of Evaluations = " << getEvaluations() << endl;
     os << "Mutation Probability = " << mutationProb << endl;
     os << "Population Size = " << getPopulationSize() << endl;
-    os << "Neighbors = " << neighSize << endl;
+    os << "Neighborhood size = " << neighSize << endl;
 }
