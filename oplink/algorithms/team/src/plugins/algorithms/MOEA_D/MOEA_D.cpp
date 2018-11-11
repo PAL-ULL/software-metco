@@ -52,7 +52,7 @@ void MOEA_D::runGeneration() {
                                 [neighborhood[i][idxK]]->internalClone());
         indL->crossover(indK.get());
         indL->mutation(mutationProb);
-        // Improvement TODO
+        improvement(indL.get());
         // Update of Z
         vector<Individual*>* child = new vector<Individual*>();
         child->push_back(indL.get());
@@ -174,10 +174,23 @@ double MOEA_D::evaluateWithG(Individual* ind, vector<double>& lambda) {
     return objective;
 }
 
+// Mantenemos las variables dentro de los límites
+void MOEA_D::improvement(Individual* ind) {
+    const int vars = ind->getNumberOfVar();
+    default_random_engine generator;
+    for(int i = 0; i < vars; i++) {
+        if(ind->getVar(i) > ind->getMaximum(i)
+        || ind->getVar(i) < ind->getMinimum(i)){
+            uniform_real_distribution<double> distribution(ind->getMinimum(i), ind->getMaximum(i));
+            ind->setVar(i, distribution(generator));
+        }
+    }
+}
+
 // Rellena un frente con las soluciones actuales
 void MOEA_D::getSolution(MOFront *p) {
-   for (unsigned int i = 0;  i < population->size(); i++) {
-      p->insert((*population)[i]);
+   for (Individual* ind : (*population)) {
+      p->insert(ind);
    }
 }
 

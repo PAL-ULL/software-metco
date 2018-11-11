@@ -45,6 +45,7 @@ private:
 		const vector<double>&) const;
 	void minFastSort(vector<double>&, vector<int>&);
 	double evaluateWithG(Individual*, vector<double>&);
+	void improvement(Individual*);
 };
 
 
