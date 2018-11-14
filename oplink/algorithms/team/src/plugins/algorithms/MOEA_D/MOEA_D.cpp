@@ -1,3 +1,11 @@
+/***********************************************************************************
+ * AUTHORS
+ *   - Alejandro Marrero
+ *   - Eduardo Segredo
+ *
+ * DATE
+ *   November 2018
+ * *********************************************************************************/
 #include "MOEA_D.h"
 #include <float.h>
 #include <random>
@@ -5,6 +13,10 @@
 #include <limits>
 
 const int MOEA_D::PARAMS = 4;
+
+MOEA_D::MOEA_D() {
+
+}
 
 MOEA_D::~MOEA_D() {
     //
@@ -22,18 +34,18 @@ bool MOEA_D::init(const vector<string> &params) {
         crossoverProb = stof(params[3].c_str());
         neighborhood.resize(getPopulationSize(), std::vector<int>());
         lambdaV.resize(getPopulationSize(), std::vector<double>());
-        zVector = unique_ptr<Individual>(getSampleInd()->internalClone());
+        refPoint = unique_ptr<Individual>(getSampleInd()->internalClone());
+        exPopulation.resize(0);
+        initWeights();
+        initNeighborhood();
+        initReferencePoint();
+        initPopulation();
         return true;
     }
 }
 
 // Define una generación de búsqueda del algoritmo
 void MOEA_D::runGeneration() {
-    if(getGeneration() == 0){
-        initWeights();
-        initNeighborhood();
-        initZVector();
-    }
     const int size = getPopulationSize();
     random_device rd;
     mt19937 range(rd());
@@ -50,12 +62,11 @@ void MOEA_D::runGeneration() {
                                 [neighborhood[i][idxL]]->internalClone());
         unique_ptr<Individual> indK = unique_ptr<Individual>((*population)
                                 [neighborhood[i][idxK]]->internalClone());
+        
         indL->crossover(indK.get());
         indL->mutation(mutationProb);
-        improvement(indL); // improvement
-        vector<Individual*>* child = new vector<Individual*>();
-        child->push_back(indL.get());
-        updateReferencePoint(child);
+        improvement(indL); // improvement;
+        updateReferencePoint(indL.get());
         // Update Neighbors
         for(int j = 0; j < neighSize; j++) {
             double childEvaluation = evaluateWithG(indL.get(), lambdaV.at(j));
@@ -67,8 +78,6 @@ void MOEA_D::runGeneration() {
         }
         indL.reset();
         indK.reset();
-        child->clear();
-        delete(child);
     }
 }
 
@@ -129,30 +138,35 @@ void MOEA_D::minFastSort(vector<double>& distances, vector<int>& idx) {
     }
 }
 
-void MOEA_D::initZVector() {
+void MOEA_D::initReferencePoint() {
     const int objs = (*population)[0]->getNumberOfObj();
     for(int i = 0; i < objs; i++) {
-        zVector->setVar(i, 1.0e+30);
-    }
-    updateReferencePoint(population);
-}
-
-void MOEA_D::updateReferencePoint(vector<Individual*>* ind) {
-    const int objs = (*population)[0]->getNumberOfObj();
-    const int size = ind->size();
-    for(int i = 0; i < objs; i++) {
-        for(int j = 0; j < size; j++) {
-            if((*ind)[j]->getInternalOptDirection(i) == MINIMIZE) {
-                if(isless((*ind)[j]->getObj(i), zVector->getObj(i))) {
-                    zVector->setObj(i, (*ind)[j]->getObj(i));
-                }
-            } else {
-                if(isgreater((*ind)[j]->getObj(i), zVector->getObj(i))) {
-                    zVector->setObj(i, (*ind)[j]->getObj(i));
-                }
-            }
+        if(getSampleInd()->getInternalOptDirection(i) == MAXIMIZE) {
+            refPoint->setVar(i, numeric_limits<double>::min());
+        } else if (getSampleInd()->getInternalOptDirection(i) == MINIMIZE) {
+            refPoint->setVar(i, numeric_limits<double>::max());
         }
     }
+}
+
+void MOEA_D::updateReferencePoint(Individual* ind) {
+    const int objs = ind->getNumberOfObj();
+    for(int i = 0; i < objs; i++) {
+            if(ind->getInternalOptDirection(i) == MINIMIZE) {
+                if(isless(ind->getObj(i), refPoint->getObj(i))) {
+                    refPoint->setObj(i, ind->getObj(i));
+                }
+            } else {
+                if(isgreater(ind->getObj(i), refPoint->getObj(i))) {
+                    refPoint->setObj(i, ind->getObj(i));
+                }
+            }
+    }
+}
+
+void MOEA_D::initPopulation() {
+    for(Individual* ind : (*population))
+        updateReferencePoint(ind);
 }
 
 double MOEA_D::evaluateWithG(Individual* ind, vector<double>& lambda) {
@@ -160,7 +174,7 @@ double MOEA_D::evaluateWithG(Individual* ind, vector<double>& lambda) {
     double objective = numeric_limits<double>::max();
     evaluate(ind);
     for(int i = 0; i < objs; i++) {
-        double abs = fabs(ind->getObj(i) - zVector->getObj(i));
+        double abs = fabs(ind->getObj(i) - refPoint->getObj(i));
         if (lambda[i] == 0) {
             abs += 0.0001;
         } else {
@@ -188,8 +202,8 @@ void MOEA_D::improvement(unique_ptr<Individual>& ind) {
 
 // Rellena un frente con las soluciones actuales
 void MOEA_D::getSolution(MOFront *p) {
-   for (Individual* ind : (*population)) {
-      p->insert(ind);
+   for (const unique_ptr<Individual>& ind : exPopulation)  {
+      p->insert(ind.get());
    }
 }
 

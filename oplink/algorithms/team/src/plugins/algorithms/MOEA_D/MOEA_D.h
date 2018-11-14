@@ -1,4 +1,19 @@
-
+/***********************************************************************************
+ * AUTHORS
+ *   - Alejandro Marrero
+ *   - Eduardo Segredo
+ *
+ * DATE
+ *   November 2018
+ *
+ * DESCRIPTION
+ *
+ * Implementation of the Multi-objective Evolutionary Algorithm based on Decomposition
+ * (MOEA/D) given in:
+ * Qingfu Zhang, Hui Li (2007). "MOEA/D: A Multiobjective Evolutionary Algorithm
+ * Based on Decomposition". IEEE Transactions on Evolutionary Computation.
+ *
+ * **********************************************************************************/
 #ifndef __MOEA_D_H__
 #define __MOEA_D_H__
 
@@ -16,17 +31,18 @@ class MOEA_D : public EA {
 public:
 	static const int PARAMS;
 private:
-	unique_ptr<Individual> zVector; // Punto ideal
+	unique_ptr<Individual> refPoint; // Punto ideal
 	vector<vector<double>> lambdaV; // Vectores de coeficientes
 	int neighSize; // Tamanio del vecindario
 	vector<vector<int>> neighborhood; // Estructura del Vecindario
+	vector<unique_ptr<Individual>> exPopulation;
 	// Operators Probability
 	double mutationProb;
 	double crossoverProb;
 public:
 	// Constructor
-	MOEA_D() {};
-	~MOEA_D();
+	MOEA_D();
+	virtual ~MOEA_D();
 	// Define una generación de búsqueda del algoritmo
 	void runGeneration();
 	// Inicializa los parámetros iniciales del algoritmo
@@ -35,12 +51,13 @@ public:
 	void getSolution(MOFront *p) ;
 	// Muestra la información relativa al algoritmo
 	void printInfo(ostream &os) const;
-	string getName() const { return "MOEA_D"; }
+	inline string getName() const { return "MOEA/D"; }
 private:
 	void initWeights();
 	void initNeighborhood();
-	void initZVector();
-	void updateReferencePoint(vector<Individual*>*);
+	void initReferencePoint();
+	void updateReferencePoint(Individual*);
+	void initPopulation();
 	double getEuclideanDistanceFromCoeff(const vector<double>&,
 		const vector<double>&) const;
 	void minFastSort(vector<double>&, vector<int>&);
