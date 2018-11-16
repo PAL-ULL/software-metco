@@ -30,16 +30,9 @@
 class MOEA_D : public EA {
 public:
 	static const int PARAMS;
-private:
-	unique_ptr<Individual> refPoint; // Punto ideal
-	vector<vector<double>> lambdaV; // Vectores de coeficientes
-	int neighSize; // Tamanio del vecindario
-	vector<vector<int>> neighborhood; // Estructura del Vecindario
-	vector<unique_ptr<Individual>> exPopulation;
-	// Operators Probability
-	double mutationProb;
-	double crossoverProb;
-public:
+	static const int RANDOM;
+	static const int FILE;
+	static int DIRECTION;
 	// Constructor
 	MOEA_D();
 	virtual ~MOEA_D();
@@ -53,16 +46,27 @@ public:
 	void printInfo(ostream &os) const;
 	inline string getName() const { return "MOEA/D"; }
 private:
-	void initWeights();
+	void initWeights(bool withFile);
 	void initNeighborhood();
 	void initReferencePoint();
 	void updateReferencePoint(Individual*);
-	void initPopulation();
+	void updateReferencePoint(vector<Individual*>&);
+	void updateNeighbours(const int, Individual*);
+	void updateExternalPopulation(Individual* ind);
 	double getEuclideanDistanceFromCoeff(const vector<double>&,
 		const vector<double>&) const;
 	void minFastSort(vector<double>&, vector<int>&);
 	double evaluateWithG(Individual*, vector<double>&);
-	void improvement(unique_ptr<Individual>&);
+	void improvement(Individual*);
+	unique_ptr<Individual> refPoint; // Punto ideal
+	vector<vector<double>> weights; // Vectores de coeficientes
+	int neighSize; // Tamanio del vecindario
+	vector<vector<int>> neighborhood; // Estructura del Vecindario
+	vector<Individual*> exPopulation;
+	// Operators Probability
+	double mutationProb;
+	double crossoverProb;
+	string filename;
 };
 
 
