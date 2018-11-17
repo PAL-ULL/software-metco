@@ -1,0 +1,30 @@
+LFLAGS = -shared
+DECOMPOSITIONDIR = ../../plugins/decompositions/
+IFLAGS= -I../ -I../utils/ -I$(DECOMPOSITIONDIR)$(decomposition)/ -I../utils/fuzzylite/
+SO_FILE= $(decomposition).so
+COMPLETE_O_FILE=$(decomposition).complete.o
+O_FILE= $(decomposition).o
+C_FILE:=$(DECOMPOSITIONDIR)$(decomposition)/$(decomposition).cpp
+H_FILE:=$(DECOMPOSITIONDIR)$(decomposition)/$(decomposition).h
+LIBRARY_C_FILE:=$(DECOMPOSITIONDIR)$(decomposition)/$(decomposition).library.cpp
+LIBRARY_O_FILE:=$(decomposition).library.o
+H_FILE:=$(DECOMPOSITIONDIR)$(decomposition)/$(decomposition).h
+FILE_TO_CHANGE:=../complete.c
+OBJ_FILES:=Decomposition.reloc.o Individual.reloc.o utils.reloc.o Plugin.reloc.o
+
+$(SO_FILE):$(O_FILE) $(OBJ_FILES) $(LIBRARY_O_FILE)
+	$(CXX) $(IFLAGS) $(LFLAGS) -o $@ -Wl,--whole-archive ../utils/fuzzylite/lib/libfuzzylite-static.a -Wl,--no-whole-archive -Wl,-soname,$@ $^
+
+$(LIBRARY_O_FILE): $(LIBRARY_C_FILE) ../Decomposition.h ../Individual.h ../Definitions.h $(H_FILE)
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(LIBRARY_C_FILE) -o $@
+
+$(LIBRARY_C_FILE): $(FILE_TO_CHANGE)
+	sed 's/TIPO_NUEVO/$(decomposition)/g' $(FILE_TO_CHANGE) | sed 's/TIPO_DEVUELTO/Decomposition/g' > $@
+
+$(O_FILE): $(C_FILE) $(H_FILE) ../Decomposition.h ../Individual.h ../Definitions.h
+	$(CXX) -fPIC $(IFLAGS) $(CCFLAGS) $(C_FILE) -o $@
+
+$(OBJ_FILES): force
+	make -f Makefile $@
+
+force : ;

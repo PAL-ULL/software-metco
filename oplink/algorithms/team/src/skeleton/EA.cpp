@@ -3,7 +3,7 @@
  *   - Ofelia Gonz�lez P�rez
  *   - Gara Miranda Valladares
  *   - Carlos Segura Gonz�lez
- * 
+ *
  * FECHA
  *    Noviembre 2007
  ************************************************************************************/
@@ -75,7 +75,7 @@ void EA::setStoppingCriterion(const int critStop, const double critStopValue) {
 	this->critStop = critStop;
 	this->critStopValue = critStopValue;
 	if (critStop == getTypeStoppingCriterion("TIME")) {
-		struct timeval actualTime; 
+		struct timeval actualTime;
 		gettimeofday(&actualTime, NULL);
 		time = ((double) (actualTime.tv_sec) * 1.0e6 + (double) (actualTime.tv_usec))/1.0e6 + critStopValue;
 		evaluations = 0;
@@ -84,7 +84,7 @@ void EA::setStoppingCriterion(const int critStop, const double critStopValue) {
 	} else if (critStop == getTypeStoppingCriterion("QUALITY")){
 		quality = critStopValue;
 	} else {
-		cout << "\tError: Stopping criterion nondefined" << endl << flush; 
+		cout << "\tError: Stopping criterion nondefined" << endl << flush;
 		exit(-1);
 	}
 }
@@ -93,12 +93,12 @@ void EA::setStoppingCriterion(const int critStop, const double critStopValue) {
 
 /* ******************************************************************************
  * Este m�todo devuelve true cuando se ha alcanzado el criterio de parada local
- * del EA. Los criterios actuales pueden ser tiempo de ejecuci�n o n�mero de 
- * evaluaciones realizadas. 
+ * del EA. Los criterios actuales pueden ser tiempo de ejecuci�n o n�mero de
+ * evaluaciones realizadas.
  * ******************************************************************************/
 bool EA::hasFinished() {
 	if (critStop == getTypeStoppingCriterion("TIME")) {
-		struct timeval actualTime; 
+		struct timeval actualTime;
 		gettimeofday(&actualTime, NULL);
 		double at = ((double) (actualTime.tv_sec) * 1.0e6 + (double) (actualTime.tv_usec))/1.0e6;
 		return (at >= time);
@@ -111,14 +111,14 @@ bool EA::hasFinished() {
 		delete p;
 		return (reached);
 	} else {
-		cout << "\tError: Stopping criterion nondefined" << endl << flush; 
+		cout << "\tError: Stopping criterion nondefined" << endl << flush;
 		return (true);
 	}
 }
 
 
 /* *********************************************************************************
- * Realiza las impresiones intermedias de la soluci�n encontrada en funci�n del 
+ * Realiza las impresiones intermedias de la soluci�n encontrada en funci�n del
  * periodo de impresi�n fijado por el usuario
  * *********************************************************************************/
 void EA::checkPrint() {
@@ -141,7 +141,7 @@ void EA::checkPrint() {
  * Cada cierto numero de evaluaciones muestra por pantalla la soluci�n actual.
  * ***********************************************************************************/
 void EA::run() {
-	struct timeval actualTime; 
+	struct timeval actualTime;
 	gettimeofday(&actualTime, NULL);
 	startTime = (double) (actualTime.tv_sec) * 1.0e6 + (double) (actualTime.tv_usec);
 	fillPopWithNewIndsAndEvaluate();
@@ -154,9 +154,9 @@ void EA::run() {
 
 
 /*************************************************************************************
- * Este m�todo es invocado cuando se reciben individuos migrados desde otra isla. 
- * El algoritmo debe sacrificar a algunos de los individuos actuales, 
- * intercambi�ndolos por los nuevos individuos. La elecci�n de que individuos se 
+ * Este m�todo es invocado cuando se reciben individuos migrados desde otra isla.
+ * El algoritmo debe sacrificar a algunos de los individuos actuales,
+ * intercambi�ndolos por los nuevos individuos. La elecci�n de que individuos se
  * intercambian es dependiente del algoritmo.
  * El conjunto de individuos que sean sacrificados (ya no se vayan a usar m�s)
  * y los individuos del vector migrados que no se utilicen deben ser borrados
@@ -178,14 +178,14 @@ void EA::received(vector<Individual*> &mig){
 /*************************************************************************************
  * Ejecuci�n de generaciones
  * - Se ejecuta la generaci�n
- * - Se llama al codigo generationCode del individuo 
+ * - Se llama al codigo generationCode del individuo
  * - Se incrementa el n�mero de generaciones hechas
  * ***********************************************************************************/
 void EA::runGenerationInc() {
 	sampleInd->generationCode();
 	runGeneration();
 	ls->localSearch(population, generateArchive?localSolution:NULL);
-	
+
 	if (localFrontSize != 0){
 		localSolution->crowOrder(localFrontSize);
 	}
@@ -196,7 +196,7 @@ void EA::runGenerationInc() {
 /************************************************************************************
  * Inicializaci�n de la poblaci�n con un conjunto de individuos que ya estan
  * evaluados
- * El resto se generan de forma aleatoria y se evaluan 
+ * El resto se generan de forma aleatoria y se evaluan
  * *********************************************************************************/
 void EA::fillPopWithEvaluatedInds(const vector<Individual *> &newInds) {
 	for (unsigned int i = 0; i < newInds.size(); i++) {
@@ -207,7 +207,7 @@ void EA::fillPopWithEvaluatedInds(const vector<Individual *> &newInds) {
 
 
 /************************************************************************************
- * Rellena la poblacion hasta llegar al tama�o de la poblaci�n, con individuos que 
+ * Rellena la poblacion hasta llegar al tama�o de la poblaci�n, con individuos que
  * se crean llamando al metodo create del individuo
  * *********************************************************************************/
 void EA::fillPopWithNewIndsAndEvaluate() {
@@ -232,14 +232,14 @@ void EA::resetStopConditions() {
 	evaluationActual = 0;
 	generationActual = 0;
 	if (critStop == getTypeStoppingCriterion("TIME")) {
-		struct timeval actualTime; 
+		struct timeval actualTime;
 		gettimeofday(&actualTime, NULL);
-		time = ((double) (actualTime.tv_sec) * 1.0e6 + (double) (actualTime.tv_usec))/1.0e6 + critStopValue;	
+		time = ((double) (actualTime.tv_sec) * 1.0e6 + (double) (actualTime.tv_usec))/1.0e6 + critStopValue;
 	}
 }
 
 double EA::getElapsedTime() const {
-	struct timeval actualTime; 
+	struct timeval actualTime;
 	gettimeofday(&actualTime, NULL);
 	double at = (double) (actualTime.tv_sec) * 1.0e6 + (double) (actualTime.tv_usec);
 	return ((at - startTime) / 1.0e6);
@@ -254,7 +254,7 @@ void EA::evaluate(Individual *ind) {
 	ind->evaluate();
 	if (generateArchive) {
 		localSolution->insert(ind);
-	} 
+	}
 	evaluationActual++;
 }
 
@@ -269,7 +269,7 @@ void EA::evaluate(Individual *ind) {
 void EA::insertInArchive(Individual *ind){
 	if (generateArchive) {
 		localSolution->insert(ind);
-	} 
+	}
 }
 
 
@@ -294,21 +294,21 @@ EA *getEA(const string &pluginPath, const string &pluginName, const vector<strin
 // Torneo binario
 // Returns the index of the winning individual in the population
 int EA::binaryTournament(vector<Individual *>* pop) {
-	//int dominates = MOFront::dominate(newIndividual, aux) 
+	//int dominates = MOFront::dominate(newIndividual, aux)
 	int individual1 ;
 	int individual2 ;
 	int winner      ;
-	
+
 	if (pop->size() == 1)
 		return 0 ; // There is only one individual
-        
+
 	individual1 = (int)((pop->size()-1) * ((double)rand()/RAND_MAX)) ;
 	individual2 = individual1 ;
 	while (individual2 == individual1) {
 		double rnd = (double)rand()/RAND_MAX ;
 		individual2 = (int)((pop->size()) * rnd) ;
  	}
- 	
+
 	if ((individual1 >= pop->size()) || (individual1 < 0)) {
   		cerr << "Invalid individual1 in binary tournament. Index: " << individual1 << endl ;
 		exit(-1) ;
@@ -329,8 +329,12 @@ int EA::binaryTournament(vector<Individual *>* pop) {
 		if ((rand()/(RAND_MAX) < 0.5))
 			winner = individual1 ;
 		else
-			winner = individual2 ; 	
+			winner = individual2 ;
 	}
-	
+
 	return winner ;
 } // Torneo binario
+
+double EA::decompose(Individual* ind, Individual* reference, vector<double>& weights) {
+	return decomposition->evaluate(ind, reference, weights);
+}

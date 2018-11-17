@@ -1,12 +1,12 @@
 /* -----------------------------------------------------------------------------
- * Ejecución aislada de un único EA.
- * Al programa se le pasa el EA que se quiere ejecutar, el problema que se 
- * quiere resolver, el criterio de parada, la indicación de si se debe crear
- * un frente de Pareto con los óptimos encontrados durante toda la ejecución
- * y los parámetros que se deberán pasar al EA correspondiente.
- * Como salida proporciona el frente de Pareto obtenido durante la ejecución,
- * y los puntos solución (no tiene por qué coincidir con el frente de Pareto 
- * mostrado).  
+ * Ejecuciï¿½n aislada de un ï¿½nico EA.
+ * Al programa se le pasa el EA que se quiere ejecutar, el problema que se
+ * quiere resolver, el criterio de parada, la indicaciï¿½n de si se debe crear
+ * un frente de Pareto con los ï¿½ptimos encontrados durante toda la ejecuciï¿½n
+ * y los parï¿½metros que se deberï¿½n pasar al EA correspondiente.
+ * Como salida proporciona el frente de Pareto obtenido durante la ejecuciï¿½n,
+ * y los puntos soluciï¿½n (no tiene por quï¿½ coincidir con el frente de Pareto
+ * mostrado).
  * -------------------------------------------------------------------------- */
 
 #include <stdlib.h>
@@ -26,8 +26,9 @@
 #include "LocalSearch.h"
 #include "OutputPrinter.h"
 #include "MultiObjectivization.h"
+#include "Decomposition.h"
 
-#define MINIMUM_ARGS 10 
+#define MINIMUM_ARGS 10
 #define ARG_OUTPUTPATH          1
 #define ARG_PLUGINPATH          2
 #define ARG_OUTPUTPRINTERMODULE 3
@@ -40,8 +41,15 @@
 #define ARG_EXTARC              10
 #define ARG_MAXLOCFRONT         11
 
-void argumentError (char *programName) {		
-	cout << "Correct usage: " << programName << " outputPath pluginPath outputPrinterModule outputFile algoritmo problema critStop critStopValue printPeriod useExternalArchive(0 | (1 maxLocalFrontSize)) [parametros_algoritmo] [! parametros_problema] [_ scoreModule paramsScoreModule] [- Mutation Crossover ] $ LocalSearch paramsLocalSearch [ + MultiObjectivizationPlugin paramsMultiObjectivization ]" << endl;
+const char PROBLEM = '!';
+const char SCORE = '_';
+const char MUTATION_CROSSOVER = '-';
+const char LOCAL_SEARCH = '$';
+const char MULTIOBJECTIVIZATION = '+';
+const char DECOMPOSITION = '%';
+
+void argumentError (char *programName) {
+	cout << "Correct usage: " << programName << " outputPath pluginPath outputPrinterModule outputFile algoritmo problema critStop critStopValue printPeriod useExternalArchive(0 | (1 maxLocalFrontSize)) [parametros_algoritmo] [! parametros_problema] [_ scoreModule paramsScoreModule] [- Mutation Crossover ] $ LocalSearch paramsLocalSearch [ + MultiObjectivizationPlugin paramsMultiObjectivization ] [ % Decomposition <direction>]" << endl;
  	exit (-1);
 }
 
@@ -77,7 +85,7 @@ int main (int argc, char *argv[]) {
 	}
 	double critStopValue = atof(argv[ARG_CRITSTOPVALUE]);
 	int printPeriod      = atoi(argv[ARG_PRINTPERIOD]);
-	bool useExternalArchive = (atoi(argv[ARG_EXTARC]) == 1); 
+	bool useExternalArchive = (atoi(argv[ARG_EXTARC]) == 1);
 	int algParamIndex;
 	int maxLocalFrontSize;
 
@@ -90,12 +98,16 @@ int main (int argc, char *argv[]) {
 		maxLocalFrontSize = 0;
 		algParamIndex = MINIMUM_ARGS + 1;
 	}
-	
-	//Búsqueda de los parámetros del algoritmo
+
+	//Bï¿½squeda de los parï¿½metros del algoritmo
 	vector<string> algorithmArgs;
 	int actualArg;
 	for (actualArg = algParamIndex; actualArg < argc; actualArg++){
-		if ((argv[actualArg][0] == '!') || (argv[actualArg][0] == '_') || (argv[actualArg][0] == '-') || (argv[actualArg][0] == '$')){
+		if ((argv[actualArg][0] == PROBLEM)
+		|| (argv[actualArg][0] == SCORE)
+		|| (argv[actualArg][0] == MUTATION_CROSSOVER)
+		|| (argv[actualArg][0] == LOCAL_SEARCH)
+		|| (argv[actualArg][0] == DECOMPOSITION)){
 			break;
 		}
 		algorithmArgs.push_back(argv[actualArg]);
@@ -113,12 +125,14 @@ int main (int argc, char *argv[]) {
       }
   }*/
 
-	//Búsqueda de los parámetros del problema
+	//Bï¿½squeda de los parï¿½metros del problema
 	vector<string> problemArgs;
-	if (argv[actualArg][0] == '!'){
+	if (argv[actualArg][0] == PROBLEM){
 		actualArg++;
 		for (; actualArg < argc; actualArg++){
-			if ((argv[actualArg][0] != '_') && (argv[actualArg][0] != '-') && (argv[actualArg][0] != '$')){
+			if ((argv[actualArg][0] != SCORE)
+			&& (argv[actualArg][0] != MUTATION_CROSSOVER)
+			&& (argv[actualArg][0] != LOCAL_SEARCH)){
 				problemArgs.push_back(argv[actualArg]);
 			} else {
 				break;
@@ -129,12 +143,12 @@ int main (int argc, char *argv[]) {
 	//Modulo score
 	ScoreAlgorithm *score = NULL;
 	vector<string> scoreArgs;
-	if (argv[actualArg][0] == '_'){
+	if (argv[actualArg][0] == SCORE){
 		actualArg++;
 		if (actualArg < argc){
 			string scoreModuleName = argv[actualArg++];
 			for (; actualArg < argc; actualArg++){
-				if (argv[actualArg][0] != '-'){
+				if (argv[actualArg][0] != MUTATION_CROSSOVER){
 					scoreArgs.push_back(argv[actualArg]);
 				} else {
 					break;
@@ -156,7 +170,7 @@ int main (int argc, char *argv[]) {
 		//Cargamos mutation
 		if (actualArg < argc){
 			if (strcmp(argv[actualArg], "internal") != 0){
-				mut = getMutation(pluginPath, argv[actualArg], mutationArgs, true); 
+				mut = getMutation(pluginPath, argv[actualArg], mutationArgs, true);
 			}
 		}
 		actualArg++;
@@ -172,13 +186,14 @@ int main (int argc, char *argv[]) {
 	//Modulo LocalSearch
 	LocalSearch *ls = NULL;
 	vector<string> localSearchArgs;
-	if (argv[actualArg][0] == '$'){
+	if (argv[actualArg][0] == LOCAL_SEARCH){
 		actualArg++;
 		//Cargamos local Search
 		if (actualArg < argc){
 			string localSearchModuleName = argv[actualArg++];
 			for (; actualArg < argc; actualArg++){
-				if (argv[actualArg][0] == '+'){
+				if (argv[actualArg][0] == MULTIOBJECTIVIZATION
+				|| argv[actualArg][0] == DECOMPOSITION){
 					break;
 				}
 				localSearchArgs.push_back(argv[actualArg]);
@@ -194,12 +209,15 @@ int main (int argc, char *argv[]) {
 	//Plugins de MultiObjetivizacion
   MultiObjectivization *mo = NULL;
   vector<string> multiObjectivizationArgs;
-  if ((actualArg < argc) && (argv[actualArg][0] == '+')) {
+  if ((actualArg < argc) && (argv[actualArg][0] == MULTIOBJECTIVIZATION)) {
     actualArg++;
     if (actualArg < argc){
       string multiObjectivizationName = argv[actualArg++];
       for (; actualArg < argc; actualArg++){
         multiObjectivizationArgs.push_back(argv[actualArg]);
+		if(argv[actualArg][0] == DECOMPOSITION) {
+			break;
+		}
       }
       mo = getMultiObjectivization(pluginPath, multiObjectivizationName, multiObjectivizationArgs, true);
       if (mo == NULL){
@@ -208,7 +226,23 @@ int main (int argc, char *argv[]) {
       }
     }
   }
-	
+
+  Decomposition* decomposition = nullptr;
+  vector<string> decompositionArgs;
+  if ((actualArg < argc) && (argv[actualArg][0] == DECOMPOSITION)) {
+	actualArg++;
+	if (actualArg < argc){
+	  string decompositionName = argv[actualArg++];
+	  for (; actualArg < argc; actualArg++){
+		decompositionArgs.push_back(argv[actualArg]);
+	  }
+	  decomposition = getDecomposition(pluginPath, decompositionName, decompositionArgs, true);
+	  if (decomposition == nullptr){
+		cerr << "Error loading Decomposition plugin" << endl;
+		exit(-1);
+	  }
+	}
+  }
 	//cargamos individuo
 	Individual *ind = getInd(pluginPath, argv[ARG_PROBLEM], problemArgs, true);
 	if (ind == NULL){
@@ -243,7 +277,7 @@ int main (int argc, char *argv[]) {
 	ga->setStoppingCriterion(critStopId, critStopValue);
 	ga->setPrintPeriod(printPeriod);
 	ga->setMultiObjectivizationPlugins(vector<MultiObjectivization *>(1, mo));
-
+	ga->setDecomposition(decomposition);
 	if (ind->getIndexObj() == -1){
 		ga->setGenerateArchive(useExternalArchive, ARCHIVE_VECTOR);
 	} else {
@@ -269,7 +303,6 @@ int main (int argc, char *argv[]) {
 	/*MOFront *solBorrar = new MOFrontVector(ind, true, true);
 	ga->getSolution(solBorrar);
 	cout << solBorrar;*/
-       
 
 	//Finishing
 	delete (ga);

@@ -13,11 +13,12 @@
 #include "Individual.h"
 #include "MOFront.h"
 #include "LocalSearch.h"
-#include "LocalScoreAlgorithm.h" 
+#include "LocalScoreAlgorithm.h"
 #include "OutputPrinter.h"
 #include "MultiObjectivization.h"
+#include "Decomposition.h"
 
-#define N_CRIT_STOP 3 
+#define N_CRIT_STOP 3
 const string CRIT_STOP[] = {"TIME", "EVALUATIONS", "QUALITY"};
 
 #define ARCHIVE_VECTOR 10
@@ -25,7 +26,7 @@ const string CRIT_STOP[] = {"TIME", "EVALUATIONS", "QUALITY"};
 using namespace std;
 
 class OutputPrinter;
-/** \brief Plugin base class to represent the algorithms 
+/** \brief Plugin base class to represent the algorithms
  * */
 class EA : public Plugin {
 
@@ -111,7 +112,7 @@ public:
 	void setScoreAlgorithm          (ScoreAlgorithm *sc)  { scoreAlgorithm = (LocalScoreAlgorithm *)sc;              }
 	void setLocalSearch             (LocalSearch *ls)     { this->ls = ls;                                           }
 	void setMultiObjectivizationPlugins (const vector<MultiObjectivization*> &multi) { this->multiObjectivizationsPlugins = multi; }
-	
+
 	//Fijar archivo
 	void setGenerateArchive         (const bool generate, const int type);
 
@@ -165,7 +166,7 @@ public:
 	/// @cond INTERNAL
 	inline int getIdConf                       (void) const             { return idConf;                                 }
 	/// @endcond
-	inline Individual *getSampleInd            (void) const             { return sampleInd;                              } 
+	inline Individual *getSampleInd            (void) const             { return sampleInd;                              }
 	static inline string getGlobalTypeStopCrit (const int i)            { return CRIT_STOP[i];                           }
 	static inline int getTypeStoppingCriterion (const string &cr)       { return getIndex(cr, CRIT_STOP, N_CRIT_STOP);   }
 	inline bool isGeneratingArchive            (void) const             { return generateArchive;                        }
@@ -179,14 +180,16 @@ public:
 	double getElapsedTime() const;
 	// Soporte de multiObjectivizacion
 	virtual bool supportsMultiObjectivization() { return false; }
-
+	inline Decomposition* getDecomposition() { return decomposition; }
+	void setDecomposition(Decomposition* d) { decomposition = d; }
+	double decompose(Individual*, Individual*, vector<double>&);
 protected:
 	/**
 	 * \brief Vector of Individual instances that shape the population.
 	 **/
 	vector<Individual*>* population;
-	
-	// Operador de torneo binario anadido por 
+
+	// Operador de torneo binario anadido por
 	// Antonio J. Nebro
 	int binaryTournament(vector<Individual *>* pop);
 
@@ -218,6 +221,7 @@ private:
 	double startTime;
 	/// @endcond
 	vector<MultiObjectivization*> multiObjectivizationsPlugins;
+	Decomposition* decomposition;
 	/**
 	 * \brief Method that run one generation of the algorithm.
 	 * This method must be overwritten by the sub-classes.

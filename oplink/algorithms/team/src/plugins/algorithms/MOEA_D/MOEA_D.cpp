@@ -223,12 +223,15 @@ void MOEA_D::updateReferencePoint(vector<Individual*>& popu) {
 
 void MOEA_D::updateNeighbours(const int ind, Individual* child) {
     for(int j = 0; j < neighSize; j++) {
-        double childEvaluation = evaluateWithG(child, weights.at(j));
-        double neighborEvaluation = evaluateWithG((*population)[neighborhood[ind][j]], weights.at(j));
-        if (childEvaluation < neighborEvaluation){
+        double childEv = decompose(child, refPoint.get(), weights.at(j));
+        double neighbourdEv = decompose((*population)[neighborhood[ind][j]], refPoint.get(), weights.at(j));
+        //double childEvaluation = evaluateWithG(child, weights.at(j));
+        //double neighborEvaluation = evaluateWithG((*population)[neighborhood[ind][j]], weights.at(j));
+        if (childEv < neighbourdEv){
             (*population)[neighborhood[ind][j]] = child->internalClone();
         }
     }
+
 }
 
 void MOEA_D::updateExternalPopulation(Individual* child) {

@@ -1,0 +1,14 @@
+directory:=../../plugins/decompositions/
+decompositions=$(shell ls $(directory))
+clean:=$(foreach decomposition, $(decompositions), ${directory}${decomposition}/${decomposition}.library)
+
+all: $(decompositions)
+clean: $(clean)
+
+$(decompositions):
+	@echo Generando $@
+	make -s -f makefile_decomposition decomposition="$@" CC="$(CC)" CCFLAGS="$(CCFLAGS)"
+	@echo Hecho
+
+$(clean):
+	rm -f $@.cpp
