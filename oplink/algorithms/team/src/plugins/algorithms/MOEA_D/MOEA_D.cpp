@@ -225,8 +225,6 @@ void MOEA_D::updateNeighbours(const int ind, Individual* child) {
     for(int j = 0; j < neighSize; j++) {
         double childEv = decompose(child, refPoint.get(), weights.at(j));
         double neighbourdEv = decompose((*population)[neighborhood[ind][j]], refPoint.get(), weights.at(j));
-        //double childEvaluation = evaluateWithG(child, weights.at(j));
-        //double neighborEvaluation = evaluateWithG((*population)[neighborhood[ind][j]], weights.at(j));
         if (childEv < neighbourdEv){
             (*population)[neighborhood[ind][j]] = child->internalClone();
         }
@@ -252,30 +250,6 @@ void MOEA_D::updateExternalPopulation(Individual* child) {
     if(dominance == NO_DOMINATED) {
         exPopulation.push_back(child);
     }
-}
-
-double MOEA_D::evaluateWithG(Individual* ind, vector<double>& lambda) {
-    const int objs = ind->getNumberOfObj();
-    double objective;
-    if(DIRECTION == MINIMIZE) {
-        objective = numeric_limits<double>::max();
-    } else {
-        objective = numeric_limits<double>::min();
-    }
-    for(int i = 0; i < objs; i++) {
-        double fitness = fabs(ind->getObj(i) - refPoint->getObj(i));
-        if (lambda[i] == 0.0) {
-            fitness *= 0.0001;
-        } else {
-            fitness *= lambda[i];
-        }
-        if(DIRECTION == MINIMIZE && fitness < objective) {
-            objective = fitness;
-        } else if (DIRECTION == MAXIMIZE && fitness > objective) {
-            objective = fitness;
-        }
-    }
-    return objective;
 }
 
 // Mantenemos las variables dentro de los límites

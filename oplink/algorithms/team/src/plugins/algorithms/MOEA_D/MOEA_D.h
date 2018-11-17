@@ -56,7 +56,6 @@ private:
 	double getEuclideanDistanceFromCoeff(const vector<double>&,
 		const vector<double>&) const;
 	void minFastSort(vector<double>&, vector<int>&);
-	double evaluateWithG(Individual*, vector<double>&);
 	void improvement(Individual*);
 	unique_ptr<Individual> refPoint; // Punto ideal
 	vector<vector<double>> weights; // Vectores de coeficientes
