@@ -2,7 +2,7 @@
 
 ## Setup
 
-The steps you must follow to [start](../README.md) using METCO can be found in the [README](../README.md) file. However, here is the list of all the steps you must follow from cloned the repo to finally run an algorithm to solve a problem in METCO. 
+The steps you must follow to [start](../README.md) using METCO can be found in the [README](../README.md) file. However, here is the list of all the steps you must follow from cloned the repo to finally run an algorithm to solve a problem in METCO.
 
 1. First of all, download or clone this repo.
 2. After that, move to `local_path/software-metco/oplink/algorithms/team/src/skeleton/main`.
@@ -22,7 +22,7 @@ If your purpose is using METCO for sequential runs, _metcoSeq_ is the variation 
 * Plugin Path: Path where is metcoSeq (`(...)/src/skeleton/main/`).
 * Output Printer Module: PlainText or XML.
 * Output File
-* Algorithm 
+* Algorithm
 * Problem
 * Stopping Criteria: EVALUATIONS, QUALITY and TIME.
 * Stopping Criteria Value
@@ -33,9 +33,10 @@ If your purpose is using METCO for sequential runs, _metcoSeq_ is the variation 
 * Score Module and Parameters of the Score Module (Optional)
 * Mutation and Crossover operators (Optional)
 * Local Search and Local Search Parameters (Optional)
-* Multiobjectivization and Parameters 
+* Multiobjectivization and Parameters
+* Decomposition and Parameters
 
-`./metcoSeq outputPath pluginPath outputPrinterModule outputFile algoritmo problema critStop critStopValue printPeriod useExternalArchive(0 | (1 maxLocalFrontSize)) [parametros_algoritmo] [! parametros_problema] [_ scoreModule paramsScoreModule] [- Mutation Crossover ] $ LocalSearch paramsLocalSearch [ + MultiObjectivizationPlugin paramsMultiObjectivization ]`
+`./metcoSeq outputPath pluginPath outputPrinterModule outputFile algoritmo problema critStop critStopValue printPeriod useExternalArchive(0 | (1 maxLocalFrontSize)) [parametros_algoritmo] [! parametros_problema] [_ scoreModule paramsScoreModule] [- Mutation Crossover ] $ LocalSearch paramsLocalSearch [ + MultiObjectivizationPlugin paramsMultiObjectivization ] [ % Decomposition <parameters>]`
 
 As you can see, we use some delimiters to separate the parameters in groups.
 
@@ -43,7 +44,7 @@ As you can see, we use some delimiters to separate the parameters in groups.
  * The **'_'** character determines the beginning of the score module and it's parameters. This parameters are optional.
  * After **'-'** goes the mutation and crossover operators.
  * The **'$'** are used to define, after it, a local search strategy and its parameters. It is optional as well.
- * Finally, if you are into multiobjectivization, use the **'+'** character and then define the module and its parameters.
+ * Finally, if you are into multiobjectivization or decomposition, use the **'+'**  or **'%'** character  respectively and then define the module and its parameters.
 
 The options of the parameters such as Output Printer, Algorithm, Problem and so on must be any option from the appropiate [directory](structure.md).
 
