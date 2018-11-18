@@ -252,6 +252,7 @@ void MOEA_D::updateExternalPopulation(Individual* child) {
     }
 }
 
+
 // Mantenemos las variables dentro de los límites
 void MOEA_D::improvement(Individual* ind) {
     const int vars = ind->getNumberOfVar();

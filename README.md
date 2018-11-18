@@ -6,7 +6,7 @@ Welcome! You've found the source code of METCO, a registered tool which can be u
 
 1. Download or clone this repo
 2. Unzip if needed and move to `local_path/software-metco/oplink/algorithms/team/src/skeleton/main`
-3. Make sure you have installed all the dependencies (below) 
+3. Make sure you have installed all the dependencies (below)
 3. Run `gen.sh`.
 4. Run the `configure` script.
 3. Run `make` to build the tool.
@@ -25,6 +25,8 @@ Now you are ready to start using METCO.
 | GNU GSL          	| sudo apt-get install libgsl0-dev                 	| [GNU GSL](https://www.gnu.org/software/gsl/)                                                               	|
 
 \* Make sure you are allowed to run mpicc compiler from your command line.
+
+**You can install all METCO's dependencies by running ```xargs -a dependencies.txt sudo apt-get install``` from the root directory of METCO.**
 
 ## Documentation
 * [Setup](./doc/setup.md): Instructions to get everything up and running.

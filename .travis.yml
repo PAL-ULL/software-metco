@@ -1,0 +1,18 @@
+language: cpp
+compiler: gcc
+dist: trusty
+sudo: required
+before_install:
+    - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+    - sudo apt-get update -qq
+install:
+    - sudo apt-get install -qq g++-6
+    - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+    - xargs -a dependencies.txt sudo apt-get install
+
+script:
+  - gcc --version
+  - cd oplink/algorithms/team/src/skeleton/main/
+  - bash gen.sh
+  - bash configure
+  - make
