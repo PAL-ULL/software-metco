@@ -13,10 +13,9 @@
 #include <limits>
 #include <cstring>
 
-const int MOEA_D::PARAMS = 6;
+const int MOEA_D::PARAMS = 5;
 const int MOEA_D::RANDOM = 0;
 const int MOEA_D::FILE = 1;
-int MOEA_D::DIRECTION;
 
 MOEA_D::MOEA_D() {
 
@@ -34,7 +33,6 @@ bool MOEA_D::init(const vector<string> &params) {
         cerr << " <neighborhood_size>";
         cerr << " <mutationProb>";
         cerr << " <crossoverProb>";
-        cerr << " <0 = MINIMIZE | 1 = MAXIMIZE>";
         cerr << " <weightGeneration> || 0 = Random || [1 = file <filename>]" << endl;
         return false;
     } else {
@@ -45,15 +43,8 @@ bool MOEA_D::init(const vector<string> &params) {
         neighborhood.resize(getPopulationSize(), std::vector<int>());
         weights.resize(getPopulationSize(), std::vector<double>(getSampleInd()->getNumberOfObj(), 0));
         refPoint = unique_ptr<Individual>(getSampleInd()->internalClone());
-        int direction = stoi(params[4].c_str());
-        if(direction != MINIMIZE && direction != MAXIMIZE) {
-            cerr << "Error\n Direction must be MINIZE or MAXIMIZE" << endl;
-            return false;
-        } else {
-            MOEA_D::DIRECTION = direction;
-        }
-        if(stoi(params[5]) == FILE && params.size() == PARAMS + 1) {
-            filename = params[6];
+        if(stoi(params[4]) == FILE && params.size() == PARAMS + 1) {
+            filename = params[5];
             initWeights(true);
         } else {
             initWeights(false);
@@ -280,5 +271,4 @@ void MOEA_D::printInfo(ostream &os) const {
     os << "Mutation Probability = " << mutationProb << endl;
     os << "Population Size = " << getPopulationSize() << endl;
     os << "Neighborhood size = " << neighSize << endl;
-    os << "GLOBAL DIRECTION = " << DIRECTION << endl;
 }

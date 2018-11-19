@@ -23,7 +23,6 @@ class Decomposition : public Plugin {
 public:
   virtual bool init(const vector<string> &params);
   virtual double evaluate(Individual*, Individual*, std::vector<double>&) = 0;
-  int direction;
 };
 
 Decomposition* getDecomposition(const string& pluginPath, const string& pluginName, const vector<string>& args, bool printError);

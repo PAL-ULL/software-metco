@@ -32,7 +32,6 @@ public:
 	static const int PARAMS;
 	static const int RANDOM;
 	static const int FILE;
-	static int DIRECTION;
 	// Constructor
 	MOEA_D();
 	virtual ~MOEA_D();

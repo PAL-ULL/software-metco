@@ -5,21 +5,11 @@
 #include <iostream>
 
 bool Decomposition::init(const vector<string> &params) {
-	if(params.size() != 1) {
-		std::cerr << "Error loading Decomposition" << std::endl;
-		std::cerr << "direction must be specified: ";
-		std::cerr << " <0 = MINIMIZE | 1 = MAXIMIZE>" << std::endl;
+	if(params.size() != 0) {
+		std::cerr << "Error loading Decomposition. Decomposition does not need args" << std::endl;
  		return false;
 	} else {
-		int dir = stoi(params[0].c_str());
-		if(dir != MINIMIZE && dir != MAXIMIZE) {
-			std::cerr << "Error: direction must be  <0 = MINIMIZE | 1 = MAXIMIZE>" << endl;
-			return false;
-		} else {
-			direction = dir;
-		}
 		return true;
-		std::cout << "Decomposition init done. Direction: " << direction << std::endl;
 	}
 }
 
