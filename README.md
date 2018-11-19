@@ -1,4 +1,7 @@
-# Metaheuristic-based Extensible Tool for Cooperative Optimisation (METCO) -- Version registered at Safe Creative
+# Metaheuristic-based Extensible Tool for Cooperative Optimisation (METCO) 
+#### Version registered at Safe Creative
+
+[![Build Status](https://travis-ci.org/PAL-ULL/software-metco.svg?branch=master)](https://travis-ci.org/PAL-ULL/software-metco)
 
 Welcome! You've found the source code of METCO, a registered tool which can be use to developing and testing metaheuristics in C/C++ language.
 
@@ -26,7 +29,7 @@ Now you are ready to start using METCO.
 
 \* Make sure you are allowed to run mpicc compiler from your command line.
 
-**You can install all METCO's dependencies by running ```xargs -a dependencies.txt sudo apt-get install``` from the root directory of METCO.**
+**You can install all METCO's dependencies by running** ```xargs -a dependencies.txt sudo apt-get install``` **from the root directory of METCO.**
 
 ## Documentation
 * [Setup](./doc/setup.md): Instructions to get everything up and running.
