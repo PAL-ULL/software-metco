@@ -12,8 +12,11 @@
 #include <math.h>
 #include <limits>
 #include <cstring>
+#include <functional>
+#include <algorithm>
+#include <iterator>
 
-const int MOEA_D::PARAMS = 5;
+const int MOEA_D::PARAMS = 6;
 const int MOEA_D::RANDOM = 0;
 const int MOEA_D::FILE = 1;
 
@@ -33,6 +36,7 @@ bool MOEA_D::init(const vector<string> &params) {
         cerr << " <neighborhood_size>";
         cerr << " <mutationProb>";
         cerr << " <crossoverProb>";
+        cerr << " <seed>";
         cerr << " <weightGeneration> || 0 = Random || [1 = file <filename>]" << endl;
         return false;
     } else {
@@ -40,10 +44,11 @@ bool MOEA_D::init(const vector<string> &params) {
         neighSize = stoi(params[1].c_str());
         mutationProb = stof(params[2].c_str());
         crossoverProb = stof(params[3].c_str());
+        seed = stof(params[4].c_str());
         neighborhood.resize(getPopulationSize(), std::vector<int>());
         weights.resize(getPopulationSize(), std::vector<double>(getSampleInd()->getNumberOfObj(), 0));
         refPoint = unique_ptr<Individual>(getSampleInd()->internalClone());
-        if(stoi(params[4]) == FILE && params.size() == PARAMS + 1) {
+        if(stoi(params[5]) == FILE && params.size() == PARAMS + 1) {
             filename = params[5];
             initWeights(true);
         } else {
@@ -115,11 +120,24 @@ void MOEA_D::initWeights(bool withFile) {
             std::cerr << "Exception opening file: " << std::strerror(errno) << endl;
         }
     } else {
-        default_random_engine generator;
-        uniform_real_distribution<double> distribution(0.01, 1.0);
-        for(int i = 0; i < size; i++) {
-            for(int j = 0; j < objs; j++){
-                weights[i][j] = distribution(generator);
+        if(getSampleInd()->getNumberOfObj() == 2) {
+            for(int i = 0; i < size; i++) {
+                double w = 1.0 * (double)(i / (size - 1));
+                weights[i][0] = w;
+                weights[i][1] = 1 - w;
+            }
+        } else {
+            default_random_engine generator(seed);
+            uniform_real_distribution<double> distribution(0.0, 1.0);
+            for(int i = 0; i < size; i++) {
+                double sum = 0;
+                for(int j = 0; j < objs; j++){
+                    weights[i][j] = distribution(generator);
+                    sum += weights[i][j];
+                }
+                for(double& v : weights[i]){
+                    v /= sum;
+                }
             }
         }
     }
@@ -271,4 +289,5 @@ void MOEA_D::printInfo(ostream &os) const {
     os << "Mutation Probability = " << mutationProb << endl;
     os << "Population Size = " << getPopulationSize() << endl;
     os << "Neighborhood size = " << neighSize << endl;
+    os << "Seed: " << seed << endl;
 }

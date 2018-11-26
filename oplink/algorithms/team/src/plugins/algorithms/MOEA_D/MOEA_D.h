@@ -65,6 +65,7 @@ private:
 	double mutationProb;
 	double crossoverProb;
 	string filename;
+	double seed;
 };
 
 
