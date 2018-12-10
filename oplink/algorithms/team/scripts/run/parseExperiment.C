@@ -25,7 +25,7 @@ void experimentInit(){
 		nameOfExperimentDir << "experimentsTmpFiles/" << get_variable("expName");
 		if (mkdir(nameOfExperimentDir.str().c_str(), S_IRWXU) == -1){//could not create experiments directory
 			if (errno != EEXIST){
-				cout << "Error: directory " << nameOfExperimentDir <<  "could not be created";
+				cout << "Error: directory " << nameOfExperimentDir.str() <<  "could not be created";
 				exit(-1);
 			}
 		}
@@ -50,7 +50,7 @@ void createSeqExecutionFile(int repetitions){
 
 void createParExecutionFile(int repetitions){
 	experimentInit();
-	
+
 	//Execution File
 	char *tmp = new char[get_variable("algFile").length() + 1];
 	strcpy(tmp, get_variable("algFile").c_str());
@@ -70,12 +70,12 @@ void createParExecutionFile(int repetitions){
 	//create Configuration file
 	stringstream configurationBuffer;
 	configurationBuffer.str("");
-	ifstream onlyConfFile(get_variable("algFile").c_str()); 
+	ifstream onlyConfFile(get_variable("algFile").c_str());
 	if (!onlyConfFile.is_open()){
 		cerr << "File " << get_variable("algFile") << " does not exist\n" << endl;
 		exit(-1);
 	} else {
-		char c; 
+		char c;
 		while (!onlyConfFile.eof()){
 			onlyConfFile.get(c);
 			if (onlyConfFile.eof())
@@ -84,10 +84,10 @@ void createParExecutionFile(int repetitions){
 		}
 		onlyConfFile.close();
 	}
-		
-	ofstream confFile(nameConfFile.str().c_str()); 
+
+	ofstream confFile(nameConfFile.str().c_str());
 	if (!confFile.is_open()){
-		cerr << "Error: file " << nameConfFile.str() << " could not be created" << endl; 
+		cerr << "Error: file " << nameConfFile.str() << " could not be created" << endl;
 		exit(-1);
 	}
 	//write Configuration Parameters
@@ -121,7 +121,7 @@ void createParExecutionFile(int repetitions){
 	}
 	confFile << endl;
 	//Algorithms
-	confFile << configurationBuffer.str(); 
+	confFile << configurationBuffer.str();
 	confFile.close();
 	delete(tmp);
 }
@@ -146,6 +146,6 @@ int main(int argc, char *argv[]){
 			exit(-1);
 		}
 	}
-	analyzeExperiment(argv[1], &prepareExecution);	
+	analyzeExperiment(argv[1], &prepareExecution);
 	experiment_list.close();
 }

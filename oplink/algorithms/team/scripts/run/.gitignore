@@ -1,0 +1,5 @@
+*.o
+*.Line.c
+*.tab.*
+parseExperiment
+lex.*.c
