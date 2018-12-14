@@ -9,7 +9,7 @@ double Tchebycheff::evaluate(Individual* ind, Individual* reference, std::vector
     double objective = numeric_limits<double>::min();
     double fixedW, gte;
     for(int i = 0; i < objs; i++) {
-        (weights[1] == 0.) ? (fixedW = 1e-4) : (fixedW = weights[i]);
+        (weights[i] == 0.) ? (fixedW = 1e-4) : (fixedW = weights[i]);
         double gte = fixedW * abs(ind->getObj(i) - reference->getObj(i));
         if(gte > objective){
             objective = gte;

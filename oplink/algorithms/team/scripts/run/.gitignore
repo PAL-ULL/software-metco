@@ -3,3 +3,4 @@
 *.tab.*
 parseExperiment
 lex.*.c
+experimetConfigFiles/
