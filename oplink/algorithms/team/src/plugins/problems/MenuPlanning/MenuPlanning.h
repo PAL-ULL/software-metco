@@ -13,8 +13,6 @@
 #include "Constants.h"
 #include <unistd.h>
 
-char *getcwd(char *buf, size_t size);
-
 #define CROSSOVER_UNIFORM 0
 #define CROSSOVER_HUX 1
 

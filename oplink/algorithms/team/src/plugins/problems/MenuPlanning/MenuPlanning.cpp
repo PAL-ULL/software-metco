@@ -77,7 +77,8 @@ void MenuPlanning::set_gruposAl(void){
 	gruposAl.assign(num_gAl, ga);
 }
 
-void MenuPlanning::set_VectoresPlatos(const char* c_filename, vector<infoPlatos> &v_vecP) {
+void MenuPlanning::set_VectoresPlatos(const char* c_filename, 
+	vector<infoPlatos> &v_vecP) {
 	ifstream ifs;
 	int i;
 	int cont = 1;
@@ -86,13 +87,25 @@ void MenuPlanning::set_VectoresPlatos(const char* c_filename, vector<infoPlatos>
 		while (ifs.good()) {
 			string str;
 			infoPlatos ip;
-			getline(ifs, str, ','); ip.nombre = str;															//Nombre del plato
-			getline(ifs, str, ','); ip.precio = atof(str.c_str());												//Precio
-			getline(ifs, str, ','); ip.cantidad = atof(str.c_str());											//Cantidad
+			getline(ifs, str, ','); 
+			ip.nombre = str;															//Nombre del plato
+			getline(ifs, str, ','); 
+			ip.precio = atof(str.c_str());												//Precio
+			getline(ifs, str, ','); 
+			ip.cantidad = atof(str.c_str());											//Cantidad
 			ip.diasRep = i_max;																					//Dias desde que se repitio
-			for(i = 0; i < num_alerg; i++)	{ getline(ifs, str, ','); ip.alg.push_back(str); }							//Alergenos
-			for(i = 0; i < num_incomp; i++)	{ getline(ifs, str, ','); ip.inc.push_back(str); }							//Incompatibilidades
-			for(i = 0; i < num_nutr; i++)	{ getline(ifs, str, ','); ip.infoN.push_back(atof(str.c_str())); }			//Informacion nutricional
+			for(i = 0; i < num_alerg; i++)	{ //Alergenos
+				getline(ifs, str, ','); 
+				ip.alg.push_back(str); 
+			}							
+			for(i = 0; i < num_incomp; i++)	{ //Incompatibilidades
+				getline(ifs, str, ','); 
+				ip.inc.push_back(str); 
+			}							
+			for(i = 0; i < num_nutr; i++)	{ //Informacion nutricional
+				getline(ifs, str, ','); 
+				ip.infoN.push_back(atof(str.c_str())); 
+			}			
 			getline(ifs, str, ',');
 			while(str != "*" && !ifs.eof()){
 				ip.gruposAl.push_back(atoi(str.c_str()));
@@ -114,73 +127,74 @@ void MenuPlanning::set_VectoresPlatos(const char* c_filename, vector<infoPlatos>
 }
 
 void MenuPlanning::set_ingestaRecomedada(void) {
-	pair<double,double> ir;
-	ir.first = ir.second = ingR_acFol; 	ingRecomendada.push_back(ir);			//acido folico
+	pair<double, double> ir;
+	ir.first = ir.second = ingR_acFol; 	
+	ingRecomendada.push_back(ir);			//acido folico
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_cal; 	ingRecomendada.push_back(ir);			//calcio
+	ir.first = ir.second = ingR_cal; 	
+	ingRecomendada.push_back(ir);			//calcio
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_en; 	ingRecomendada.push_back(ir);			//energia
+	ir.first = ir.second = ingR_en; 	
+	ingRecomendada.push_back(ir);			//energia
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_fos; 	ingRecomendada.push_back(ir);			//fosforo
+	ir.first = ir.second = ingR_fos; 	
+	ingRecomendada.push_back(ir);			//fosforo
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_gra; 	ingRecomendada.push_back(ir);			//grasa
+	ir.first = ir.second = ingR_gra; 	
+	ingRecomendada.push_back(ir);			//grasa
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_hie; 	ingRecomendada.push_back(ir);			//hierro
+	ir.first = ir.second = ingR_hie; 	
+	ingRecomendada.push_back(ir);			//hierro
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_mag; 	ingRecomendada.push_back(ir);			//magnesio
+	ir.first = ir.second = ingR_mag; 	
+	ingRecomendada.push_back(ir);			//magnesio
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_pot; 	ingRecomendada.push_back(ir);			//potasio
+	ir.first = ir.second = ingR_pot; 	
+	ingRecomendada.push_back(ir);			//potasio
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_pro; 	ingRecomendada.push_back(ir);			//proteinas
+	ir.first = ir.second = ingR_pro; 	
+	ingRecomendada.push_back(ir);			//proteinas
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_sel; 	ingRecomendada.push_back(ir);			//selenio
+	ir.first = ir.second = ingR_sel; 	
+	ingRecomendada.push_back(ir);			//selenio
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_sod; 	ingRecomendada.push_back(ir);			//sodio
+	ir.first = ir.second = ingR_sod; 	
+	ingRecomendada.push_back(ir);			//sodio
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_vA; 	ingRecomendada.push_back(ir);			//vitA
+	ir.first = ir.second = ingR_vA; 	
+	ingRecomendada.push_back(ir);			//vitA
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_vB1; 	ingRecomendada.push_back(ir);			//vitB1
+	ir.first = ir.second = ingR_vB1; 	
+	ingRecomendada.push_back(ir);			//vitB1
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_vB2; 	ingRecomendada.push_back(ir);			//vitB2
+	ir.first = ir.second = ingR_vB2; 	
+	ingRecomendada.push_back(ir);			//vitB2
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_vB6; 	ingRecomendada.push_back(ir);			//vitB6
+	ir.first = ir.second = ingR_vB6; 	
+	ingRecomendada.push_back(ir);			//vitB6
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_vB12; 	ingRecomendada.push_back(ir);			//vitB12
+	ir.first = ir.second = ingR_vB12; 	
+	ingRecomendada.push_back(ir);			//vitB12
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_vC; 	ingRecomendada.push_back(ir);			//vitC
+	ir.first = ir.second = ingR_vC; 	
+	ingRecomendada.push_back(ir);			//vitC
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_vD; 	ingRecomendada.push_back(ir);			//vitD
+	ir.first = ir.second = ingR_vD; 	
+	ingRecomendada.push_back(ir);			//vitD
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_vE; 	ingRecomendada.push_back(ir);			//vitE
+	ir.first = ir.second = ingR_vE; 	
+	ingRecomendada.push_back(ir);			//vitE
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_yod; 	ingRecomendada.push_back(ir);			//yodo
-		cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
-
-	ir.first = ir.second = ingR_zin; 	ingRecomendada.push_back(ir);			//zinc
+	ir.first = ir.second = ingR_yod; 	
+	ingRecomendada.push_back(ir);			//yodo
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+	ir.first = ir.second = ingR_zin; 	
+	ingRecomendada.push_back(ir);			//zinc
 	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
 	cout << "ingRe size: " << ingRecomendada.size() << endl;
-	
 	for(int i = 0; i < ingRecomendada.size(); i++) {
-		ir.first = (ingRecomendada[i].first - ingRecomendada[i].first/ingR_rangMin) * nDias;
+		ir.first = (ingRecomendada[i].first - 
+			ingRecomendada[i].first / ingR_rangMin) * nDias;
 		ir.second = (ingRecomendada[i].second * ingR_rangMax) * nDias;
 		ingRecomendada[i] = ir;
 	}
@@ -197,9 +211,11 @@ void MenuPlanning::set_vectorCompatibilidad(void) {
 				gaElegidos.clear();
 				gaElegidos.assign(num_gAl,false);
 				set_GAElegidos(v_primerosPlatos[y].gruposAl, gaElegidos);
-				v3_compatibilidadPlatos[y][x][z] = set_penalizacionVC(v_segundosPlatos[x].gruposAl, gaElegidos);
+				v3_compatibilidadPlatos[y][x][z] = 
+				 set_penalizacionVC(v_segundosPlatos[x].gruposAl, gaElegidos);
 				set_GAElegidos(v_segundosPlatos[x].gruposAl, gaElegidos);
-				v3_compatibilidadPlatos[y][x][z] += set_penalizacionVC(v_postres[z].gruposAl, gaElegidos);
+				v3_compatibilidadPlatos[y][x][z] += 
+					set_penalizacionVC(v_postres[z].gruposAl, gaElegidos);
 			}
 }
 
@@ -213,16 +229,37 @@ double MenuPlanning::set_penalizacionVC(vector<int> &gal, vector<bool> galE) {
 	for(int i = 0; i < gal.size(); i++) {
 		if(galE[gal[i]])
 			switch(gal[i]) {
-				case 0:	resultado += penalizaciones[0]; break;
-				case 1:	resultado += penalizaciones[1]; break;
-				case 2: resultado += penalizaciones[2]; break;
-				case 3:	resultado += penalizaciones[3]; break;
-				case 4:	resultado += penalizaciones[4]; break;
-				case 5:	resultado += penalizaciones[5]; break;
-				case 6:	resultado += penalizaciones[6]; break;
-				case 7:	resultado += penalizaciones[7]; break;
-				case 8:	resultado += penalizaciones[8]; break;
-				case 9:	resultado += penalizaciones[9]; break;
+				case 0:	
+					resultado += penalizaciones[0]; 
+					break;
+				case 1:	
+					resultado += penalizaciones[1]; 
+					break;
+				case 2: 
+					resultado += penalizaciones[2]; 
+					break;
+				case 3:	
+					resultado += penalizaciones[3]; 
+					break;
+				case 4:	
+					resultado += penalizaciones[4]; 
+					break;
+				case 5:	
+					resultado += penalizaciones[5]; 
+					break;
+				case 6:	
+					resultado += penalizaciones[6]; 
+					break;
+				case 7:	
+					resultado += penalizaciones[7]; 
+					break;
+				case 8:	
+					resultado += penalizaciones[8]; 
+					break;
+				case 9:	
+				resultado += penalizaciones[9]; 
+				break;
+				default: break;
 			}
 	}
 	return resultado;
@@ -248,10 +285,10 @@ void MenuPlanning::dependentMutation(double pm) {
 	bool mod = false;
 	for(int i = 0; i < nDias; i++) {
 		x = rand() % 100;
-		if(x < (pm*100)) {
-			setVar(i*num_tipoPlato, 	rand() % v_primerosPlatos.size());
-			setVar(i*num_tipoPlato+1, 	rand() % v_segundosPlatos.size());
-			setVar(i*num_tipoPlato+2, 	rand() % v_postres.size());
+		if(x < (pm * 100)) {
+			setVar(i * num_tipoPlato, rand() % v_primerosPlatos.size());
+			setVar(i * num_tipoPlato + 1, rand() % v_segundosPlatos.size());
+			setVar(i * num_tipoPlato + 2, rand() % v_postres.size());
 			mod = true;
 		}
 	}
@@ -263,9 +300,9 @@ void MenuPlanning::repair(void) {
 	bool mod = false;
 	while(!checkInfoN2()) {
 		for(int i = 0; i < nDias; i++) {
-			setVar(i*num_tipoPlato, 	rand() % v_primerosPlatos.size());
-			setVar(i*num_tipoPlato+1, 	rand() % v_segundosPlatos.size());
-			setVar(i*num_tipoPlato+2, 	rand() % v_postres.size());
+			setVar(i * num_tipoPlato, rand() % v_primerosPlatos.size());
+			setVar(i * num_tipoPlato + 1, rand() % v_segundosPlatos.size());
+			setVar(i * num_tipoPlato + 2, rand() % v_postres.size());
 		}
 		mod = true;
 	}
@@ -276,7 +313,9 @@ void MenuPlanning::repair(void) {
 bool MenuPlanning::checkInfoN(const int i) {
 	double aux;
 	for(int j = 0; j < num_nutr; j++) {
-		aux = v_primerosPlatos[getVar(i*num_tipoPlato)].infoN[j] + v_segundosPlatos[getVar(i*num_tipoPlato+1)].infoN[j] + v_postres[getVar(i*num_tipoPlato+2)].infoN[j];
+		aux = v_primerosPlatos[getVar(i * num_tipoPlato)].infoN[j] + 
+			v_segundosPlatos[getVar(i * num_tipoPlato + 1)].infoN[j] + 
+			v_postres[getVar(i * num_tipoPlato + 2)].infoN[j];
 		if(aux < ingRecomendada[j].first || aux > ingRecomendada[j].second)
 			return false;
 	}
@@ -288,7 +327,9 @@ bool MenuPlanning::checkInfoN2(void) {
 	for(int j = 0; j < num_nutr; j++) {
 		aux = 0;
 		for(int i = 0; i < nDias; i++) {
-			aux += v_primerosPlatos[getVar(i*num_tipoPlato)].infoN[j] + v_segundosPlatos[getVar(i*num_tipoPlato+1)].infoN[j] + v_postres[getVar(i*num_tipoPlato+2)].infoN[j];
+			aux += v_primerosPlatos[getVar(i * num_tipoPlato)].infoN[j] + 
+			v_segundosPlatos[getVar(i * num_tipoPlato + 1)].infoN[j] + 
+			v_postres[getVar(i * num_tipoPlato + 2)].infoN[j];
 		}
 		if(aux < ingRecomendada[j].first || aux > ingRecomendada[j].second)
 			return false;
@@ -310,12 +351,16 @@ void MenuPlanning::evaluate(void) {
 	for(int i = 0; i < nDias; i++) {
 		x = i * num_tipoPlato;
 		//- PRECIO -------------------------------------------------------------------------------------------------------------
-		precioTotal += v_primerosPlatos[getVar(x)].precio + v_segundosPlatos[getVar(x + 1)].precio + v_postres[getVar( x + 2)].precio;
+		precioTotal += v_primerosPlatos[getVar(x)].precio + 
+			v_segundosPlatos[getVar(x + 1)].precio + 
+			v_postres[getVar(x + 2)].precio;
 
 		//- INFORMACION NUTRICIONAL --------------------------------------------------------------------------------------------
 		for(int j = 0; j < infoNPlan.size(); j++)
-			infoNPlan[j] +=  v_primerosPlatos[getVar(x)].infoN[j] + v_segundosPlatos[getVar(x+1)].infoN[j] + v_postres[getVar(x+2)].infoN[j];
-		setObj(0,precioTotal);
+			infoNPlan[j] +=  v_primerosPlatos[getVar(x)].infoN[j] + 
+			v_segundosPlatos[getVar(x + 1)].infoN[j] + 
+			v_postres[getVar(x + 2)].infoN[j];
+		setObj(0, precioTotal);
 	}
 		//- GRADO DE REPETICION -----------------------------------------------------------------------------------------------------
 	for(int i = 0; i < nDias; i++) {
@@ -324,24 +369,28 @@ void MenuPlanning::evaluate(void) {
 		valPP = setValorPP(getVar(x));                                          //Numero de dias desde que se repitio el plato seleccionado
 		for(int j = 0; j < v_primerosPlatos[getVar(x)].gruposAl.size(); j++) {
 			//comprueba si ya habia aparecido en el menu el grupo alimenticio j, si no lo a�ade al vector gaElegidos
-			if(gaElegidosPorIteracion(gaElegidos, v_primerosPlatos[getVar(x)].gruposAl[j]))
+			if(gaElegidosPorIteracion(gaElegidos, 
+			v_primerosPlatos[getVar(x)].gruposAl[j]))
 				gaElegidos.push_back(v_primerosPlatos[getVar(x)].gruposAl[j]);
 		}
 		//SEGUNDO PLATO
-		valSP = setValorSP(getVar(x+1));
-		for(int k = 0; k < v_segundosPlatos[getVar(x+1)].gruposAl.size(); k++) {
-			if(gaElegidosPorIteracion(gaElegidos, v_segundosPlatos[getVar(x+1)].gruposAl[k]))
-				gaElegidos.push_back(v_segundosPlatos[getVar(x+1)].gruposAl[k]);
+		valSP = setValorSP(getVar(x + 1));
+		for(int k = 0; k < v_segundosPlatos[getVar(x + 1)].gruposAl.size(); k++) {
+			if(gaElegidosPorIteracion(gaElegidos, 
+			v_segundosPlatos[getVar(x + 1)].gruposAl[k]))
+				gaElegidos.push_back(v_segundosPlatos[getVar(x + 1)].gruposAl[k]);
 		}
 		//POSTRE
-		valP = setValorP(getVar(x+2));
-		for(int l = 0; l < v_postres[getVar(x+2)].gruposAl.size(); l++) {
-			if(gaElegidosPorIteracion(gaElegidos, v_postres[getVar(x+2)].gruposAl[l]))
-				gaElegidos.push_back(v_postres[getVar(x+2)].gruposAl[l]);
+		valP = setValorP(getVar(x + 2));
+		for(int l = 0; l < v_postres[getVar(x + 2)].gruposAl.size(); l++) {
+			if(gaElegidosPorIteracion(gaElegidos, 
+			v_postres[getVar(x+2)].gruposAl[l]))
+				gaElegidos.push_back(v_postres[getVar(x + 2)].gruposAl[l]);
 		}
-		valTabla = v3_compatibilidadPlatos[getVar(x)][getVar(x+1)][getVar(x+2)];							//Obtener el valor de la tabla de platos de compatibilidad entre primeros y segundos platos
+		valTabla = v3_compatibilidadPlatos[getVar(x)][getVar(x + 1)][getVar(x + 2)];							//Obtener el valor de la tabla de platos de compatibilidad entre primeros y segundos platos
 		valGAFirst = set_ValorGAFirstAlternativa(ultimos5GA, gaElegidos);									//Obtener el valor total del numero de dias desde que se repitieron grupos alimenticios
-		valTotal += valTabla + numPP/valPP + numSP/valSP + numP/valP + valGAFirst;
+		valTotal += valTabla + numPP  /valPP + numSP / valSP + numP / valP +
+		 valGAFirst;
 		sumValorPP();                                                                                       //Suma los valores de platos y grupos alimenticios elegidos para el siguiente dia
 		sumValorSP();
 		sumValorP();
@@ -425,18 +474,7 @@ void MenuPlanning::set_ultimos5GA(vector<vector<int> > &ultimos5GA, vector<int> 
 
 double MenuPlanning::set_ValorGAFirstAlternativa(vector<vector<int>>&ultimos5GA, 												vector<int> vec) {
 	/* 0 Otros, 1 Carne, 2 Cereal, 3 Fruta, 4 Lacteo, 5 Legumbre, 6 Marisco, 7 Pasta, 8 Pescado, 9 Verdura */
-	double penalizacionPorGA[10]; /* = {
-		penalizaciones[0],
-		penalizaciones[1],
-		penalizaciones[2],
-		penalizaciones[3],
-		penalizaciones[4],
-		penalizaciones[5],
-		penalizaciones[6],
-		penalizaciones[7],
-		penalizaciones[8],
-		penalizaciones[9]
-	}; */
+	double penalizacionPorGA[10];
 	for(int i = 0; i < 10; i++){
 		penalizacionPorGA[i] = penalizaciones[i];
 	}
