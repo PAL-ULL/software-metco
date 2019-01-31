@@ -25,7 +25,6 @@ MOEA_D::MOEA_D() {
 }
 
 MOEA_D::~MOEA_D() {
-    //
 }
 
 // Inicializa los parámetros iniciales del algoritmo
@@ -69,6 +68,8 @@ void MOEA_D::runGeneration() {
     default_random_engine generator;
     uniform_int_distribution<int> intDist(0, neighSize - 1);
     uniform_real_distribution<double> realDist(0.0, 1.0);
+    Individual* indL;
+    Individual* indK;
     for(int i = 0; i < size; i++) { // Update loop
         int idxL = 0;
         int idxK = 0;
@@ -76,8 +77,8 @@ void MOEA_D::runGeneration() {
             idxL = intDist(range);
             idxK = intDist(range);
         }
-        Individual* indL = (*population)              [neighborhood[i][idxL]]->internalClone();
-        Individual* indK = (*population)                        [neighborhood[i][idxK]]->internalClone();
+        indL = (*population)[neighborhood[i][idxL]]->internalClone();
+        indK = (*population)[neighborhood[i][idxK]]->internalClone();
         double genXProb = realDist(generator);
         if(genXProb < crossoverProb) {
             indL->crossover(indK);
@@ -89,6 +90,8 @@ void MOEA_D::runGeneration() {
         updateNeighbours(i, indL); // Update Neighbors
         updateExternalPopulation(indL);
     }
+    delete(indK);
+    indK = nullptr;
 }
 
 void MOEA_D::initWeights(bool withFile) {
@@ -172,9 +175,8 @@ double MOEA_D::getEuclideanDistanceFromCoeff(const vector<double>& coeff1,
 }
 
 void MOEA_D::minFastSort(vector<double>& distances, vector<int>& idx) {
-    const int size = getPopulationSize();
     for (int i = 0; i < neighSize; i++) {
-        for (int j = i + 1; j < size; j++) {
+        for (int j = i + 1; j < getPopulationSize(); j++) {
             if (distances[i] > distances[j]) {
                 double temp = distances[i];
                 distances[i] = distances[j];
@@ -188,8 +190,7 @@ void MOEA_D::minFastSort(vector<double>& distances, vector<int>& idx) {
 }
 
 void MOEA_D::initReferencePoint() {
-    const int objs = getSampleInd()->getNumberOfObj();
-    for(int i = 0; i < objs; i++) {
+    for(int i = 0; i < getSampleInd()->getNumberOfObj(); i++) {
         if(getSampleInd()->getInternalOptDirection(i) == MAXIMIZE) {
             refPoint->setVar(i, numeric_limits<double>::min());
         } else if (getSampleInd()->getInternalOptDirection(i) == MINIMIZE) {
@@ -199,8 +200,7 @@ void MOEA_D::initReferencePoint() {
 }
 
 void MOEA_D::updateReferencePoint(Individual* ind) {
-    const int objs = ind->getNumberOfObj();
-    for(int i = 0; i < objs; i++) {
+    for(int i = 0; i < ind->getNumberOfObj(); i++) {
             if(ind->getInternalOptDirection(i) == MINIMIZE) {
                 if(isless(ind->getObj(i), refPoint->getObj(i))) {
                     refPoint->setObj(i, ind->getObj(i));
@@ -214,9 +214,8 @@ void MOEA_D::updateReferencePoint(Individual* ind) {
 }
 
 void MOEA_D::updateReferencePoint(vector<Individual*>& popu) {
-    const int objs = getSampleInd()->getNumberOfObj();
     for(const Individual* ind : popu) {
-        for(int j = 0; j < objs; j++) {
+        for(int j = 0; j < ind->getNumberOfObj(); j++) {
             if(ind->getInternalOptDirection(j) == MINIMIZE) {
                 if(isless(ind->getObj(j), refPoint->getObj(j))) {
                     refPoint->setObj(j, ind->getObj(j));
@@ -233,7 +232,8 @@ void MOEA_D::updateReferencePoint(vector<Individual*>& popu) {
 void MOEA_D::updateNeighbours(const int ind, Individual* child) {
     for(int j = 0; j < neighSize; j++) {
         double childEv = decompose(child, refPoint.get(), weights.at(j));
-        double neighbourdEv = decompose((*population)[neighborhood[ind][j]], refPoint.get(), weights.at(j));
+        double neighbourdEv = decompose((*population)[neighborhood[ind][j]],
+         refPoint.get(), weights.at(j));
         if (childEv < neighbourdEv){
             (*population)[neighborhood[ind][j]] = child->internalClone();
         }
@@ -244,29 +244,27 @@ void MOEA_D::updateNeighbours(const int ind, Individual* child) {
 void MOEA_D::updateExternalPopulation(Individual* child) {
     int dominance = 0;
     const int NO_DOMINATED = 0;
-    int i = 0;
-    while(i < exPopulation.size()) {
-        int result = dominanceTest(exPopulation[i], child);
+    for(auto& ind: exPopulation) {
+        int result = dominanceTest(ind, child);
         if(result == SECOND_DOMINATES) {
-            delete(exPopulation[i]);
-            exPopulation[i] = exPopulation[exPopulation.size() - 1];
-            exPopulation.pop_back();
+            delete ind;
+            ind = nullptr;
         } else if(result == FIRST_DOMINATES) {
             dominance++;
         }
-        i++;
     }
     if(dominance == NO_DOMINATED) {
         exPopulation.push_back(child);
     }
+    exPopulation.erase(std::remove(exPopulation.begin(), exPopulation.end(),
+     nullptr), exPopulation.end());
 }
 
 
 // Mantenemos las variables dentro de los límites
 void MOEA_D::improvement(Individual* ind) {
-    const int vars = ind->getNumberOfVar();
     default_random_engine generator;
-    for(int i = 0; i < vars; i++) {
+    for(int i = 0; i < ind->getNumberOfVar(); i++) {
         if(ind->getVar(i) > ind->getMaximum(i)
         || ind->getVar(i) < ind->getMinimum(i)){
             uniform_real_distribution<double> distribution(ind->getMinimum(i), ind->getMaximum(i));

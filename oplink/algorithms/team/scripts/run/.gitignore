@@ -4,3 +4,4 @@
 parseExperiment
 lex.*.c
 experimetConfigFiles/
+experiment*

@@ -116,26 +116,69 @@ void MenuPlanning::set_VectoresPlatos(const char* c_filename, vector<infoPlatos>
 void MenuPlanning::set_ingestaRecomedada(void) {
 	pair<double,double> ir;
 	ir.first = ir.second = ingR_acFol; 	ingRecomendada.push_back(ir);			//acido folico
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_cal; 	ingRecomendada.push_back(ir);			//calcio
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_en; 	ingRecomendada.push_back(ir);			//energia
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_fos; 	ingRecomendada.push_back(ir);			//fosforo
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_gra; 	ingRecomendada.push_back(ir);			//grasa
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_hie; 	ingRecomendada.push_back(ir);			//hierro
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_mag; 	ingRecomendada.push_back(ir);			//magnesio
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_pot; 	ingRecomendada.push_back(ir);			//potasio
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_pro; 	ingRecomendada.push_back(ir);			//proteinas
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_sel; 	ingRecomendada.push_back(ir);			//selenio
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_sod; 	ingRecomendada.push_back(ir);			//sodio
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_vA; 	ingRecomendada.push_back(ir);			//vitA
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_vB1; 	ingRecomendada.push_back(ir);			//vitB1
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_vB2; 	ingRecomendada.push_back(ir);			//vitB2
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_vB6; 	ingRecomendada.push_back(ir);			//vitB6
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_vB12; 	ingRecomendada.push_back(ir);			//vitB12
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_vC; 	ingRecomendada.push_back(ir);			//vitC
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_vD; 	ingRecomendada.push_back(ir);			//vitD
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_vE; 	ingRecomendada.push_back(ir);			//vitE
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_yod; 	ingRecomendada.push_back(ir);			//yodo
+		cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+
 	ir.first = ir.second = ingR_zin; 	ingRecomendada.push_back(ir);			//zinc
+	cout << "IR.first: " << ir.first << " IR.Second: " << ir.second << endl;
+	cout << "ingRe size: " << ingRecomendada.size() << endl;
+	
 	for(int i = 0; i < ingRecomendada.size(); i++) {
 		ir.first = (ingRecomendada[i].first - ingRecomendada[i].first/ingR_rangMin) * nDias;
 		ir.second = (ingRecomendada[i].second * ingR_rangMax) * nDias;
@@ -382,9 +425,27 @@ void MenuPlanning::set_ultimos5GA(vector<vector<int> > &ultimos5GA, vector<int> 
 
 double MenuPlanning::set_ValorGAFirstAlternativa(vector<vector<int>>&ultimos5GA, 												vector<int> vec) {
 	/* 0 Otros, 1 Carne, 2 Cereal, 3 Fruta, 4 Lacteo, 5 Legumbre, 6 Marisco, 7 Pasta, 8 Pescado, 9 Verdura */
-	double penalizacionPorGA[10] = {penalizaciones[0],penalizaciones[1],penalizaciones[2],penalizaciones[3],penalizaciones[4],penalizaciones[5],penalizaciones[6],penalizaciones[7],penalizaciones[8],penalizaciones[9]};
-	double penalizacionPorDias[5] = {penalizaciones[10],penalizaciones[11],penalizaciones[12],penalizaciones[13],penalizaciones[14]};
-	bool pen[5] = {false, false, false, false, false};
+	double penalizacionPorGA[10]; /* = {
+		penalizaciones[0],
+		penalizaciones[1],
+		penalizaciones[2],
+		penalizaciones[3],
+		penalizaciones[4],
+		penalizaciones[5],
+		penalizaciones[6],
+		penalizaciones[7],
+		penalizaciones[8],
+		penalizaciones[9]
+	}; */
+	for(int i = 0; i < 10; i++){
+		penalizacionPorGA[i] = penalizaciones[i];
+	}
+	//double penalizacionPorDias[5] = {penalizaciones[10],penalizaciones[11],penalizaciones[12],penalizaciones[13],penalizaciones[14]};
+	double penalizacionPorDias[5];
+	for(int i = 10, j = 0; i < 15; i++, j++) {
+		penalizacionPorDias[j] = penalizaciones[i];
+	}
+	bool pen[5] = { false, false, false, false, false };
 	double resultado = 0;
 	if(ultimos5GA.size() > 0) {
 		for(int i = 0; i < vec.size(); i++) {
