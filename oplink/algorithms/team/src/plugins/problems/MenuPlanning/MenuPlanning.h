@@ -25,6 +25,13 @@ struct infoPlatos {
 	vector<float> infoN;           		//Informacion nutricional del plato
 	vector<string> alg;         		//Alergenos del plato
 	vector<string> inc;        			//Incompatibilidades alimenticias del plato
+	void toStr() {
+		cout << "Info: " << endl;
+		cout << "Name: " << nombre << endl;
+		cout << "DiasRep: " << diasRep << endl;
+		cout << "Precio: " << precio << endl;
+		cout << "Cantidad: " << cantidad << endl;
+	}
 };
 
 
