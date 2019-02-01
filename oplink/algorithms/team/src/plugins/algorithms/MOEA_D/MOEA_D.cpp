@@ -25,6 +25,10 @@ MOEA_D::MOEA_D() {
 }
 
 MOEA_D::~MOEA_D() {
+    for(auto& ind : exPopulation){
+        delete ind;
+        ind = nullptr;
+    }
 }
 
 // Inicializa los parámetros iniciales del algoritmo
