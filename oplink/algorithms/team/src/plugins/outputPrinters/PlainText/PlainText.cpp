@@ -1,5 +1,7 @@
 #include "MOFrontVector.h"
 #include "PlainText.h"
+#include <iostream>
+#include <new>
 
 void PlainText::printSolution(EA *ga, bool end){
 	outputFile.precision(18);
@@ -17,10 +19,15 @@ void PlainText::printSolution(EA *ga, bool end){
 		if (ga->isGeneratingArchive()){
 			outputFile << ga->getLocalSolution();
 		} else {
-			MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
-			ga->getSolution(p);
-			outputFile << p;
-			delete p;
+			try {
+				MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
+				ga->getSolution(p);
+				outputFile << p;
+				delete p;
+				p = nullptr;
+			} catch (const std::bad_alloc& except) {
+				std::cerr << "Allocation failed at PlainText" << endl;
+			}
 		}
 	} else if (ga->getCritStop() == ga->getTypeStoppingCriterion("EVALUATIONS")){
 		if (end){
@@ -31,15 +38,15 @@ void PlainText::printSolution(EA *ga, bool end){
 		if (ga->isGeneratingArchive()){
 			outputFile << ga->getLocalSolution();
 		} else {
-			//cerr << "Va a hacer el new" << endl << flush;
-			MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
-			//cerr << "Va a hacer el getSolution" << endl << flush;
-			ga->getSolution(p);
-			//cerr << "Va a imprimir en archivo" << endl << flush;
-			outputFile << p;
-			//cerr << "Va a borrar" << endl << flush;
-			delete p;
-			//cerr << "Borro" << endl << flush;
+			try {
+				MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
+				ga->getSolution(p);
+				outputFile << p;
+				delete p;
+				p = nullptr;
+			} catch(const std::bad_alloc& except) {
+				std::cerr << "Allocation failed at PlainText" << endl;
+			}
 		}
 	}
 }

@@ -74,24 +74,25 @@ void MenuPlanning::setPlatos(string& first, string& second, string& dessert) {
 }
 
 void MenuPlanning::set_penalizaciones(void) {
-    penalizaciones.push_back(p_otros);      //otros
-    penalizaciones.push_back(p_carnes);     //carnes
-    penalizaciones.push_back(p_cereales);   //cereales
-    penalizaciones.push_back(p_frutas);     //frutas
-    penalizaciones.push_back(p_lacteos);    //lacteos
-    penalizaciones.push_back(p_legumbres);  //legumbres
-    penalizaciones.push_back(p_marisco);    //mariscos
-    penalizaciones.push_back(p_pasta);      //pastas
-    penalizaciones.push_back(p_pescado);    //pescados
-    penalizaciones.push_back(p_verdura);    //verduras
-    penalizaciones.push_back(p_1d);         //1 dia
-    penalizaciones.push_back(p_2d);         //2 dias
-    penalizaciones.push_back(p_3d);         //3 dias
-    penalizaciones.push_back(p_4d);         //4 dias
-    penalizaciones.push_back(p_5d);         //5 dias
-    penalizaciones.push_back(p_pp);         //primer platos
-    penalizaciones.push_back(p_sp);         //segundo plato
-    penalizaciones.push_back(p_p);          //postre
+    penalizaciones.reserve(PENALIZACIONES);
+    penalizaciones.emplace_back(p_otros);      //otros
+    penalizaciones.emplace_back(p_carnes);     //carnes
+    penalizaciones.emplace_back(p_cereales);   //cereales
+    penalizaciones.emplace_back(p_frutas);     //frutas
+    penalizaciones.emplace_back(p_lacteos);    //lacteos
+    penalizaciones.emplace_back(p_legumbres);  //legumbres
+    penalizaciones.emplace_back(p_marisco);    //mariscos
+    penalizaciones.emplace_back(p_pasta);      //pastas
+    penalizaciones.emplace_back(p_pescado);    //pescados
+    penalizaciones.emplace_back(p_verdura);    //verduras
+    penalizaciones.emplace_back(p_1d);         //1 dia
+    penalizaciones.emplace_back(p_2d);         //2 dias
+    penalizaciones.emplace_back(p_3d);         //3 dias
+    penalizaciones.emplace_back(p_4d);         //4 dias
+    penalizaciones.emplace_back(p_5d);         //5 dias
+    penalizaciones.emplace_back(p_pp);         //primer platos
+    penalizaciones.emplace_back(p_sp);         //segundo plato
+    penalizaciones.emplace_back(p_p);          //postre
 #ifdef DEBUG
     cout << "\n --- Debugging Penalizaciones  ---" << endl;
     for (const auto penalizacion : penalizaciones) {
@@ -164,7 +165,7 @@ void MenuPlanning::set_VectoresPlatos(const char* c_filename,
         cout << "\n\nError. No se han podido leer los archivos de platos: ";
         cout << c_filename << endl;
         cin.get();
-        exit(0);
+        exit(-1);
     }
 #ifdef DEBUG
     cout << "v_vecP size: " << v_vecP.size() << endl;
@@ -173,48 +174,49 @@ void MenuPlanning::set_VectoresPlatos(const char* c_filename,
 
 void MenuPlanning::set_ingestaRecomedada(void) {
     pair<double, double> ir;
+    ingRecomendada.reserve(ING_RECOMENDADA);
     ir.first = ir.second = ingR_acFol;
-    ingRecomendada.push_back(ir);  //acido folico
+    ingRecomendada.emplace_back(ir);  //acido folico
     ir.first = ir.second = ingR_cal;
-    ingRecomendada.push_back(ir);  //calcio
+    ingRecomendada.emplace_back(ir);  //calcio
     ir.first = ir.second = ingR_en;
-    ingRecomendada.push_back(ir);  //energia
+    ingRecomendada.emplace_back(ir);  //energia
     ir.first = ir.second = ingR_fos;
-    ingRecomendada.push_back(ir);  //fosforo
+    ingRecomendada.emplace_back(ir);  //fosforo
     ir.first = ir.second = ingR_gra;
-    ingRecomendada.push_back(ir);  //grasa
+    ingRecomendada.emplace_back(ir);  //grasa
     ir.first = ir.second = ingR_hie;
-    ingRecomendada.push_back(ir);  //hierro
+    ingRecomendada.emplace_back(ir);  //hierro
     ir.first = ir.second = ingR_mag;
-    ingRecomendada.push_back(ir);  //magnesio
+    ingRecomendada.emplace_back(ir);  //magnesio
     ir.first = ir.second = ingR_pot;
-    ingRecomendada.push_back(ir);  //potasio
+    ingRecomendada.emplace_back(ir);  //potasio
     ir.first = ir.second = ingR_pro;
-    ingRecomendada.push_back(ir);  //proteinas
+    ingRecomendada.emplace_back(ir);  //proteinas
     ir.first = ir.second = ingR_sel;
-    ingRecomendada.push_back(ir);  //selenio
+    ingRecomendada.emplace_back(ir);  //selenio
     ir.first = ir.second = ingR_sod;
-    ingRecomendada.push_back(ir);  //sodio
+    ingRecomendada.emplace_back(ir);  //sodio
     ir.first = ir.second = ingR_vA;
-    ingRecomendada.push_back(ir);  //vitA
+    ingRecomendada.emplace_back(ir);  //vitA
     ir.first = ir.second = ingR_vB1;
-    ingRecomendada.push_back(ir);  //vitB1
+    ingRecomendada.emplace_back(ir);  //vitB1
     ir.first = ir.second = ingR_vB2;
-    ingRecomendada.push_back(ir);  //vitB2
+    ingRecomendada.emplace_back(ir);  //vitB2
     ir.first = ir.second = ingR_vB6;
-    ingRecomendada.push_back(ir);  //vitB6
+    ingRecomendada.emplace_back(ir);  //vitB6
     ir.first = ir.second = ingR_vB12;
-    ingRecomendada.push_back(ir);  //vitB12
+    ingRecomendada.emplace_back(ir);  //vitB12
     ir.first = ir.second = ingR_vC;
-    ingRecomendada.push_back(ir);  //vitC
+    ingRecomendada.emplace_back(ir);  //vitC
     ir.first = ir.second = ingR_vD;
-    ingRecomendada.push_back(ir);  //vitD
+    ingRecomendada.emplace_back(ir);  //vitD
     ir.first = ir.second = ingR_vE;
-    ingRecomendada.push_back(ir);  //vitE
+    ingRecomendada.emplace_back(ir);  //vitE
     ir.first = ir.second = ingR_yod;
-    ingRecomendada.push_back(ir);  //yodo
+    ingRecomendada.emplace_back(ir);  //yodo
     ir.first = ir.second = ingR_zin;
-    ingRecomendada.push_back(ir);  //zinc
+    ingRecomendada.emplace_back(ir);  //zinc
     for (int i = 0; i < ingRecomendada.size(); i++) {
         ir.first = (ingRecomendada[i].first -
                     ingRecomendada[i].first / ingR_rangMin) *
@@ -309,6 +311,9 @@ double MenuPlanning::set_penalizacionVC(vector<int>& gal, vector<bool> galE) {
 }
 
 void MenuPlanning::restart(void) {
+#ifdef DEBUG
+    cout << "Running restart @ MenuPlanning" << endl;
+#endif
     for (int i = 0; i < nParam; i++)
         setVar(i, (double)(rand() % (int)getMaximum(i)));
 }

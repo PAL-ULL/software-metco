@@ -9,6 +9,7 @@ const int num_gAl = 10;
 const int num_obj = 2;
 
 //Penalizaciones
+const int PENALIZACIONES = 18;
 const double p_otros = 0.1;
 const double p_carnes = 3;
 const double p_cereales = 0.3;
@@ -29,6 +30,7 @@ const double p_sp = 10;
 const double p_p = 2;
 
 //Cantidad de nutrientes recomedados (por almuerzo)
+const int ING_RECOMENDADA = 21;
 const double ingR_acFol = 135;
 const double ingR_cal = 585;
 const double ingR_en = 1012;
