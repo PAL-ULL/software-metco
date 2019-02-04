@@ -11,6 +11,7 @@
 #include <math.h>
 #include <algorithm>
 #include <cstring>
+#include <ctime>
 #include <functional>
 #include <iterator>
 #include <limits>
@@ -68,7 +69,7 @@ bool MOEA_D::init(const vector<string>& params) {
 // Define una generación de búsqueda del algoritmo
 void MOEA_D::runGeneration() {
 #ifdef DEBUG
-    cout << "Running Generation: " << getGeneration() << " with " << getPerformedEvaluations() 
+    cout << "Running Generation: " << getGeneration() << " with " << getPerformedEvaluations()
          << " evaluations done" << endl;
 #endif
     random_device rd;
@@ -90,10 +91,16 @@ void MOEA_D::runGeneration() {
         double genXProb = realDist(generator);
         if (genXProb < crossoverProb) {
             indL->crossover(indK.get());
-        } 
+        }
         indL->mutation(mutationProb);
-        improvement(indL.get());           // Keep Individual in ranges
-        evaluate(indL.get());              // Evaluating the new Individual
+        improvement(indL.get());  // Keep Individual in ranges
+#ifdef DEBUG
+        clock_t begin = clock();
+#endif
+        evaluate(indL.get());  // Evaluating the new Individual
+#ifdef DEBUG
+        cout << "Evaluation of individual " << i << " done in " << float(clock() - begin) / CLOCKS_PER_SEC << "s" << endl;
+#endif
         updateReferencePoint(indL.get());  // Updating the reference point
         updateNeighbours(i, indL.get());   // Update Neighbors
         updateExternalPopulation(indL.get());
