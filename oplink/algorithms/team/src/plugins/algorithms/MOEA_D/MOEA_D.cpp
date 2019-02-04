@@ -27,8 +27,7 @@ MOEA_D::MOEA_D() {
 
 MOEA_D::~MOEA_D() {
     for (auto& ind : exPopulation) {
-        delete ind;
-        ind = nullptr;
+        ind.reset();
     }
     refPoint.reset();
 }
@@ -86,22 +85,20 @@ void MOEA_D::runGeneration() {
             if (idxL >= neighSize || idxK >= neighSize)
                 throw new out_of_range("IdxL or IdxK out of range");
         }
-        Individual* indL = (*population)[neighborhood[i][idxL]]->internalClone();
-        Individual* indK = (*population)[neighborhood[i][idxK]]->internalClone();
+        unique_ptr<Individual> indL((*population)[neighborhood[i][idxL]]->internalClone());
+        unique_ptr<Individual> indK((*population)[neighborhood[i][idxK]]->internalClone());
         double genXProb = realDist(generator);
         if (genXProb < crossoverProb) {
-            indL->crossover(indK);
+            indL->crossover(indK.get());
         } 
         indL->mutation(mutationProb);
-        improvement(indL);           // Keep Individual in ranges
-        evaluate(indL);              // Evaluating the new Individual
-        updateReferencePoint(indL);  // Updating the reference point
-        updateNeighbours(i, indL);   // Update Neighbors
-        updateExternalPopulation(indL);
-        delete (indL);
-        delete (indK);
-        indL = nullptr;
-        indK = nullptr;
+        improvement(indL.get());           // Keep Individual in ranges
+        evaluate(indL.get());              // Evaluating the new Individual
+        updateReferencePoint(indL.get());  // Updating the reference point
+        updateNeighbours(i, indL.get());   // Update Neighbors
+        updateExternalPopulation(indL.get());
+        indL.reset();
+        indK.reset();
     }
 }
 
@@ -256,16 +253,16 @@ void MOEA_D::updateExternalPopulation(Individual* child) {
         int dominance = 0;
         const int NO_DOMINATED = 0;
         for (auto& ind : exPopulation) {
-            int result = dominanceTest(ind, child);
+            int result = dominanceTest(ind.get(), child);
             if (result == SECOND_DOMINATES) {
-                delete ind;
+                ind.reset();
                 ind = nullptr;
             } else if (result == FIRST_DOMINATES) {
                 dominance++;
             }
         }
         if (dominance == NO_DOMINATED) {
-            exPopulation.push_back(child->internalClone());
+            exPopulation.push_back(unique_ptr<Individual>(child->internalClone()));
         }
         exPopulation.erase(std::remove(exPopulation.begin(), exPopulation.end(),
                                        nullptr),
@@ -288,8 +285,8 @@ void MOEA_D::improvement(Individual* ind) {
 
 // Rellena un frente con las soluciones actuales
 void MOEA_D::getSolution(MOFront* p) {
-    for (Individual* ind : exPopulation) {
-        p->insert(ind);
+    for (auto& ind : exPopulation) {
+        p->insert(ind.get());
     }
 }
 

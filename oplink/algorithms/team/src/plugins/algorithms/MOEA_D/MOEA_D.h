@@ -40,7 +40,7 @@ public:
 	// Inicializa los parámetros iniciales del algoritmo
 	bool init(const vector<string> &params);
 	// Rellena un frente con las soluciones actuales
-	void getSolution(MOFront *p) ;
+	void getSolution(MOFront *p) ; 
 	// Muestra la información relativa al algoritmo
 	void printInfo(ostream &os) const;
 	inline string getName() const { return "MOEA/D"; }
@@ -60,7 +60,7 @@ private:
 	vector<vector<double>> weights; // Vectores de coeficientes
 	int neighSize; // Tamanio del vecindario
 	vector<vector<int>> neighborhood; // Estructura del Vecindario
-	vector<Individual*> exPopulation;
+	vector<unique_ptr<Individual>> exPopulation;
 	// Operators Probability
 	double mutationProb;
 	double crossoverProb;

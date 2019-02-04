@@ -18,7 +18,7 @@ int MenuPlanning::i_max = numeric_limits<int>::max();
 
 const int MenuPlanning::PARAMS = 4;
 
-#define DEBUG
+//#define DEBUG
 
 bool MenuPlanning::init(const vector<string>& params) {
     if (params.size() != PARAMS) {
