@@ -18,7 +18,7 @@ int MenuPlanning::i_max = numeric_limits<int>::max();
 
 const int MenuPlanning::PARAMS = 4;
 
-//#define DEBUG
+#define DEBUG
 
 bool MenuPlanning::init(const vector<string>& params) {
     if (params.size() != PARAMS) {
@@ -456,6 +456,8 @@ void MenuPlanning::evaluate(void) {
         gaElegidosAnterior = gaElegidos;
         gaElegidos.clear();
 #ifdef DEBUG
+        cout << "I: " << i << endl;
+        cout << "Days: " << nDias << endl;
         cout << "ValTotal: " << valTotal << endl;
 #endif
     }
