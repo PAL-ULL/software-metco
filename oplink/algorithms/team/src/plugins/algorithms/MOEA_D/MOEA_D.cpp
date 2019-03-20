@@ -31,6 +31,8 @@ MOEA_D::~MOEA_D() {
         ind.reset();
     }
     refPoint.reset();
+    neighborhood.shrink_to_fit();
+    weights.shrink_to_fit();
 }
 
 // Inicializa los parámetros iniciales del algoritmo
@@ -50,11 +52,12 @@ bool MOEA_D::init(const vector<string>& params) {
         mutationProb = stof(params[2].c_str());
         crossoverProb = stof(params[3].c_str());
         seed = stof(params[4].c_str());
-        neighborhood.resize(getPopulationSize(), std::vector<int>());
+        neighborhood.reserve(getPopulationSize());
+        //neighborhood.resize(getPopulationSize(), std::vector<int>());
         weights.resize(getPopulationSize(), std::vector<double>(getSampleInd()->getNumberOfObj(), 0));
         refPoint = unique_ptr<Individual>(getSampleInd()->internalClone());
         if (stoi(params[5]) == FILE && params.size() == PARAMS + 1) {
-            filename = params[5];
+            filename = params[6];
             initWeights(true);
         } else {
             initWeights(false);
@@ -132,6 +135,7 @@ void MOEA_D::initWeights(bool withFile) {
                 inputFile.close();
             } else {
                 cerr << "Error MOEA/D: file containing weight vectors could not be opened" << endl;
+                cerr << "Filename: " << filename << endl;
                 exit(1);
             }
         } catch (std::ifstream::failure e) {
@@ -269,7 +273,7 @@ void MOEA_D::updateExternalPopulation(Individual* child) {
             }
         }
         if (dominance == NO_DOMINATED) {
-            exPopulation.push_back(unique_ptr<Individual>(child->internalClone()));
+            exPopulation.emplace_back(unique_ptr<Individual>(child->internalClone()));
         }
         exPopulation.erase(std::remove(exPopulation.begin(), exPopulation.end(),
                                        nullptr),
@@ -284,6 +288,9 @@ void MOEA_D::improvement(Individual* ind) {
     default_random_engine generator;
     for (int i = 0; i < ind->getNumberOfVar(); i++) {
         if (ind->getVar(i) > ind->getMaximum(i) || ind->getVar(i) < ind->getMinimum(i)) {
+#ifdef DEBUG
+            cout << "Improvement" << endl;
+#endif
             uniform_real_distribution<double> distribution(ind->getMinimum(i), ind->getMaximum(i));
             ind->setVar(i, distribution(generator));
         }

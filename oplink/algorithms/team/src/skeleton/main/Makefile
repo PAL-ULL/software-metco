@@ -231,9 +231,9 @@ AUTOMAKE = ${SHELL} /home/marrero/software-metco/oplink/algorithms/team/src/skel
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+CFLAGS = -g -O2 -lprofiler
 CPP = gcc -E
-CPPFLAGS = 
+CPPFLAGS = -lprofiler
 CXX = g++
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2

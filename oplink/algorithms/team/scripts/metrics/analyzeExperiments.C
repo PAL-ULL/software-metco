@@ -29,7 +29,7 @@ vector<long double> minObjs;
 void normalizeReferenceFront(MOFront *p1, MOFront *pnorm, const vector<long double> &maxObjs, const vector<long double> &minObjs){
 	pnorm->clear();
 	Individual *newInd = p1->getInd(0);
-	newInd->setNumberOfObj(1);//!!!!!!!!!!!!!!!!!!!!!!!!!
+	newInd->setNumberOfObj(2);//!!!!!!!!!!!!!!!!!!!!!!!!!
 	if (maxObjs.size() != newInd->getNumberOfObj()){
 		cout << "Error: number of objectives do not match" << endl;
 		exit(-1);
@@ -47,12 +47,11 @@ void normalizeReferenceFront(MOFront *p1, MOFront *pnorm, const vector<long doub
 				actualInd->setObj(j, ((actualInd->getObj(j) - minObjs[j])/(maxObjs[j] - minObjs[j])));
 			else{
 				cerr << "ENTRA" << endl;
-				//actualInd->setObj(j, (1 - ((actualInd->getObj(j) - minObjs[j])/(maxObjs[j] - minObjs[j]))));
-				actualInd->setObj(j, (0 - ((actualInd->getObj(j) - minObjs[j])/(maxObjs[j] - minObjs[j]))));			//OJOOO monoobjetivo con falso objetivo
+				actualInd->setObj(j, (1 - ((actualInd->getObj(j) - minObjs[j])/(maxObjs[j] - minObjs[j]))));
+				//actualInd->setObj(j, (0 - ((actualInd->getObj(j) - minObjs[j])/(maxObjs[j] - minObjs[j]))));			//OJOOO monoobjetivo con falso objetivo
 			}
 		}
 	}	
-
 }
 
 long double calculateGenerationalDistance(const string &frontFile){
@@ -98,7 +97,7 @@ void generateFileForSurface(const string &baseFile, const int evaluations, const
 }
 
 long double calculateHypervolume(const string &frontFile){
-	ind->setNumberOfObj(1);
+	ind->setNumberOfObj(2);
 	MOFrontVector p(ind, false, true);
 	cout << "Numero de objetivos: " << ind->getNumberOfObj() << endl;
 	p.readAll(frontFile);
@@ -114,8 +113,8 @@ long double calculateHypervolume(const string &frontFile){
 	long double maxValue = -LDBL_MAX;
 	for (unsigned int i = 0; i < p.getFrontSize(); i++){
 		Individual *actInd = p.getInd(i);
-		//if (actInd->getObj(0) + actInd->getObj(1) < minValue){//!!!!!!!!!!!!!!!!!!!!!!!
-		if (actInd->getObj(0) < minValue){//!!!!!!!!!!!!!!!!!!!!!!!
+		//if (actInd->getObj(0) + actInd->getObj(1) < minValue) { //!!!!!!!!!!!!!!!!!!!!!!!
+		if (actInd->getObj(0) < minValue){  //!!!!!!!!!!!!!!!!!!!!!!!
 			//minValue = actInd->getObj(0) + actInd->getObj(1);
 			minValue = actInd->getObj(0);
 		}
@@ -124,61 +123,66 @@ long double calculateHypervolume(const string &frontFile){
 		}
 		//comprobamos que todos los objetivos transformados sean menor que 1
 		bool error = false;
-		{ int j = 0; //FORZAMOS MONOOBJETIVO	
-		//!!!!!!!!!!!for (unsigned int j = 0; j < ind->getNumberOfObj(); j++){
-			/*if (ind->getOptDirection(j) == MINIMIZE){
-				if (((actInd->getObj(j) - minObjs[j])/(maxObjs[j] - minObjs[j])) > 1){
+		//{ int j = 0; //FORZAMOS MONOOBJETIVO	
+		for (unsigned int j = 0; j < ind->getNumberOfObj(); j++) {
+			if (ind->getOptDirection(j) == MINIMIZE) {
+				if (((actInd->getObj(j) - minObjs[j])/(long double)(maxObjs[j] - minObjs[j])) > 1){
 					error = true;
+          cout << "ERROR: El valor normalizado del objetivo " << j << " es superior a 1" << endl;
 					break;
 				}
-			} else if ((1 - ((actInd->getObj(j) - minObjs[j])/(maxObjs[j] - minObjs[j]))) > 1){
+			} else if ((1 - ((actInd->getObj(j) - minObjs[j])/(long double)(maxObjs[j] - minObjs[j]))) > 1){
 				error = true;
+        cout << "ERROR: El valor normalizado del objetivo " << j << " es superior a 1" << endl;
 				break;
-			}*/
+			}
 		}
-		//if (!error){!!!!!!!!!!!!
+		if (!error){//!!!!!!!!!!!!
 			inserted = true;
-			{
-				int j = 0; //forzamos mono
-			//for (unsigned int j = 0; j < ind->getNumberOfObj(); j++){
+			//{
+		  	//int j = 0; //forzamos mono
+			for (unsigned int j = 0; j < ind->getNumberOfObj(); j++){
 				if (ind->getInternalOptDirection(j) == MINIMIZE)
-					objFile << ((actInd->getObj(j) - minObjs[j])/(maxObjs[j] - minObjs[j])) << " ";
+					objFile << ((actInd->getObj(j) - minObjs[j])/(long double)(maxObjs[j] - minObjs[j])) << " ";
 				else
-					//objFile << (1 - ((actInd->getObj(j) - minObjs[j])/(maxObjs[j] - minObjs[j]))) << " ";
-					objFile << (0 - ((actInd->getObj(j) - minObjs[j])/(maxObjs[j] - minObjs[j]))) << " ";//!!!!VALIDO PARA MONO+ALTERNATIVOS
+					objFile << (1 - ((actInd->getObj(j) - minObjs[j])/(long double)(maxObjs[j] - minObjs[j]))) << " ";
+					//objFile << (0 - ((actInd->getObj(j) - minObjs[j])/(maxObjs[j] - minObjs[j]))) << " ";//!!!!VALIDO PARA MONO+ALTERNATIVOS
 			}
 			objFile << endl;
-		//}!!!!!!!!!!!!!!!
+		}//!!!!!!!!!!!!!!!
+  //}
 	}
 	objFile.close();
+
 	stringstream cmd;
 	long double hvValue = 0;
+
 	if (inserted){
 		cmd << "./hv-1.1-src/hv -r \"";
-		//for (unsigned int i = 0; i < ind->getNumberOfObj(); i++)//Para multiobjetivo!!!
-			//cmd << "1 ";
+		for (unsigned int i = 0; i < ind->getNumberOfObj(); i++)//Para multiobjetivo!!!
+			cmd << "1 ";
 		//Para monoobjetivo
-		cmd << "0 ";
+		//cmd << "0 ";
 
 		cmd << "\" " << frontFile << ".normObj";
 		cout << "Ejecuta: " << cmd.str() << endl;
 		FILE *hvValueFile = popen(cmd.str().c_str(), "r");
 		if (hvValueFile == NULL){
-			cout << "Error executing " << cmd.str() << endl; 
+			cout << "Error executing " << cmd.str() << endl << flush;
 			exit(-1);
 		}
 		if (wait(NULL) == -1){//wait termination
-			cout << "Error waiting child termination" << endl;
+			cout << "Error waiting child termination" << endl << flush;
 			exit(-1);
 		}
-		fscanf(hvValueFile, "%lf", &hvValue);
+		fscanf(hvValueFile, "%Lf", &hvValue);
 		pclose(hvValueFile);
 	}
 
-	//
-	return minValue;//!!!!!	
+	// return minValue;//!!!!!	
 	// return maxValue;
-	//return hvValue; //Para multi-objetivo
+  cout << "hvValue: " << hvValue << endl;
+	return hvValue; //Para multi-objetivo
 	//return -hvValue; //Para el uniobjetivo (monoobjetivo)
 }
 
@@ -375,16 +379,15 @@ void getMaxMinObjs(){
   //maxObjs.push_back(4.5);
 	
 	//monoobjetivo sin normalizar
-	minObjs.push_back(0);
-	maxObjs.push_back(1);
-	//minObjs.push_back(0);
-	//maxObjs.push_back(1);
+	minObjs.push_back(21.3);
+	maxObjs.push_back(75.2);
+	minObjs.push_back(86.6);
+	maxObjs.push_back(850.4);
 
 	/*minObjs.push_back(100);
 	minObjs.push_back(75);
 	maxObjs.push_back(150);
 	maxObjs.push_back(400);*/
-
 }
 
 void calculateValues(const string &frontFile, const string &prefix, long double &av, long double &max, long double &min, long double &med, int repetitions){

@@ -49,7 +49,7 @@ const char MULTIOBJECTIVIZATION = '+';
 const char DECOMPOSITION = '%';
 
 void argumentError (char *programName) {
-	cout << "Correct usage: " << programName << " outputPath pluginPath outputPrinterModule outputFile algoritmo problema critStop critStopValue printPeriod useExternalArchive(0 | (1 maxLocalFrontSize)) [parametros_algoritmo] [! parametros_problema] [_ scoreModule paramsScoreModule] [- Mutation Crossover ] $ LocalSearch paramsLocalSearch [ + MultiObjectivizationPlugin paramsMultiObjectivization ] [ % Decomposition <direction>]" << endl;
+	cout << "Correct usage: " << programName << " outputPath pluginPath outputPrinterModule outputFile algoritmo problema critStop critStopValue printPeriod useExternalArchive(0 | (1 maxLocalFrontSize)) [parametros_algoritmo] [! parametros_problema] [_ scoreModule paramsScoreModule] [- Mutation Crossover ] $ LocalSearch paramsLocalSearch [ + MultiObjectivizationPlugin paramsMultiObjectivization ] [ % Decomposition ]" << endl;
  	exit (-1);
 }
 

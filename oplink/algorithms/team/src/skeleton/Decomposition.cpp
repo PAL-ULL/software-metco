@@ -6,7 +6,7 @@
 
 bool Decomposition::init(const vector<string> &params) {
 	if(params.size() != 0) {
-		std::cerr << "Error loading Decomposition. Decomposition does not need args" << std::endl;
+		std::cerr << "Error loading Decomposition.\n Decomposition does not need args" << std::endl;
  		return false;
 	} else {
 		return true;
