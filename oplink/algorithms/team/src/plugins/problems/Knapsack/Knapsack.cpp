@@ -25,7 +25,7 @@ bool Knapsack::init(const vector<string>& params) {
         cout << "<instance> <type_crossover>" << endl;
         return false;
     }
-    filename = params[0];
+    string filename = params[0];
     setNumberOfObj(1);
     type_crossover = atoi(params[1].c_str());
     // Reads a problem from file

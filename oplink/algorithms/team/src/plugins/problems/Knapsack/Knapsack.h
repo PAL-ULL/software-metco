@@ -15,11 +15,13 @@
 #include "Individual.h"
 #include "utils.h"
 
-#define CROSSOVER_UNIFORM 0
-#define CROSSOVER_HUX 1
+const int CROSSOVER_UNIFORM = 0;
+const int CROSSOVER_HUX = 1;
 
 class Knapsack : public Individual {
    public:
+    Knapsack() {}
+    virtual ~Knapsack() {}
     // Reads a problem from file
     void readFile(const string filename);
 
