@@ -14,9 +14,11 @@
 #include <string.h>
 #include <sys/time.h>
 #include <time.h>
+#include <algorithm>
 #include <fstream>
 #include <future>
 #include <iostream>
+#include <numeric>
 #include <string>
 #include <thread>
 #include "Crossover.h"
@@ -85,7 +87,7 @@ vector<Individual *> run_experiment(EA *ga, string printerModule,
     MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
     ga->getSolution(p);
     vector<Individual *> allIndividuals;
-
+    p->getAllIndividuals(allIndividuals);
     /*  p->getAllIndividuals(allIndividuals);
      for (Individual *ind : allIndividuals) {
          for (int i = 0; i < ind->getNumberOfObj(); i++)
@@ -341,8 +343,23 @@ int main(int argc, char *argv[]) {
         allIndividuals.insert(allIndividuals.end(), ret.begin(), ret.end());
     }
 
-    // run_experiment(ga, printerModule, outputPath, outputFilename, pluginPath,
-    // 0);
+    vector<double> objectives;
+    for (Individual *ind : allIndividuals) {
+        // Solo tenemos un objetivo en este caso
+        objectives.push_back(ind->getObj(0));
+    }
+
+    double average = accumulate(objectives.begin(), objectives.end(), 0.0) /
+                     objectives.size();
+    vector<double>::iterator min =
+        min_element(objectives.begin(), objectives.end());
+    vector<double>::iterator max =
+        max_element(objectives.begin(), objectives.end());
+    // double median = median(objectives);
+    cout << "Results\n - Avg: " << average << " - Min: " << *min
+         << " - Max: " << *max << endl;
+    // run_experiment(ga, printerModule, outputPath, outputFilename,
+    // pluginPath, 0);
     /*     ga->setOutputPrinter(outputPrinter);
 
         outputPrinter->printInit(ga);
