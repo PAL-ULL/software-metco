@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
+#include <sstream>
+
 #include <time.h>
 #include <algorithm>
 #include <fstream>
@@ -55,7 +57,13 @@ const char MUTATION_CROSSOVER = '-';
 const char LOCAL_SEARCH = '$';
 const char MULTIOBJECTIVIZATION = '+';
 const char DECOMPOSITION = '%';
+const char SEPARATOR = '-';
+const char COMMA = ',';
+
 const string EXTENSION = ".mrf";
+const string CSV_HEADER = "Algorithm,Avg,Min,Max,Std\n";
+const int PLOT_WIDTH = 1200;
+const int PLOT_HEIGHT = 700;
 
 void argumentError(char *programName) {
     cout << "Correct usage: " << programName
@@ -103,6 +111,34 @@ vector<Individual *> run_experiment(EA *ga, string printerModule,
     return allIndividuals;
 }
 
+double getMean(const vector<double> &objectives) {
+    return accumulate(objectives.begin(), objectives.end(), 0.0) /
+           objectives.size();
+}
+
+double getMin(vector<double> &objectives) {
+    vector<double>::iterator min =
+        min_element(objectives.begin(), objectives.end());
+    return *min;
+}
+
+double getMax(vector<double> &objectives) {
+    vector<double>::iterator max =
+        max_element(objectives.begin(), objectives.end());
+    return *max;
+}
+
+double getVariance(const vector<double> &objectives) {
+    double mean = getMean(objectives);
+    double sqSum = std::inner_product(objectives.begin(), objectives.end(),
+                                      objectives.begin(), 0.0);
+    return sqSum / objectives.size() - mean * mean;
+}
+
+double getStDev(const vector<double> &objectives) {
+    return std::sqrt(getVariance(objectives));
+}
+
 int main(int argc, char *argv[]) {
     // Llamada correcta al programa
     if (argc < MINIMUM_ARGS + 1) {
@@ -114,19 +150,9 @@ int main(int argc, char *argv[]) {
     // Initialize random generator
     string outputPath = argv[ARG_OUTPUTPATH];
     string pluginPath = argv[ARG_PLUGINPATH];
-
     string outputFilename = argv[ARG_OUTPUTFILE];
     string printerModule = argv[ARG_OUTPUTPRINTERMODULE];
 
-    /*  vector<string> outputPrinterParams(
-         1, (outputPath + "/" + argv[ARG_OUTPUTFILE]));
-     OutputPrinter *outputPrinter = getOutputPrinter(
-         pluginPath, argv[ARG_OUTPUTPRINTERMODULE], outputPrinterParams, true);
-     if (outputPrinter == NULL) {
-         cout << "OutputPrinter could not be loaded" << endl;
-         exit(-1);
-     }
-  */
     // Initialize parameters
     char *critStop = argv[ARG_CRITSTOP];
     int critStopId = EA::getTypeStoppingCriterion(critStop);
@@ -154,6 +180,7 @@ int main(int argc, char *argv[]) {
 
     // B�squeda de los par�metros del algoritmo
     vector<string> algorithmArgs;
+    stringstream algArgsStream;
     int actualArg;
     for (actualArg = algParamIndex; actualArg < argc; actualArg++) {
         if ((argv[actualArg][0] == PROBLEM) || (argv[actualArg][0] == SCORE) ||
@@ -163,10 +190,12 @@ int main(int argc, char *argv[]) {
             break;
         }
         algorithmArgs.push_back(argv[actualArg]);
+        algArgsStream << argv[actualArg] << SEPARATOR;
     }
 
     // B�squeda de los par�metros del problema
     vector<string> problemArgs;
+    stringstream probArgsStream;
     if (argv[actualArg][0] == PROBLEM) {
         actualArg++;
         for (; actualArg < argc; actualArg++) {
@@ -174,6 +203,7 @@ int main(int argc, char *argv[]) {
                 (argv[actualArg][0] != MUTATION_CROSSOVER) &&
                 (argv[actualArg][0] != LOCAL_SEARCH)) {
                 problemArgs.push_back(argv[actualArg]);
+                probArgsStream << argv[actualArg] << SEPARATOR;
             } else {
                 break;
             }
@@ -290,6 +320,7 @@ int main(int argc, char *argv[]) {
         }
     }
     // Cargamos individuo
+    string problemName = argv[ARG_PROBLEM];
     Individual *ind = getInd(pluginPath, argv[ARG_PROBLEM], problemArgs, true);
     if (ind == NULL) {
         cerr << "Error loading individual" << endl;
@@ -308,6 +339,7 @@ int main(int argc, char *argv[]) {
     ind->setCrossOperator(cross);
 
     // Initiate the corresponding EA
+    string algorithmName = argv[ARG_ALGORITHM];
     EA *ga = getEA(pluginPath, argv[ARG_ALGORITHM], algorithmArgs, true, ind);
     if (ga == NULL) {
         cerr << "Error loading EA" << endl;
@@ -352,35 +384,30 @@ int main(int argc, char *argv[]) {
         objectives.push_back(ind->getObj(0));
     }
 
-    double average = accumulate(objectives.begin(), objectives.end(), 0.0) /
-                     objectives.size();
-    vector<double>::iterator min =
-        min_element(objectives.begin(), objectives.end());
-    vector<double>::iterator max =
-        max_element(objectives.begin(), objectives.end());
+    double mean = getMean(objectives);
+    double min = getMin(objectives);
+    double max = getMax(objectives);
+    double stDev = getStDev(objectives);
     // double median = median(objectives);
-    cout << "Results\n - Avg: " << average << " - Min: " << *min
-         << " - Max: " << *max << endl;
-    // run_experiment(ga, printerModule, outputPath, outputFilename,
-    // pluginPath, 0);
-    /*     ga->setOutputPrinter(outputPrinter);
 
-        outputPrinter->printInit(ga);
-        // Runs the evolurionary process
-        ga->run();
-        MOFront *p = new MOFrontVector(ga->getSampleInd(), false,
-       false); ga->getSolution(p); vector<Individual *>
-       allIndividuals;
-
-        p->getAllIndividuals(allIndividuals);
-        for (Individual *ind : allIndividuals) {
-            for (int i = 0; i < ind->getNumberOfObj(); i++)
-                cout << "Obj: " << ind->getObj(i);
-            cout << endl;
-        }
-        // Program Output
-        outputPrinter->printSolution(ga, true);
-        outputPrinter->finish(); */
+    cout << "Results\n - Avg: " << mean << " - Min: " << min
+         << " - Max: " << max << " - Std: " << stDev << endl;
+    stringstream csvContent;
+    csvContent << algorithmName << COMMA << mean << COMMA << min << COMMA << max
+               << COMMA << stDev;
+    ofstream outputCSV(outputFilename + ".csv");
+    outputCSV << CSV_HEADER;
+    outputCSV << csvContent.str();
+    outputCSV.close();
+    // vector<double> checkpoints;
+    // for (int i = 0; i < objectives.size(); i++) checkpoints.push_back(i);
+    // string title = problemName + SEPARATOR + probArgsStream.str();
+    // string label = algorithmName + algArgsStream.str();
+    // plt::figure_size(PLOT_WIDTH, PLOT_HEIGHT);
+    // plt::named_plot(label, objectives, objectives);
+    // // plt::title(title);
+    // plt::legend();
+    // plt::show();
 
     // Finishing
     delete (ga);
