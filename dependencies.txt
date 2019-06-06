@@ -7,3 +7,4 @@ libcr-dev
 mpich2
 mpich2-doc
 libgsl0-dev
+python-matplotlib

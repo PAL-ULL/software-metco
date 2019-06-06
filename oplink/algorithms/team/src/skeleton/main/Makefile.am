@@ -54,7 +54,7 @@ metcoPar_SOURCES = metcoPar.cpp
 FLEX = flex
 BISON = bison
 CCFLAGS = -c -O2
-IFLAGS = -I. -I.. -I../utils -I../../../src_external/hv-1.1-src -I/usr/include/python3.6
+IFLAGS = -I. -I.. -I../utils -I../../../src_external/hv-1.1-src -I/usr/include/python3.6 -pthread
 DFLAGS =
 LFLAGS = -fPIC
 

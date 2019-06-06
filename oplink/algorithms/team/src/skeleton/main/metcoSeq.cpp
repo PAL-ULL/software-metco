@@ -16,7 +16,8 @@
 #include <time.h>
 #include <fstream>
 #include <iostream>
-
+#include <string>
+#include <thread>
 #include "Crossover.h"
 #include "Decomposition.h"
 #include "EA.h"
@@ -40,7 +41,7 @@
 #define ARG_PRINTPERIOD 9
 #define ARG_EXTARC 10
 #define ARG_MAXLOCFRONT 11
-#define ARG_REPETITIONS 12
+#define ARG_REPETITIONS 11
 
 const char PROBLEM = '!';
 const char SCORE = '_';
@@ -48,6 +49,7 @@ const char MUTATION_CROSSOVER = '-';
 const char LOCAL_SEARCH = '$';
 const char MULTIOBJECTIVIZATION = '+';
 const char DECOMPOSITION = '%';
+const string EXTENSION = ".mrf";
 
 void argumentError(char *programName) {
     cout << "Correct usage: " << programName
@@ -63,7 +65,8 @@ void argumentError(char *programName) {
 }
 
 void run_experiment(EA *ga, string printerModule, string outputPath,
-                    string outputFile, string pluginPath) {
+                    string outputFile, string pluginPath, int rep) {
+    outputFile += "_" + to_string(rep) + EXTENSION;
     vector<string> outputPrinterParams(1, (outputPath + "/" + outputFile));
     OutputPrinter *outputPrinter =
         getOutputPrinter(pluginPath, printerModule, outputPrinterParams, true);
@@ -321,15 +324,24 @@ int main(int argc, char *argv[]) {
     ga->setScoreAlgorithm(score);
     ga->setLocalSearch(ls);
 
-    run_experiment(ga, printerModule, outputPath, outputFilename, pluginPath);
+    vector<thread> threads;
+    for (int i = 0; i < repetitions; ++i) {
+        threads.push_back(thread(run_experiment, ga, printerModule, outputPath,
+                                 outputFilename, pluginPath, i));
+        cout << "Running " << i + 1 << "/" << repetitions << endl;
+        threads[i].join();
+    }
+
+    // run_experiment(ga, printerModule, outputPath, outputFilename, pluginPath,
+    // 0);
     /*     ga->setOutputPrinter(outputPrinter);
 
         outputPrinter->printInit(ga);
         // Runs the evolurionary process
         ga->run();
-        MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
-        ga->getSolution(p);
-        vector<Individual *> allIndividuals;
+        MOFront *p = new MOFrontVector(ga->getSampleInd(), false,
+       false); ga->getSolution(p); vector<Individual *>
+       allIndividuals;
 
         p->getAllIndividuals(allIndividuals);
         for (Individual *ind : allIndividuals) {
