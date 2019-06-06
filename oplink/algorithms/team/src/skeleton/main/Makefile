@@ -231,9 +231,9 @@ AUTOMAKE = ${SHELL} /home/marrero/software-metco/oplink/algorithms/team/src/skel
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2 -lprofiler
+CFLAGS = -g -O2
 CPP = gcc -E
-CPPFLAGS = -lprofiler
+CPPFLAGS = 
 CXX = g++
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
@@ -340,7 +340,7 @@ metcoPar_SOURCES = metcoPar.cpp
 FLEX = flex
 BISON = bison
 CCFLAGS = -c -O2
-IFLAGS = -I. -I.. -I../utils -I../../../src_external/hv-1.1-src
+IFLAGS = -I. -I.. -I../utils -I../../../src_external/hv-1.1-src -I/usr/include/python3.6
 DFLAGS = 
 LFLAGS = -fPIC
 all: all-am

@@ -28,7 +28,7 @@
 #include "OutputPrinter.h"
 #include "ScoreAlgorithm.h"
 
-#define MINIMUM_ARGS 11
+#define MINIMUM_ARGS 10
 #define ARG_OUTPUTPATH 1
 #define ARG_PLUGINPATH 2
 #define ARG_OUTPUTPRINTERMODULE 3
@@ -40,7 +40,6 @@
 #define ARG_PRINTPERIOD 9
 #define ARG_EXTARC 10
 #define ARG_MAXLOCFRONT 11
-#define ARG_REPETITIONS 12
 
 const char PROBLEM = '!';
 const char SCORE = '_';
@@ -53,7 +52,7 @@ void argumentError(char *programName) {
     cout << "Correct usage: " << programName
          << " outputPath pluginPath outputPrinterModule outputFile algoritmo "
             "problema critStop critStopValue printPeriod useExternalArchive(0 "
-            "| (1 maxLocalFrontSize)) repetitions [parametros_algoritmo] [! "
+            "| (1 maxLocalFrontSize)) [parametros_algoritmo] [! "
             "parametros_problema] [_ scoreModule paramsScoreModule] [- "
             "Mutation Crossover ] $ LocalSearch paramsLocalSearch [ + "
             "MultiObjectivizationPlugin paramsMultiObjectivization ] [ % "
@@ -90,12 +89,9 @@ int main(int argc, char *argv[]) {
         cerr << "Incorrect stopping criterion: " << critStop << endl;
         exit(-1);
     }
-
     double critStopValue = atof(argv[ARG_CRITSTOPVALUE]);
     int printPeriod = atoi(argv[ARG_PRINTPERIOD]);
     bool useExternalArchive = (atoi(argv[ARG_EXTARC]) == 1);
-    int repetitions = atoi(argv[ARG_REPETITIONS]);
-
     int algParamIndex;
     int maxLocalFrontSize;
 
