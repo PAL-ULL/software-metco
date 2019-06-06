@@ -15,6 +15,7 @@
 #include <sys/time.h>
 #include <time.h>
 #include <fstream>
+#include <future>
 #include <iostream>
 #include <string>
 #include <thread>
@@ -64,8 +65,9 @@ void argumentError(char *programName) {
     exit(-1);
 }
 
-void run_experiment(EA *ga, string printerModule, string outputPath,
-                    string outputFile, string pluginPath, int rep) {
+vector<Individual *> run_experiment(EA *ga, string printerModule,
+                                    string outputPath, string outputFile,
+                                    string pluginPath, int rep) {
     outputFile += "_" + to_string(rep) + EXTENSION;
     vector<string> outputPrinterParams(1, (outputPath + "/" + outputFile));
     OutputPrinter *outputPrinter =
@@ -84,15 +86,16 @@ void run_experiment(EA *ga, string printerModule, string outputPath,
     ga->getSolution(p);
     vector<Individual *> allIndividuals;
 
-    p->getAllIndividuals(allIndividuals);
-    for (Individual *ind : allIndividuals) {
-        for (int i = 0; i < ind->getNumberOfObj(); i++)
-            cout << "Obj: " << ind->getObj(i);
-        cout << endl;
-    }
+    /*  p->getAllIndividuals(allIndividuals);
+     for (Individual *ind : allIndividuals) {
+         for (int i = 0; i < ind->getNumberOfObj(); i++)
+             cout << "Obj: " << ind->getObj(i);
+         cout << endl;
+     } */
     // Program Output
     outputPrinter->printSolution(ga, true);
     outputPrinter->finish();
+    return allIndividuals;
 }
 
 int main(int argc, char *argv[]) {
@@ -325,11 +328,17 @@ int main(int argc, char *argv[]) {
     ga->setLocalSearch(ls);
 
     vector<thread> threads;
+    vector<Individual *> allIndividuals;
     for (int i = 0; i < repetitions; ++i) {
-        threads.push_back(thread(run_experiment, ga, printerModule, outputPath,
-                                 outputFilename, pluginPath, i));
+        /*
+         threads.push_back(thread(run_experiment, ga, printerModule, outputPath,
+                                  outputFilename, pluginPath, i));*/
         cout << "Running " << i + 1 << "/" << repetitions << endl;
-        threads[i].join();
+        // threads[i].join();
+        auto future = async(run_experiment, ga, printerModule, outputPath,
+                            outputFilename, pluginPath, i);
+        vector<Individual *> ret = future.get();
+        allIndividuals.insert(allIndividuals.end(), ret.begin(), ret.end());
     }
 
     // run_experiment(ga, printerModule, outputPath, outputFilename, pluginPath,
