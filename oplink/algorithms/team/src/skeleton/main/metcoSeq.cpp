@@ -31,6 +31,7 @@
 #include "Mutation.h"
 #include "OutputPrinter.h"
 #include "ScoreAlgorithm.h"
+#include "matplotlibcpp.h"
 
 #define MINIMUM_ARGS 11
 #define ARG_OUTPUTPATH 1
@@ -45,6 +46,8 @@
 #define ARG_EXTARC 10
 #define ARG_MAXLOCFRONT 11
 #define ARG_REPETITIONS 11
+
+namespace plt = matplotlibcpp;
 
 const char PROBLEM = '!';
 const char SCORE = '_';
