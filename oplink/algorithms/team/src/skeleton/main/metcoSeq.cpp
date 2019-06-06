@@ -62,6 +62,36 @@ void argumentError(char *programName) {
     exit(-1);
 }
 
+void run_experiment(EA *ga, string printerModule, string outputPath,
+                    string outputFile, string pluginPath) {
+    vector<string> outputPrinterParams(1, (outputPath + "/" + outputFile));
+    OutputPrinter *outputPrinter =
+        getOutputPrinter(pluginPath, printerModule, outputPrinterParams, true);
+
+    if (outputPrinter == NULL) {
+        cout << "OutputPrinter could not be loaded" << endl;
+        exit(-1);
+    }
+
+    ga->setOutputPrinter(outputPrinter);
+    outputPrinter->printInit(ga);
+    // Runs the evolurionary process
+    ga->run();
+    MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
+    ga->getSolution(p);
+    vector<Individual *> allIndividuals;
+
+    p->getAllIndividuals(allIndividuals);
+    for (Individual *ind : allIndividuals) {
+        for (int i = 0; i < ind->getNumberOfObj(); i++)
+            cout << "Obj: " << ind->getObj(i);
+        cout << endl;
+    }
+    // Program Output
+    outputPrinter->printSolution(ga, true);
+    outputPrinter->finish();
+}
+
 int main(int argc, char *argv[]) {
     // Llamada correcta al programa
     if (argc < MINIMUM_ARGS + 1) {
@@ -74,15 +104,18 @@ int main(int argc, char *argv[]) {
     string outputPath = argv[ARG_OUTPUTPATH];
     string pluginPath = argv[ARG_PLUGINPATH];
 
-    vector<string> outputPrinterParams(
-        1, (outputPath + "/" + argv[ARG_OUTPUTFILE]));
-    OutputPrinter *outputPrinter = getOutputPrinter(
-        pluginPath, argv[ARG_OUTPUTPRINTERMODULE], outputPrinterParams, true);
-    if (outputPrinter == NULL) {
-        cout << "OutputPrinter could not be loaded" << endl;
-        exit(-1);
-    }
+    string outputFilename = argv[ARG_OUTPUTFILE];
+    string printerModule = argv[ARG_OUTPUTPRINTERMODULE];
 
+    /*  vector<string> outputPrinterParams(
+         1, (outputPath + "/" + argv[ARG_OUTPUTFILE]));
+     OutputPrinter *outputPrinter = getOutputPrinter(
+         pluginPath, argv[ARG_OUTPUTPRINTERMODULE], outputPrinterParams, true);
+     if (outputPrinter == NULL) {
+         cout << "OutputPrinter could not be loaded" << endl;
+         exit(-1);
+     }
+  */
     // Initialize parameters
     char *critStop = argv[ARG_CRITSTOP];
     int critStopId = EA::getTypeStoppingCriterion(critStop);
@@ -287,24 +320,26 @@ int main(int argc, char *argv[]) {
     ga->setMaxLocalFrontSize(maxLocalFrontSize);
     ga->setScoreAlgorithm(score);
     ga->setLocalSearch(ls);
-    ga->setOutputPrinter(outputPrinter);
 
-    outputPrinter->printInit(ga);
-    // Runs the evolurionary process
-    ga->run();
-    MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
-    ga->getSolution(p);
-    vector<Individual *> allIndividuals;
+    run_experiment(ga, printerModule, outputPath, outputFilename, pluginPath);
+    /*     ga->setOutputPrinter(outputPrinter);
 
-    p->getAllIndividuals(allIndividuals);
-    for (Individual *ind : allIndividuals) {
-        for (int i = 0; i < ind->getNumberOfObj(); i++)
-            cout << "Obj: " << ind->getObj(i);
-        cout << endl;
-    }
-    // Program Output
-    outputPrinter->printSolution(ga, true);
-    outputPrinter->finish();
+        outputPrinter->printInit(ga);
+        // Runs the evolurionary process
+        ga->run();
+        MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
+        ga->getSolution(p);
+        vector<Individual *> allIndividuals;
+
+        p->getAllIndividuals(allIndividuals);
+        for (Individual *ind : allIndividuals) {
+            for (int i = 0; i < ind->getNumberOfObj(); i++)
+                cout << "Obj: " << ind->getObj(i);
+            cout << endl;
+        }
+        // Program Output
+        outputPrinter->printSolution(ga, true);
+        outputPrinter->finish(); */
 
     // Finishing
     delete (ga);
