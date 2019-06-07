@@ -4,8 +4,8 @@
             "Algorithm": "MonoGA",
             "Problem": "Knapsack",
             "StopCriteria": "EVALUATIONS",
-            "StopLimit": 10000,
-            "Steps": 1000,
+            "StopLimit": 1000,
+            "Steps": 10,
             "OutputDir": "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/KnapsackProblem/results",
             "OutputFilePattern": "KnapsackMonoGA",
             "Printer": "PlainText",
@@ -20,19 +20,13 @@
             },
             "AlgorithmArgs": {
                 "popSize": [
-                    250,
-                    200,
-                    150
+                    250
                 ],
                 "pm": [
-                    0.8,
-                    0.5,
-                    0.7
+                    0.8
                 ],
                 "pc": [
-                    0.1,
-                    0.2,
-                    0.3
+                    0.1
                 ],
                 "survivalSelection": [
                     0

@@ -24,7 +24,9 @@ DECOMPOSITION = "Decomposition"
 PROBLEM_SEP = "!"
 LOCAL_SEARCH_SEP = "$"
 MUTATION_SEP = "-"
-METCO_PATH_ = "/home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main/"
+
+# Fullpaths
+METCO_PATH_ = "/home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main"
 METCO_EXEC_ = "/home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main/metcoSeq"
 
 
@@ -56,7 +58,7 @@ class Parser:
             for alg_comb in alg_params_combs:
                 for prob_comb in prob_params_combs:
                     for rep in range(job[REPS]):
-                        command = f".{METCO_EXEC_} {job[OUTPUT_DIR]} {METCO_PATH_} "
+                        command = f"{METCO_EXEC_} {job[OUTPUT_DIR]} {METCO_PATH_} "
                         command += f"{job[PRINTER]} {job[OUTPUT_FILE]}_{rep} "
                         command += f"{job[ALG]} {job[PROB]} {job[STOP_CRITERIA]} "
                         command += f"{job[STOP_LIMIT]} {job[STEPS]} 0 "
@@ -89,7 +91,5 @@ if __name__ == "__main__":
     filename = "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/KnapsackProblem/experiment_configs/sample1.json"
     parser = Parser(filename)
     experiments = parser.get_experiments()
-    for i in experiments:
-        print(i)
 
     print(f"Total: {len(experiments)}")
