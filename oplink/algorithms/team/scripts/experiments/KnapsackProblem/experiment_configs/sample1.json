@@ -1,0 +1,35 @@
+{
+    "jobs": [
+        {
+            "Algorithm": "MonoGA",
+            "Problem": "Knapsack",
+            "Evaluations": 10000,
+            "Steps": 1000,
+            "OutputDir": "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/KnapsackProblem/results",
+            "OutputFilePattern": "KnapsackMonoGA",
+            "Repetitions": 10,
+            "ProblemArgs": {
+                "Filename": [
+                    "SOME FILE"
+                ]
+            },
+            "AlgorithmArgs": {
+                "popSize": [
+                    250
+                ],
+                "pm": [
+                    0.8
+                ],
+                "pc": [
+                    0.1
+                ],
+                "survivalSelection": [
+                    0
+                ]
+            },
+            "Mutation": "Mutate_BinaryFlip_All",
+            "Crossover": "Crossover_BLX_Alpha",
+            "LocalSearch": "NoOp"
+        }
+    ]
+}
