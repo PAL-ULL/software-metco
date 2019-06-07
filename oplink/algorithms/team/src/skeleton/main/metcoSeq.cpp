@@ -78,67 +78,6 @@ void argumentError(char *programName) {
     exit(-1);
 }
 
-vector<Individual *> run_experiment(EA *ga, string printerModule,
-                                    string outputPath, string outputFile,
-                                    string pluginPath, int rep) {
-    outputFile += "_" + to_string(rep) + EXTENSION;
-    vector<string> outputPrinterParams(1, (outputPath + "/" + outputFile));
-    OutputPrinter *outputPrinter =
-        getOutputPrinter(pluginPath, printerModule, outputPrinterParams, true);
-
-    if (outputPrinter == NULL) {
-        cout << "OutputPrinter could not be loaded" << endl;
-        exit(-1);
-    }
-
-    ga->setOutputPrinter(outputPrinter);
-    outputPrinter->printInit(ga);
-    // Runs the evolurionary process
-    ga->run();
-    MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
-    ga->getSolution(p);
-    vector<Individual *> allIndividuals;
-    p->getAllIndividuals(allIndividuals);
-    /*  p->getAllIndividuals(allIndividuals);
-     for (Individual *ind : allIndividuals) {
-         for (int i = 0; i < ind->getNumberOfObj(); i++)
-             cout << "Obj: " << ind->getObj(i);
-         cout << endl;
-     } */
-    // Program Output
-    outputPrinter->printSolution(ga, true);
-    outputPrinter->finish();
-    return allIndividuals;
-}
-
-double getMean(const vector<double> &objectives) {
-    return accumulate(objectives.begin(), objectives.end(), 0.0) /
-           objectives.size();
-}
-
-double getMin(vector<double> &objectives) {
-    vector<double>::iterator min =
-        min_element(objectives.begin(), objectives.end());
-    return *min;
-}
-
-double getMax(vector<double> &objectives) {
-    vector<double>::iterator max =
-        max_element(objectives.begin(), objectives.end());
-    return *max;
-}
-
-double getVariance(const vector<double> &objectives) {
-    double mean = getMean(objectives);
-    double sqSum = std::inner_product(objectives.begin(), objectives.end(),
-                                      objectives.begin(), 0.0);
-    return sqSum / objectives.size() - mean * mean;
-}
-
-double getStDev(const vector<double> &objectives) {
-    return std::sqrt(getVariance(objectives));
-}
-
 int main(int argc, char *argv[]) {
     // Llamada correcta al programa
     if (argc < MINIMUM_ARGS + 1) {
@@ -364,50 +303,26 @@ int main(int argc, char *argv[]) {
     ga->setScoreAlgorithm(score);
     ga->setLocalSearch(ls);
 
-    vector<thread> threads;
-    vector<Individual *> allIndividuals;
-    for (int i = 0; i < repetitions; ++i) {
-        /*
-         threads.push_back(thread(run_experiment, ga, printerModule, outputPath,
-                                  outputFilename, pluginPath, i));*/
-        cout << "Running " << i + 1 << "/" << repetitions << endl;
-        // threads[i].join();
-        auto future = async(run_experiment, ga, printerModule, outputPath,
-                            outputFilename, pluginPath, i);
-        vector<Individual *> ret = future.get();
-        allIndividuals.insert(allIndividuals.end(), ret.begin(), ret.end());
+    outputFile += "_" + to_string(rep) + EXTENSION;
+    vector<string> outputPrinterParams(1, (outputPath + "/" + outputFile));
+    OutputPrinter *outputPrinter =
+        getOutputPrinter(pluginPath, printerModule, outputPrinterParams, true);
+
+    if (outputPrinter == NULL) {
+        cout << "OutputPrinter could not be loaded" << endl;
+        exit(-1);
     }
 
-    vector<double> objectives;
-    for (Individual *ind : allIndividuals) {
-        // Solo tenemos un objetivo en este caso
-        objectives.push_back(ind->getObj(0));
-    }
+    ga->setOutputPrinter(outputPrinter);
+    outputPrinter->printInit(ga);
 
-    double mean = getMean(objectives);
-    double min = getMin(objectives);
-    double max = getMax(objectives);
-    double stDev = getStDev(objectives);
-    // double median = median(objectives);
+    // Runs the evolurionary process
+    ga->run();
+    MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
 
-    cout << "Results\n - Avg: " << mean << " - Min: " << min
-         << " - Max: " << max << " - Std: " << stDev << endl;
-    stringstream csvContent;
-    csvContent << algorithmName << COMMA << mean << COMMA << min << COMMA << max
-               << COMMA << stDev;
-    ofstream outputCSV(outputFilename + ".csv");
-    outputCSV << CSV_HEADER;
-    outputCSV << csvContent.str();
-    outputCSV.close();
-    // vector<double> checkpoints;
-    // for (int i = 0; i < objectives.size(); i++) checkpoints.push_back(i);
-    // string title = problemName + SEPARATOR + probArgsStream.str();
-    // string label = algorithmName + algArgsStream.str();
-    // plt::figure_size(PLOT_WIDTH, PLOT_HEIGHT);
-    // plt::named_plot(label, objectives, objectives);
-    // // plt::title(title);
-    // plt::legend();
-    // plt::show();
+    // Program Output
+    outputPrinter->printSolution(ga, true);
+    outputPrinter->finish();
 
     // Finishing
     delete (ga);
