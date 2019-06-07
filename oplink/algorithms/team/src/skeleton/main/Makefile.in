@@ -340,7 +340,7 @@ metcoPar_SOURCES = metcoPar.cpp
 FLEX = flex
 BISON = bison
 CCFLAGS = -c -O2
-IFLAGS = -I. -I.. -I../utils -I../../../src_external/hv-1.1-src -pthread
+IFLAGS = -I. -I.. -I../utils -I../../../src_external/hv-1.1-src
 DFLAGS = 
 LFLAGS = -fPIC
 all: all-am
@@ -891,14 +891,15 @@ decompositions:
 ######################## sequential #####################################
 
 metcoSeq: metcoSeq.cpp Individual.o MOFrontBinaryInteger.o MOFrontVector_noMPI.o MOFront.o hv.o avl.o EA.o utils.o ScoreAlgorithm.o Mutation.o Crossover.o LocalSearch.o Plugin.o OutputPrinter.o MultiObjectivization.o Decomposition.o
-	$(CXX) -DNO_CONF_PARSING $(IFLAGS) metcoSeq.cpp Individual.o MOFrontBinaryInteger.o MOFrontVector_noMPI.o MOFront.o hv.o avl.o EA.o utils.o ScoreAlgorithm.o Mutation.o Crossover.o LocalSearch.o Plugin.o OutputPrinter.o MultiObjectivization.o Decomposition.o -o $@ -ldl -I/usr/include/python2.7 -lpython2.7
+	$(CXX) -DNO_CONF_PARSING $(IFLAGS) metcoSeq.cpp Individual.o MOFrontBinaryInteger.o MOFrontVector_noMPI.o MOFront.o hv.o avl.o EA.o utils.o ScoreAlgorithm.o Mutation.o Crossover.o LocalSearch.o Plugin.o OutputPrinter.o MultiObjectivization.o Decomposition.o -o $@ -ldl
 
 #########################################################################
 
 ############################# parallel ##################################
 
 metcoPar: metcoPar.cpp MOFrontBinaryInteger.o MOFrontVector.o MOFront.o hv.o avl.o Individual.o EA.o ExecutionIsland.o CoordinatorIsland.o Configuration.o utils.o parseConf.tab.c lex.Conf.c Conversion.o ScoreAlgorithm.o GlobalScoreAlgorithm.o LocalScoreAlgorithm.o MigrationSelector.o ExchangeSelector.o Mutation.o Crossover.o LocalSearch.o MigrationTopology.o InitPopIslandLoader.o Plugin.o MultiObjectivization.o Decomposition.o
-	$(MPICC) $(IFLAGS) metcoPar.cpp Individual.o MOFrontBinaryInteger.o MOFrontVector.o MOFront.o hv.o avl.o EA.o ExecutionIsland.o utils.o CoordinatorIsland.o Configuration.o parseConf.tab.c lex.Conf.c Conversion.o ScoreAlgorithm.o MigrationSelector.o ExchangeSelector.o GlobalScoreAlgorithm.o LocalScoreAlgorithm.o Mutation.o Crossover.o LocalSearch.o MigrationTopology.o InitPopIslandLoader.o Plugin.o MultiObjectivization.o Decomposition.o -o $@ -ldl -I/usr/include/python2.7 -lpython2.7
+	$(MPICC) $(IFLAGS) metcoPar.cpp Individual.o MOFrontBinaryInteger.o MOFrontVector.o MOFront.o hv.o avl.o EA.o ExecutionIsland.o utils.o CoordinatorIsland.o Configuration.o parseConf.tab.c lex.Conf.c Conversion.o ScoreAlgorithm.o MigrationSelector.o ExchangeSelector.o GlobalScoreAlgorithm.o LocalScoreAlgorithm.o Mutation.o Crossover.o LocalSearch.o MigrationTopology.o InitPopIslandLoader.o Plugin.o MultiObjectivization.o Decomposition.o -o $@ -ldl
+
 #########################################################################
 
 ############################# skeleton ##################################

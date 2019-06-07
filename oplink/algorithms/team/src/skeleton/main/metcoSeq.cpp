@@ -33,9 +33,8 @@
 #include "Mutation.h"
 #include "OutputPrinter.h"
 #include "ScoreAlgorithm.h"
-#include "matplotlibcpp.h"
 
-#define MINIMUM_ARGS 11
+#define MINIMUM_ARGS 10
 #define ARG_OUTPUTPATH 1
 #define ARG_PLUGINPATH 2
 #define ARG_OUTPUTPRINTERMODULE 3
@@ -47,9 +46,6 @@
 #define ARG_PRINTPERIOD 9
 #define ARG_EXTARC 10
 #define ARG_MAXLOCFRONT 11
-#define ARG_REPETITIONS 11
-
-namespace plt = matplotlibcpp;
 
 const char PROBLEM = '!';
 const char SCORE = '_';
@@ -61,15 +57,13 @@ const char SEPARATOR = '-';
 const char COMMA = ',';
 
 const string EXTENSION = ".mrf";
-const string CSV_HEADER = "Algorithm,Avg,Min,Max,Std\n";
-const int PLOT_WIDTH = 1200;
-const int PLOT_HEIGHT = 700;
 
 void argumentError(char *programName) {
     cout << "Correct usage: " << programName
-         << " outputPath pluginPath outputPrinterModule outputFile algoritmo "
+         << " outputPath pluginPath outputPrinterModule outputFilePattern "
+            "algoritmo "
             "problema critStop critStopValue printPeriod useExternalArchive(0 "
-            "| (1 maxLocalFrontSize)) repetitions [parametros_algoritmo] [! "
+            "| (1 maxLocalFrontSize)) [parametros_algoritmo] [! "
             "parametros_problema] [_ scoreModule paramsScoreModule] [- "
             "Mutation Crossover ] $ LocalSearch paramsLocalSearch [ + "
             "MultiObjectivizationPlugin paramsMultiObjectivization ] [ % "
@@ -103,7 +97,6 @@ int main(int argc, char *argv[]) {
     double critStopValue = atof(argv[ARG_CRITSTOPVALUE]);
     int printPeriod = atoi(argv[ARG_PRINTPERIOD]);
     bool useExternalArchive = (atoi(argv[ARG_EXTARC]) == 1);
-    int repetitions = atoi(argv[ARG_REPETITIONS]);
 
     int algParamIndex;
     int maxLocalFrontSize;
@@ -303,8 +296,8 @@ int main(int argc, char *argv[]) {
     ga->setScoreAlgorithm(score);
     ga->setLocalSearch(ls);
 
-    outputFile += "_" + to_string(rep) + EXTENSION;
-    vector<string> outputPrinterParams(1, (outputPath + "/" + outputFile));
+    outputFilename += EXTENSION;
+    vector<string> outputPrinterParams(1, (outputPath + "/" + outputFilename));
     OutputPrinter *outputPrinter =
         getOutputPrinter(pluginPath, printerModule, outputPrinterParams, true);
 

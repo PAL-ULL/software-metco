@@ -1,2 +1,0 @@
-Total time: 805583
-Sumo time: 801540

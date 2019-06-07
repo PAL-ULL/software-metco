@@ -1,3 +1,0 @@
-Para F4 y F5 se han generado 9000 numeros aleatorios en el rango [minValue, maxValue] uniformemente.
-La semilla utilizada ha sido la numero 1
-Los 1000 primeros numeros se dejaron como estaban en la propuesta original
