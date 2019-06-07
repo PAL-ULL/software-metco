@@ -3,10 +3,12 @@
         {
             "Algorithm": "MonoGA",
             "Problem": "Knapsack",
-            "Evaluations": 10000,
+            "StopCriteria": "EVALUATIONS",
+            "StopLimit": 10000,
             "Steps": 1000,
             "OutputDir": "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/KnapsackProblem/results",
             "OutputFilePattern": "KnapsackMonoGA",
+            "Printer": "PlainText",
             "Repetitions": 10,
             "ProblemArgs": {
                 "Filename": [
