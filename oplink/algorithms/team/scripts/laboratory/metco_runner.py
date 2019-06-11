@@ -1,6 +1,6 @@
 import logging
-from intern import Intern
-from parser import Parser
+from modules.intern import Intern
+from modules.parser import Parser
 from datetime import datetime
 import sys
 import os

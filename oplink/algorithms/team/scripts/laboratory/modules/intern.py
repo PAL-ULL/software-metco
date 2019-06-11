@@ -5,7 +5,7 @@ from queue import Queue
 import logging
 import threading
 import time
-from parser import Parser
+from .parser import Parser
 import warnings
 import logging
 
@@ -25,6 +25,7 @@ class Intern:
         self.max_workers = max_workers
 
     def run_experiments(self):
+        # Interfaz para ejecutar los experimentos creados
         self.__run_experiments(self.experiment_list,
                                self.machine, self.max_workers)
 
