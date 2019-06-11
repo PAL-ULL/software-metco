@@ -1,6 +1,7 @@
 
 import json
 import itertools
+import os
 
 # Constantes de un experimento
 JOBS = "jobs"
@@ -28,6 +29,7 @@ MUTATION_SEP = "-"
 # Fullpaths
 METCO_PATH_ = "/home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main"
 METCO_EXEC_ = "/home/marrero/software-metco/oplink/algorithms/team/src/skeleton/main/metcoSeq"
+RESULTS = "/raw_metco_results"
 
 
 class Parser:
@@ -55,10 +57,16 @@ class Parser:
             alg_params_combs = list(itertools.product(*alg_args))
             prob_params_combs = list(itertools.product(*prob_args))
 
+            # Creamos el directorio de resultados si no existe
+            output_dir = job[OUTPUT_DIR] + RESULTS
+            if not os.path.exists(output_dir):
+                os.makedirs(output_dir)
+
             for alg_comb in alg_params_combs:
                 for prob_comb in prob_params_combs:
                     for rep in range(job[REPS]):
-                        command = f"{METCO_EXEC_} {job[OUTPUT_DIR]} {METCO_PATH_} "
+
+                        command = f"{METCO_EXEC_} {output_dir} {METCO_PATH_} "
                         command += f"{job[PRINTER]} {job[OUTPUT_FILE]}_{rep} "
                         command += f"{job[ALG]} {job[PROB]} {job[STOP_CRITERIA]} "
                         command += f"{job[STOP_LIMIT]} {job[STEPS]} 0 "

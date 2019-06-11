@@ -1,0 +1,34 @@
+{
+    "jobs": [
+        {
+            "Algorithm": "NSGA2",
+            "Problem": "DTLZ1",
+            "StopCriteria": "EVALUATIONS",
+            "StopLimit": 100000,
+            "Steps": 1000,
+            "OutputDir": "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/DTLZ1",
+            "OutputFilePattern": "DTLZ1_MonoGA",
+            "Printer": "PlainText",
+            "Repetitions": 50,
+            "ProblemArgs": {
+                "dimension": [
+                    3
+                ]
+            },
+            "AlgorithmArgs": {
+                "pm": [
+                    0.8
+                ],
+                "pc": [
+                    0.1
+                ],
+                "pSize": [
+                    250
+                ]
+            },
+            "Mutation": "Mutate_BinaryFlip_All",
+            "Crossover": "Crossover_BLX_Alpha",
+            "LocalSearch": "NoOp"
+        }
+    ]
+}
