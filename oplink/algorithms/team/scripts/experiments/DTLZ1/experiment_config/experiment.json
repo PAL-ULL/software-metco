@@ -1,31 +1,38 @@
 {
     "jobs": [
         {
-            "Algorithm": "NSGA2",
-            "Problem": "DTLZ1",
+            "Algorithms": [
+                {
+                    "Name": "NSGA2",
+                    "Args": {
+                        "pm": 0.8,
+                        "pc": 0.1,
+                        "pSize": 250
+                    },
+                    "OutputFilePattern": "DTLZ1_3_NSGA2_250"
+                },
+                {
+                    "Name": "NSGA2",
+                    "Args": {
+                        "pm": 0.8,
+                        "pc": 0.1,
+                        "pSize": 150
+                    },
+                    "OutputFilePattern": "DTLZ1_3_NSGA2_150"
+                }
+            ],
+            "Problem": {
+                "Name": "DTLZ1",
+                "Args": {
+                    "dim": 3
+                }
+            },
             "StopCriteria": "EVALUATIONS",
-            "StopLimit": 100000,
+            "StopLimit": 10000,
             "Steps": 1000,
-            "OutputDir": "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/DTLZ1",
-            "OutputFilePattern": "DTLZ1_MonoGA",
+            "OutputDir": "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/DTLZ1/",
             "Printer": "PlainText",
-            "Repetitions": 50,
-            "ProblemArgs": {
-                "dimension": [
-                    3
-                ]
-            },
-            "AlgorithmArgs": {
-                "pm": [
-                    0.8
-                ],
-                "pc": [
-                    0.1
-                ],
-                "pSize": [
-                    250
-                ]
-            },
+            "Repetitions": 30,
             "Mutation": "Mutate_BinaryFlip_All",
             "Crossover": "Crossover_BLX_Alpha",
             "LocalSearch": "NoOp"
