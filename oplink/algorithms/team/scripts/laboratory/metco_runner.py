@@ -1,15 +1,17 @@
 import logging
 from intern import Intern
 from parser import Parser
-import datetime
+
+from datetime import datetime
 
 LOG_FILE = "metco_runner"
 EXT = ".log"
 
 
 def main():
-    date = datetime.date.today().strftime("%d-%m-%Y-%H-%M-%S")
-    log_filename = LOG_FILE + "_" + date + EXT
+    now = datetime.now()
+    now_str = now.strftime("%d_%m_%Y_%H_%M_%S")
+    log_filename = LOG_FILE + "_" + now_str + EXT
     print(f"Logs at: {log_filename}")
     logging.basicConfig(filename=log_filename, level=logging.INFO)
     logging.info('Started')

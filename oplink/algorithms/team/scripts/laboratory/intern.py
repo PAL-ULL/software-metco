@@ -9,6 +9,7 @@ from parser import Parser
 import warnings
 import logging
 
+logging.getLogger("paramiko").setLevel(logging.WARNING)
 warnings.filterwarnings(action='ignore', module='.*paramiko.*')
 
 
@@ -26,42 +27,47 @@ class Intern:
     def run_experiments(self):
         if len(self.machines) == 1:
             # Ejecutar en la misma maquina pero paralelo si es posible
-            # exp_queue = Queue()
-            # list = [exp_queue.put(x) for x in self.experiment_list]
-            # self.__run_experiments(exp_queue, self.machines[0])
-            offset = 10
-            for i in range(0, len(self.experiment_list), offset):
-                print(f"Running {i + offset}/{len(self.experiment_list)}")
-                self.__run_experiments(
-                    self.experiment_list[i:offset], self.machines[0])
+            self.__run_experiments(self.experiment_list, self.machines[0])
 
         else:
             exps_per_machine = len(self.experiment_list) // len(self.machines)
             print(f"Exps per machine: {exps_per_machine}")
 
-    def __run_experiments(self, experiment_list, machine):
+    def __add_experiment_to_queue(self, experiment, machine, exp_queue):
+        th = threading.Thread(
+            target=self.__run_ssh_experiment, args=(experiment, machine))
+        th.start()
+        exp_queue.put(th)
+
+    def __run_experiments(self, experiment_list, machine, batch_size=10):
         """
             Ejecuta la cola de experimentos en la maquina que le toca
         """
         exp_queue = Queue()
-        threads = []
-        for i in experiment_list:
-            th = threading.Thread(
-                target=self.__run_ssh_experiment, args=(i, machine))
-            th.start()
-            exp_queue.put(th)
 
-        while not exp_queue.empty():
+        for i in experiment_list[:batch_size]:
+            self.__add_experiment_to_queue(i, machine, exp_queue)
+            # th = threading.Thread(
+            #     target=self.__run_ssh_experiment, args=(i, machine))
+            # th.start()
+            # exp_queue.put(th)
+
+        counter = batch_size
+        while counter < len(self.experiment_list):  # not exp_queue.empty():
             th = exp_queue.get()
             th.join()
             exp_queue.task_done()
 
-        exp_queue.join()
+            self.__add_experiment_to_queue(
+                self.experiment_list[counter + 1], machine, exp_queue)
+            counter += 1
+            print(f"{counter}/{len(self.experiment_list)} experiments performed")
+
         logging.info("Done")
 
     def __run_ssh_experiment(self, exp, machine):
 
-        logging.info(f"Running: {exp} in {machine}")
+        logging.info(f"\n- Running:\n{exp}\nat: {machine}")
         ssh = SSHClient()
         ssh.load_system_host_keys()
         ssh.connect(machine)
