@@ -23,17 +23,19 @@
                     "OutputFilePattern": "Knapsack_MonoGA_150_08_01"
                 }
             ],
-            "Problem": "Knapsack",
+            "Problem": {
+                "Name": "Knapsack",
+                "Args": {
+                    "Filename": "/home/marrero/Proyectos/jMetalPy/resources/Knapsack_instances/KnapsackInstance_50_0_0.kp",
+                    "Crossover": 0
+                }
+            },
             "StopCriteria": "EVALUATIONS",
             "StopLimit": 10000,
             "Steps": 1000,
-            "OutputDir": "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/KnapsackProblem/results",
+            "OutputDir": "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/KnapsackProblem/",
             "Printer": "PlainText",
-            "Repetitions": 10,
-            "ProblemArgs": {
-                "Filename": "/home/marrero/Proyectos/jMetalPy/resources/Knapsack_instances/KnapsackInstance_50_0_0.kp",
-                "Crossover": 0
-            },
+            "Repetitions": 30,
             "Mutation": "Mutate_BinaryFlip_All",
             "Crossover": "Crossover_BLX_Alpha",
             "LocalSearch": "NoOp"

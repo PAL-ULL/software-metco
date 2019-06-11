@@ -16,7 +16,6 @@ OUTPUT_DIR = "OutputDir"
 OUTPUT_FILE = "OutputFilePattern"
 PRINTER = "Printer"
 REPS = "Repetitions"
-PROB_ARGS = "ProblemArgs"
 
 
 MUTATION = "Mutation"
@@ -59,14 +58,12 @@ class Parser:
 
             # Generamos los comandos de ejecucion para cada posible opcion
             for algorithm in job[ALGS]:
-                print(algorithm)
-                print(job[PROB])
-                print(job[PROB_ARGS])
+                # Para cada algoritmo creamos los experimentos
 
                 for rep in range(job[REPS]):
                     command = f"{METCO_EXEC_} {output_dir} {METCO_PATH_} "
                     command += f"{job[PRINTER]} {algorithm[OUTPUT_FILE]}_{rep} "
-                    command += f"{algorithm[NAME]} {job[PROB]} {job[STOP_CRITERIA]} "
+                    command += f"{algorithm[NAME]} {job[PROB][NAME]} {job[STOP_CRITERIA]} "
                     command += f"{job[STOP_LIMIT]} {job[STEPS]} 0 "
 
                     # Parametros del algoritmo vienen aqui
@@ -74,7 +71,8 @@ class Parser:
                                         for x in algorithm[ARGS].values()) + " "
 
                     command += PROBLEM_SEP + " " + \
-                        " ".join(str(x) for x in job[PROB_ARGS].values()) + " "
+                        " ".join(str(x)
+                                 for x in job[PROB][ARGS].values()) + " "
                     # Opciones que pueden estar o no
                     if MUTATION in job and CROSSOVER in job:
                         command += f"{MUTATION_SEP} {job[MUTATION]} "
