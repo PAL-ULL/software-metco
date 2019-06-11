@@ -46,7 +46,7 @@ class Intern:
             self.__add_experiment_to_queue(i, machine, exp_queue)
 
         counter = workers
-        while counter < len(experiment_list):
+        while counter < len(experiment_list) - 1:
             th = exp_queue.get()
             th.join()
             exp_queue.task_done()
@@ -54,7 +54,7 @@ class Intern:
             self.__add_experiment_to_queue(
                 experiment_list[counter + 1], machine, exp_queue)
             counter += 1
-            print(f"{counter}/{len(experiment_list)} experiments performed")
+            print(f"{counter}/{len(experiment_list) - 1} experiments performed")
 
         logging.info("Done")
 

@@ -16,7 +16,7 @@ def main():
     logging.basicConfig(filename=log_filename, level=logging.INFO)
     logging.info('Started')
 
-    filename = "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/KnapsackProblem/experiment_configs/sample2.json"
+    filename = "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/KnapsackProblem/experiment_configs/simple_exp.json"
     parser = Parser(filename)
     experiments = parser.get_experiments()
     print(f"Total: {len(experiments)}")

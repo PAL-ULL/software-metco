@@ -9,7 +9,7 @@
             "OutputDir": "/home/marrero/software-metco/oplink/algorithms/team/scripts/experiments/KnapsackProblem/results",
             "OutputFilePattern": "KnapsackMonoGA",
             "Printer": "PlainText",
-            "Repetitions": 10,
+            "Repetitions": 50,
             "ProblemArgs": {
                 "Filename": [
                     "/home/marrero/Proyectos/jMetalPy/resources/Knapsack_instances/KnapsackInstance_50_0_0.kp"
