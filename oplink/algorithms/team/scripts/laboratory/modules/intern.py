@@ -8,6 +8,7 @@ import time
 from .parser import Parser
 import warnings
 import logging
+import subprocess
 
 logging.getLogger("paramiko").setLevel(logging.WARNING)
 warnings.filterwarnings(action='ignore', module='.*paramiko.*')
@@ -17,7 +18,10 @@ class Intern:
     """
         Clase que representa a un becario.
         El que se encarga de ejecutar todo lo que le mandan.
+        Si la maquina que se pasa es localhost se ejecuta como comando
+
     """
+    LOCAL = "localhost"
 
     def __init__(self, experiment_list=None, machine="localhost", max_workers=10):
         self.experiment_list = experiment_list
@@ -30,8 +34,13 @@ class Intern:
                                self.machine, self.max_workers)
 
     def __add_experiment_to_queue(self, experiment, machine, exp_queue):
-        th = threading.Thread(
-            target=self.__run_ssh_experiment, args=(experiment, machine))
+        if machine == Intern.LOCAL:
+            th = threading.Thread(
+                target=self.__run_local_experiment, args=(experiment,))
+        else:
+            th = threading.Thread(
+                target=self.__run_ssh_experiment, args=(experiment, machine))
+
         th.start()
         exp_queue.put(th)
 
@@ -63,7 +72,6 @@ class Intern:
         """
             Ejecuta el experimento sobre SSH en la maquina especificada
         """
-        logging.info(f"\n- Running:\n{exp}\nat: {machine}")
         ssh = SSHClient()
         ssh.load_system_host_keys()
         ssh.connect(machine)
@@ -72,6 +80,18 @@ class Intern:
 
         error = ssh_stderr.read()
         output = ssh_stdout.read()
+        if error != b'':
+            logging.error(error)
+            raise RuntimeError(error)
+
+    def __run_local_experiment(self, exp):
+        """
+            Ejecuta el experimento en la maquina local como comando
+        """
+        logging.info(f"\n- Running:\n{exp}\n")
+        output, error = subprocess.Popen(
+            exp.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+
         if error != b'':
             logging.error(error)
             raise RuntimeError(error)
