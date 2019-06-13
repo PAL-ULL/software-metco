@@ -11,7 +11,7 @@ EXT = ".log"
 NUM_ARGS = 2
 
 
-def main(experiment_file):
+def main(experiment_file, machine="localhost"):
     now = datetime.now()
     now_str = now.strftime("%d_%m_%Y_%H_%M_%S")
     log_filename = LOG_DIR + LOG_FILE + "_" + now_str + EXT
@@ -37,7 +37,12 @@ if __name__ == '__main__':
         raise AttributeError(
             "No enough args given. Experiment filename needed")
 
+    machine = "localhost"
+    if (len(sys.argv) == NUM_ARGS + 1):
+        # Puede venir una maquina
+        machine = sys.argv[2]
+
     if not os.path.exists(LOG_DIR):
         os.makedirs(LOG_DIR)
 
-    main(sys.argv[1])
+    main(sys.argv[1], machine)

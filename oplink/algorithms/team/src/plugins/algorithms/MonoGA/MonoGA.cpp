@@ -157,11 +157,11 @@ void MonoGA::survivalSelection() {
         // Nota este replace worst no es el que esta explicado en el libro de
         // Eiben Aqui nos estamos "cargando" los peores entre padres e hijos En
         // el libro de Eiben dice que se generan nu hijos (< n) y se borran los
-        // nu peores padres. Habria que hacer otro operador mas y a este llamarlo
-        // RPELACEWORSTFROMPARENTSANDOFFSPRING Al otro lo podemos llamar GENITOR
-        // Nota: en la pagina 27 si llama replace worst a un esquema en que se
-        // eligen los mejores entre padres e hijos, pero puede llevar a
-        // confusion...
+        // nu peores padres. Habria que hacer otro operador mas y a este
+        // llamarlo RPELACEWORSTFROMPARENTSANDOFFSPRING Al otro lo podemos
+        // llamar GENITOR Nota: en la pagina 27 si llama replace worst a un
+        // esquema en que se eligen los mejores entre padres e hijos, pero puede
+        // llevar a confusion...
         for (int i = 0; i < offSpring.size(); i++) {
             population->push_back(offSpring[i]);
         }
