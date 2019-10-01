@@ -15,22 +15,20 @@ vector<float> Knapsack::weights;
 float Knapsack::capacity;
 vector<int> Knapsack::deleteOrder;
 
-const int Knapsack::ARGS = 2;
+const int Knapsack::ARGS = 1;
 
 // Problem Initialization
-bool Knapsack::init(const vector<string>& params) {
+bool Knapsack::init(const vector<string> &params) {
   // Check for the problem parameters
   if (params.size() != ARGS) {
     cout << "Error Knapsack: Incorrect parameters " << endl;
-    cout << "<instance> <type_crossover>" << endl;
+    cout << "<instance>" << endl;
     return false;
   }
   string filename = params[0];
   setNumberOfObj(1);
-  type_crossover = atoi(params[1].c_str());
   // Reads a problem from file
   readFile(filename);
-  ratios();
   return true;
 }
 
@@ -60,58 +58,15 @@ void Knapsack::dependentMutation(double pm) {
   repair();
 }
 
-/* // Genetic Operators - Uniform Crossover
-void Knapsack::dependentCrossover(Individual* ind) {
-    if (type_crossover == CROSSOVER_UNIFORM) {
-        crossover_uniform(ind);
-    } else if (type_crossover == CROSSOVER_HUX) {
-        crossover_HUX(ind);
-    } else {
-        cout << "Error en el tipo de Crossover. type_crossover = 0 ->
-crossover_uniforme. type_crossover = 1 -> crossover_hux" << endl;
-    }
-
-    ((Knapsack*)ind)->repair();
-    repair();
-}
- */
-/* void Knapsack::crossover_HUX(Individual* ind) {
-    int indDistance = hammingDistance(this, ind);
-    vector<int> idxVector;
-
-    //Se genera un vector de valores aleatorios para seleccionar de forma
-aleatoria la primera
-    //mitad de los elementos
-    generateRandomValues(0, indDistance - 1, indDistance, idxVector);
-
-    for (unsigned int i = 0; i < getNumberOfVar(); i++) {
-        //Se cruza si los elementos son diferentes
-        if (getVar(i) != ind->getVar(i)) {
-            //Se comprueba si el elemento a cruzar esta en la primera mitad de
-la lista aleatoria for (unsigned int j = 0; j < floor(idxVector.size() / 2);
-j++) {
-                //Si esta en la lista se realiza el cruce
-                if (i == idxVector[j]) {
-                    double tmp = ind->getVar(i);
-                    ind->setVar(i, getVar(i));
-                    setVar(i, tmp);
-                }
-            }
-        }
-    }
-    ((Knapsack*)ind)->repair();
-    repair();
-} */
-
 // Random generation of an individual
 void Knapsack::restart(void) {
   for (int i = 0; i < nItems; i++) {
     setVar(i, ((double)rand() / (double)RAND_MAX));
     setVar(i, getVar(i) * (getMaximum(i) - getMinimum(i)) + getMinimum(i));
     if (getVar(i) >= 0.5)
-      setVar(i, 1);
+      setVar(i, 1.0);
     else
-      setVar(i, 0);
+      setVar(i, 0.0);
   }
   repair();
 }
@@ -120,25 +75,50 @@ void Knapsack::restart(void) {
 void Knapsack::repair(void) {
   int i = 0;
   while (!checkCapacity()) {
-    setVar(deleteOrder[i], 0);
+    setVar(deleteOrder[i], 0.0);
     i++;
   }
 }
 
+// Checking if the packed weights is over the capacity
+bool Knapsack::checkCapacity() {
+  float packed = 0;
+  for (int i = 0; i < nItems; i++) {
+    packed += getWeight(i) * int(getVar(i));
+  }
+  return (packed > capacity) ? false : true;
+}
+
+// Evaluation of an individual
+void Knapsack::evaluate(void) {
+  float objective = 0;
+  for (int j = 0; j < nItems; j++) {
+    objective += profits[j] * int(getVar(j));
+  }
+  if (!checkCapacity()) {
+    repair();
+    evaluate();
+  } else
+    setObj(0, objective);
+}
+
 // Calculates the max profit/weight ratio for each item in increasing order
 void Knapsack::ratios(void) {
-  vector<float> maxRatio(nItems, -1.0);
+  float *maxRatio = new float[nItems];
   for (int j = 0; j < nItems; j++) {
-    float ratio = getProfit(j) / getWeight(j);
-    if (ratio >= maxRatio[j]) maxRatio[j] = ratio;
+    maxRatio[j] = -1.0;
+    for (int i = 0; i < this->getNumberOfObj(); i++) {
+      float ratio = getProfit(j) / getWeight(j);
+      if (ratio >= maxRatio[j]) maxRatio[j] = ratio;
+    }
   }
   quicksort(deleteOrder, maxRatio, 0, nItems - 1);
-  maxRatio.shrink_to_fit();
+  delete maxRatio;
 }
 
 // Quicksort algorithm to order the max profit/weight ratio vector
-void Knapsack::quicksort(vector<int>& deleteOrder, vector<float>& maxRatio,
-                         int begin, int end) {
+void Knapsack::quicksort(vector<int> &deleteOrder, float *maxRatio, int begin,
+                         int end) {
   float pivote = maxRatio[end];
   int i = begin;
   int j = end;
@@ -173,19 +153,4 @@ void Knapsack::quicksort(vector<int>& deleteOrder, vector<float>& maxRatio,
   quicksort(deleteOrder, maxRatio, i + 1, end);
 }
 
-// Checks all capacities restrictions
-bool Knapsack::checkCapacity(void) {
-  float sum = 0;
-  for (int j = 0; j < nItems; j++) sum += (getWeight(j) * getVar(j));
-  if (sum > capacity) return false;
-  return true;
-}
-
-// Evaluation of an individual
-void Knapsack::evaluate(void) {
-  float objective = 0;
-  for (int j = 0; j < nItems; j++) objective += profits[j] * getVar(j);
-  setObj(0, objective);
-}
-
-Individual* Knapsack::clone(void) const { return new Knapsack(); }
+Individual *Knapsack::clone(void) const { return new Knapsack(); }

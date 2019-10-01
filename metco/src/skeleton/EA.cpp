@@ -20,75 +20,74 @@
 
 // Constructor
 EA::EA() {
-    // init seed
-    // initRandomSeed();
-    // set initial values
-    sampleInd = NULL;
-    outputPrinter = NULL;
-    localSolution = NULL;
-    ls = NULL;
-    population = new vector<Individual *>;
-    this->pSize = -1;
-    initiated = 0;
-    this->printPeriod = this->nextPrint = 0;
-    generateArchive = true;
-    evaluations = 0;
+  // init seed
+  // initRandomSeed();
+  // set initial values
+  sampleInd = NULL;
+  outputPrinter = NULL;
+  localSolution = NULL;
+  ls = NULL;
+  population = new vector<Individual *>;
+  this->pSize = -1;
+  initiated = 0;
+  this->printPeriod = this->nextPrint = 0;
+  generateArchive = true;
+  evaluations = 0;
 }
 
 /* ********************************************************************************
  * Elimina la soluci�n local y la poblaci�n
  * ********************************************************************************/
 EA::~EA() {
-    delete localSolution;
-    for (unsigned int i = 0; i < population->size(); i++)
-        delete (*population)[i];
-    delete population;
+  delete localSolution;
+  for (unsigned int i = 0; i < population->size(); i++) delete (*population)[i];
+  delete population;
 }
 
 void EA::setGenerateArchive(const bool generate, const int type) {
-    this->generateArchive = generate;
-    if (generate) {
-        if (sampleInd == NULL) {
-            cerr << "Error interno: sampleInd es null" << endl;
-        }
-        switch (type) {
-            case ARCHIVE_VECTOR:
-                localSolution = new MOFrontVector(sampleInd, true, true);
-                break;
-            case ARCHIVE_INSO1:
-                localSolution = new MOFrontBinaryInteger(sampleInd, true, true);
-                break;
-            default:
-                cerr << "Error: tipo de archivo no definido" << endl;
-                exit(-1);
-        }
+  this->generateArchive = generate;
+  if (generate) {
+    if (sampleInd == NULL) {
+      cerr << "Error interno: sampleInd es null" << endl;
     }
+    switch (type) {
+      case ARCHIVE_VECTOR:
+        localSolution = new MOFrontVector(sampleInd, true, true);
+        break;
+      case ARCHIVE_INSO1:
+        localSolution = new MOFrontBinaryInteger(sampleInd, true, true);
+        break;
+      default:
+        cerr << "Error: tipo de archivo no definido" << endl;
+        exit(-1);
+    }
+  }
 }
 /* ********************************************************************************
  * Inicializa los atributos necesiarios para fijar un determinado criterio de
  * parada
  * *******************************************************************************/
 void EA::setStoppingCriterion(const int critStop, const double critStopValue) {
-    generationActual = 0;
-    evaluationActual = 0;
-    this->critStop = critStop;
-    this->critStopValue = critStopValue;
-    if (critStop == getTypeStoppingCriterion("TIME")) {
-        struct timeval actualTime;
-        gettimeofday(&actualTime, NULL);
-        time = ((double)(actualTime.tv_sec) * 1.0e6 +
-                (double)(actualTime.tv_usec)) /
-                   1.0e6 +
-               critStopValue;
-        evaluations = 0;
-    } else if (critStop == getTypeStoppingCriterion("EVALUATIONS")) {
-        evaluations = (int)critStopValue;
-    } else if (critStop == getTypeStoppingCriterion("QUALITY")) {
-        quality = critStopValue;
-    } else {
-        cout << "\tError: Stopping criterion nondefined" << endl << flush;
-        exit(-1);
-    }
+  generationActual = 0;
+  evaluationActual = 0;
+  this->critStop = critStop;
+  this->critStopValue = critStopValue;
+  if (critStop == getTypeStoppingCriterion("TIME")) {
+    struct timeval actualTime;
+    gettimeofday(&actualTime, NULL);
+    time =
+        ((double)(actualTime.tv_sec) * 1.0e6 + (double)(actualTime.tv_usec)) /
+            1.0e6 +
+        critStopValue;
+    evaluations = 0;
+  } else if (critStop == getTypeStoppingCriterion("EVALUATIONS")) {
+    evaluations = (int)critStopValue;
+  } else if (critStop == getTypeStoppingCriterion("QUALITY")) {
+    quality = critStopValue;
+  } else {
+    cout << "\tError: Stopping criterion nondefined" << endl << flush;
+    exit(-1);
+  }
 }
 
 /* ******************************************************************************
@@ -97,25 +96,25 @@ void EA::setStoppingCriterion(const int critStop, const double critStopValue) {
  * evaluaciones realizadas.
  * ******************************************************************************/
 bool EA::hasFinished() {
-    if (critStop == getTypeStoppingCriterion("TIME")) {
-        struct timeval actualTime;
-        gettimeofday(&actualTime, NULL);
-        double at = ((double)(actualTime.tv_sec) * 1.0e6 +
-                     (double)(actualTime.tv_usec)) /
-                    1.0e6;
-        return (at >= time);
-    } else if (critStop == getTypeStoppingCriterion("EVALUATIONS")) {
-        return (evaluationActual >= evaluations);
-    } else if (critStop == getTypeStoppingCriterion("QUALITY")) {
-        MOFront *p = new MOFrontVector(sampleInd, false, false);
-        getSolution(p);
-        bool reached = scoreAlgorithm->score(p) >= quality;
-        delete p;
-        return (reached);
-    } else {
-        cout << "\tError: Stopping criterion nondefined" << endl << flush;
-        return (true);
-    }
+  if (critStop == getTypeStoppingCriterion("TIME")) {
+    struct timeval actualTime;
+    gettimeofday(&actualTime, NULL);
+    double at =
+        ((double)(actualTime.tv_sec) * 1.0e6 + (double)(actualTime.tv_usec)) /
+        1.0e6;
+    return (at >= time);
+  } else if (critStop == getTypeStoppingCriterion("EVALUATIONS")) {
+    return (evaluationActual >= evaluations);
+  } else if (critStop == getTypeStoppingCriterion("QUALITY")) {
+    MOFront *p = new MOFrontVector(sampleInd, false, false);
+    getSolution(p);
+    bool reached = scoreAlgorithm->score(p) >= quality;
+    delete p;
+    return (reached);
+  } else {
+    cout << "\tError: Stopping criterion nondefined" << endl << flush;
+    return (true);
+  }
 }
 
 /* *********************************************************************************
@@ -123,16 +122,16 @@ bool EA::hasFinished() {
  * periodo de impresi�n fijado por el usuario
  * *********************************************************************************/
 void EA::checkPrint() {
-    if (printPeriod == 0) return;
-    if ((critStop == getTypeStoppingCriterion("TIME")) &&
-        (getElapsedTime() >= nextPrint)) {
-        outputPrinter->printSolution(this, false);
-        nextPrint += printPeriod;
-    } else if ((critStop == getTypeStoppingCriterion("EVALUATIONS")) &&
-               (getPerformedEvaluations() >= nextPrint)) {
-        outputPrinter->printSolution(this, false);
-        nextPrint += printPeriod;
-    }
+  if (printPeriod == 0) return;
+  if ((critStop == getTypeStoppingCriterion("TIME")) &&
+      (getElapsedTime() >= nextPrint)) {
+    outputPrinter->printSolution(this, false);
+    nextPrint += printPeriod;
+  } else if ((critStop == getTypeStoppingCriterion("EVALUATIONS")) &&
+             (getPerformedEvaluations() >= nextPrint)) {
+    outputPrinter->printSolution(this, false);
+    nextPrint += printPeriod;
+  }
 }
 
 /*************************************************************************************
@@ -142,16 +141,16 @@ void EA::checkPrint() {
  * cierto numero de evaluaciones muestra por pantalla la soluci�n actual.
  * ***********************************************************************************/
 void EA::run() {
-    struct timeval actualTime;
-    gettimeofday(&actualTime, NULL);
-    startTime =
-        (double)(actualTime.tv_sec) * 1.0e6 + (double)(actualTime.tv_usec);
-    fillPopWithNewIndsAndEvaluate();
-    do {
-        checkPrint();
-        runGenerationInc();
-    } while (!hasFinished());
+  struct timeval actualTime;
+  gettimeofday(&actualTime, NULL);
+  startTime =
+      (double)(actualTime.tv_sec) * 1.0e6 + (double)(actualTime.tv_usec);
+  fillPopWithNewIndsAndEvaluate();
+  do {
     checkPrint();
+    runGenerationInc();
+  } while (!hasFinished());
+  checkPrint();
 }
 
 /*************************************************************************************
@@ -166,15 +165,15 @@ void EA::run() {
  * los individuos que se han recibido
  * ***********************************************************************************/
 void EA::received(vector<Individual *> &mig) {
-    unsigned int indCopy =
-        (mig.size() < population->size()) ? mig.size() : population->size();
-    for (unsigned int i = 0; i < indCopy; i++) {
-        delete (*population)[i];
-        (*population)[i] = mig[i];
-    }
-    for (unsigned int i = indCopy; i < mig.size(); i++) {
-        delete (mig[i]);
-    }
+  unsigned int indCopy =
+      (mig.size() < population->size()) ? mig.size() : population->size();
+  for (unsigned int i = 0; i < indCopy; i++) {
+    delete (*population)[i];
+    (*population)[i] = mig[i];
+  }
+  for (unsigned int i = indCopy; i < mig.size(); i++) {
+    delete (mig[i]);
+  }
 }
 
 /*************************************************************************************
@@ -184,14 +183,14 @@ void EA::received(vector<Individual *> &mig) {
  * - Se incrementa el n�mero de generaciones hechas
  * ***********************************************************************************/
 void EA::runGenerationInc() {
-    sampleInd->generationCode();
-    runGeneration();
-    ls->localSearch(population, generateArchive ? localSolution : NULL);
+  sampleInd->generationCode();
+  runGeneration();
+  ls->localSearch(population, generateArchive ? localSolution : NULL);
 
-    if (localFrontSize != 0) {
-        localSolution->crowOrder(localFrontSize);
-    }
-    generationActual++;
+  if (localFrontSize != 0) {
+    localSolution->crowOrder(localFrontSize);
+  }
+  generationActual++;
 }
 
 /************************************************************************************
@@ -200,10 +199,10 @@ void EA::runGenerationInc() {
  * El resto se generan de forma aleatoria y se evaluan
  * *********************************************************************************/
 void EA::fillPopWithEvaluatedInds(const vector<Individual *> &newInds) {
-    for (unsigned int i = 0; i < newInds.size(); i++) {
-        population->push_back(newInds[i]);
-    }
-    fillPopWithNewIndsAndEvaluate();
+  for (unsigned int i = 0; i < newInds.size(); i++) {
+    population->push_back(newInds[i]);
+  }
+  fillPopWithNewIndsAndEvaluate();
 }
 
 /************************************************************************************
@@ -211,43 +210,43 @@ void EA::fillPopWithEvaluatedInds(const vector<Individual *> &newInds) {
  * que se crean llamando al metodo create del individuo
  * *********************************************************************************/
 void EA::fillPopWithNewIndsAndEvaluate() {
-    if (pSize == -1) {
-        cerr << "Warning: fillPopWithNewInds called but pSize has not been "
-                "fixed. Using default value: 100"
-             << endl;
-        pSize = 100;
-    }
+  if (pSize == -1) {
+    cerr << "Warning: fillPopWithNewInds called but pSize has not been "
+            "fixed. Using default value: 100"
+         << endl;
+    pSize = 100;
+  }
 
-    for (int i = population->size(); i < getPopulationSize(); i++) {
-        Individual *ind = sampleInd->internalClone();
-        ind->restart();
-        evaluate(ind);
-        population->push_back(ind);
-    }
+  for (int i = population->size(); i < getPopulationSize(); i++) {
+    Individual *ind = sampleInd->internalClone();
+    ind->restart();
+    evaluate(ind);
+    population->push_back(ind);
+  }
 }
 
 /************************************************************************************
  * Reinicia los atributos relacionados con los criterios de parada
  * **********************************************************************************/
 void EA::resetStopConditions() {
-    evaluationActual = 0;
-    generationActual = 0;
-    if (critStop == getTypeStoppingCriterion("TIME")) {
-        struct timeval actualTime;
-        gettimeofday(&actualTime, NULL);
-        time = ((double)(actualTime.tv_sec) * 1.0e6 +
-                (double)(actualTime.tv_usec)) /
-                   1.0e6 +
-               critStopValue;
-    }
+  evaluationActual = 0;
+  generationActual = 0;
+  if (critStop == getTypeStoppingCriterion("TIME")) {
+    struct timeval actualTime;
+    gettimeofday(&actualTime, NULL);
+    time =
+        ((double)(actualTime.tv_sec) * 1.0e6 + (double)(actualTime.tv_usec)) /
+            1.0e6 +
+        critStopValue;
+  }
 }
 
 double EA::getElapsedTime() const {
-    struct timeval actualTime;
-    gettimeofday(&actualTime, NULL);
-    double at =
-        (double)(actualTime.tv_sec) * 1.0e6 + (double)(actualTime.tv_usec);
-    return ((at - startTime) / 1.0e6);
+  struct timeval actualTime;
+  gettimeofday(&actualTime, NULL);
+  double at =
+      (double)(actualTime.tv_sec) * 1.0e6 + (double)(actualTime.tv_usec);
+  return ((at - startTime) / 1.0e6);
 }
 
 /************************************************************************************
@@ -255,11 +254,11 @@ double EA::getElapsedTime() const {
  * - Incrementa evaluationActual
  * **********************************************************************************/
 void EA::evaluate(Individual *ind) {
-    ind->evaluate();
-    if (generateArchive) {
-        localSolution->insert(ind);
-    }
-    evaluationActual++;
+  ind->evaluate();
+  if (generateArchive) {
+    localSolution->insert(ind);
+  }
+  evaluationActual++;
 }
 
 /****************************************************************************************
@@ -271,9 +270,9 @@ void EA::evaluate(Individual *ind) {
  ***************************************************************************************/
 
 void EA::insertInArchive(Individual *ind) {
-    if (generateArchive) {
-        localSolution->insert(ind);
-    }
+  if (generateArchive) {
+    localSolution->insert(ind);
+  }
 }
 
 /***********************************************************************************
@@ -283,65 +282,64 @@ void EA::insertInArchive(Individual *ind) {
  * *********************************************************************************/
 EA *getEA(const string &pluginPath, const string &pluginName,
           const vector<string> &args, bool printError, Individual *ind) {
-    EA *tmp =
-        (EA *)loadPlugin("EA", pluginPath, pluginName, args, printError, false);
-    tmp->setSampleInd(ind);
-    if (!tmp->init(args)) {
-        if (printError)
-            cerr << "Plugin \""
-                 << "EA::" << pluginName << "\" initialization failed" << endl;
-        return NULL;
-    }
-    return tmp;
+  EA *tmp =
+      (EA *)loadPlugin("EA", pluginPath, pluginName, args, printError, false);
+  tmp->setSampleInd(ind);
+  if (!tmp->init(args)) {
+    if (printError)
+      cerr << "Plugin \""
+           << "EA::" << pluginName << "\" initialization failed" << endl;
+    return NULL;
+  }
+  return tmp;
 }
 
 // Creado por Antonio J. Nebro
 // Torneo binario
 // Returns the index of the winning individual in the population
 int EA::binaryTournament(vector<Individual *> *pop) {
-    // int dominates = MOFront::dominate(newIndividual, aux)
-    int individual1;
-    int individual2;
-    int winner;
+  // int dominates = MOFront::dominate(newIndividual, aux)
+  int individual1;
+  int individual2;
+  int winner;
 
-    if (pop->size() == 1) return 0;  // There is only one individual
+  if (pop->size() == 1) return 0;  // There is only one individual
 
-    individual1 = (int)((pop->size() - 1) * ((double)rand() / RAND_MAX));
-    individual2 = individual1;
-    while (individual2 == individual1) {
-        double rnd = (double)rand() / RAND_MAX;
-        individual2 = (int)((pop->size()) * rnd);
-    }
+  individual1 = (int)((pop->size() - 1) * ((double)rand() / RAND_MAX));
+  individual2 = individual1;
+  while (individual2 == individual1) {
+    double rnd = (double)rand() / RAND_MAX;
+    individual2 = (int)((pop->size()) * rnd);
+  }
 
-    if ((individual1 >= pop->size()) || (individual1 < 0)) {
-        cerr << "Invalid individual1 in binary tournament. Index: "
-             << individual1 << endl;
-        exit(-1);
-    }  // if
-    if ((individual2 >= pop->size()) || (individual2 < 0)) {
-        cerr << "Invalid individual2 in binary tournament. Index: "
-             << individual2 << endl;
-        exit(-1);
-    }  // if
+  if ((individual1 >= pop->size()) || (individual1 < 0)) {
+    cerr << "Invalid individual1 in binary tournament. Index: " << individual1
+         << endl;
+    exit(-1);
+  }  // if
+  if ((individual2 >= pop->size()) || (individual2 < 0)) {
+    cerr << "Invalid individual2 in binary tournament. Index: " << individual2
+         << endl;
+    exit(-1);
+  }  // if
 
-    int dominates = dominanceTest((*pop)[individual1], (*pop)[individual2]);
-    if (dominates == SECOND_DOMINATES) {  // individual2 dominates Individual1
-        winner = individual2;
-    }  // if
-    else if (dominates ==
-             FIRST_DOMINATES) {  // individual1 dominates individual2
-        winner = individual1;
-    } else {
-        if ((rand() / (RAND_MAX) < 0.5))
-            winner = individual1;
-        else
-            winner = individual2;
-    }
+  int dominates = dominanceTest((*pop)[individual1], (*pop)[individual2]);
+  if (dominates == SECOND_DOMINATES) {  // individual2 dominates Individual1
+    winner = individual2;
+  }                                         // if
+  else if (dominates == FIRST_DOMINATES) {  // individual1 dominates individual2
+    winner = individual1;
+  } else {
+    if ((rand() / (RAND_MAX) < 0.5))
+      winner = individual1;
+    else
+      winner = individual2;
+  }
 
-    return winner;
+  return winner;
 }  // Torneo binario
 
 double EA::decompose(Individual *ind, Individual *reference,
                      vector<double> &weights) {
-    return decomposition->evaluate(ind, reference, weights);
+  return decomposition->evaluate(ind, reference, weights);
 }
