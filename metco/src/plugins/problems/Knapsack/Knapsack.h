@@ -7,16 +7,18 @@
 #define __KNAPSACK_H__
 
 #include <math.h>
+#include <algorithm>  // std::sort
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <utility>
 #include <vector>
-
 #include "Individual.h"
 #include "utils.h"
 
-const int CROSSOVER_UNIFORM = 0;
-const int CROSSOVER_HUX = 1;
+// Tupla para ordenar los elementos por su eficiencia
+typedef pair<int, float> item_efficiency;
 
 class Knapsack : public Individual {
  public:
@@ -42,9 +44,7 @@ class Knapsack : public Individual {
   // Repairs an individual with the capacity restriction
   void repair(void);
   // Calculates the max profit/weight ratio for each item in increasing order
-  void ratios(void);
-  // Quicksort algorithm to order the max profit/weight ratio vector
-  void quicksort(vector<int> &deleteOrder, float *maxRatio, int begin, int end);
+  void computeEfficiency(void);
   // Checks all capacities restrictions
   bool checkCapacity(void);
   // Individual evaluation and selection
@@ -64,10 +64,13 @@ class Knapsack : public Individual {
   static vector<float> profits;
   static vector<float> weights;
   static float capacity;
-  static vector<int> deleteOrder;
+  // Array que tiene los indices de los elementos en funcion de su ratio
+  // profit/weight
+  static vector<item_efficiency> items_efficiency;
   static string filename;
   // Constants
   static const int ARGS;
 };
-
+bool sortByEfficiencyDesc(const pair<int, int> &firstPair,
+                          const pair<int, int> &secondPair);
 #endif
