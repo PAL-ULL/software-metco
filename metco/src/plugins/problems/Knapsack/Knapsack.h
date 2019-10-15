@@ -1,5 +1,10 @@
 /* -----------------------------------------------------------------------------
+ *  One-dimensional Knapsack Problem implementation
+ *  Implementacion del 0-1 Knapsack Problem unidimensional.
  *
+ *
+ *  @author: Alejandro Marrero Diaz (alu0100825008@ull.edu.es)
+ *  @date: 2019
  *
  * -------------------------------------------------------------------------- */
 
@@ -24,9 +29,19 @@ class Knapsack : public Individual {
  public:
   Knapsack() {}
   virtual ~Knapsack() {}
-  // Reads a problem from file
   void readFile(const string filename);
+  bool init(const vector<string> &params);
+  void restart(void);
+  void repair(void);
+  void computeEfficiency(void);
+  bool checkCapacity(void);
+  void evaluate(void);
+  Individual *clone(void) const;
 
+  // Rango del espacio de busqueda de cada variable: [0, 1]
+  double inline getMaximum(const int i) const { return 1; }
+  double inline getMinimum(const int i) const { return 0; }
+  unsigned int inline getOptDirection(const int i) const { return MAXIMIZE; }
   // Getters and Setters
   void inline setProfit(const int i, const float value) const {
     profits[i] = value;
@@ -37,38 +52,14 @@ class Knapsack : public Individual {
   float inline getProfit(const int i) const { return profits[i]; }
   float inline getWeight(const int i) const { return weights[i]; }
 
-  // Initialization function
-  bool init(const vector<string> &params);
-  // Random generation of an individual
-  void restart(void);
-  // Repairs an individual with the capacity restriction
-  void repair(void);
-  // Calculates the max profit/weight ratio for each item in increasing order
-  void computeEfficiency(void);
-  // Checks all capacities restrictions
-  bool checkCapacity(void);
-  // Individual evaluation and selection
-  void evaluate(void);
-  Individual *clone(void) const;
-  // Ranges
-  double inline getMaximum(const int i) const { return 1; }
-  double inline getMinimum(const int i) const { return 0; }
-  unsigned int inline getOptDirection(const int i) const { return MAXIMIZE; }
-
  private:
-  // Genetic Operators
   void dependentMutation(double pm);
-  // Number of items
   static int nItems;
-  // Profits, weights, capacities and max profit/weight ratios, respectively
   static vector<float> profits;
   static vector<float> weights;
   static float capacity;
-  // Array que tiene los indices de los elementos en funcion de su ratio
-  // profit/weight
   static vector<item_efficiency> items_efficiency;
   static string filename;
-  // Constants
   static const int ARGS;
 };
 bool sortByEfficiencyDesc(const pair<int, int> &firstPair,

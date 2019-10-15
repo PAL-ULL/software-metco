@@ -1,20 +1,30 @@
 /* -----------------------------------------------------------------------------
  *  One-dimensional Knapsack Problem implementation
+ *  Implementacion del 0-1 Knapsack Problem unidimensional.
  *
- *  @Author: Alejandro Marrero Diaz (alu0100825008@ull.edu.es)
+ *
+ *  @author: Alejandro Marrero Diaz (alu0100825008@ull.edu.es)
+ *  @date: 2019
  *
  * -------------------------------------------------------------------------- */
 
 #include "Knapsack.h"
 #include <algorithm>
 
-// Number of items, profits, weights and capacity
+/**
+ *  Variables estáticas que son comunes para todas las instancias del problema.
+ *  - Numero de elementos de la instancia.
+ *  - Beneficio de cada uno de los i elementos.
+ *  - Peso de cada uno de los i elementos.
+ *  - Capacidad maxima de la mochila.
+ *  - Vector que almacena los elementos en funcion de su efficiencia.
+ *
+ **/
 int Knapsack::nItems;
 vector<float> Knapsack::profits;
 vector<float> Knapsack::weights;
 float Knapsack::capacity;
 vector<item_efficiency> Knapsack::items_efficiency;
-
 const int Knapsack::ARGS = 1;
 
 // Problem Initialization
@@ -27,13 +37,21 @@ bool Knapsack::init(const vector<string> &params) {
   }
   string filename = params[0];
   setNumberOfObj(1);
-  // Reads a problem from file
+  // Leemos las caracteristicas del problema del fichero de instancia.
   readFile(filename);
   computeEfficiency();
   return true;
 }
 
-// Reads a problem from file
+/**
+ *  Metodo empleado para parsear una instancia del KP.
+ *  Este metodo espera un fichero con la siguiente estructura:
+ *
+ *  number_of_items
+ *  capacity
+ *
+ *  (wi, pi) para los elementos i=0, number_of_items-1
+ **/
 void Knapsack::readFile(const string filename) {
   ifstream input(filename.c_str());
   if (input.fail()) {
@@ -56,13 +74,20 @@ void Knapsack::readFile(const string filename) {
   input.close();
 }
 
-// Genetic Operators - Binary Mutation
+/**
+ *  Operador que realiza la mutacion binaria especifica para este problema.
+ *  - Heredado.
+ **/
 void Knapsack::dependentMutation(double pm) {
   mutate_binary(pm);
   repair();
 }
 
-// Random generation of an individual
+/**
+ *  Generacion aleatoria de un nuevo individuo.
+ *  Se establece un valor aleatorio en el rango [0, 1] y posteriormente
+ *  se redondea al entero mas cercano.
+ **/
 void Knapsack::restart(void) {
   for (int i = 0; i < nItems; i++) {
     setVar(i, ((double)rand() / (double)RAND_MAX));
@@ -83,14 +108,29 @@ void Knapsack::restart(void) {
  **/
 void Knapsack::repair(void) {
   int i = 0;
+  // Mientras violemos la restriccion
   while (!checkCapacity()) {
     // Ponemos a 0 el elemento en la posicion i-esima del vector de efficiencia
     setVar(items_efficiency[i].first, 0.0);
     i++;
   }
+  // Nueva version
+  // Incluimos los elementos del final mientras no nos pasemos
+  i = nItems - 1;
+  while (checkCapacity()) {
+    setVar(items_efficiency[i].first, 1.0);
+    i--;
+  }
+  // Eliminamos el ultimo elemento incluido porque la capacidad ha sido
+  // sobrepasada
+  setVar(items_efficiency[i + 1].first, 0.0);
 }
 
-// Checking if the packed weights is over the capacity
+/**
+ *  Comprobamos que la solucion sigue siendo factible
+ *  Para ellos sumamos los pesos de los elementos incluidos dentro de la
+ *solucion y verificamos que no excede la capacidad de la mochila
+ **/
 bool Knapsack::checkCapacity() {
   float packed = 0;
   for (int i = 0; i < nItems; i++) {
@@ -99,20 +139,33 @@ bool Knapsack::checkCapacity() {
   return (packed > capacity) ? false : true;
 }
 
-// Evaluation of an individual
+/**
+ *  Metodo para evaluar un individuo de la poblacion. En primer lugar, aplicamos
+ *el operador de reparacion que hace dos cosas:
+ *  - Elimina los elementos mas eficientes que hacen que se sobrepase la
+ *capacidad de la mochila.
+ *
+ * - Añade los elemenos menos eficientes que cuyos pesos no convierten a la
+ *solucion en no-factible.
+ *
+ *  Por último evaluamos el individuo y asignamos su fitness.
+ **/
 void Knapsack::evaluate(void) {
+  repair();
+  // Ahora tenemos que evaluar el individuo
   float objective = 0;
   for (int j = 0; j < nItems; j++) {
     objective += profits[j] * int(getVar(j));
   }
-  if (!checkCapacity()) {
-    repair();
-    evaluate();
-  } else
-    setObj(0, objective);
+  setObj(0, objective);
 }
 
-// Calculates the max profit/weight ratio for each item in increasing order
+/**
+ *  Metodo empleado para calcular y ordenar los elementos por su eficiencia.
+ *  El concepto de eficiencia se define como el ratio pi/wi y por lo tanto
+ *  los elementos con mayor eficiencia estarán en los primeros puestos.
+ *  Ordenación descendente.
+ **/
 void Knapsack::computeEfficiency(void) {
   items_efficiency.resize(nItems);
 
