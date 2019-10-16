@@ -140,6 +140,19 @@ bool Knapsack::checkCapacity() {
 }
 
 /**
+ *  Metodo que nos permite asegurarnos que nos mantenemos en
+ *  una representacion binaria del problema
+ **/
+void Knapsack::roundVariables() {
+  for (int i = 0; i < nItems; i++) {
+    if (getVar(i) >= 0.5)
+      setVar(i, 1.0);
+    else
+      setVar(i, 0.0);
+  }
+}
+
+/**
  *  Metodo para evaluar un individuo de la poblacion. En primer lugar, aplicamos
  *el operador de reparacion que hace dos cosas:
  *  - Elimina los elementos mas eficientes que hacen que se sobrepase la

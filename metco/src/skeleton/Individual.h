@@ -138,231 +138,225 @@ class MultiObjectivization;
 /** Mother class to represent individuals (Problems)
  **/
 class Individual : public Plugin {
-   public:
-    // Constructor
-    Individual(void) {
-        mutOperator = NULL;
-        crossOperator = NULL;
-    }
+ public:
+  // Constructor
+  Individual(void) {
+    mutOperator = NULL;
+    crossOperator = NULL;
+  }
 
-    // Destructor
-    virtual ~Individual(void){};
+  // Destructor
+  virtual ~Individual(void){};
 
-    // Initialization function
-    // virtual bool init(const vector<string> &params) = 0;
+  // Initialization function
+  // virtual bool init(const vector<string> &params) = 0;
 
-    // Mutation Operators
-    void mutate_binary_flip(double pm, int origin = 0, int destination = -1);
-    void mutate_uniform_one(double pm);
-    void mutate_uniform(double pm, int origin = 0, int destination = -1);
-    void mutate_binary(double pm);
-    void mutate_range(double pm);
-    void mutate_Pol(double pm, int origin = 0, int destination = -1);
-    void mutate_Pol2(double pm, int origin = 0, int destination = -1);
+  // Mutation Operators
+  void mutate_binary_flip(double pm, int origin = 0, int destination = -1);
+  void mutate_uniform_one(double pm);
+  void mutate_uniform(double pm, int origin = 0, int destination = -1);
+  void mutate_binary(double pm);
+  void mutate_range(double pm);
+  void mutate_Pol(double pm, int origin = 0, int destination = -1);
+  void mutate_Pol2(double pm, int origin = 0, int destination = -1);
 
-    // Crossover Operators
-    void crossover_range(Individual *ind, const int interval);
-    void crossover_uniform(Individual *ind, int origin = 0,
-                           int destination = -1);
-    void crossover_SBX(Individual *ind, int origin = 0, int destination = -1);
-    void crossover_SBX2(Individual *ind);
-    void crossover_OPC(Individual *ind, int origin = 0, int destination = -1);
-    void crossover_TPC(Individual *ind, int origin = 0, int destination = -1);
+  // Crossover Operators
+  void crossover_range(Individual *ind, const int interval);
+  void crossover_uniform(Individual *ind, int origin = 0, int destination = -1);
+  void crossover_SBX(Individual *ind, int origin = 0, int destination = -1);
+  void crossover_SBX2(Individual *ind);
+  void crossover_OPC(Individual *ind, int origin = 0, int destination = -1);
+  void crossover_TPC(Individual *ind, int origin = 0, int destination = -1);
 
-    // Genetic operators
-    void mutation(double pm);
-    void crossover(Individual *ind);
+  // Genetic operators
+  void mutation(double pm);
+  void crossover(Individual *ind);
 
-    // Freeing space
-    void deleteVars();
+  // Freeing space
+  void deleteVars();
 
-    // Evaluate
-    virtual void evaluate(void) = 0;
+  // Evaluate
+  virtual void evaluate(void) = 0;
 
-    // Getters
-    unsigned int inline getNumberOfVar(void) const { return var.size(); }
-    double inline getVar(const int i) const { return var[i]; }
-    unsigned int inline getNumberOfObj(void) const { return obj.size(); }
-    long double inline getObj(const int i) const { return obj[i]; }
-    unsigned int inline getNumberOfMigData(void) const {
-        return migrationData.size();
-    }
-    unsigned int inline getNumberOfAuxData(void) const {
-        return auxData.size();
-    }
-    double inline getMigrationData(const int i) const {
-        return migrationData[i];
-    }
-    double inline getAuxData(const int i) const { return auxData[i]; }
-    unsigned int inline getAuxDataSize(void) const { return auxData.size(); }
-    double inline getAlgorithmData(const int i) const {
-        return algorithmData[i];
-    }
-    double inline getAlgorithmDataSize(void) const {
-        return algorithmData.size();
-    }
-    double inline getFitnessValue(void) const { return fitnessValue; }
-    Owner inline getOwner(void) const { return owner; }
-    unsigned int getInternalOptDirection(const int i) const;
-    virtual double getMaximum(const int i) const = 0;
-    virtual double getMinimum(const int i) const = 0;
-    inline MultiObjectivization *getMultiObjectivizationPlugin(
-        int index) const {
-        return multiObjectivizationsPlugins[index];
-    }
-    inline int getNumMultiObjectivizationPlugins(void) const {
-        return multiObjectivizationsPlugins.size();
-    }
+  // Metodo de reparacion
+  virtual void repair(void);
 
-    // Inline Setters
-    void inline setObj(const int i, const long double value) { obj[i] = value; }
-    void inline setVar(const int i, const double value) { var[i] = value; }
-    void inline setFitnessValue(const double value) { fitnessValue = value; }
-    void inline setMigrationData(const int i, const double value) {
-        migrationData[i] = value;
-    }
-    void inline setAuxData(const int i, const double value) {
-        auxData[i] = value;
-    }
-    void inline setNumberOfVar(const int n) { var.resize(n); }
-    void inline setNumberOfObj(const int n) { obj.resize(n); }
-    void inline setAlgorithmData(const int i, const double value) {
-        algorithmData[i] = value;
-    }
-    void inline setAuxDataSize(const int n) { auxData.resize(n); }
-    void inline setMigrationDataSize(const int n) { migrationData.resize(n); }
-    void inline setOwner(const Owner own) { owner = own; }
-    void inline setMutOperator(Mutation *mut) { mutOperator = mut; }
-    void inline setCrossOperator(Crossover *cross) { crossOperator = cross; }
-    void setMultiObjectivizationPlugins(
-        const vector<MultiObjectivization *> &multi) {
-        this->multiObjectivizationsPlugins = multi;
-    }
+  // Getters
+  unsigned int inline getNumberOfVar(void) const { return var.size(); }
+  double inline getVar(const int i) const { return var[i]; }
+  unsigned int inline getNumberOfObj(void) const { return obj.size(); }
+  long double inline getObj(const int i) const { return obj[i]; }
+  unsigned int inline getNumberOfMigData(void) const {
+    return migrationData.size();
+  }
+  unsigned int inline getNumberOfAuxData(void) const { return auxData.size(); }
+  double inline getMigrationData(const int i) const { return migrationData[i]; }
+  double inline getAuxData(const int i) const { return auxData[i]; }
+  unsigned int inline getAuxDataSize(void) const { return auxData.size(); }
+  double inline getAlgorithmData(const int i) const { return algorithmData[i]; }
+  double inline getAlgorithmDataSize(void) const {
+    return algorithmData.size();
+  }
+  double inline getFitnessValue(void) const { return fitnessValue; }
+  Owner inline getOwner(void) const { return owner; }
+  unsigned int getInternalOptDirection(const int i) const;
+  virtual double getMaximum(const int i) const = 0;
+  virtual double getMinimum(const int i) const = 0;
+  inline MultiObjectivization *getMultiObjectivizationPlugin(int index) const {
+    return multiObjectivizationsPlugins[index];
+  }
+  inline int getNumMultiObjectivizationPlugins(void) const {
+    return multiObjectivizationsPlugins.size();
+  }
 
-    int inline requestAlgorithmData(void) {
-        algorithmData.push_back(0);
-        return algorithmData.size() - 1;
-    }
-    void inline releaseAlgorithmData(void) { algorithmData.pop_back(); }
+  // Inline Setters
+  void inline setObj(const int i, const long double value) { obj[i] = value; }
+  void inline setVar(const int i, const double value) { var[i] = value; }
+  void inline setFitnessValue(const double value) { fitnessValue = value; }
+  void inline setMigrationData(const int i, const double value) {
+    migrationData[i] = value;
+  }
+  void inline setAuxData(const int i, const double value) {
+    auxData[i] = value;
+  }
+  void inline setNumberOfVar(const int n) { var.resize(n); }
+  void inline setNumberOfObj(const int n) { obj.resize(n); }
+  void inline setAlgorithmData(const int i, const double value) {
+    algorithmData[i] = value;
+  }
+  void inline setAuxDataSize(const int n) { auxData.resize(n); }
+  void inline setMigrationDataSize(const int n) { migrationData.resize(n); }
+  void inline setOwner(const Owner own) { owner = own; }
+  void inline setMutOperator(Mutation *mut) { mutOperator = mut; }
+  void inline setCrossOperator(Crossover *cross) { crossOperator = cross; }
+  void setMultiObjectivizationPlugins(
+      const vector<MultiObjectivization *> &multi) {
+    this->multiObjectivizationsPlugins = multi;
+  }
 
-    // Clone of individuals
-    Individual *internalClone(void) const;
-    void internalClone(const Individual *);
-    void internalCloneData(const Individual *);
+  int inline requestAlgorithmData(void) {
+    algorithmData.push_back(0);
+    return algorithmData.size() - 1;
+  }
+  void inline releaseAlgorithmData(void) { algorithmData.pop_back(); }
 
-    // Serializacion
-    void serialize(long double *buffer, int &count) const;
-    Individual *deserialize(const int nVar, const int nObj, const int nMig,
-                            const long double *buffer, int &count);
-    virtual void deserialized() {}
-    virtual void cloned(){};
+  // Clone of individuals
+  Individual *internalClone(void) const;
+  void internalClone(const Individual *);
+  void internalCloneData(const Individual *);
 
-    // Otros
-    virtual void maintainOnlyObj() { maintainOnlyObjInternal(); }
+  // Serializacion
+  void serialize(long double *buffer, int &count) const;
+  Individual *deserialize(const int nVar, const int nObj, const int nMig,
+                          const long double *buffer, int &count);
+  virtual void deserialized() {}
+  virtual void cloned(){};
 
-    void maintainOnlyObjInternal() {
-        vector<double> v1, v2, v3;
-        var.swap(v1);
-        migrationData.swap(v2);
-        auxData.swap(v3);
-    }
+  // Otros
+  virtual void maintainOnlyObj() { maintainOnlyObjInternal(); }
 
-    // Salida por pantalla de los individuos
-    virtual void print(ostream &os) const;
-    virtual void printInfo(ostream &os) const {}
+  void maintainOnlyObjInternal() {
+    vector<double> v1, v2, v3;
+    var.swap(v1);
+    migrationData.swap(v2);
+    auxData.swap(v3);
+  }
 
-    // Info de la mutacion
-    virtual string getMutationName() const;
-    virtual int getMutationNumberOfParameters() const;
-    virtual string getMutationParameterName(int i) const;
-    virtual string getMutationParameterValue(int i) const;
+  // Salida por pantalla de los individuos
+  virtual void print(ostream &os) const;
+  virtual void printInfo(ostream &os) const {}
 
-    // Info del crossover
-    virtual string getCrossoverName() const;
-    virtual int getCrossoverNumberOfParameters() const;
-    virtual string getCrossoverParameterName(int i) const;
-    virtual string getCrossoverParameterValue(int i) const;
+  // Info de la mutacion
+  virtual string getMutationName() const;
+  virtual int getMutationNumberOfParameters() const;
+  virtual string getMutationParameterName(int i) const;
+  virtual string getMutationParameterValue(int i) const;
 
-    // Info de los objetivos
-    virtual string getObjName(int i) const {
-        stringstream s;
-        s << "obj" << i;
-        return s.str();
-    }
+  // Info del crossover
+  virtual string getCrossoverName() const;
+  virtual int getCrossoverNumberOfParameters() const;
+  virtual string getCrossoverParameterName(int i) const;
+  virtual string getCrossoverParameterValue(int i) const;
 
-    // Uso de MOFrontBinaryInteger
-    virtual int getIndexObj() const { return -1; }
-    virtual int getIndexObjMin() const { return 0; }
-    virtual int getIndexObjMax() const { return 0; }
+  // Info de los objetivos
+  virtual string getObjName(int i) const {
+    stringstream s;
+    s << "obj" << i;
+    return s.str();
+  }
 
-    // Comparacion de individuos (por defecto por el campo fitnessValue)
-    bool operator<(const Individual &ind) const {
-        return (fitnessValue < ind.fitnessValue);
-    }
-    bool operator==(const Individual &ind) const {
-        return (fitnessValue == ind.fitnessValue);
-    }
+  // Uso de MOFrontBinaryInteger
+  virtual int getIndexObj() const { return -1; }
+  virtual int getIndexObjMin() const { return 0; }
+  virtual int getIndexObjMax() const { return 0; }
 
-    // Inicializacion aleatoria de un individuo
-    virtual void restart(void);
+  // Comparacion de individuos (por defecto por el campo fitnessValue)
+  bool operator<(const Individual &ind) const {
+    return (fitnessValue < ind.fitnessValue);
+  }
+  bool operator==(const Individual &ind) const {
+    return (fitnessValue == ind.fitnessValue);
+  }
 
-    // Codigo llamado tras cada generacion
-    virtual void generationCode() const {}
+  // Inicializacion aleatoria de un individuo
+  virtual void restart(void);
 
-    // Distancia euclidea
-    double getEuclideanDistance(const Individual *) const;
-    double getEuclideanDistanceDecisionSpace(const Individual *) const;
+  // Codigo llamado tras cada generacion
+  virtual void generationCode() const {}
 
-    // LocalSearch
-    virtual unsigned int getNeighbourhoodSize() const {
-        cout << "Funcion getNeighbourhoodSize llamada sin implementar" << endl;
-        exit(-1);
-    }
-    virtual Individual *getNeighbour(const int i) const {
-        cout << "Funcion getNeighbour llamada sin implementar" << endl;
-        exit(-1);
-    }
-    virtual void getNeighbourObjectives(const int i,
-                                        vector<double> &objectives) const {
-        cout << "Funcion getNeighbourObjectives llamada sin implementar"
-             << endl;
-        exit(-1);
-    }
+  // Distancia euclidea
+  double getEuclideanDistance(const Individual *) const;
+  double getEuclideanDistanceDecisionSpace(const Individual *) const;
 
-    virtual unsigned int getOptDirection(const int i) const = 0;
+  // LocalSearch
+  virtual unsigned int getNeighbourhoodSize() const {
+    cout << "Funcion getNeighbourhoodSize llamada sin implementar" << endl;
+    exit(-1);
+  }
+  virtual Individual *getNeighbour(const int i) const {
+    cout << "Funcion getNeighbour llamada sin implementar" << endl;
+    exit(-1);
+  }
+  virtual void getNeighbourObjectives(const int i,
+                                      vector<double> &objectives) const {
+    cout << "Funcion getNeighbourObjectives llamada sin implementar" << endl;
+    exit(-1);
+  }
 
-   private:
-    // Operador de clonaci�n: debe ser reimplementado en la clase hija
-    virtual Individual *clone(void) const = 0;
-    vector<MultiObjectivization *> multiObjectivizationsPlugins;
+  virtual unsigned int getOptDirection(const int i) const = 0;
 
-    // Genetic operators to implement
-    virtual void dependentMutation(double pm);
-    virtual void dependentCrossover(Individual *ind);
+ private:
+  // Operador de clonaci�n: debe ser reimplementado en la clase hija
+  virtual Individual *clone(void) const = 0;
+  vector<MultiObjectivization *> multiObjectivizationsPlugins;
 
-    // genes
-    vector<double> var;
+  // Genetic operators to implement
+  virtual void dependentMutation(double pm);
+  virtual void dependentCrossover(Individual *ind);
 
-    // objetivos
-    vector<long double> obj;
+  // genes
+  vector<double> var;
 
-    // datos a migrar
-    vector<double> migrationData;
+  // objetivos
+  vector<long double> obj;
 
-    // datos auxiliares (que no se migran)
-    vector<double> auxData;
+  // datos a migrar
+  vector<double> migrationData;
 
-    // vector en que puede guardar datos un algoritmo (no se migran)
-    vector<double> algorithmData;
+  // datos auxiliares (que no se migran)
+  vector<double> auxData;
 
-    // Valor de fitness del individuo
-    double fitnessValue;
+  // vector en que puede guardar datos un algoritmo (no se migran)
+  vector<double> algorithmData;
 
-    Mutation *mutOperator;
-    Crossover *crossOperator;
+  // Valor de fitness del individuo
+  double fitnessValue;
 
-    // Algoritmo que lo genero (necesario para hacer conversiones)
-    Owner owner;
+  Mutation *mutOperator;
+  Crossover *crossOperator;
+
+  // Algoritmo que lo genero (necesario para hacer conversiones)
+  Owner owner;
 };
 
 // Auxiliar functions

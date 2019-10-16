@@ -54,6 +54,9 @@ class Knapsack : public Individual {
 
  private:
   void dependentMutation(double pm);
+  void roundVariables();
+
+ private:
   static int nItems;
   static vector<float> profits;
   static vector<float> weights;
