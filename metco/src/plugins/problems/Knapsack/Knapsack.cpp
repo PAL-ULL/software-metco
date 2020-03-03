@@ -185,9 +185,7 @@ void Knapsack::computeEfficiency(void) {
   for (int j = 0; j < nItems; j++) {
     items_efficiency[j].first = j;
     items_efficiency[j].second = 0.0;
-    for (int i = 0; i < 1; i++) {
-      items_efficiency[j].second = getProfit(j) / getWeight(j);
-    }
+    items_efficiency[j].second = getProfit(j) / getWeight(j);
   }
   sort(items_efficiency.begin(), items_efficiency.end(), sortByEfficiencyDesc);
 }

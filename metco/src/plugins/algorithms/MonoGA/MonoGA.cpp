@@ -64,14 +64,17 @@ void MonoGA::binaryTournamentSelection(
     int &p1, int &p2) {  // Supone que population esta ordenada
   int opt1 = (int)(((double)(getPopulationSize())) * rand() / (RAND_MAX + 1.0));
   int opt2 = (int)(((double)(getPopulationSize())) * rand() / (RAND_MAX + 1.0));
+  cout << "Option 1: " << opt1 << " Option 2: " << opt2 << endl;
   p1 = min(opt1, opt2);
   opt1 = (int)(((double)(getPopulationSize())) * rand() / (RAND_MAX + 1.0));
   opt2 = (int)(((double)(getPopulationSize())) * rand() / (RAND_MAX + 1.0));
   p2 = min(opt1, opt2);
+  cout << "Option 1: " << opt1 << " Option 2: " << opt2 << endl;
 }
 
 void MonoGA::parentSelection(int &p1, int &p2) {
   binaryTournamentSelection(p1, p2);
+  cout << "Parent 1: " << p1 << " Parent 2: " << p2 << endl;
 }
 
 void MonoGA::createOffSpring() {  // Crear 2 hijos
@@ -80,6 +83,7 @@ void MonoGA::createOffSpring() {  // Crear 2 hijos
   Individual *of1 = (*population)[p1]->internalClone();
   Individual *of2 = (*population)[p2]->internalClone();
   double vcross = rand() / (RAND_MAX + 1.0);
+  cout << "vcross: " << vcross << endl;
   if (vcross < pc) {
     of1->crossover(of2);
   }
