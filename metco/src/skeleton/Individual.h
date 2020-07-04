@@ -177,7 +177,7 @@ class Individual : public Plugin {
 
   // Evaluate
   virtual void evaluate(void) = 0;
-
+  virtual double computeFeasibility(void) { return 0.0; }
   // Metodo de reparacion
   virtual void repair(void);
 

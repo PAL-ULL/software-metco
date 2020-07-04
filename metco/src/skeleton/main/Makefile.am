@@ -95,7 +95,7 @@ decompositions:
 
 ######################## sequential #####################################
 
-metcoSeq: metcoSeq.cpp Individual.o MOFrontBinaryInteger.o MOFrontVector_noMPI.o MOFront.o hv.o avl.o EA.o utils.o ScoreAlgorithm.o Mutation.o Crossover.o LocalSearch.o Plugin.o OutputPrinter.o MultiObjectivization.o Decomposition.o
+metcoSeq$(EXEEXT): metcoSeq.cpp Individual.o MOFrontBinaryInteger.o MOFrontVector_noMPI.o MOFront.o hv.o avl.o EA.o utils.o ScoreAlgorithm.o Mutation.o Crossover.o LocalSearch.o Plugin.o OutputPrinter.o MultiObjectivization.o Decomposition.o
 	$(CXX) -DNO_CONF_PARSING $(IFLAGS) metcoSeq.cpp Individual.o MOFrontBinaryInteger.o MOFrontVector_noMPI.o MOFront.o hv.o avl.o EA.o utils.o ScoreAlgorithm.o Mutation.o Crossover.o LocalSearch.o Plugin.o OutputPrinter.o MultiObjectivization.o Decomposition.o -o $@ -ldl
 
 
@@ -104,7 +104,7 @@ metcoSeq: metcoSeq.cpp Individual.o MOFrontBinaryInteger.o MOFrontVector_noMPI.o
 
 ############################# parallel ##################################
 
-metcoPar: metcoPar.cpp MOFrontBinaryInteger.o MOFrontVector.o MOFront.o hv.o avl.o Individual.o EA.o ExecutionIsland.o CoordinatorIsland.o Configuration.o utils.o parseConf.tab.c lex.Conf.c Conversion.o ScoreAlgorithm.o GlobalScoreAlgorithm.o LocalScoreAlgorithm.o MigrationSelector.o ExchangeSelector.o Mutation.o Crossover.o LocalSearch.o MigrationTopology.o InitPopIslandLoader.o Plugin.o MultiObjectivization.o Decomposition.o
+metcoPar$(EXEEXT): metcoPar.cpp MOFrontBinaryInteger.o MOFrontVector.o MOFront.o hv.o avl.o Individual.o EA.o ExecutionIsland.o CoordinatorIsland.o Configuration.o utils.o parseConf.tab.c lex.Conf.c Conversion.o ScoreAlgorithm.o GlobalScoreAlgorithm.o LocalScoreAlgorithm.o MigrationSelector.o ExchangeSelector.o Mutation.o Crossover.o LocalSearch.o MigrationTopology.o InitPopIslandLoader.o Plugin.o MultiObjectivization.o Decomposition.o
 	$(MPICC) $(IFLAGS) metcoPar.cpp Individual.o MOFrontBinaryInteger.o MOFrontVector.o MOFront.o hv.o avl.o EA.o ExecutionIsland.o utils.o CoordinatorIsland.o Configuration.o parseConf.tab.c lex.Conf.c Conversion.o ScoreAlgorithm.o MigrationSelector.o ExchangeSelector.o GlobalScoreAlgorithm.o LocalScoreAlgorithm.o Mutation.o Crossover.o LocalSearch.o MigrationTopology.o InitPopIslandLoader.o Plugin.o MultiObjectivization.o Decomposition.o -o $@ -ldl
 
 

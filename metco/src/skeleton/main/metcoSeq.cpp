@@ -13,16 +13,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-#include <sstream>
-
 #include <time.h>
+
 #include <algorithm>
 #include <fstream>
 #include <future>
 #include <iostream>
 #include <numeric>
+#include <sstream>
 #include <string>
 #include <thread>
+
 #include "Crossover.h"
 #include "Decomposition.h"
 #include "EA.h"
@@ -266,7 +267,7 @@ int main(int argc, char *argv[]) {
 
   ind->setMutOperator(mut);
   ind->setCrossOperator(cross);
-
+  std::cout << "Iniciando EA" << std::endl;
   // Initiate the corresponding EA
   string algorithmName = argv[ARG_ALGORITHM];
   EA *ga = getEA(pluginPath, argv[ARG_ALGORITHM], algorithmArgs, true, ind);
@@ -291,7 +292,7 @@ int main(int argc, char *argv[]) {
   ga->setMaxLocalFrontSize(maxLocalFrontSize);
   ga->setScoreAlgorithm(score);
   ga->setLocalSearch(ls);
-
+  std::cout << "EA cargado" << std::endl;
   vector<string> outputPrinterParams(1, (outputPath + "/" + outputFilename));
   OutputPrinter *outputPrinter =
       getOutputPrinter(pluginPath, printerModule, outputPrinterParams, true);
@@ -305,7 +306,9 @@ int main(int argc, char *argv[]) {
   outputPrinter->printInit(ga);
 
   // Runs the evolurionary process
+  std::cout << "Todo cargado!" << std::endl;
   ga->run();
+  std::cout << "Ejecucion terminada" << std::endl;
   MOFront *p = new MOFrontVector(ga->getSampleInd(), false, false);
 
   // Program Output
