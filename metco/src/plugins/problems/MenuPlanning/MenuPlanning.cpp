@@ -1,8 +1,16 @@
 
 
 /**
- *  Alejandro Marrero - alu0100825008@ul.edu.es
- *  06-07-2020
+ *
+ * author: Alejandro Marrero
+ * contact: alejandro.marrero.10@ull.edu.es
+ * Created on Sun Jul 05 2020
+ *
+ * Copyright (c) 2020 Universidad de La Laguna
+ *
+ * Summary:
+ *
+ *
  **/
 
 #include "MenuPlanning.h"
@@ -10,27 +18,30 @@
 #include <array>
 #include <cmath>
 
+#define __MPP_DEBUG__
+
+// Constantes del problema
+const int MenuPlanning::N_OBJS = 2;
+const int MenuPlanning::MAX_INT = std::numeric_limits<int>::max();
+
+// Variables estaticas del problema
 int MenuPlanning::nDias;
 int MenuPlanning::nParam;
-int MenuPlanning::nObj;
-int MenuPlanning::i_max = std::numeric_limits<int>::max();
-
-vector<pair<double, double> > MenuPlanning::ingRecomendada;
-
 vector<infoPlatos> MenuPlanning::v_primerosPlatos;
 vector<infoPlatos> MenuPlanning::v_segundosPlatos;
 vector<infoPlatos> MenuPlanning::v_postres;
 vector<pair<int, int> > MenuPlanning::gruposAl;
 vector<vector<vector<double> > > MenuPlanning::v3_compatibilidadPlatos;
-
 vector<string> MenuPlanning::alergenosPlan;
 vector<string> MenuPlanning::incompatibilidadesPlan;
 vector<int> MenuPlanning::gruposAlPlan;
 vector<double> MenuPlanning::infoNPlan;
 
-/*-------------------------------------*/
-/*---------- INICIALIZACION -----------*/
-/*-------------------------------------*/
+/**
+ * Metodo para inicializar un individuo MenuPlanning
+ *
+ * @param vector de parametros
+ **/
 bool MenuPlanning::init(const vector<string> &params) {
   if (params.size() != 1) {
     cout << "Error Menu Planning: numero incorrecto de parametros." << endl;
@@ -40,8 +51,7 @@ bool MenuPlanning::init(const vector<string> &params) {
   nDias = atoi((params[0]).c_str());
   nParam = nDias * num_tipoPlato;  // Multiplicar nDias por tipos de platos (3)
   setNumberOfVar(nParam);
-  nObj = num_obj;  // Numero de objetivos (2: precio, grado de repeticion)
-  setNumberOfObj(nObj);
+  setNumberOfObj(N_OBJS);
   set_gruposAl();
   set_Platos();
   set_vectorCompatibilidad();
@@ -53,12 +63,12 @@ bool MenuPlanning::init(const vector<string> &params) {
 }
 
 /**
- *  Metodo para agregar los diferentes grupos de alimentos
- * */
+ * Método para definir los grupos de alimentos
+ */
 void MenuPlanning::set_gruposAl(void) {
   pair<int, int> ga;
-  ga.first = i_max;
-  ga.second = i_max;
+  ga.first = MAX_INT;
+  ga.second = MAX_INT;
   gruposAl.assign(num_gAl, ga);
 }
 
@@ -235,12 +245,12 @@ void MenuPlanning::dependentMutation(double pm) {
  **/
 double MenuPlanning::computeFeasibility() {
   double totalFeasibility = 0.0;
-  infoNPlan[num_nutr];
   std::array<double, num_nutr> infoNPlan;
+  // Bucle para calcular did(S)
   for (int i = 0; i < nDias; i++) {
     int idx = i * num_tipoPlato;
     std::array<double, num_nutr> dayNutr;
-    // Primero calculamos los valores totales
+    // Primero obtenemos la cantidad de nutrientes de cada dia
     for (unsigned int j = 0; j < num_nutr; j++) {
       dayNutr[j] += v_primerosPlatos[round(getVar(idx))].infoN[j];
       dayNutr[j] += v_segundosPlatos[round(getVar(idx + 1))].infoN[j];
@@ -252,40 +262,29 @@ double MenuPlanning::computeFeasibility() {
       int index = FORCED_INDEXES[j];
       if (dayNutr[index] < ingR[index] * FORCED_MIN[j]) {
         totalFeasibility +=
-            pow((ingR[index] * FORCED_MIN[j] - dayNutr[index]) / ingR[index],
-                2) *
-            1000000.0;
+            pow((ingR[index] * (FORCED_MIN[j] - dayNutr[index])), 2);
       } else if (dayNutr[index] > ingR[index] * FORCED_MAX[j]) {
         totalFeasibility +=
-            pow((dayNutr[index] - ingR[index] * FORCED_MAX[j]) / ingR[index],
-                2) *
-            1000000.0;
+            pow((dayNutr[index] - (ingR[index] * FORCED_MAX[j])), 2);
       }
     }
   }
 
-  double heaviestValue = 0;
+  // Ahora calculamos los nutrientes globales del plan gid(S)
   for (unsigned int i = 0; i < num_nutr; i++) {
     if ((i == CALCIUM_INDEX) || (i == POTASIUM_INDEX) || (i == IRON_INDEX))
       continue;
-    if (infoNPlan[i] < ingR[i] * minReq[i] * nDias) {
-      double v = pow(
-          (ingR[i] * minReq[i] * nDias - infoNPlan[i]) / (ingR[i] * nDias), 2);
-      totalFeasibility += v;
-      if (v > heaviestValue) {
-        heaviestValue = v;
-      }
+    if (infoNPlan[i] < (ingR[i] * minReq[i] * nDias)) {
+      totalFeasibility =
+          pow(((ingR[i] * minReq[i] * nDias) - infoNPlan[i]), 2) * 1e6;
     }
-    if (infoNPlan[i] > ingR[i] * maxReq[i] * nDias) {
-      double v = pow(
-          (infoNPlan[i] - ingR[i] * maxReq[i] * nDias) / (ingR[i] * nDias), 2);
-      totalFeasibility += v;
-      if (v > heaviestValue) {
-        heaviestValue = v;
-      }
+    if (infoNPlan[i] > (ingR[i] * maxReq[i] * nDias)) {
+      totalFeasibility =
+          pow((infoNPlan[i] - (ingR[i] * maxReq[i] * nDias)), 2) * 1e6;
     }
   }
-  return totalFeasibility * 1e12;
+  // devolvemos id(S) = did(S) + gid(S)
+  return totalFeasibility;
 }
 
 /**
@@ -381,6 +380,11 @@ void MenuPlanning::evaluate(void) {
   double feasibility = computeFeasibility();
   setObj(0, precioTotal + feasibility);
   setObj(1, valTotal + feasibility);
+
+#ifdef __MPP_DEBUG__
+  std::cout << "Precio: " << precioTotal << " Nivel Repeticion:" << valTotal
+            << " Factibilidad: " << feasibility << std::endl;
+#endif
 }
 
 /*----------------------------------------------------------------------*/
@@ -395,14 +399,14 @@ bool MenuPlanning::gaElegidosPorIteracion(vector<int> vec, int valor) {
 }
 
 int MenuPlanning::setValorPP(int id) {
-  int valor = i_max;  // Tengo que retornar el numero de dias desde que se
-                      // eligio el plato por ultima vez
-  // Si el numero de dias es i_max, significa que nunca se ha
+  int valor = MAX_INT;  // Tengo que retornar el numero de dias desde que se
+                        // eligio el plato por ultima vez
+  // Si el numero de dias es MAX_INT, significa que nunca se ha
   // elegido, por lo que retorno 0
-  if (v_primerosPlatos[id].diasRep != i_max)
+  if (v_primerosPlatos[id].diasRep != MAX_INT)
     valor = v_primerosPlatos[id].diasRep;
 
-  // Si el numero de dias es distinto a i_max,
+  // Si el numero de dias es distinto a MAX_INT,
   // retorno el valor y reseteo el numero de dias a 0
   v_primerosPlatos[id].diasRep = 0;
 
@@ -410,8 +414,8 @@ int MenuPlanning::setValorPP(int id) {
 }
 
 int MenuPlanning::setValorSP(int id) {
-  int valor = i_max;
-  if (v_segundosPlatos[id].diasRep != i_max)
+  int valor = MAX_INT;
+  if (v_segundosPlatos[id].diasRep != MAX_INT)
     valor = v_segundosPlatos[id].diasRep;
   v_segundosPlatos[id].diasRep = 0;
 
@@ -419,8 +423,8 @@ int MenuPlanning::setValorSP(int id) {
 }
 
 int MenuPlanning::setValorP(int id) {
-  int valor = i_max;
-  if (v_postres[id].diasRep != i_max) valor = v_postres[id].diasRep;
+  int valor = MAX_INT;
+  if (v_postres[id].diasRep != MAX_INT) valor = v_postres[id].diasRep;
   v_postres[id].diasRep = 0;
 
   return valor;
@@ -428,23 +432,23 @@ int MenuPlanning::setValorP(int id) {
 
 void MenuPlanning::sumValorPP(void) {
   for (int i = 0; i < v_primerosPlatos.size(); i++)
-    if (v_primerosPlatos[i].diasRep != i_max) v_primerosPlatos[i].diasRep++;
+    if (v_primerosPlatos[i].diasRep != MAX_INT) v_primerosPlatos[i].diasRep++;
 }
 
 void MenuPlanning::sumValorSP(void) {
   for (int i = 0; i < v_segundosPlatos.size(); i++)
-    if (v_segundosPlatos[i].diasRep != i_max) v_segundosPlatos[i].diasRep++;
+    if (v_segundosPlatos[i].diasRep != MAX_INT) v_segundosPlatos[i].diasRep++;
 }
 
 void MenuPlanning::sumValorP(void) {
   for (int i = 0; i < v_postres.size(); i++)
-    if (v_postres[i].diasRep != i_max) v_postres[i].diasRep++;
+    if (v_postres[i].diasRep != MAX_INT) v_postres[i].diasRep++;
 }
 
 void MenuPlanning::sumValorGA(void) {
   for (int i = 0; i < gruposAl.size(); i++) {
-    if (gruposAl[i].first != i_max) gruposAl[i].first++;
-    gruposAl[i].second = i_max;
+    if (gruposAl[i].first != MAX_INT) gruposAl[i].first++;
+    gruposAl[i].second = MAX_INT;
   }
 }
 

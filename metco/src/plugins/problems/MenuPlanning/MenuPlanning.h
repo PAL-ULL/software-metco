@@ -43,51 +43,29 @@ struct infoPlatos {
 
 class MenuPlanning : public Individual {
  private:
-  // Numero de dias, platos y objetivos
-  static int nDias;
-  static int nParam;
-  static int nObj;
-  static int i_max;
-
-  // Vectores de platos
-  static vector<infoPlatos> v_primerosPlatos;
-  static vector<infoPlatos> v_segundosPlatos;
-  static vector<infoPlatos> v_postres;
-
-  // grupos alimenticios
-  // existentes, vector de compatibilidad de platos
-  static vector<pair<double, double> > ingRecomendada;
-  static vector<pair<int, int> > gruposAl;
+  static int nDias;   // Numero de dias que tenemos que planificar
+  static int nParam;  // Numero de parametos = nDias * 3
+  static vector<infoPlatos> v_primerosPlatos;  // Primeros platos
+  static vector<infoPlatos> v_segundosPlatos;  // Segundos platos
+  static vector<infoPlatos> v_postres;         // Postres
+  static vector<pair<int, int> > gruposAl;     // Grupos de alimentos
+  // Compatibilidad entre los platos
   static vector<vector<vector<double> > > v3_compatibilidadPlatos;
+  static vector<string> alergenosPlan;           // Alergenos del plan
+  static vector<string> incompatibilidadesPlan;  // Incomptabilidades del plan
+  static vector<int> gruposAlPlan;  // Grupos de alimentos en el plan
+  static vector<double> infoNPlan;  // Informacion Nutrional del plan
 
-  // Del plan alimenticio total: alergenos, incompatibilidades alimenticias,
-  // grupos alimenticios, informacion nutricional
-  static vector<string> alergenosPlan;
-  static vector<string> incompatibilidadesPlan;
-  static vector<int> gruposAlPlan;
-  static vector<double> infoNPlan;
-
-  // Operadores geneticos
-  void dependentCrossover(Individual *ind);
-  void dependentMutation(double pm);
+  void dependentCrossover(Individual *ind);  // Operadro de cruce especifico
+  void dependentMutation(double pm);         // Operador de mutacion específico
 
  public:
-  // Inicializacion
-  bool init(const vector<string> &params);
-
-  // Evaluacion de individuo
-  void evaluate(void);
-
-  // Clonacion de individuo
-  Individual *clone(void) const;
-
-  // Generacion aleatoria de individuo
-  void restart(void);
-
-  // Metodo de reparacion de individuo
-  // void repair(void);
-
-  void set_gruposAl(void);
+  bool init(const vector<string> &params);  // METCO init
+  void evaluate(void);  // Metodo de evaluacion de individuos MenuPlanning
+  Individual *clone(void) const;  // Clonacion de un individuo MenuPlanning
+  void restart(void);             // Generacion aleatoria del individuos
+  void set_gruposAl(void);        // Metodo que define los grupos de alimentos
+  double computeFeasibility();    // Calcula la factibilidad de los individuos
 
   // Lectura de ficheros de platos
   void set_Platos(void) {
@@ -106,16 +84,14 @@ class MenuPlanning : public Individual {
   }
   void set_VectoresPlatos(const char *c_filename, vector<infoPlatos> &v_vecP);
 
-  // Calculo del vector de compatibilidad de platos
-  void set_vectorCompatibilidad(void);
+  void set_vectorCompatibilidad(void);  // Calcula la compatibilidad
   void set_GAElegidos(vector<int> gal, vector<bool> &galE);
   double set_penalizacionVC(vector<int> &gal, vector<bool> galE);
 
   // Comprobar las restricciones del problema
   // bool checkInfoN(const int i);
   // bool checkInfoN2(void);
-
-  double computeFeasibility();
+  // void repair(void); // Metodo de reparacion
 
   // Metodos para el calculo del objetivo de grado de repeticion
   bool gaElegidosPorIteracion(vector<int> vec, int valor);
@@ -131,18 +107,29 @@ class MenuPlanning : public Individual {
                                      vector<int> vec);
 
   unsigned int inline getOptDirection(const int i) const { return MINIMIZE; }
+
   double inline getMinimum(const int i) const { return 1; }
+
   double inline getMaximum(const int i) const {
-    if (i % 3 == 0)
+    if (i % num_tipoPlato == 0)
       return v_primerosPlatos.size();
-    else if (i % 3 == 1)
+    else if (i % num_tipoPlato == 1)
       return v_segundosPlatos.size();
-    else if (i % 3 == 2)
+    else if (i % num_tipoPlato == 2)
       return v_postres.size();
+
+    else {
+      std::cout << "Error in getMaximum. I = " << i << std::endl;
+      exit(-1);
+    }
   }
 
   // PRUEBA
   void mostrarPlatos(void);
+
+ private:
+  static const int N_OBJS;
+  static const int MAX_INT;
 };
 
 #endif
