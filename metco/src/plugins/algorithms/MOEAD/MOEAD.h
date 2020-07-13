@@ -29,6 +29,8 @@
 #include "Individual.h"
 #include "MOFront.h"
 
+//#define __MOEAD_DEBUG__
+
 using namespace std;
 
 class MOEAD : public EA {

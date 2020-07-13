@@ -93,4 +93,6 @@ const double maxReq[21] = {1.30, 1.30, 1.10, 1.30, 1.10, 1.30, 1.30,
                            1.30, 1.30, 1.30, 1.30, 1.30, 1.30, 1.30};
 const int NPLATOS[3] = {19, 34, 14};
 
+const int TOTAL_RESTRICTIONS = num_nutr;
+
 #endif

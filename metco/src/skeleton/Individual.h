@@ -115,6 +115,7 @@
 #define __INDIVIDUAL_H__
 
 #include <stdlib.h>
+
 #include <algorithm>
 #include <iostream>
 #include <sstream>
@@ -264,7 +265,7 @@ class Individual : public Plugin {
 
   // Salida por pantalla de los individuos
   virtual void print(ostream &os) const;
-  virtual void printInfo(ostream &os) const {}
+  virtual void printInfo(ostream &os) const {};
 
   // Info de la mutacion
   virtual string getMutationName() const;

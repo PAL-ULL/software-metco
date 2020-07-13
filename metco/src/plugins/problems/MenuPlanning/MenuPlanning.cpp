@@ -18,8 +18,6 @@
 #include <array>
 #include <cmath>
 
-#define __MPP_DEBUG__
-
 // Constantes del problema
 const int MenuPlanning::N_OBJS = 2;
 const int MenuPlanning::MAX_INT = std::numeric_limits<int>::max();
@@ -36,6 +34,12 @@ vector<string> MenuPlanning::alergenosPlan;
 vector<string> MenuPlanning::incompatibilidadesPlan;
 vector<int> MenuPlanning::gruposAlPlan;
 vector<double> MenuPlanning::infoNPlan;
+
+/**
+ *
+ * Constructor por defecto de una instancia de MenuPlanning
+ */
+MenuPlanning::MenuPlanning() : infeasibilityDegree(0.0f) {}
 
 /**
  * Metodo para inicializar un individuo MenuPlanning
@@ -58,6 +62,8 @@ bool MenuPlanning::init(const vector<string> &params) {
   infoNPlan.assign(num_nutr, 0);
   alergenosPlan.assign(num_alerg, "0");
   incompatibilidadesPlan.assign(num_incomp, "0");
+  infeasibilityDegree = 0.0f;
+  restrictionsID.fill(0.0f);
 
   return true;
 }
@@ -202,19 +208,26 @@ double MenuPlanning::set_penalizacionVC(vector<int> &gal, vector<bool> galE) {
 void MenuPlanning::restart(void) {
   for (int i = 0; i < nParam; i++)
     setVar(i, (double)(rand() % (int)getMaximum(i)));
+
+  computeFeasibility();
   // repair();
 }
 
 /**
  * Clonacion del individuo
  **/
-Individual *MenuPlanning::clone(void) const { return new MenuPlanning(); }
+Individual *MenuPlanning::clone(void) const {
+  MenuPlanning *mpp = new MenuPlanning();
+  mpp->infeasibilityDegree = this->infeasibilityDegree;
+  return mpp;
+}
 
 /*----------------------------------------*/
 /*---------- OPERADOR DE CRUCE -----------*/
 /*----------------------------------------*/
 void MenuPlanning::dependentCrossover(Individual *ind) {
   crossover_uniform(ind);
+  computeFeasibility();
   // ((MenuPlanning *)ind)->repair();
   // repair();
 }
@@ -234,6 +247,7 @@ void MenuPlanning::dependentMutation(double pm) {
       mod = true;
     }
   }
+  if (mod) computeFeasibility();
   // if (mod) repair();
 }
 
@@ -245,6 +259,9 @@ void MenuPlanning::dependentMutation(double pm) {
  **/
 double MenuPlanning::computeFeasibility() {
   double totalFeasibility = 0.0;
+  // Reseteamos el array de ID por nutriente
+  restrictionsID.fill(0.0f);
+
   std::array<double, num_nutr> infoNPlan;
   // Bucle para calcular did(S)
   for (int i = 0; i < nDias; i++) {
@@ -274,6 +291,9 @@ double MenuPlanning::computeFeasibility() {
   for (unsigned int i = 0; i < num_nutr; i++) {
     if ((i == CALCIUM_INDEX) || (i == POTASIUM_INDEX) || (i == IRON_INDEX))
       continue;
+
+    // En cualquier caso, guardamos la diferencia para cada nutriente
+    restrictionsID[i] = (infoNPlan[i] - (ingR[i] * minReq[i] * nDias));
     if (infoNPlan[i] < (ingR[i] * minReq[i] * nDias)) {
       totalFeasibility =
           pow(((ingR[i] * minReq[i] * nDias) - infoNPlan[i]), 2) * 1e6;
@@ -284,7 +304,8 @@ double MenuPlanning::computeFeasibility() {
     }
   }
   // devolvemos id(S) = did(S) + gid(S)
-  return totalFeasibility;
+  infeasibilityDegree = totalFeasibility;
+  return infeasibilityDegree;
 }
 
 /**
@@ -377,15 +398,25 @@ void MenuPlanning::evaluate(void) {
   ultimos5GA.clear();
   gaElegidosAnterior.clear();
   // Asignamos el valor de los objetivos
-  double feasibility = computeFeasibility();
-  setObj(0, precioTotal + feasibility);
-  setObj(1, valTotal + feasibility);
-
-#ifdef __MPP_DEBUG__
-  std::cout << "Precio: " << precioTotal << " Nivel Repeticion:" << valTotal
-            << " Factibilidad: " << feasibility << std::endl;
-#endif
+  computeFeasibility();
+  setObj(0, precioTotal + infeasibilityDegree);
+  setObj(1, valTotal + infeasibilityDegree);
 }
+
+#ifdef __MPP_FEASIBILITY_DEBUG__
+/**
+ * En esta version nos centramos únicamente en mostrar los
+ * valores de cada nutriente para comprobar la factiblidad de los
+ * individuos resultantes
+ */
+void MenuPlanning::print(ostream &os) const {
+  for (unsigned int i = 0; i < num_nutr; i++) {
+    os << restrictionsID[i] << " ";
+  }
+  os << this->infeasibilityDegree;
+  os << endl;
+}
+#endif
 
 /*----------------------------------------------------------------------*/
 /*---------- METODOS PARA EL CALCULO DEL GRADO DE REPETICION -----------*/

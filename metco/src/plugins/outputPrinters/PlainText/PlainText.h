@@ -1,6 +1,6 @@
 /************************************************************************************************
  * AUTHORS
- *    Carlos Segura González
+ *    Carlos Segura Gonzï¿½lez
  *
  * DATE
  *    May 2010
@@ -8,7 +8,6 @@
  * DESCRIPTION
  * 		Output with plain text
  ************************************************************************************************/
-
 
 #ifndef __PLAIN_TEXT_H__
 #define __PLAIN_TEXT_H__
@@ -21,12 +20,13 @@
 using namespace std;
 
 class PlainText : public OutputPrinter {
-	public:
-		virtual bool init(const vector<string> &params);
-		virtual void printSolution(EA *, bool end);
-		virtual void printInit(EA *){}
-		virtual void finish();
-	private:
-		ofstream outputFile;
+ public:
+  virtual bool init(const vector<string> &params);
+  virtual void printSolution(EA *, bool end);
+  virtual void printInit(EA *) {}
+  virtual void finish();
+
+ private:
+  ofstream outputFile;
 };
 #endif

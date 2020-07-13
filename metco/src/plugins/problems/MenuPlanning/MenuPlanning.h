@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include <array>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -20,6 +21,8 @@
 
 #include "Constants.h"
 #include "Individual.h"
+
+#define __MPP_FEASIBILITY_DEBUG__
 
 char *getcwd(char *buf, size_t size);
 
@@ -43,6 +46,12 @@ struct infoPlatos {
 
 class MenuPlanning : public Individual {
  private:
+  // Grado de Infactibilidad ID(S)
+  double infeasibilityDegree;
+  // Grado de infactibilidad por cada restriccion
+  array<double, TOTAL_RESTRICTIONS> restrictionsID;
+
+  // Variables comunes a todas las instancias de MenuPlanning
   static int nDias;   // Numero de dias que tenemos que planificar
   static int nParam;  // Numero de parametos = nDias * 3
   static vector<infoPlatos> v_primerosPlatos;  // Primeros platos
@@ -60,12 +69,20 @@ class MenuPlanning : public Individual {
   void dependentMutation(double pm);         // Operador de mutacion específico
 
  public:
+  MenuPlanning();
+  virtual ~MenuPlanning(){};
+
   bool init(const vector<string> &params);  // METCO init
   void evaluate(void);  // Metodo de evaluacion de individuos MenuPlanning
   Individual *clone(void) const;  // Clonacion de un individuo MenuPlanning
   void restart(void);             // Generacion aleatoria del individuos
   void set_gruposAl(void);        // Metodo que define los grupos de alimentos
   double computeFeasibility();    // Calcula la factibilidad de los individuos
+
+#ifdef __MPP_FEASIBILITY_DEBUG__
+  // Imprime los datos de un individuo MenuPlanning
+  virtual void print(std::ostream &os) const;
+#endif
 
   // Lectura de ficheros de platos
   void set_Platos(void) {

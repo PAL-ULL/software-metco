@@ -32,5 +32,4 @@ Plugin *loadPlugin(const string &pluginKind, const string &pluginPath,
                    const string &name, const vector<string> &scoreArgs,
                    bool printError, bool initialize);
 
-#endif /*
-
+#endif

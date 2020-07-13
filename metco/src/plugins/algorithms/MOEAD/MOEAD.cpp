@@ -43,10 +43,11 @@ MOEAD::~MOEAD(void) {
 }
 
 void MOEAD::runGeneration() {
-  // For each individual (subproblem) in the current population
-  // computePenalties();
+// For each individual (subproblem) in the current population
+#ifdef __MOEAD_DEBUG__
   std::cout << "Ejecutando generacion: " << this->getGeneration() << std::endl;
   std::cout << "Evaluaciones: " << this->getPerformedEvaluations() << std::endl;
+#endif
   for (int i = 0; i < getPopulationSize(); i++) {
     // Creates a new offspring by applying the variation operators
     // LA EVALUACION SE REALIZA TRAS LA CREACION
@@ -66,10 +67,6 @@ void MOEAD::runGeneration() {
  *
  **/
 void MOEAD::computePenalties() {
-  for (int i = 0; i < getPopulationSize(); i++) {
-    violationDegrees[i] = (*population)[i]->computeFeasibility();
-  }
-
   if (thresholdPolicy == ADAPTATIVE_THRESHOLD) {
     minConstViolation =
         *std::min_element(violationDegrees.begin(), violationDegrees.end());
