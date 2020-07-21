@@ -335,12 +335,15 @@ temp = ${HOME}/metco
 #temp = ${plugin_path}
 nodist_include_HEADERS = *.so
 
+# HOSTNAME
+HOSTNAME = $(shell hostname)
+
 #ACLOCAL_AMFLAGS = -I configureFiles
 metcoSeq_SOURCES = metcoSeq.cpp
 metcoPar_SOURCES = metcoPar.cpp
 FLEX = flex
 BISON = bison
-CCFLAGS = -c -O3 -std=c++14
+CCFLAGS = -c -O3 -std=c++14 -D $(HOSTNAME) 
 IFLAGS = -I. -I.. -I../utils -I../../../src_external/hv-1.1-src
 DFLAGS = 
 LFLAGS = -fPIC

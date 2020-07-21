@@ -49,7 +49,8 @@ class MenuPlanning : public Individual {
   // Grado de Infactibilidad ID(S)
   double infeasibilityDegree;
   // Grado de infactibilidad por cada restriccion
-  array<double, TOTAL_RESTRICTIONS> restrictionsID;
+  array<double, num_nutr> restrictionsID;
+  vector<double> forcedRestrictionsID;
 
   // Variables comunes a todas las instancias de MenuPlanning
   static int nDias;   // Numero de dias que tenemos que planificar

@@ -15,6 +15,8 @@
 
 #include "MenuPlanning.h"
 
+#include <bits/stdc++.h>
+
 #include <array>
 #include <cmath>
 
@@ -39,7 +41,9 @@ vector<double> MenuPlanning::infoNPlan;
  *
  * Constructor por defecto de una instancia de MenuPlanning
  */
-MenuPlanning::MenuPlanning() : infeasibilityDegree(0.0f) {}
+MenuPlanning::MenuPlanning() : infeasibilityDegree(0.0f) {
+  restrictionsID.fill(0.0f);
+}
 
 /**
  * Metodo para inicializar un individuo MenuPlanning
@@ -49,7 +53,7 @@ MenuPlanning::MenuPlanning() : infeasibilityDegree(0.0f) {}
 bool MenuPlanning::init(const vector<string> &params) {
   if (params.size() != 1) {
     cout << "Error Menu Planning: numero incorrecto de parametros." << endl;
-    cout << "N-days expected" << endl;
+    cout << "Number of days expected" << endl;
     return false;
   }
   nDias = atoi((params[0]).c_str());
@@ -62,8 +66,9 @@ bool MenuPlanning::init(const vector<string> &params) {
   infoNPlan.assign(num_nutr, 0);
   alergenosPlan.assign(num_alerg, "0");
   incompatibilidadesPlan.assign(num_incomp, "0");
-  infeasibilityDegree = 0.0f;
-  restrictionsID.fill(0.0f);
+
+  // Ajustamos el tamaño del vector de restricciones diarias
+  forcedRestrictionsID.resize(nDias * FORCED_INDEXES_SIZE, 0.0f);
 
   return true;
 }
@@ -219,6 +224,8 @@ void MenuPlanning::restart(void) {
 Individual *MenuPlanning::clone(void) const {
   MenuPlanning *mpp = new MenuPlanning();
   mpp->infeasibilityDegree = this->infeasibilityDegree;
+  mpp->restrictionsID = {this->restrictionsID};
+  mpp->forcedRestrictionsID = {this->forcedRestrictionsID};
   return mpp;
 }
 
@@ -258,31 +265,58 @@ void MenuPlanning::dependentMutation(double pm) {
  * Alejandro Marrero - alu0100825008@ull.edu.es
  **/
 double MenuPlanning::computeFeasibility() {
-  double totalFeasibility = 0.0;
   // Reseteamos el array de ID por nutriente
-  restrictionsID.fill(0.0f);
-
+  restrictionsID.fill(0.0);
+  infeasibilityDegree = 0.0f;
+  std::fill(forcedRestrictionsID.begin(), forcedRestrictionsID.end(), 0.0);
   std::array<double, num_nutr> infoNPlan;
+  infoNPlan.fill(0.0);
+
   // Bucle para calcular did(S)
   for (int i = 0; i < nDias; i++) {
     int idx = i * num_tipoPlato;
+    // Valores nutricionales para el dia I
     std::array<double, num_nutr> dayNutr;
+    dayNutr.fill(0.0);
     // Primero obtenemos la cantidad de nutrientes de cada dia
     for (unsigned int j = 0; j < num_nutr; j++) {
       dayNutr[j] += v_primerosPlatos[round(getVar(idx))].infoN[j];
       dayNutr[j] += v_segundosPlatos[round(getVar(idx + 1))].infoN[j];
       dayNutr[j] += v_postres[round(getVar(idx + 2))].infoN[j];
       infoNPlan[j] += dayNutr[j];
+#ifdef __MPP_FEASIBILITY_DEBUG__
+      std::cout << "Nutrient: " << ingRNames[j] << ": "
+                << "Main: " << v_primerosPlatos[round(getVar(idx))].infoN[j]
+                << " Second: "
+                << v_segundosPlatos[round(getVar(idx + 1))].infoN[j]
+                << " Dessert: " << v_postres[round(getVar(idx + 2))].infoN[j];
+
+      std::cout << " Global intake of " << ingRNames[j] << ": " << infoNPlan[j]
+                << std::endl;
+#endif
     }
-    // Calculamos los nutrientes por dia
+    // Calculamos los nutrientes forzados por dia
     for (int j = 0; j < FORCED_INDEXES_SIZE; j++) {
       int index = FORCED_INDEXES[j];
+#ifdef __MPP_FEASIBILITY_DEBUG__
+      std::cout << "Nutrient: " << forcedNames[j] << ": " << dayNutr[index]
+                << "\tDaily req [" << ingR[index] * FORCED_MIN[j] << ", "
+                << ingR[index] * FORCED_MAX[j] << "]" << std::endl;
+#endif
       if (dayNutr[index] < ingR[index] * FORCED_MIN[j]) {
-        totalFeasibility +=
+        infeasibilityDegree +=
             pow((ingR[index] * (FORCED_MIN[j] - dayNutr[index])), 2);
+        // Guardamos la infactibilidad
+        forcedRestrictionsID[j * i] =
+            (ingR[index] * (FORCED_MIN[j] - dayNutr[index]));
+
       } else if (dayNutr[index] > ingR[index] * FORCED_MAX[j]) {
-        totalFeasibility +=
+        infeasibilityDegree +=
             pow((dayNutr[index] - (ingR[index] * FORCED_MAX[j])), 2);
+
+        // Guardamos la diferencia de infactibilidad
+        forcedRestrictionsID[j * i] =
+            (dayNutr[index] - (ingR[index] * FORCED_MAX[j]));
       }
     }
   }
@@ -291,20 +325,31 @@ double MenuPlanning::computeFeasibility() {
   for (unsigned int i = 0; i < num_nutr; i++) {
     if ((i == CALCIUM_INDEX) || (i == POTASIUM_INDEX) || (i == IRON_INDEX))
       continue;
-
-    // En cualquier caso, guardamos la diferencia para cada nutriente
-    restrictionsID[i] = (infoNPlan[i] - (ingR[i] * minReq[i] * nDias));
+#ifdef __MPP_FEASIBILITY_DEBUG__
+    std::cout << "Nutrient: " << ingRNames[i] << ": " << infoNPlan[i]
+              << "\tGlobal req [" << ingR[i] * minReq[i] * nDias << ", "
+              << ingR[i] * maxReq[i] * nDias << "]" << std::endl;
+#endif
     if (infoNPlan[i] < (ingR[i] * minReq[i] * nDias)) {
-      totalFeasibility =
+      infeasibilityDegree =
           pow(((ingR[i] * minReq[i] * nDias) - infoNPlan[i]), 2) * 1e6;
+      // Guardamos la diferencia de factibilidad
+      restrictionsID[i] = ((ingR[i] * minReq[i] * nDias) - infoNPlan[i]);
     }
     if (infoNPlan[i] > (ingR[i] * maxReq[i] * nDias)) {
-      totalFeasibility =
+      infeasibilityDegree =
           pow((infoNPlan[i] - (ingR[i] * maxReq[i] * nDias)), 2) * 1e6;
+      // Guardamos la diferencia
+      restrictionsID[i] = (infoNPlan[i] - (ingR[i] * maxReq[i] * nDias));
     }
   }
+#ifdef __MPP_FEASIBILITY_DEBUG__
+  if (std::abs(infeasibilityDegree - 0.0) < 0.001) {
+    std::cout << "Infeasibility less than 0.001: " << infeasibilityDegree
+              << std::endl;
+  }
+#endif
   // devolvemos id(S) = did(S) + gid(S)
-  infeasibilityDegree = totalFeasibility;
   return infeasibilityDegree;
 }
 
@@ -410,11 +455,22 @@ void MenuPlanning::evaluate(void) {
  * individuos resultantes
  */
 void MenuPlanning::print(ostream &os) const {
-  for (unsigned int i = 0; i < num_nutr; i++) {
-    os << restrictionsID[i] << " ";
+  os << "========================================" << std::endl;
+  os << "Restricciones diarias" << std::endl;
+  for (unsigned int i = 0; i < nDias; i++) {
+    os << "Día #" << i << std::endl;
+    for (unsigned int j = 0; j < FORCED_INDEXES_SIZE; j++) {
+      os << forcedNames[j] << " = "
+         << forcedRestrictionsID[(i * FORCED_INDEXES_SIZE) + j] << std::endl;
+    }
+    os << "==============" << std::endl;
   }
-  os << this->infeasibilityDegree;
-  os << endl;
+  os << "Restricciones globales" << std::endl;
+  for (unsigned int i = 0; i < num_nutr; i++) {
+    os << "\t- " << ingRNames[i] << " = " << restrictionsID[i] << std::endl;
+  }
+  os << "ID(S) = " << this->infeasibilityDegree << endl;
+  os << "========================================" << std::endl;
 }
 #endif
 
