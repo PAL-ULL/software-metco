@@ -6,7 +6,8 @@ Currently, METCO only allows two formats for the results files, plain text and X
 
 ## Plain Text
 
-Let's supposed that we are trying to find the global optimum of the [Ackley Function](https://www.sfu.ca/~ssurjano/ackley.html) (30 dimensions instance) using the Differential Evolution algorithm implemented in METCO. We should run our experiment like:
+Let's supposed that we are trying to find the global optimum of the [Ackley Function](https://www.sfu.ca/~ssurjano/ackley.html) (30 dimensions instance) using the Differential Evolution algorithm implemented in METCO. Notice that the Ackley Function it is not implemented in the latest version of METCO.
+We should run our experiment like:
 
 `./metcoSeq /home/username . PlainText results.txt MonoDE Ackley EVALUATIONS 100000 1000 0 0.5 0.115 30 ! 30 $ NoOp;`
 
